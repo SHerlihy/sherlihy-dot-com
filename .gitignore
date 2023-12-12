@@ -1,0 +1,15 @@
+# Local .terraform directories
+**/.terraform/*
+.terraform.*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+**/.ssh/*
+
+dist
+
+node_modules/
+
+package-lock.json
