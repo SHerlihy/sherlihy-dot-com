@@ -6,9 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
-        "preview": "vite preview"
-     "image": "packer build ./deployment/imaging/aws-ubuntu.pkr.hcl",
-    "deploy": "cd deployment/production && terraform destroy -auto-approve && terraform apply -auto-approve",
+    "preview": "vite preview",
+    "image": "packer build ./deployment/imaging/aws-ubuntu.pkr.hcl",
+    "deploy": "cd deployment/production && terraform destroy -auto-approve && terraform apply -auto-approve"
   },
   "dependencies": {
     "vue": "^3.3.8"
