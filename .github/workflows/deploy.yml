@@ -22,8 +22,10 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - run: npm install packer
-      - run: npm run image
+      - name: Image Build
+        run: npm run image
 
-      - run: npm install terraform
+      - name: Tf deploy
+        run: npm install terraform
+
       - run: npm run deploy
