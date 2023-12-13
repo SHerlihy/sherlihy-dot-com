@@ -12,18 +12,12 @@ env:
   HCP_BUCKET_NAME: "sherlihy-dot-com"
 
 jobs:
-  Deploy-Image:
+  Build-Image:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
-
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          role-to-assume: arn:aws:iam::111644099040:role/sherlihy-dot-com
-          aws-region: eu-west-2
 
       - name: Setup Node
         uses: actions/setup-node@v3
@@ -37,7 +31,21 @@ jobs:
       - name: Image Build
         run: npm run image
 
-      - name: Tf deploy
-        run: npm install terraform
 
-      - run: npm run deploy
+  AWS-Provision:
+    needs: Build-Image
+    permissions:
+      id-token: write
+      contents: read
+    
+    steps:
+     - name: Configure AWS Credentials
+       uses: aws-actions/configure-aws-credentials@v4
+       with:
+         role-to-assume: arn:aws:iam::111644099040:role/sherlihy-dot-com
+         aws-region: eu-west-2
+
+     - name: Tf deploy
+       run: npm install terraform
+
+     - run: npm run deploy
