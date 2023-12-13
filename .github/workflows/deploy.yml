@@ -12,8 +12,10 @@ env:
   HCP_BUCKET_NAME: "sherlihy-dot-com"
 
 jobs:
-  Build-Image:
+  Build_Image:
     runs-on: ubuntu-latest
+
+    name: build_image
 
     steps:
       - name: Checkout repo
@@ -32,8 +34,12 @@ jobs:
         run: npm run image
 
 
-  AWS-Provision:
-    needs: Build-Image
+  AWS_Provision:
+    runs-on: ubuntu-latest
+
+    name: aws_provision
+
+    needs: Build_Image
     permissions:
       id-token: write
       contents: read
