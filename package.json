@@ -8,9 +8,11 @@
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
     "image": "packer init ./deployment/imaging/aws-ubuntu.pkr.hcl && packer build ./deployment/imaging/aws-ubuntu.pkr.hcl",
+    "init-terraform": "terraform init ./deployment/production/main.tf",
     "deploy": "cd deployment/production && terraform destroy -auto-approve && terraform apply -auto-approve"
   },
   "dependencies": {
+    "terraform": "^1.23.0",
     "vue": "^3.3.8"
   },
   "devDependencies": {
