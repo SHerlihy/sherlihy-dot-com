@@ -27,24 +27,14 @@ resource "aws_default_subnet" "default_az1" {
   }
 }
 
-resource "aws_security_group" "allow_ssh" {
-  name   = "allow_ssh"
+resource "aws_security_group" "web_page" {
+  name   = "web_page"
   vpc_id = aws_default_vpc.default.id
-}
-
-resource "aws_security_group_rule" "ingress_ssh" {
-  type              = "ingress"
-  security_group_id = aws_security_group.allow_ssh.id
-
-  from_port   = "22"
-  to_port     = "22"
-  protocol    = "tcp"
-  cidr_blocks = ["0.0.0.0/0"]
 }
 
 resource "aws_security_group_rule" "ingress_http" {
   type              = "ingress"
-  security_group_id = aws_security_group.allow_ssh.id
+  security_group_id = aws_security_group.web_page.id
 
   from_port   = "80"
   to_port     = "80"
@@ -52,10 +42,9 @@ resource "aws_security_group_rule" "ingress_http" {
   cidr_blocks = ["0.0.0.0/0"]
 }
 
-
 resource "aws_security_group_rule" "egress_all_ports" {
   type              = "egress"
-  security_group_id = aws_security_group.allow_ssh.id
+  security_group_id = aws_security_group.web_page.id
 
   from_port   = 0
   to_port     = 0
@@ -63,7 +52,7 @@ resource "aws_security_group_rule" "egress_all_ports" {
   cidr_blocks = ["0.0.0.0/0"]
 }
 
-data "aws_ami" "ubuntu" {
+data "aws_ami" "sherlihy_dot_com" {
   most_recent = true
   owners      = ["111644099040"]
 
@@ -73,42 +62,20 @@ data "aws_ami" "ubuntu" {
   }
 }
 
-resource "aws_key_pair" "ssh-key" {
-  key_name   = "ssh-key"
-  public_key = file("../.ssh/id_rsa.pub")
-}
-
 resource "aws_instance" "web" {
-  ami           = data.aws_ami.ubuntu.id
+  ami           = data.aws_ami.sherlihy_dot_com.id
   instance_type = "t2.micro"
 
   subnet_id = aws_default_subnet.default_az1.id
 
-  vpc_security_group_ids = [aws_security_group.allow_ssh.id]
+  vpc_security_group_ids = [aws_security_group.web_page.id]
 
-  key_name = aws_key_pair.ssh-key.key_name
+    user_data = <<EOF 
+    #!/bin/bash
+    sudo nohup busybox httpd -f -p 80 &
+    EOF
 
   tags = {
     Name = "sherlihy_dot_com"
-  }
-}
-
-resource "terraform_data" "provision_server" {
-  connection {
-    type = "ssh"
-    port = "22"
-
-    host = aws_instance.web.public_ip
-    user = "ubuntu"
-
-    private_key = file("../.ssh/id_rsa")
-
-    timeout = "2m"
-  }
-
-  provisioner "remote-exec" {
-    inline = [
-      "sudo nohup busybox httpd -f -p 8080 &"
-    ]
   }
 }
