@@ -70,9 +70,9 @@ build {
     ]
   }
 
-  provisioner "shell" {
-    inline = [
-      "sudo bash ~/position_files.sh"
-    ]
-  }
+//  provisioner "shell" {
+//    inline = [
+//      "sudo bash ~/position_files.sh"
+//    ]
+//  }
 }
