@@ -24,11 +24,6 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build project
-        run: npm run build
 
 
   AWS_Provision:
@@ -53,6 +48,12 @@ jobs:
 
      - name: Setup Node
        uses: actions/setup-node@v3
+
+     - name: Install dependencies
+       run: npm install
+
+     - name: Build project
+       run: npm run build
 
      - name: Image Build
        run: npm run image
