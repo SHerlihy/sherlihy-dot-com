@@ -70,7 +70,7 @@ resource "aws_instance" "web" {
 
   vpc_security_group_ids = [aws_security_group.web_page.id]
 
-    user_data = file("../configuration_scripts/web_server-init.sh")
+//    user_data = file("../configuration_scripts/web_server-init.sh")
 
   tags = {
     Name = "sherlihy_dot_com"
