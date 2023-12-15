@@ -175,6 +175,59 @@ resource "aws_instance" "sherlihy_dot_com-lb_test-pvt2" {
   user_data = file("../configuration_scripts/web_server-init.sh")
 }
 
+resource "aws_security_group" "inet_access" {
+  name   = "inetAccess"
+  vpc_id = aws_vpc.lb_test.id
+}
+
+resource "aws_security_group_rule" "inet_ingress_https" {
+  type              = "ingress"
+  security_group_id = aws_security_group.inet_access.id
+
+  from_port   = "443"
+  to_port     = "443"
+  protocol    = "tcp"
+  cidr_blocks = ["0.0.0.0/0"]
+}
+
+resource "aws_security_group_rule" "inet_ingress_http" {
+  type              = "ingress"
+  security_group_id = aws_security_group.inet_access.id
+
+  from_port   = "80"
+  to_port     = "80"
+  protocol    = "tcp"
+  cidr_blocks = ["0.0.0.0/0"]
+}
+
+resource "aws_security_group_rule" "inet_egress" {
+  type              = "egress"
+  security_group_id = aws_security_group.inet_access.id
+
+  from_port   = 0
+  to_port     = 0
+  protocol    = "-1"
+  cidr_blocks = ["0.0.0.0/0"]
+}
+
+resource "aws_lb" "lb_test" {
+  name               = "lb-test"
+  internal           = false
+  load_balancer_type = "application"
+
+  security_groups    = [aws_security_group.inet_access.id]
+  subnets            = [aws_subnet.public-1.id, aws_subnet.public-2.id]
+}
+
+//resource "aws_acm_certificate" "cert" {
+//  domain_name       = aws_lb.lb_test.dns_name
+//  validation_method = "DNS"
+//
+//lifecycle {
+//    create_before_destroy = true
+//  }
+//}
+
 resource "aws_lb_target_group" "privates" {
   name     = "privates-tg"
   port     = 80
@@ -194,21 +247,86 @@ resource "aws_lb_target_group_attachment" "private2" {
   port             = 80
 }
 
-resource "aws_lb" "lb_test" {
-  name               = "lb-test"
-  internal           = false
-  load_balancer_type = "application"
-  security_groups    = [aws_security_group.web_page-lb_test.id]
-  subnets            = [aws_subnet.public-1.id, aws_subnet.public-2.id]
-}
-
 resource "aws_lb_listener" "front_end" {
   load_balancer_arn = aws_lb.lb_test.arn
-  port              = "80"
-  protocol          = "HTTP"
+
+ // port              = 80
+ // protocol          = "HTTP"
+  port              = 443
+  protocol          = "HTTPS"
+
+ ssl_policy = "ELBSecurityPolicy-TLS13-1-2-2021-06"
+ certificate_arn   = "arn:aws:acm:eu-west-2:111644099040:certificate/180c3701-3923-4407-9613-9d9a04d1dca9"
 
   default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.privates.arn
   }
 }
+
+resource "aws_route53_record" "www" {
+  zone_id = "Z01772082XKBXYLJYG8P2"
+  name    = "sherlihy.com"
+  type    = "A"
+
+  alias {
+    name                   = aws_lb.lb_test.dns_name
+    zone_id                = aws_lb.lb_test.zone_id
+    evaluate_target_health = true
+  }
+}
+
+output "lb_dns" {
+    value = aws_lb.lb_test.dns_name
+}
+//resource "aws_acm_certificate" "lb_test" {
+//  domain_name       = aws_lb.lb_test.dns_name
+//  validation_method = "DNS"
+//}
+
+//data "aws_route53_zone" "lb_test" {
+//  name         = aws_lb.lb_test.dns_name
+//  private_zone = false
+//}
+
+//resource "aws_route53_record" "lb_test" {
+//  zone_id = data.aws_route53_zone.lb_test.zone_id
+//  name    = aws_lb.lb_test.dns_name
+//  type    = "A"
+//  ttl     = 300
+//  records = [aws_eip.future_lb.public_ip]
+//}
+
+//resource "aws_route53_record" "lb_test" {
+//  for_each = {
+//    for dvo in aws_acm_certificate.lb_test.domain_validation_options : dvo.domain_name => {
+//      name   = dvo.resource_record_name
+//      record = dvo.resource_record_value
+//      type   = dvo.resource_record_type
+//    }
+//  }
+//
+//  allow_overwrite = true
+//  name            = each.value.name
+//  records         = [each.value.record]
+//  ttl             = 60
+//  type            = each.value.type
+//  zone_id         = data.aws_route53_zone.lb_test.zone_id
+//}
+
+//resource "aws_acm_certificate_validation" "lb_test" {
+//  certificate_arn         = aws_acm_certificate.lb_test.arn
+//  validation_record_fqdns = [aws_route53_record.lb_test.fqdn]
+//}
+
+//resource "aws_lb_listener" "front_end" {
+//  load_balancer_arn = aws_lb.lb_test.arn
+//  port              = "80"
+//  protocol          = "HTTP"
+//
+//  default_action {
+//    type             = "forward"
+//    target_group_arn = aws_lb_target_group.privates.arn
+//  }
+//}
+
