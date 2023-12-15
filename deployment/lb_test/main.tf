@@ -18,39 +18,41 @@ data "aws_availability_zones" "available" {
 }
 
 resource "aws_vpc" "lb_test" {
-  cidr_block       = "10.0.0.0/16"
+  cidr_block = "10.0.0.0/16"
 }
 
 resource "aws_internet_gateway" "lb_test" {
   vpc_id = aws_vpc.lb_test.id
 }
 
-resource "aws_subnet" "public-1" {
-  vpc_id     = aws_vpc.lb_test.id
-  cidr_block = "10.0.1.0/24"
-
-availability_zone = data.aws_availability_zones.available.names[0]
+locals {
+  az_names = { for idx, az_name in data.aws_availability_zones.available.names : idx => az_name }
 }
 
-resource "aws_subnet" "public-2" {
-  vpc_id     = aws_vpc.lb_test.id
-  cidr_block = "10.0.2.0/24"
+resource "aws_subnet" "publics" {
+  for_each = local.az_names
 
-availability_zone = data.aws_availability_zones.available.names[1]
+  vpc_id     = aws_vpc.lb_test.id
+  cidr_block = "10.0.${(each.key + 1) * 2}.0/24"
+
+  availability_zone = each.value
+
+  tags = {
+    az_name = each.value
+  }
 }
 
-resource "aws_subnet" "private-1" {
+resource "aws_subnet" "privates" {
+  for_each = local.az_names
+
   vpc_id     = aws_vpc.lb_test.id
-  cidr_block = "10.0.3.0/24"
+  cidr_block = "10.0.${(each.key * 2) + 1}.0/24"
 
-availability_zone = data.aws_availability_zones.available.names[0]
-}
+  availability_zone = each.value
 
-resource "aws_subnet" "private-2" {
-  vpc_id     = aws_vpc.lb_test.id
-  cidr_block = "10.0.4.0/24"
-
-availability_zone = data.aws_availability_zones.available.names[1]
+  tags = {
+    az_name = each.value
+  }
 }
 
 resource "aws_route_table" "inet_gw-publics" {
@@ -58,98 +60,40 @@ resource "aws_route_table" "inet_gw-publics" {
 }
 
 resource "aws_route" "inet_gw" {
-  route_table_id            = aws_route_table.inet_gw-publics.id
-  destination_cidr_block    = "0.0.0.0/0"
+  route_table_id         = aws_route_table.inet_gw-publics.id
+  destination_cidr_block = "0.0.0.0/0"
 
-  gateway_id     = aws_internet_gateway.lb_test.id
+  gateway_id = aws_internet_gateway.lb_test.id
 }
 
-resource "aws_route_table_association" "inet_gw-public_1" {
-  subnet_id      = aws_subnet.public-1.id
+resource "aws_route_table_association" "inet_gw-publics" {
+  for_each = aws_subnet.publics
+
+  subnet_id      = each.value.id
   route_table_id = aws_route_table.inet_gw-publics.id
 }
 
-resource "aws_route_table_association" "inet_gw-public_2" {
-  subnet_id      = aws_subnet.public-2.id
-  route_table_id = aws_route_table.inet_gw-publics.id
+locals {
+    az_name-public_subnet = { for idx, public_subnet in aws_subnet.publics : public_subnet.tags_all.az_name => public_subnet.id }
+    az_name-private_subnet = { for idx, private_subnet in aws_subnet.privates : private_subnet.tags_all.az_name => private_subnet.id }
+    az_name-subnets = { for idx, az_name in local.az_names : az_name => {
+        pubId = local.az_name-public_subnet[az_name]
+        pvtId = local.az_name-private_subnet[az_name]
+    }
+}
 }
 
-resource "aws_eip" "nat_gw-az0" {
-  //domain   = "vpc"
+module "nat_access" {
+  for_each = local.az_name-subnets
+  source   = "./nat_access"
 
-  # To ensure proper ordering, it is recommended to add an explicit dependency
-  # on the Internet Gateway for the VPC.
-  depends_on = [aws_internet_gateway.lb_test]
-}
-
-resource "aws_nat_gateway" "nat-pub_pvt-az0" {
-  allocation_id = aws_eip.nat_gw-az0.id
-  subnet_id     = aws_subnet.public-1.id
-
-    connectivity_type = "public"
-
-  tags = {
-    Name = "gw NAT"
-  }
-
-  # To ensure proper ordering, it is recommended to add an explicit dependency
-  # on the Internet Gateway for the VPC.
-  depends_on = [aws_internet_gateway.lb_test]
-}
-
-resource "aws_route_table" "nat_gw-public_private-az0" {
   vpc_id = aws_vpc.lb_test.id
-}
 
-resource "aws_route" "nat_gw-az0" {
-  route_table_id            = aws_route_table.nat_gw-public_private-az0.id
-  destination_cidr_block    = "0.0.0.0/0"
+  pub_subnet_id = each.value.pubId
 
-    nat_gateway_id = aws_nat_gateway.nat-pub_pvt-az0.id
-}
+  pvt_subnet_id = each.value.pvtId
 
-resource "aws_route_table_association" "nat_gw-private_1" {
-  subnet_id      = aws_subnet.private-1.id
-  route_table_id = aws_route_table.nat_gw-public_private-az0.id
-}
-
-resource "aws_eip" "nat_gw-az1" {
-  //domain   = "vpc"
-
-  # To ensure proper ordering, it is recommended to add an explicit dependency
-  # on the Internet Gateway for the VPC.
   depends_on = [aws_internet_gateway.lb_test]
-}
-
-resource "aws_nat_gateway" "nat-pub_pvt-az1" {
-  allocation_id = aws_eip.nat_gw-az1.id
-  subnet_id     = aws_subnet.public-2.id
-
-    connectivity_type = "public"
-
-  tags = {
-    Name = "gw NAT"
-  }
-
-  # To ensure proper ordering, it is recommended to add an explicit dependency
-  # on the Internet Gateway for the VPC.
-  depends_on = [aws_internet_gateway.lb_test]
-}
-
-resource "aws_route_table" "nat_gw-public_private-az1" {
-  vpc_id = aws_vpc.lb_test.id
-}
-
-resource "aws_route" "nat_gw-az1" {
-  route_table_id            = aws_route_table.nat_gw-public_private-az1.id
-  destination_cidr_block    = "0.0.0.0/0"
-
-    nat_gateway_id = aws_nat_gateway.nat-pub_pvt-az1.id
-}
-
-resource "aws_route_table_association" "nat_gw-private_2" {
-  subnet_id      = aws_subnet.private-2.id
-  route_table_id = aws_route_table.nat_gw-public_private-az1.id
 }
 
 resource "aws_security_group" "web_page-lb_test" {
@@ -187,22 +131,12 @@ data "aws_ami" "sherlihy_dot_com-lb_test" {
   }
 }
 
-resource "aws_instance" "sherlihy_dot_com-lb_test-pvt1" {
+resource "aws_instance" "sherlihy_dot_com-pvts" {
+  for_each      = aws_subnet.privates
   ami           = data.aws_ami.sherlihy_dot_com-lb_test.id
   instance_type = "t2.micro"
 
-  subnet_id = aws_subnet.private-1.id
-
-  vpc_security_group_ids = [aws_security_group.web_page-lb_test.id]
-
-  user_data = file("../configuration_scripts/web_server-init.sh")
-}
-
-resource "aws_instance" "sherlihy_dot_com-lb_test-pvt2" {
-  ami           = data.aws_ami.sherlihy_dot_com-lb_test.id
-  instance_type = "t2.micro"
-
-  subnet_id = aws_subnet.private-2.id
+  subnet_id = each.value.id
 
   vpc_security_group_ids = [aws_security_group.web_page-lb_test.id]
 
@@ -244,13 +178,17 @@ resource "aws_security_group_rule" "inet_egress" {
   cidr_blocks = ["0.0.0.0/0"]
 }
 
+locals {
+  pub_subnets-ids = [for publicInstance in aws_subnet.publics : publicInstance.id]
+}
+
 resource "aws_lb" "lb_test" {
   name               = "lb-test"
   internal           = false
   load_balancer_type = "application"
 
-  security_groups    = [aws_security_group.inet_access.id]
-  subnets            = [aws_subnet.public-1.id, aws_subnet.public-2.id]
+  security_groups = [aws_security_group.inet_access.id]
+  subnets         = local.pub_subnets-ids
 }
 
 resource "aws_lb_target_group" "privates" {
@@ -260,15 +198,11 @@ resource "aws_lb_target_group" "privates" {
   vpc_id   = aws_vpc.lb_test.id
 }
 
-resource "aws_lb_target_group_attachment" "private1" {
-  target_group_arn = aws_lb_target_group.privates.arn
-  target_id        = aws_instance.sherlihy_dot_com-lb_test-pvt1.id
-  port             = 80
-}
+resource "aws_lb_target_group_attachment" "privates" {
+  for_each = aws_instance.sherlihy_dot_com-pvts
 
-resource "aws_lb_target_group_attachment" "private2" {
   target_group_arn = aws_lb_target_group.privates.arn
-  target_id        = aws_instance.sherlihy_dot_com-lb_test-pvt2.id
+  target_id        = each.value.id
   port             = 80
 }
 
@@ -277,8 +211,8 @@ resource "aws_lb_listener" "front_end" {
   port              = 443
   protocol          = "HTTPS"
 
- ssl_policy = "ELBSecurityPolicy-TLS13-1-2-2021-06"
- certificate_arn   = var.TLS_cert_arn
+  ssl_policy      = "ELBSecurityPolicy-TLS13-1-2-2021-06"
+  certificate_arn = var.TLS_cert_arn
 
   default_action {
     type             = "forward"
@@ -299,13 +233,13 @@ resource "aws_route53_record" "www" {
 }
 
 variable "zone_id" {
-    type = string
+  type = string
 }
 
 variable "domain_name" {
-    type = string
+  type = string
 }
 
 variable "TLS_cert_arn" {
-    type = string
+  type = string
 }
