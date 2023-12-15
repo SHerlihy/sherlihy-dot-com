@@ -74,7 +74,7 @@ resource "aws_route_table_association" "inet_gw-public_2" {
   route_table_id = aws_route_table.inet_gw-publics.id
 }
 
-resource "aws_eip" "future_lb" {
+resource "aws_eip" "nat_gw-az0" {
   //domain   = "vpc"
 
   # To ensure proper ordering, it is recommended to add an explicit dependency
@@ -82,8 +82,8 @@ resource "aws_eip" "future_lb" {
   depends_on = [aws_internet_gateway.lb_test]
 }
 
-resource "aws_nat_gateway" "lb_test" {
-  allocation_id = aws_eip.future_lb.id
+resource "aws_nat_gateway" "nat-pub_pvt-az0" {
+  allocation_id = aws_eip.nat_gw-az0.id
   subnet_id     = aws_subnet.public-1.id
 
     connectivity_type = "public"
@@ -97,25 +97,59 @@ resource "aws_nat_gateway" "lb_test" {
   depends_on = [aws_internet_gateway.lb_test]
 }
 
-resource "aws_route_table" "nat_gw-privates" {
+resource "aws_route_table" "nat_gw-public_private-az0" {
   vpc_id = aws_vpc.lb_test.id
 }
 
-resource "aws_route" "nat_gw" {
-  route_table_id            = aws_route_table.nat_gw-privates.id
+resource "aws_route" "nat_gw-az0" {
+  route_table_id            = aws_route_table.nat_gw-public_private-az0.id
   destination_cidr_block    = "0.0.0.0/0"
 
-    nat_gateway_id = aws_nat_gateway.lb_test.id
+    nat_gateway_id = aws_nat_gateway.nat-pub_pvt-az0.id
 }
 
 resource "aws_route_table_association" "nat_gw-private_1" {
   subnet_id      = aws_subnet.private-1.id
-  route_table_id = aws_route_table.nat_gw-privates.id
+  route_table_id = aws_route_table.nat_gw-public_private-az0.id
+}
+
+resource "aws_eip" "nat_gw-az1" {
+  //domain   = "vpc"
+
+  # To ensure proper ordering, it is recommended to add an explicit dependency
+  # on the Internet Gateway for the VPC.
+  depends_on = [aws_internet_gateway.lb_test]
+}
+
+resource "aws_nat_gateway" "nat-pub_pvt-az1" {
+  allocation_id = aws_eip.nat_gw-az1.id
+  subnet_id     = aws_subnet.public-2.id
+
+    connectivity_type = "public"
+
+  tags = {
+    Name = "gw NAT"
+  }
+
+  # To ensure proper ordering, it is recommended to add an explicit dependency
+  # on the Internet Gateway for the VPC.
+  depends_on = [aws_internet_gateway.lb_test]
+}
+
+resource "aws_route_table" "nat_gw-public_private-az1" {
+  vpc_id = aws_vpc.lb_test.id
+}
+
+resource "aws_route" "nat_gw-az1" {
+  route_table_id            = aws_route_table.nat_gw-public_private-az1.id
+  destination_cidr_block    = "0.0.0.0/0"
+
+    nat_gateway_id = aws_nat_gateway.nat-pub_pvt-az1.id
 }
 
 resource "aws_route_table_association" "nat_gw-private_2" {
   subnet_id      = aws_subnet.private-2.id
-  route_table_id = aws_route_table.nat_gw-privates.id
+  route_table_id = aws_route_table.nat_gw-public_private-az1.id
 }
 
 resource "aws_security_group" "web_page-lb_test" {
@@ -219,15 +253,6 @@ resource "aws_lb" "lb_test" {
   subnets            = [aws_subnet.public-1.id, aws_subnet.public-2.id]
 }
 
-//resource "aws_acm_certificate" "cert" {
-//  domain_name       = aws_lb.lb_test.dns_name
-//  validation_method = "DNS"
-//
-//lifecycle {
-//    create_before_destroy = true
-//  }
-//}
-
 resource "aws_lb_target_group" "privates" {
   name     = "privates-tg"
   port     = 80
@@ -249,14 +274,11 @@ resource "aws_lb_target_group_attachment" "private2" {
 
 resource "aws_lb_listener" "front_end" {
   load_balancer_arn = aws_lb.lb_test.arn
-
- // port              = 80
- // protocol          = "HTTP"
   port              = 443
   protocol          = "HTTPS"
 
  ssl_policy = "ELBSecurityPolicy-TLS13-1-2-2021-06"
- certificate_arn   = "arn:aws:acm:eu-west-2:111644099040:certificate/180c3701-3923-4407-9613-9d9a04d1dca9"
+ certificate_arn   = var.TLS_cert_arn
 
   default_action {
     type             = "forward"
@@ -265,8 +287,8 @@ resource "aws_lb_listener" "front_end" {
 }
 
 resource "aws_route53_record" "www" {
-  zone_id = "Z01772082XKBXYLJYG8P2"
-  name    = "sherlihy.com"
+  zone_id = var.zone_id
+  name    = var.domain_name
   type    = "A"
 
   alias {
@@ -276,57 +298,14 @@ resource "aws_route53_record" "www" {
   }
 }
 
-output "lb_dns" {
-    value = aws_lb.lb_test.dns_name
+variable "zone_id" {
+    type = string
 }
-//resource "aws_acm_certificate" "lb_test" {
-//  domain_name       = aws_lb.lb_test.dns_name
-//  validation_method = "DNS"
-//}
 
-//data "aws_route53_zone" "lb_test" {
-//  name         = aws_lb.lb_test.dns_name
-//  private_zone = false
-//}
+variable "domain_name" {
+    type = string
+}
 
-//resource "aws_route53_record" "lb_test" {
-//  zone_id = data.aws_route53_zone.lb_test.zone_id
-//  name    = aws_lb.lb_test.dns_name
-//  type    = "A"
-//  ttl     = 300
-//  records = [aws_eip.future_lb.public_ip]
-//}
-
-//resource "aws_route53_record" "lb_test" {
-//  for_each = {
-//    for dvo in aws_acm_certificate.lb_test.domain_validation_options : dvo.domain_name => {
-//      name   = dvo.resource_record_name
-//      record = dvo.resource_record_value
-//      type   = dvo.resource_record_type
-//    }
-//  }
-//
-//  allow_overwrite = true
-//  name            = each.value.name
-//  records         = [each.value.record]
-//  ttl             = 60
-//  type            = each.value.type
-//  zone_id         = data.aws_route53_zone.lb_test.zone_id
-//}
-
-//resource "aws_acm_certificate_validation" "lb_test" {
-//  certificate_arn         = aws_acm_certificate.lb_test.arn
-//  validation_record_fqdns = [aws_route53_record.lb_test.fqdn]
-//}
-
-//resource "aws_lb_listener" "front_end" {
-//  load_balancer_arn = aws_lb.lb_test.arn
-//  port              = "80"
-//  protocol          = "HTTP"
-//
-//  default_action {
-//    type             = "forward"
-//    target_group_arn = aws_lb_target_group.privates.arn
-//  }
-//}
-
+variable "TLS_cert_arn" {
+    type = string
+}
