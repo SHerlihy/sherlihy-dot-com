@@ -46,33 +46,24 @@ build {
   provisioner "shell" {
     inline = [
       "mkdir /home/ubuntu/dist",
+      "mkdir /home/ubuntu/provision_scripts"
     ]
   }
 
   provisioner "file" {
-    source      = "./dist/"
+    source      = "../../dist/"
     destination = "/home/ubuntu/dist/"
   }
 
   provisioner "file" {
-    source      = "./deployment/provision_scripts/config_server.sh"
-    destination = "~/config_server.sh"
-  }
-
-  provisioner "file" {
-    source      = "./deployment/provision_scripts/position_files.sh"
-    destination = "~/position_files.sh"
+    source      = "./provision_scripts/"
+    destination = "/home/ubuntu/provision_scripts/"
   }
 
   provisioner "shell" {
     inline = [
-      "sudo bash ~/config_server.sh"
+      "sudo bash /home/ubuntu/provision_scripts/config_server.sh",
+      "sudo bash /home/ubuntu/provision_scripts/position_files.sh"
     ]
   }
-
-//  provisioner "shell" {
-//    inline = [
-//      "sudo bash ~/position_files.sh"
-//    ]
-//  }
 }
