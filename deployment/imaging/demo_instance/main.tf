@@ -114,7 +114,7 @@ resource "terraform_data" "provision_server" {
   }
 
   provisioner "file" {
-    source      = "../../dist/"
+    source      = "../../../dist/"
     destination = "/home/ubuntu/dist/"
   }
 
@@ -124,7 +124,7 @@ resource "terraform_data" "provision_server" {
   }
 
   provisioner "file" {
-    source      = "../configuration_scripts/"
+    source      = "../../configuration_scripts/"
     destination = "/home/ubuntu/configuration_scripts/"
   }
 
@@ -138,9 +138,9 @@ resource "terraform_data" "provision_server" {
 }
 
 output "instance_user" {
-    value = "ubuntu"
+  value = "ubuntu"
 }
 
 output "instance_ip" {
-    value = aws_instance.demo_instance.public_ip
+  value = aws_instance.demo_instance.public_ip
 }
