@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
-    "image": "packer init ./deployment/imaging/aws-ubuntu.pkr.hcl && packer build ./deployment/imaging/aws-ubuntu.pkr.hcl",
+    "image": "cd ./deployment/imaging packer init aws-ubuntu.pkr.hcl && packer build aws-ubuntu.pkr.hcl && cd ../../",
     "init-terraform": "cd deployment/production && terraform init -input=false && cd ../../",
     "deploy": "cd deployment/production && terraform destroy -auto-approve && terraform apply -auto-approve && cd ../../"
   },
