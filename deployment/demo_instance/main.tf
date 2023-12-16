@@ -109,6 +109,7 @@ resource "terraform_data" "provision_server" {
     inline = [
       "mkdir /home/ubuntu/dist",
       "mkdir /home/ubuntu/provision_scripts",
+      "mkdir /home/ubuntu/configuration_scripts",
     ]
   }
 
@@ -123,17 +124,21 @@ resource "terraform_data" "provision_server" {
   }
 
   provisioner "file" {
-    source      = "../configuration_scripts/web_server-init.sh"
-    destination = "/home/ubuntu/"
+    source      = "../configuration_scripts/"
+    destination = "/home/ubuntu/configuration_scripts/"
   }
 
   provisioner "remote-exec" {
     inline = [
       "sudo bash /home/ubuntu/provision_scripts/config_server.sh",
       "sudo bash /home/ubuntu/provision_scripts/position_files.sh",
-      "sudo bash /home/ubuntu/web_server-init.sh"
+      "sudo bash /home/ubuntu/configuration_scripts/web_server-init.sh"
     ]
   }
+}
+
+output "instance_user" {
+    value = "ubuntu"
 }
 
 output "instance_ip" {
