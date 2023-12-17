@@ -85,6 +85,9 @@ jobs:
       - name: Move in Deploy State
         run: mv -f /tmp/actions_artifacts/* deployment/imaging/demo_instance
 
+      - name: Is Moved In?
+        run: ls -a deployment/imaging/demo_instance
+
       #      - name: Update demo image tf
       #        run: npm run update-demo-img-tf
       #
