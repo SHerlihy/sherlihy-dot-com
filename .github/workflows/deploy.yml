@@ -66,9 +66,6 @@ jobs:
       - name: Setup demo image deploy
         run: npm run setup-demo-deploy
 
-      - name: Tf State Dir
-        run: ls -a /deployment/imaging/demo_instance
-
       - uses: actions/upload-artifact@v4
         with:
           name: demo_image-state
@@ -85,8 +82,8 @@ jobs:
       - name: Dl artifacts
         run: ls -a /tmp/actions_artifacts
 
-      #      - name: Move in Deploy State
-      #        run: mv -f /tmp/actions_artifacts/* deployment/imaging/demo_instance
+      - name: Move in Deploy State
+        run: mv -f /tmp/actions_artifacts/* deployment/imaging/demo_instance
 
       #      - name: Update demo image tf
       #        run: npm run update-demo-img-tf
