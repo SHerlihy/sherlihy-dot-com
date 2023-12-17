@@ -66,24 +66,24 @@ jobs:
       - name: Setup demo image deploy
         run: npm run setup-demo-deploy
 
-      - uses: actions/upload-artifact@v4
-        with:
-          name: demo_image-state
-          path: |
-            deployment/imaging/demo_instance/main.tf
-            deployment/imaging/demo_instance/terraform.tfstate
-          retention-days: 1
-
-      - uses: actions/download-artifact@v4
-        with:
-          name: demo_image-state
-          path: /tmp/actions_artifacts
-
-      - name: Dl artifacts
-        run: ls -a /tmp/actions_artifacts
-
-      - name: Move in Deploy State
-        run: mv -f /tmp/actions_artifacts/* deployment/imaging/demo_instance
+      #      - uses: actions/upload-artifact@v4
+      #        with:
+      #          name: demo_image-state
+      #          path: |
+      #            deployment/imaging/demo_instance/main.tf
+      #            deployment/imaging/demo_instance/terraform.tfstate
+      #          retention-days: 1
+      #
+      #      - uses: actions/download-artifact@v4
+      #        with:
+      #          name: demo_image-state
+      #          path: /tmp/actions_artifacts
+      #
+      #      - name: Dl artifacts
+      #        run: ls -a /tmp/actions_artifacts
+      #
+      #      - name: Move in Deploy State
+      #        run: mv -f /tmp/actions_artifacts/* deployment/imaging/demo_instance
 
       - name: Is Moved In?
         run: ls -a deployment/imaging/demo_instance
