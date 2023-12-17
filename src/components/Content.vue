@@ -6,27 +6,17 @@ defineProps<{ heading: string, content: string[]}>()
 
 <template>
     <section>
-        <div>
-        <h2>
-                {{heading}}
-        </h2>
-        <article>
-                <ul>
-                <li v-for="point in content">
-                    {{point}}
-                </li>
-                </ul>
-        </article>
-        </div>
-        <slot></slot>
+        <slot name="left"></slot>
+        <slot name="right"></slot>
     </section>
 </template>
 
 <style scoped>
 section {
-    display: flex;
-    flex-direction: row;
-
-    justify-content: space-evenly;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 3vw;
+    
+    margin: 3vw;
 }
 </style>

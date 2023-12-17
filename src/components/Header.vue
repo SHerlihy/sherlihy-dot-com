@@ -15,7 +15,7 @@
     top: 0;
     position: sticky;
 
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(80, 50, 80);
 
     display: grid;
     grid-template-columns: auto auto auto;
