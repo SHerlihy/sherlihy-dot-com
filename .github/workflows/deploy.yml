@@ -88,6 +88,18 @@ jobs:
       - name: Is Moved In?
         run: ls -a deployment/imaging/demo_instance
 
+      - name: stage tf state
+        run: git add deployment/imaging/demo_instance/terraform.tfstate
+
+      - name: commit changed files
+        run: git commit -m "Auto updating tf state"
+
+      - name: fetch from master
+        run: git fetch origin main
+
+      - name: push code to master
+        run: git push origin HEAD:main
+
       #      - name: Update demo image tf
       #        run: npm run update-demo-img-tf
       #
