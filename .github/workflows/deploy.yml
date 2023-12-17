@@ -43,7 +43,41 @@ jobs:
       - name: Image Build
         run: npm run image
 
-      - name: Tf deploy
-        run: npm run init-terraform
+      #      - name: Tf deploy
+      #        run: npm run deploy-prod
+      #
+      #      - uses: actions/upload-artifact@v4
+      #        with:
+      #          name: sherlihyDotCom_prod-state
+      #          path: |
+      #            ../../deployment/production/terraform.tfstate
+      #            ../../deployment/production/main.tf
+      #            ../../deployment/production/variables.tf
+      #          retention-days: 5
+      #
+      #      - uses: actions/download-artifact@v4
+      #        with:
+      #          name: sherlihyDotCom_prod-state
+      #          path: /tmp/actions_artifacts
+      #
+      #      - name: Update local tf
+      #        run: npm run update-tf-state
 
-      - run: npm run deploy
+      - name: Deploy demo image
+        run: npm run demo-image
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: demo_image-state
+          path: |
+            ../../deployment/imaging/demo_instance/main.tf
+            ../../deployment/imaging/demo_instance/terraform.tfstate
+          retention-days: 1
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: demo_image-state
+          path: /tmp/actions_artifacts
+
+      - name: Update demo image tf
+        run: npm run update-demo-img-tf

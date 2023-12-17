@@ -1,7 +1,4 @@
 <script setup lang="ts">
-
-defineProps<{ heading: string, content: string[]}>()
-
 </script>
 
 <template>

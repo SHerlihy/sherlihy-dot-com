@@ -8,8 +8,10 @@
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
     "image": "cd ./deployment/imaging && packer init aws-ubuntu.pkr.hcl && packer build aws-ubuntu.pkr.hcl && cd ../../",
-    "init-terraform": "cd deployment/production && terraform init -input=false && cd ../../",
-    "deploy": "cd deployment/production && terraform destroy -auto-approve && terraform apply -auto-approve && cd ../../"
+    "deploy-prod": "cd ./deployment/production && ./deploy_prod.sh && cd ../../",
+    "update-tf-state": "mv -f /tmp/actions_artifacts/* ./deployment/production/",
+    "demo-image": "cd ./deployment/imaging/demo_instance && ./deploy_demo_instance.sh && cd ../../../",
+    "update-demo-image-tf": "mv -f /tmp/actions_artifacts/* ./deployment/imaging/demo_instance/"
   },
   "dependencies": {
     "terraform": "^1.23.0",

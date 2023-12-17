@@ -108,7 +108,7 @@ resource "terraform_data" "provision_server" {
   provisioner "remote-exec" {
     inline = [
       "mkdir /home/ubuntu/dist",
-      "mkdir /home/ubuntu/provision_scripts",
+      "mkdir /home/ubuntu/bake_scripts",
       "mkdir /home/ubuntu/configuration_scripts",
     ]
   }
@@ -119,8 +119,8 @@ resource "terraform_data" "provision_server" {
   }
 
   provisioner "file" {
-    source      = "../provision_scripts/"
-    destination = "/home/ubuntu/provision_scripts/"
+    source      = "../bake_scripts/"
+    destination = "/home/ubuntu/bake_scripts/"
   }
 
   provisioner "file" {
@@ -130,8 +130,7 @@ resource "terraform_data" "provision_server" {
 
   provisioner "remote-exec" {
     inline = [
-      "sudo bash /home/ubuntu/provision_scripts/config_server.sh",
-      "sudo bash /home/ubuntu/provision_scripts/position_files.sh",
+      "sudo bash /home/ubuntu/bake_scripts/bake_server.sh",
       "sudo bash /home/ubuntu/configuration_scripts/web_server-init.sh"
     ]
   }
