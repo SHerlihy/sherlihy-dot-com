@@ -92,13 +92,12 @@ jobs:
         run: git add -f deployment/imaging/demo_instance/terraform.tfstate
 
       - name: commit changed files
-        run: git commit -m "Auto updating tf state"
-
-      - name: fetch from master
-        run: git fetch origin main
-
-      - name: push code to master
-        run: git push origin HEAD:main
+        run: |
+          git config --global user.name 'SHerlihy'
+          git config --global user.email 'steven_herlihy@yahoo.com'
+          git commit -m "Auto updating tf state"
+          git fetch origin main
+          git push origin HEAD:main
 
       #      - name: Update demo image tf
       #        run: npm run update-demo-img-tf
