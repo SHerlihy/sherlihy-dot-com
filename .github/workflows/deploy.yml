@@ -70,8 +70,8 @@ jobs:
         with:
           name: demo_image-state
           path: |
-            ../../deployment/imaging/demo_instance/main.tf
-            ../../deployment/imaging/demo_instance/terraform.tfstate
+            /deployment/imaging/demo_instance/main.tf
+            /deployment/imaging/demo_instance/terraform.tfstate
           retention-days: 1
 
       - uses: actions/download-artifact@v4
