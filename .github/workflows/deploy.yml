@@ -89,7 +89,7 @@ jobs:
         run: ls -a deployment/imaging/demo_instance
 
       - name: stage tf state
-        run: git add deployment/imaging/demo_instance/terraform.tfstate
+        run: git add -f deployment/imaging/demo_instance/terraform.tfstate
 
       - name: commit changed files
         run: git commit -m "Auto updating tf state"
