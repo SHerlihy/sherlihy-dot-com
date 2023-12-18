@@ -5,9 +5,6 @@ on:
     branches:
       - 'main'
 
-permissions:
-  contents: write
-
 env:
   HCP_CLIENT_ID: ${{ secrets.HCP_CLIENT_ID }}
   HCP_CLIENT_SECRET: ${{ secrets.HCP_CLIENT_SECRET }}
@@ -24,7 +21,7 @@ jobs:
 
     permissions:
       id-token: write
-      contents: read
+      contents: write
     
     steps:
       - name: Configure AWS Credentials
@@ -93,13 +90,11 @@ jobs:
       - name: Is Moved In?
         run: ls -a deployment/imaging/demo_instance
 
-      - name: stage tf state
-        run: git add -f deployment/imaging/demo_instance/terraform.tfstate
-
-      - uses: actions/checkout@v4
-      - run: |
+      - name: Push tf state
+        run: |
           git config --global user.name 'SHerlihy'
           git config --global user.email 'steven_herlihy@yahoo.com'
+          git add -f deployment/imaging/demo_instance/terraform.tfstate
           git commit -m "Auto updating tf state"
           git push
           #git remote set-url origin https://SHerlihy:$GITHUB_TOKEN@github.com/sherlihy-dot-com
