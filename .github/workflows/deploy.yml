@@ -44,11 +44,8 @@ jobs:
       - name: Image Build
         run: npm run image
 
-      - name: Setup demo image deploy
-        run: npm run setup-demo-deploy
-
       - name: Deploy demo image
-        run: npm run deploy-demo-image
+        run: npm run deploy-prod
 
       - name: Push tf state
         run: |
@@ -56,7 +53,7 @@ jobs:
           git config --global user.email 'steven_herlihy@yahoo.com'
 
       - name: Add
-        run: git add -f deployment/imaging/demo_instance/terraform.tfstate
+        run: git add -f deployment/production/terraform.tfstate
 
       - name: Commit
         run: git commit -q -n -m"Auto updating tf state" > /dev/null 2>&1 || true
