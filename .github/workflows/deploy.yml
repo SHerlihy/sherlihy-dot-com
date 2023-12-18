@@ -96,8 +96,8 @@ jobs:
       - name: stage tf state
         run: git add -f deployment/imaging/demo_instance/terraform.tfstate
 
-      - name: commit changed files
-        run: |
+      - uses: actions/checkout@v4
+      - run: |
           git config --global user.name 'SHerlihy'
           git config --global user.email 'steven_herlihy@yahoo.com'
           git commit -m "Auto updating tf state"
