@@ -19,9 +19,9 @@ const velmaMode = [
 ]
 
 const authAndProfile = [
-    "MemoryDB",
-    "MySQL",
-    "Golang",
+    "AWS: MemoryDB, RDS",
+    "Database: Redis, MySQL",
+    "Language: Golang",
 ]
 
 const dataStructToDiagram = [
@@ -120,9 +120,25 @@ const dataStructToDiagram = [
             <template v-slot:right>
                 <ProjectDesc heading="Distributed Service Architecture">
                     <p>
-                        A REST based service Architecture designed to seperate sensitive data used for authorization (name,
-                        email, etc) from non-sensitive data.
+                        A REST based service Architecture designed to seperate sensitive data used for authorization (name, email, etc) from non-sensitive data.
                     </p>
+                        <br/>
+                        <p>
+                            After reading "Fundementals of Software Architecture: An Engineering Approach" by Mark Richards and Neal Ford I wanted to understand software architecture on a deeper level and resolved to create some architectures detailed in the book.
+                        </p>
+                        <br/>
+                        <p>
+                            I had professional experience of frontend devepment and private experience of backend development, however, I had no expereince of creating infrastructure.
+                        </p>
+                        <br/>
+                        <p>
+                            After following some guided tutorials to create infrastructure using cloud based services I realised that unless I recorded how I created infrastructure for a project I would forget important details by the time I had to revisit the project infrastructure. After a little research I discoved the concept of "Infrastructure as Code". 
+                        </p>
+                        <br/>
+                        <p>
+                        After looking at techonologies used I decided I would try to use Terraform to manage my infrastructure as code due to it's maturity, reusable modules and iterative coding capabilities.
+                        </p>
+                        <br/>
                     <br />
                     <ul>
                         <li v-for="point in authAndProfile">
@@ -132,7 +148,10 @@ const dataStructToDiagram = [
                 </ProjectDesc>
             </template>
             <template v-slot:left>
-                    <img src="../public/serviceArchitecture/serviceArchi.png" />
+                <div class="duo_image">
+                    <img class="left_top_img" src="../public/serviceArchitecture/flow.png" />
+                    <img class="right_low_img" src="../public/serviceArchitecture/sequence.png" />
+                </div>
             </template>
         </Content>
             <br/>
@@ -205,6 +224,16 @@ const dataStructToDiagram = [
 .right_top_img {
     grid-column: 5/9;
     grid-row: 1/5;
+}
+
+.left_top_img {
+    grid-column: 1/4;
+    grid-row: 1/4;
+}
+
+.right_low_img {
+    grid-column: 3/9;
+    grid-row: 3/9;
 }
 
 .grid_header {
