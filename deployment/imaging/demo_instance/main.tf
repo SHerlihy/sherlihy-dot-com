@@ -72,8 +72,8 @@ data "aws_ami" "ubuntu" {
   }
 }
 
-resource "aws_key_pair" "ubuntu" {
-  key_name   = "ubuntu"
+resource "aws_key_pair" "sherlihy_dot_com-demo_instance" {
+  key_name   = "sherlihy_dot_com-demo_instance"
   public_key = file("./.ssh/id_rsa.pub")
 }
 
@@ -85,7 +85,7 @@ resource "aws_instance" "demo_instance" {
 
   vpc_security_group_ids = [aws_security_group.demo_instance.id]
 
-  key_name = aws_key_pair.ubuntu.key_name
+  key_name = aws_key_pair.sherlihy_dot_com-demo_instance.key_name
 
   tags = {
     Name = "sherlihy_dot_com-demo_instance"
