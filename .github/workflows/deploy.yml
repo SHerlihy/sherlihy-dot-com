@@ -53,7 +53,7 @@ jobs:
           git config --global user.email 'steven_herlihy@yahoo.com'
 
       - name: Add
-        run: git add -f deployment/imaging/demo_instance/terraform.tfstate
+        run: git add -f deployment/imaging/demo_instance
 
       - name: Commit
         run: git commit -q -n -m"Auto updating tf state" > /dev/null 2>&1 || true
