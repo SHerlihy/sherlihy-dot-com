@@ -102,6 +102,7 @@ jobs:
           git config --global user.email 'steven_herlihy@yahoo.com'
           git commit -m "Auto updating tf state"
           git remote set-url --push origin https://SHerlihy:$GITHUB_TOKEN@github.com/sherlihy-dot-com
+          git push
 
           # git fetch origin main
           # git push origin HEAD:main
