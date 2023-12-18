@@ -11,7 +11,6 @@ env:
   HCP_PROJECT_ID: ${{ secrets.HCP_PROJECT_ID }}
   HCP_ORGANIZATION_ID: ${{ secrets.HCP_ORGANIZATION_ID }}
   HCP_BUCKET_NAME: "sherlihy-dot-com"
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   AWS_Provision:
@@ -42,53 +41,11 @@ jobs:
       - name: Build project
         run: npm run build
 
-      #      - name: Image Build
-      #        run: npm run image
-
-      #      - name: Tf deploy
-      #        run: npm run deploy-prod
-      #
-      #      - uses: actions/upload-artifact@v4
-      #        with:
-      #          name: sherlihyDotCom_prod-state
-      #          path: |
-      #            ../../deployment/production/terraform.tfstate
-      #            ../../deployment/production/main.tf
-      #            ../../deployment/production/variables.tf
-      #          retention-days: 5
-      #
-      #      - uses: actions/download-artifact@v4
-      #        with:
-      #          name: sherlihyDotCom_prod-state
-      #          path: /tmp/actions_artifacts
-      #
-      #      - name: Update local tf
-      #        run: npm run update-tf-state
+      - name: Image Build
+        run: npm run image
 
       - name: Setup demo image deploy
         run: npm run setup-demo-deploy
-
-      #      - uses: actions/upload-artifact@v4
-      #        with:
-      #          name: demo_image-state
-      #          path: |
-      #            deployment/imaging/demo_instance/main.tf
-      #            deployment/imaging/demo_instance/terraform.tfstate
-      #          retention-days: 1
-      #
-      #      - uses: actions/download-artifact@v4
-      #        with:
-      #          name: demo_image-state
-      #          path: /tmp/actions_artifacts
-      #
-      #      - name: Dl artifacts
-      #        run: ls -a /tmp/actions_artifacts
-      #
-      #      - name: Move in Deploy State
-      #        run: mv -f /tmp/actions_artifacts/* deployment/imaging/demo_instance
-
-      - name: Is Moved In?
-        run: ls -a deployment/imaging/demo_instance
 
       - name: Push tf state
         run: |
@@ -97,15 +54,6 @@ jobs:
           git add -f deployment/imaging/demo_instance/terraform.tfstate
           git commit -m "Auto updating tf state"
           git push
-          #git remote set-url origin https://SHerlihy:$GITHUB_TOKEN@github.com/sherlihy-dot-com
-          #git fetch origin main
-          #git push origin HEAD:main
 
-          # git fetch origin main
-          # git push origin HEAD:main
-
-      #      - name: Update demo image tf
-      #        run: npm run update-demo-img-tf
-      #
-      #      - name: Deploy demo image
-      #        run: npm run deploy-demo-image
+      - name: Deploy demo image
+        run: npm run deploy-demo-image

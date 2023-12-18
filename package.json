@@ -9,10 +9,8 @@
     "preview": "vite preview",
     "image": "cd ./deployment/imaging && packer init aws-ubuntu.pkr.hcl && packer build aws-ubuntu.pkr.hcl && cd ../../",
     "deploy-prod": "cd ./deployment/production && ./deploy_prod.sh && cd ../../",
-    "update-tf-state": "mv -f /tmp/actions_artifacts/* ./deployment/production/",
     "setup-demo-deploy": "cd ./deployment/imaging/demo_instance && ./setup_demo_deploy.sh && cd ../../../",
-    "deploy-demo-image": "cd ./deployment/imaging/demo_instance && ./deploy_demo_image.sh && cd ../../../",
-    "update-demo-image-tf": "mv -f /tmp/actions_artifacts/* ./deployment/imaging/demo_instance/"
+    "deploy-demo-image": "cd ./deployment/imaging/demo_instance && ./deploy_demo_image.sh && cd ../../../"
   },
   "dependencies": {
     "terraform": "^1.23.0",
