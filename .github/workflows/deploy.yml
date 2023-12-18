@@ -4,12 +4,17 @@ on:
   push:
     branches:
       - 'main'
+
+permissions:
+  contents: write
+
 env:
   HCP_CLIENT_ID: ${{ secrets.HCP_CLIENT_ID }}
   HCP_CLIENT_SECRET: ${{ secrets.HCP_CLIENT_SECRET }}
   HCP_PROJECT_ID: ${{ secrets.HCP_PROJECT_ID }}
   HCP_ORGANIZATION_ID: ${{ secrets.HCP_ORGANIZATION_ID }}
   HCP_BUCKET_NAME: "sherlihy-dot-com"
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   AWS_Provision:
