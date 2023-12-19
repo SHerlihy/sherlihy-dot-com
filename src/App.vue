@@ -64,58 +64,6 @@ const dataStructToDiagram = [
 
         <div class="light_bg">
             <br/>
-            <Content>
-                <template v-slot:right>
-                    <ProjectDesc heading="Text Magnifier">
-                        <p>
-                            A wrapping component and state control system that allows desired text to be resized by a user.
-                        </p>
-                        <br />
-                        <ul>
-                            <li v-for="point in velmaMode">
-                                {{ point }}
-                            </li>
-                        </ul>
-                    </ProjectDesc>
-                </template>
-                <template v-slot:left>
-                    <div class="duo_image">
-                        <img class="right_top_img" src="../public/velmaMode/velmaModeDisabled.png" />
-                        <img class="left_low_img" src="../public/velmaMode/velmaModex4.png" />
-                    </div>
-                </template>
-            </Content>
-            <br/>
-        </div>
-
-        <br />
-
-        <Content>
-            <template v-slot:left>
-                <ProjectDesc heading="Pointer Data Structure to Diagram">
-                    <p>
-                        A combination of tools to help see a data structure made of memory pointers to help debugging such a
-                        data structure. The first tool creates a string representation of a data structure and the second
-                        tool creates a diagram from a string representation of a data structure.
-                    </p>
-                        <br />
-                        <ul>
-                            <li v-for="point in dataStructToDiagram">
-                                {{ point }}
-                            </li>
-                        </ul>
-                </ProjectDesc>
-            </template>
-            <template v-slot:right>
-                <div class="multi_image">
-                    <img class="left_img" src="../public/mermaidizer/nodesToStrTest.png" />
-                    <img class="right_img" src="../public/mermaidizer/mermaidPointers.png" />
-                </div>
-            </template>
-        </Content>
-
-        <div class="light_bg">
-            <br/>
         <Content>
             <template v-slot:right>
                 <ProjectDesc heading="Distributed Service Architecture">
@@ -154,6 +102,60 @@ const dataStructToDiagram = [
                 </div>
             </template>
         </Content>
+            <br/>
+        </div>
+
+        <br />
+
+        <Content>
+            <template v-slot:left>
+                <ProjectDesc heading="Pointer Data Structure to Diagram">
+                    <p>
+                        A combination of tools to help see a data structure made of memory pointers to help debugging such a
+                        data structure. The first tool creates a string representation of a data structure and the second
+                        tool creates a diagram from a string representation of a data structure.
+                    </p>
+                        <br />
+                        <ul>
+                            <li v-for="point in dataStructToDiagram">
+                                {{ point }}
+                            </li>
+                        </ul>
+                </ProjectDesc>
+            </template>
+            <template v-slot:right>
+                <div class="multi_image">
+                    <img class="left_img" src="../public/mermaidizer/nodesToStrTest.png" />
+                    <img class="right_img" src="../public/mermaidizer/mermaidPointers.png" />
+                </div>
+            </template>
+        </Content>
+        
+        <br/>
+
+        <div class="light_bg">
+            <br/>
+            <Content>
+                <template v-slot:right>
+                    <ProjectDesc heading="Text Magnifier">
+                        <p>
+                            A wrapping component and state control system that allows desired text to be resized by a user.
+                        </p>
+                        <br />
+                        <ul>
+                            <li v-for="point in velmaMode">
+                                {{ point }}
+                            </li>
+                        </ul>
+                    </ProjectDesc>
+                </template>
+                <template v-slot:left>
+                    <div class="duo_image">
+                        <img class="right_top_img" src="../public/velmaMode/velmaModeDisabled.png" />
+                        <img class="left_low_img" src="../public/velmaMode/velmaModex4.png" />
+                    </div>
+                </template>
+            </Content>
             <br/>
         </div>
 
