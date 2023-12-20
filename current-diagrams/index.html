@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <!-- Load mermaid -->
+  <script defer src="../node_modules/mermaid/dist/mermaid.min.js"></script>
+  <script
+    type="module"
+    src="../node_modules/zero-md/dist/zero-md.min.js"
+  ></script>
+</head>
+
+<body>
+  <!-- Render zero-md in light dom -->
+  <zero-md id="app" src="./future.md" no-shadow manual-render></zero-md>
+  <script>
+    app.addEventListener('zero-md-ready', async () => {
+      // Create custom marked renderer
+      const renderer = new marked.Renderer()
+      renderer.code = function (code, lang) {
+        return lang === 'mermaid'
+          ? `<div class="mermaid">${code}</div>`
+          : `<pre><code>${code}</code></pre>`
+      }
+      await app.render({ renderer })
+      mermaid.init()
+    })
+  </script>
+</body>
+</html>

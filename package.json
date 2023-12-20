@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
+    "diagram": "live-server --open=./current-diagrams",
     "preview": "vite preview",
     "image": "cd ./deployment/imaging && packer init aws-ubuntu.pkr.hcl && packer build aws-ubuntu.pkr.hcl && cd ../../",
     "deploy-prod": "cd ./deployment/production && ./deploy_prod.sh && cd ../../",
@@ -13,11 +14,15 @@
     "deploy-demo-image": "cd ./deployment/imaging/demo_instance && ./deploy_demo_image.sh && cd ../../../"
   },
   "dependencies": {
+    "live-server": "^1.2.2",
+    "mermaid": "^10.6.1",
     "terraform": "^1.23.0",
-    "vue": "^3.3.8"
+    "vue": "^3.3.8",
+    "zero-md": "^2.5.3"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.5.0",
+    "marked": "^11.1.0",
     "typescript": "^5.2.2",
     "vite": "^5.0.0",
     "vue-tsc": "^1.8.22"
