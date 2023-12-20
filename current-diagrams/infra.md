@@ -7,9 +7,11 @@ flowchart TD
 
     subgraph VPC
 
-        alb[Application Load Balancer]
-        httpsListner[443 listener]
-        pvtsTG[Target Group Privates]
+        subgraph security-group-alb ingress:80/443 egress:all
+            alb[Application Load Balancer]
+            httpsListner[443 listener]
+            pvtsTG[Target Group Privates]
+        end
 
         alb-->httpsListner
         httpsListner-->|to pvt tg|alb
@@ -31,14 +33,18 @@ flowchart TD
 
         subgraph az-a
             
-            subgraph subnet-public-a
-                natA[Nat Gateway A]
+            subgraph security-group-pub-a
+                subgraph subnet-public-a
+                    natA[Nat Gateway A]
+                end
             end
 
             natA-->subnet-private-a
 
             subgraph subnet-private-a
-                pvtA[Private Server A]
+                subgraph security-group-pvt-a ingress:80 egress:all
+                    pvtA[Private Server A]
+                end
             end
         end
         
