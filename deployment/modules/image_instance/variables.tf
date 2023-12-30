@@ -13,3 +13,7 @@ variable "ingress_port_list" {
 variable "key_name" {
     type = string
 }
+
+variable "init_file_path" {
+    type = string
+}

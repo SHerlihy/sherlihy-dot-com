@@ -56,7 +56,7 @@ build {
   }
 
   provisioner "file" {
-    source      = "./bake_scripts/"
+    source      = "../provision_scripts/"
     destination = "/home/ubuntu/bake_scripts/"
   }
 

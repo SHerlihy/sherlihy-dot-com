@@ -27,78 +27,29 @@ resource "aws_default_subnet" "default_az1" {
   }
 }
 
-resource "aws_security_group" "demo_instance" {
-  name   = "demo_instance"
-  vpc_id = aws_default_vpc.default.id
-}
-
-resource "aws_security_group_rule" "ingress_ssh" {
-  type              = "ingress"
-  security_group_id = aws_security_group.demo_instance.id
-
-  from_port   = "22"
-  to_port     = "22"
-  protocol    = "tcp"
-  cidr_blocks = ["0.0.0.0/0"]
-}
-
-resource "aws_security_group_rule" "ingress_http" {
-  type              = "ingress"
-  security_group_id = aws_security_group.demo_instance.id
-
-  from_port   = "80"
-  to_port     = "80"
-  protocol    = "tcp"
-  cidr_blocks = ["0.0.0.0/0"]
-}
-
-resource "aws_security_group_rule" "egress_all_ports" {
-  type              = "egress"
-  security_group_id = aws_security_group.demo_instance.id
-
-  from_port   = 0
-  to_port     = 0
-  protocol    = "-1"
-  cidr_blocks = ["0.0.0.0/0"]
-}
-
-data "aws_ami" "ubuntu" {
-  most_recent = true
-  owners      = ["099720109477"]
-
-  filter {
-    name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
-  }
-}
-
-resource "aws_key_pair" "sherlihy_dot_com-demo_instance" {
-  key_name   = "sherlihy_dot_com-demo_instance"
+resource "aws_key_pair" "sherlihyDotCom_instance" {
+  key_name   = "sherlihyDotCom-instance"
   public_key = file("./.ssh/id_rsa.pub")
 }
 
-resource "aws_instance" "demo_instance" {
-  ami           = data.aws_ami.ubuntu.id
-  instance_type = "t2.micro"
+module "web_server_instance" {
+  source = "../../modules/site_instance"
 
+  vpc_id    = aws_default_vpc.default.id
   subnet_id = aws_default_subnet.default_az1.id
 
-  vpc_security_group_ids = [aws_security_group.demo_instance.id]
+  ingress_port_list = tolist([80, 443])
 
-  key_name = aws_key_pair.sherlihy_dot_com-demo_instance.key_name
-
-  tags = {
-    Name = "sherlihy_dot_com-demo_instance"
-  }
+  key_name = aws_key_pair.sherlihyDotCom_instance.key_name
 }
 
-resource "terraform_data" "provision_server" {
+resource "terraform_data" "provision_servers" {
   connection {
     type = "ssh"
     port = "22"
 
-    host = aws_instance.demo_instance.public_ip
-    user = "ubuntu"
+    host = module.web_server_instance.instance_ip
+    user = module.web_server_instance.instance_user
 
     private_key = file("./.ssh/id_rsa")
 
@@ -119,7 +70,7 @@ resource "terraform_data" "provision_server" {
   }
 
   provisioner "file" {
-    source      = "../bake_scripts/"
+    source      = "../../provision_scripts/"
     destination = "/home/ubuntu/bake_scripts/"
   }
 
@@ -141,5 +92,5 @@ output "instance_user" {
 }
 
 output "instance_ip" {
-  value = aws_instance.demo_instance.public_ip
+  value = module.web_server_instance.instance_ip
 }
