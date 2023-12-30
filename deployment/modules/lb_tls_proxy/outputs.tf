@@ -3,5 +3,5 @@ output "dns_name" {
 }
 
 output "zone_id" {
-    value = aws_lb.inet_access.zone_id
+    value = aws_lb.inet-server.zone_id
 }

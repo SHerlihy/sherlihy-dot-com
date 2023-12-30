@@ -46,14 +46,12 @@ data "aws_ami" "sherlihy_dot_com" {
 }
 
 resource "aws_instance" "sherlihyDotCom_instance" {
-    count = length(aws_subnet.publics)
-
   ami           = data.aws_ami.sherlihy_dot_com.id
   instance_type = "t2.micro"
 
-  subnet_id = aws_subnet.publics[count.index].id
+  subnet_id = var.subnet_id
 
     vpc_security_group_ids = [aws_security_group.sherlihyDotCom_instance.id]
 
-  user_data = file("../../configuration_scripts/web_server-init.sh")
+  user_data = file(var.init_file_path)
 }
