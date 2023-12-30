@@ -21,3 +21,8 @@ variable "subnet_ids" {
 variable "instance_ids" {
     type = list(string)
 }
+
+variable "resource_tags" {
+    type = map(string)
+    default = {}
+}

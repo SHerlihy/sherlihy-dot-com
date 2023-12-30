@@ -10,6 +10,7 @@ terraform {
 }
 
 resource "aws_security_group" "inet_access" {
+  tags = var.resource_tags
   name   = "inetAccess"
   vpc_id = var.vpc_id
 }
@@ -36,6 +37,7 @@ resource "aws_security_group_rule" "inet_egress" {
 }
 
 resource "aws_lb" "inet-server" {
+  tags = var.resource_tags
   name               = "sherlihyDotCom-lb"
   internal           = false
   load_balancer_type = "application"
@@ -45,6 +47,7 @@ resource "aws_lb" "inet-server" {
 }
 
 resource "aws_lb_target_group" "sherlihy_dot_com-server" {
+  tags = var.resource_tags
   name     = "sherlihyDotCom-server"
   port     = var.target_port
   protocol = "HTTP"
@@ -52,6 +55,7 @@ resource "aws_lb_target_group" "sherlihy_dot_com-server" {
 }
 
 resource "aws_lb_target_group_attachment" "server" {
+  tags = var.resource_tags
     count = length(var.instance_ids)
 
   target_group_arn = aws_lb_target_group.sherlihy_dot_com-server.arn
@@ -60,6 +64,7 @@ resource "aws_lb_target_group_attachment" "server" {
 }
 
 resource "aws_lb_listener" "front_end" {
+  tags = var.resource_tags
   load_balancer_arn = aws_lb.inet-server.arn
   port              = 443
   protocol          = "HTTPS"
