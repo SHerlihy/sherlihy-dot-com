@@ -17,3 +17,8 @@ variable "key_name" {
 variable "init_file_path" {
     type = string
 }
+
+variable "resource_tags" {
+    type = map(string)
+    default = {}
+}

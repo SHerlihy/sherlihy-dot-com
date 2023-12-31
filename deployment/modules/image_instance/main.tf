@@ -10,6 +10,7 @@ terraform {
 }
 
 resource "aws_security_group" "sherlihyDotCom_instance" {
+  tags = var.resource_tags
   name   = "instance-sherlihyDotCom-${var.subnet_id}"
   vpc_id = var.vpc_id
 }
@@ -46,6 +47,7 @@ data "aws_ami" "sherlihy_dot_com" {
 }
 
 resource "aws_instance" "sherlihyDotCom_instance" {
+  tags = var.resource_tags
   ami           = data.aws_ami.sherlihy_dot_com.id
   instance_type = "t2.micro"
 

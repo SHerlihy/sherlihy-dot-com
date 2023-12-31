@@ -13,19 +13,29 @@ provider "aws" {
   region = "eu-west-2"
 }
 
+locals {
+  cost_tags = tomap({
+    project     = "sherlihyDotCom"
+    env = "staging"
+  })
+}
+
 data "aws_availability_zones" "available" {
   state = "available"
 }
 
 resource "aws_vpc" "sherlihy_dot_com" {
+  tags = local.cost_tags
   cidr_block = "10.0.0.0/16"
 }
 
 resource "aws_internet_gateway" "sherlihy_dot_com" {
+  tags = local.cost_tags
   vpc_id = aws_vpc.sherlihy_dot_com.id
 }
 
 resource "aws_subnet" "publics" {
+  tags = local.cost_tags
     count = 2
   vpc_id     = aws_vpc.sherlihy_dot_com.id
   cidr_block = "10.0.${count.index+1}.0/24"
@@ -34,6 +44,7 @@ resource "aws_subnet" "publics" {
 }
 
 resource "aws_route_table" "inet_gw-publics" {
+  tags = local.cost_tags
   vpc_id = aws_vpc.sherlihy_dot_com.id
 }
 
@@ -52,6 +63,7 @@ resource "aws_route_table_association" "inet_gw-publics" {
 }
 
 resource "aws_key_pair" "sherlihyDotCom_instance" {
+  tags = local.cost_tags
   key_name   = "sherlihyDotCom-instance"
   public_key = file("./.ssh/id_rsa.pub")
 }
@@ -66,6 +78,7 @@ module "web_server_instance" {
   ingress_port_list = tolist([80, 443])
 
     key_name = aws_key_pair.sherlihyDotCom_instance.key_name
+  resource_tags = local.cost_tags
 }
 
 resource "terraform_data" "provision_servers" {
@@ -131,4 +144,6 @@ module "lb_tls_proxy" {
 
     target_port = 80
     TLS_cert_arn = var.TLS_cert_arn
+
+  resource_tags = local.cost_tags
 }
