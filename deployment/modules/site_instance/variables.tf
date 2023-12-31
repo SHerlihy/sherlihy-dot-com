@@ -13,3 +13,8 @@ variable "ingress_port_list" {
 variable "key_name" {
     type = string
 }
+
+variable "resource_tags" {
+    type = map(string)
+    default = {}
+}
