@@ -16,7 +16,7 @@ provider "aws" {
 locals {
   cost_tags = tomap({
     project     = "sherlihyDotCom"
-    environment = "production"
+    env = "production"
   })
 }
 
@@ -49,7 +49,6 @@ resource "aws_route_table" "inet_gw-publics" {
 }
 
 resource "aws_route" "inet_gw" {
-  tags                   = local.cost_tags
   route_table_id         = aws_route_table.inet_gw-publics.id
   destination_cidr_block = "0.0.0.0/0"
 
@@ -57,7 +56,6 @@ resource "aws_route" "inet_gw" {
 }
 
 resource "aws_route_table_association" "inet_gw-publics" {
-  tags  = local.cost_tags
   count = length(aws_subnet.publics)
 
   subnet_id      = aws_subnet.publics[count.index].id
@@ -119,9 +117,16 @@ resource "aws_route53_record" "sherlihy_dot_com" {
   }
 }
 
-resource "aws_ce_cost_allocation_tag" "cost_tags" {
-  for_each = local.cost_tags
+// Wont work for 24hrs see: https://github.com/hashicorp/terraform-provider-aws/issues/31442
+//resource "aws_ce_cost_allocation_tag" "cost_project" {
+//  tag_key = "project"
+//  status  = "Active"
+//}
 
-  tag_key = each.key
-  status  = "Active"
-}
+// reading AWS CE (Cost Explorer) Cost Allocation Tags (env): empty result
+//resource "aws_ce_cost_allocation_tag" "cost_tags" {
+//    for_each = local.cost_tags
+//
+//  tag_key = each.key
+//  status  = "Active"
+//}

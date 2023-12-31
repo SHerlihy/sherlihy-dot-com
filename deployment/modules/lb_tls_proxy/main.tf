@@ -55,7 +55,6 @@ resource "aws_lb_target_group" "sherlihy_dot_com-server" {
 }
 
 resource "aws_lb_target_group_attachment" "server" {
-  tags = var.resource_tags
     count = length(var.instance_ids)
 
   target_group_arn = aws_lb_target_group.sherlihy_dot_com-server.arn
