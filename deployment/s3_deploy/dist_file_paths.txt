@@ -1,1 +1,3 @@
-["assets/index-UUXqmhMZ.css","assets/index-b1zz7jzd.js","index.html"]
+./dist/assets/index-UUXqmhMZ.css
+./dist/assets/index-b1zz7jzd.js
+./dist/index.html
