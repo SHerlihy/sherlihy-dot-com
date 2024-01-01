@@ -1,3 +1,7 @@
 variable "dist_files" {
-  type = list(string)
+  type = list(object({
+            path: string
+            type: string
+            })
+        )
 }

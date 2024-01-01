@@ -12,7 +12,7 @@
     "deploy-prod": "cd ./deployment/production && ./deploy_prod.sh && cd ../../",
     "setup-demo-deploy": "cd ./deployment/imaging/demo_instance && ./setup_demo_deploy.sh && cd ../../../",
     "deploy-demo-image": "cd ./deployment/imaging/demo_instance && ./deploy_demo_image.sh && cd ../../../",
-        "dist_paths": "find ./dist -type f > ./deployment/s3_deploy/dist_file_paths.txt"
+        "dist_paths": "find ./dist -type f > ./deployment/s3_deploy/dist_file_paths.txt && awk -f ./deployment/s3_deploy/dist_paths_to_list.awk ./deployment/s3_deploy/dist_file_paths.txt > ./deployment/s3_deploy/s3_vars.tfvars"
   },
   "dependencies": {
     "live-server": "^1.2.2",

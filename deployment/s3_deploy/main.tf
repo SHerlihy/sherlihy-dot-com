@@ -88,12 +88,12 @@ resource "aws_s3_object" "dist-to-objects" {
   count = length(var.dist_files)
 
   bucket = aws_s3_bucket.sherlihy_dot_com-stage.id
-  key    = var.dist_files[count.index]
-  source = "../../dist/${var.dist_files[count.index]}"
+  key    = var.dist_files[count.index].path
+  source = "../../dist/${var.dist_files[count.index].path}"
 
   acl = "public-read"
 
-    content_type = "text/html"
+    content_type = var.dist_files[count.index].type
 }
 
 output "bucket_doamin_name" {
