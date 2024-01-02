@@ -13,3 +13,7 @@ output "instance_user" {
 output "instance_ip" {
   value = aws_instance.sherlihyDotCom_instance.public_ip
 }
+
+output "public_dns" {
+  value = aws_instance.sherlihyDotCom_instance.public_dns
+}

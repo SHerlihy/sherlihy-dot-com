@@ -56,4 +56,6 @@ resource "aws_instance" "sherlihyDotCom_instance" {
     vpc_security_group_ids = [aws_security_group.sherlihyDotCom_instance.id]
 
   user_data = file(var.init_file_path)
+
+   associate_public_ip_address =  var.is_public
 }
