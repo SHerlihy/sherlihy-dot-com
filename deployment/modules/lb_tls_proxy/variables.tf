@@ -26,3 +26,7 @@ variable "resource_tags" {
     type = map(string)
     default = {}
 }
+
+variable "unique_id" {
+    type=string
+}
