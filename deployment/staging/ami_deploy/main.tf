@@ -10,7 +10,7 @@ terraform {
 }
 
 provider "aws" {
-  region = "eu-west-2"
+  region = "us-east-1"
 }
 
 locals {
@@ -20,75 +20,69 @@ locals {
   })
 }
 
-data "aws_availability_zones" "available" {
-  state = "available"
+module "content_instance" {
+    source = "./server_instance"
+
+    pub_key_path = "./.ssh/id_rsa.pub"
+
+    config_script_path = "../../configuration_scripts/web_server-init.sh"
+
+    resource_tags = local.cost_tags
 }
 
-resource "aws_vpc" "sherlihyDotCom-stage-ami" {
-  tags       = local.cost_tags
-  cidr_block = "10.0.0.0/16"
-
-    enable_dns_hostnames = true
+resource "aws_acm_certificate" "sherlihyDotCom-cdnCert" {
+  domain_name       = var.domain_name
+  validation_method = "DNS"
 }
 
-resource "aws_internet_gateway" "sherlihyDotCom-stage-ami" {
-  tags   = local.cost_tags
-  vpc_id = aws_vpc.sherlihyDotCom-stage-ami.id
-}
-
-resource "aws_subnet" "sherlihyDotCom-stage-ami" {
-  tags       = local.cost_tags
-  vpc_id     = aws_vpc.sherlihyDotCom-stage-ami.id
-  cidr_block = "10.0.1.0/24"
-
-  availability_zone = data.aws_availability_zones.available.names[0]
-}
-
-resource "aws_route_table" "sherlihyDotCom-stage-ami-inet_gw" {
-  tags   = local.cost_tags
-  vpc_id = aws_vpc.sherlihyDotCom-stage-ami.id
-}
-
-resource "aws_route" "inet_gw" {
-  route_table_id         = aws_route_table.sherlihyDotCom-stage-ami-inet_gw.id
-  destination_cidr_block = "0.0.0.0/0"
-
-  gateway_id = aws_internet_gateway.sherlihyDotCom-stage-ami.id
-}
-
-resource "aws_route_table_association" "sherlihyDotCom-stage-ami-inet_gw" {
-
-  subnet_id      = aws_subnet.sherlihyDotCom-stage-ami.id
-  route_table_id = aws_route_table.sherlihyDotCom-stage-ami-inet_gw.id
-}
-
-resource "aws_key_pair" "sherlihyDotCom_ami" {
-  tags       = local.cost_tags
-  key_name   = "sherlihyDotCom-ami"
-  public_key = file("./.ssh/id_rsa.pub")
-}
-
-module "web_server_instance" {
-  source = "../../modules/image_instance"
-
-  vpc_id    = aws_vpc.sherlihyDotCom-stage-ami.id
-  subnet_id = aws_subnet.sherlihyDotCom-stage-ami.id
-
-  ingress_port_list = tolist([80, 443])
-
-  key_name = aws_key_pair.sherlihyDotCom_ami.key_name
-
-  init_file_path = "../../configuration_scripts/web_server-init.sh"
-
-  resource_tags = local.cost_tags
-
-    is_public = true
-}
-
-module "cdn_cert" {
-    source = "../../modules/cdn_cert"
+module "cdn" {
+    source = "../../modules/cdn"
     
     domain_name = var.domain_name
 
-    content_public_dns = module.web_server_instance.public_dns
+    content_public_dns = module.content_instance.public_dns
+
+    cert_arn = aws_acm_certificate.sherlihyDotCom-cdnCert.arn
+
+    resource_tags = local.cost_tags
+}
+
+data "aws_route53_zone" "sherlihyDotCom-stage-ami" {
+  name         = var.domain_name
+  private_zone = false
+}
+
+resource "aws_route53_record" "sherlihyDotCom-stage-ami-certRecs" {
+  for_each = {
+    for dvo in aws_acm_certificate.sherlihyDotCom-cdnCert.domain_validation_options : dvo.domain_name => {
+      name   = dvo.resource_record_name
+      record = dvo.resource_record_value
+      type   = dvo.resource_record_type
+    }
+  }
+
+  allow_overwrite = true
+  name            = each.value.name
+  records         = [each.value.record]
+  ttl             = 60
+  type            = each.value.type
+  zone_id         = data.aws_route53_zone.sherlihyDotCom-stage-ami.zone_id
+}
+
+resource "aws_route53_record" "sherlihyDotCom-stage-ami" {
+  zone_id = data.aws_route53_zone.sherlihyDotCom-stage-ami.zone_id
+  name    = var.domain_name
+  type    = "A"
+
+  alias {
+
+    name = module.cdn.domain_name
+    zone_id = module.cdn.zone_id 
+    evaluate_target_health = true
+  }
+}
+
+resource "aws_acm_certificate_validation" "sherlihyDotCom-stage-ami" {
+  certificate_arn         = aws_acm_certificate.sherlihyDotCom-cdnCert.arn
+  validation_record_fqdns = [for record in aws_route53_record.sherlihyDotCom-stage-ami-certRecs : record.fqdn]
 }
