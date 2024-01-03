@@ -1,8 +1,12 @@
-variable "domain_name" {
+variable "bucket_domain_name" {
     type = string
 }
 
-variable "content_public_dns" {
+variable "alias_domain_name" {
+    type = string
+}
+
+variable "origin_id" {
     type = string
 }
 

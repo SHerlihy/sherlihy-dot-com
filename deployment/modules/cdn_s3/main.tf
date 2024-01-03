@@ -13,12 +13,8 @@ provider "aws" {
   region = "us-east-1"
 }
 
-locals {
-    sherlihyDotCom_stage-origin_id = "sherlihyDotComStage-originId"
-}
-
-resource "aws_cloudfront_cache_policy" "sherlihyDotCom-stage-ami" {
-    name = "sherlihyDotCom-stage-ami"
+resource "aws_cloudfront_cache_policy" "sherlihyDotCom-cdnS3" {
+    name = "sherlihyDotCom-cdnS3"
 
     min_ttl     = 1
 
@@ -36,33 +32,38 @@ resource "aws_cloudfront_cache_policy" "sherlihyDotCom-stage-ami" {
         }
     }
 }
+resource "aws_cloudfront_origin_access_control" "sherlihyDotCom-cdnS3" {
+  name                              = "sherlihyDotCom-cdnS3"
+  origin_access_control_origin_type = "s3"
+  signing_behavior                  = "always"
+  signing_protocol                  = "sigv4"
+}
 
-resource "aws_cloudfront_distribution" "sherlihyDotCom-stage-ami" {
+resource "aws_cloudfront_distribution" "sherlihyDotCom-cdnS3" {
   origin {
-    origin_id                = local.sherlihyDotCom_stage-origin_id
+    domain_name              = var.bucket_domain_name
+    origin_id                = var.origin_id
 
-    custom_origin_config {
-        http_port = 80
-        https_port = 443
-        #origin_protocol_policy = "match-viewer"
-        origin_protocol_policy = "http-only"
-        origin_ssl_protocols = ["TLSv1"]
-    }
+        custom_origin_config {
+            http_port = 80
+            https_port = 443
 
-    domain_name              = var.content_public_dns
-
+            origin_protocol_policy = "http-only"
+            origin_ssl_protocols = ["TLSv1"]
+        }
   }
 
   enabled             = true
+  default_root_object = "index.html"
 
-          aliases = [var.domain_name]
+  aliases = [var.alias_domain_name]
 
   default_cache_behavior {
     allowed_methods  = ["GET", "HEAD"]
     cached_methods   = ["GET", "HEAD"]
-    target_origin_id = local.sherlihyDotCom_stage-origin_id
+    target_origin_id = var.origin_id
 
-        cache_policy_id = aws_cloudfront_cache_policy.sherlihyDotCom-stage-ami.id
+        cache_policy_id = aws_cloudfront_cache_policy.sherlihyDotCom-cdnS3.id
 
     viewer_protocol_policy = "allow-all"
     min_ttl                = 0
@@ -79,13 +80,11 @@ resource "aws_cloudfront_distribution" "sherlihyDotCom-stage-ami" {
     }
   }
 
+
   viewer_certificate {
-        #acm_certificate_arn = aws_acm_certificate.sherlihyDotCom-cdnCert.arn
     acm_certificate_arn = var.cert_arn
-    #cloudfront_default_certificate = true
     cloudfront_default_certificate = false
     
     ssl_support_method = "sni-only"
   }
 }
-
