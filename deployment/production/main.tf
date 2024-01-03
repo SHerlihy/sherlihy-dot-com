@@ -20,35 +20,6 @@ locals {
   })
 }
 
-resource "aws_sns_topic" "ec2_free_used" {
-  name = "ec2_free_used"
-}
-
-resource "aws_budgets_budget_action" "example" {
-  budget_name        = aws_budgets_budget.example.name
-  action_type        = "APPLY_IAM_POLICY"
-  approval_model     = "AUTOMATIC"
-  notification_type  = "ACTUAL"
-  execution_role_arn = aws_iam_role.example.arn
-
-  action_threshold {
-    action_threshold_type  = "ABSOLUTE_VALUE"
-    action_threshold_value = 100
-  }
-
-  definition {
-    iam_action_definition {
-      policy_arn = aws_iam_policy.example.arn
-      roles      = [aws_iam_role.example.name]
-    }
-  }
-
-  subscriber {
-    address           = aws_sns_topic.ec2_free_used.id
-    subscription_type = "SNS"
-  }
-}
-
 #module "content_instance" {
 #    source = "./server_instance"
 #
