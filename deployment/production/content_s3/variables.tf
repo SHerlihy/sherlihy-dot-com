@@ -9,11 +9,3 @@ variable "dist_files" {
 variable "dist_dir_path" {
     type = string
 }
-
-variable "domain_name" {
-    type = string
-}
-
-variable "cert_arn" {
-    type = string
-}

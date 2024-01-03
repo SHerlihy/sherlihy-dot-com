@@ -64,7 +64,6 @@ data "aws_iam_policy_document" "sherlihy_dot_com-prod" {
 
 resource "aws_s3_bucket_policy" "sherlihy_dot_com-prod" {
   bucket = aws_s3_bucket_public_access_block.sherlihy_dot_com-prod.id
-  #policy = templatefile("s3-policy.json", { bucket = var.bucketName })
 
     policy = data.aws_iam_policy_document.sherlihy_dot_com-prod.json
 }
@@ -95,69 +94,4 @@ resource "aws_s3_object" "dist-to-objects" {
   acl = "public-read"
 
     content_type = var.dist_files[count.index].type
-}
-
-locals {
-    s3_origin_id = "prodS3SherlihyDotCom"
-}
-
-resource "aws_cloudfront_cache_policy" "sherlihydotcom-prod" {
-    name = "sherlihydotcom-prod"
-
-    min_ttl     = 1
-
-      parameters_in_cache_key_and_forwarded_to_origin {
-        cookies_config {
-            cookie_behavior = "none"
-        }
-
-        headers_config {
-            header_behavior = "none"
-        }
-
-        query_strings_config {
-            query_string_behavior = "none"
-        }
-    }
-}
-
-resource "aws_cloudfront_distribution" "sherlihydotcom-prod" {
-  origin {
-    domain_name              = aws_s3_bucket.sherlihy_dot_com-prod.bucket_regional_domain_name
-    origin_id                = local.s3_origin_id
-  }
-
-  enabled             = true
-  default_root_object = "index.html"
-
-          aliases = [var.domain_name]
-
-  default_cache_behavior {
-    allowed_methods  = ["GET", "HEAD"]
-    cached_methods   = ["GET", "HEAD"]
-    target_origin_id = local.s3_origin_id
-
-        cache_policy_id = aws_cloudfront_cache_policy.sherlihydotcom-prod.id
-
-    viewer_protocol_policy = "allow-all"
-    min_ttl                = 0
-    default_ttl            = 3600
-    max_ttl                = 86400
-  }
-
-      price_class = "PriceClass_100"
-
-  restrictions {
-    geo_restriction {
-      restriction_type = "none"
-      locations        = []
-    }
-  }
-
-  viewer_certificate {
-    acm_certificate_arn = var.cert_arn
-    cloudfront_default_certificate = false
-    
-    ssl_support_method = "sni-only"
-  }
 }
