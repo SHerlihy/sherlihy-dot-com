@@ -3,3 +3,10 @@ variable "domain_name" {
     default = "sherlihy.com"
 }
 
+variable "dist_files" {
+  type = list(object({
+            path: string
+            type: string
+            })
+        )
+}

@@ -89,7 +89,7 @@ resource "aws_s3_object" "dist-to-objects" {
 
   bucket = aws_s3_bucket.sherlihy_dot_com-stage.id
   key    = var.dist_files[count.index].path
-  source = "../../dist/${var.dist_files[count.index].path}"
+  source = "../../../dist/${var.dist_files[count.index].path}"
 
   acl = "public-read"
 
