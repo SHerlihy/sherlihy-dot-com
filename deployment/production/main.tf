@@ -10,123 +10,79 @@ terraform {
 }
 
 provider "aws" {
-  region = "eu-west-2"
+  region = "us-east-1"
 }
 
 locals {
   cost_tags = tomap({
-    project     = "sherlihyDotCom"
-    env = "production"
+    project = "sherlihyDotCom"
+    env     = "production"
   })
 }
 
-data "aws_availability_zones" "available" {
-  state = "available"
+module "content_instance" {
+    source = "./server_instance"
+
+    pub_key_path = "./.ssh/id_rsa.pub"
+
+    config_script_path = "../configuration_scripts/web_server-init.sh"
+
+    resource_tags = local.cost_tags
 }
 
-resource "aws_vpc" "sherlihy_dot_com" {
-  tags       = local.cost_tags
-  cidr_block = "10.0.0.0/16"
+resource "aws_acm_certificate" "sherlihyDotCom-cdnCert" {
+  domain_name       = var.domain_name
+  validation_method = "DNS"
 }
 
-resource "aws_internet_gateway" "sherlihy_dot_com" {
-  tags   = local.cost_tags
-  vpc_id = aws_vpc.sherlihy_dot_com.id
+module "cdn" {
+    source = "../modules/cdn"
+    
+    domain_name = var.domain_name
+
+    content_public_dns = module.content_instance.public_dns
+
+    cert_arn = aws_acm_certificate.sherlihyDotCom-cdnCert.arn
+
+    resource_tags = local.cost_tags
 }
 
-resource "aws_subnet" "publics" {
-  tags       = local.cost_tags
-  count      = 2
-  vpc_id     = aws_vpc.sherlihy_dot_com.id
-  cidr_block = "10.0.${count.index + 1}.0/24"
-
-  availability_zone = data.aws_availability_zones.available.names[count.index]
+data "aws_route53_zone" "sherlihyDotCom-prod-ami" {
+  name         = var.domain_name
+  private_zone = false
 }
 
-resource "aws_route_table" "inet_gw-publics" {
-  tags   = local.cost_tags
-  vpc_id = aws_vpc.sherlihy_dot_com.id
+resource "aws_route53_record" "sherlihyDotCom-prod-ami-certRecs" {
+  for_each = {
+    for dvo in aws_acm_certificate.sherlihyDotCom-cdnCert.domain_validation_options : dvo.domain_name => {
+      name   = dvo.resource_record_name
+      record = dvo.resource_record_value
+      type   = dvo.resource_record_type
+    }
+  }
+
+  allow_overwrite = true
+  name            = each.value.name
+  records         = [each.value.record]
+  ttl             = 60
+  type            = each.value.type
+  zone_id         = data.aws_route53_zone.sherlihyDotCom-prod-ami.zone_id
 }
 
-resource "aws_route" "inet_gw" {
-  route_table_id         = aws_route_table.inet_gw-publics.id
-  destination_cidr_block = "0.0.0.0/0"
-
-  gateway_id = aws_internet_gateway.sherlihy_dot_com.id
-}
-
-resource "aws_route_table_association" "inet_gw-publics" {
-  count = length(aws_subnet.publics)
-
-  subnet_id      = aws_subnet.publics[count.index].id
-  route_table_id = aws_route_table.inet_gw-publics.id
-}
-
-resource "aws_key_pair" "sherlihyDotCom_instance" {
-  tags       = local.cost_tags
-  key_name   = "sherlihyDotCom-instance"
-  public_key = file("./.ssh/id_rsa.pub")
-}
-
-module "web_server_instance" {
-  count  = length(aws_subnet.publics)
-  source = "../modules/image_instance"
-
-  vpc_id    = aws_vpc.sherlihy_dot_com.id
-  subnet_id = aws_subnet.publics[count.index].id
-
-  ingress_port_list = tolist([80, 443])
-
-  key_name = aws_key_pair.sherlihyDotCom_instance.key_name
-
-  init_file_path = "../configuration_scripts/web_server-init.sh"
-
-  resource_tags = local.cost_tags
-}
-
-locals {
-  subnet_ids   = [for subnet in aws_subnet.publics : subnet.id]
-  instance_ids = [for instance in module.web_server_instance : instance.instance_id]
-}
-
-module "lb_tls_proxy" {
-  source = "../modules/lb_tls_proxy"
-
-  vpc_id = aws_vpc.sherlihy_dot_com.id
-
-  ingress_port_list = tolist([80, 443])
-
-  instance_ids = local.instance_ids
-  subnet_ids   = local.subnet_ids
-
-  target_port  = 80
-  TLS_cert_arn = var.TLS_cert_arn
-
-  resource_tags = local.cost_tags
-}
-
-resource "aws_route53_record" "sherlihy_dot_com" {
-  zone_id = var.zone_id
+resource "aws_route53_record" "sherlihyDotCom-prod-ami" {
+  zone_id = data.aws_route53_zone.sherlihyDotCom-prod-ami.zone_id
   name    = var.domain_name
   type    = "A"
 
   alias {
-    name                   = module.lb_tls_proxy.dns_name
-    zone_id                = module.lb_tls_proxy.zone_id
+
+    name = module.cdn.domain_name
+    zone_id = module.cdn.zone_id 
     evaluate_target_health = true
   }
 }
 
-// Wont work for 24hrs see: https://github.com/hashicorp/terraform-provider-aws/issues/31442
-//resource "aws_ce_cost_allocation_tag" "cost_project" {
-//  tag_key = "project"
-//  status  = "Active"
-//}
-
-// reading AWS CE (Cost Explorer) Cost Allocation Tags (env): empty result
-//resource "aws_ce_cost_allocation_tag" "cost_tags" {
-//    for_each = local.cost_tags
-//
-//  tag_key = each.key
-//  status  = "Active"
-//}
+resource "aws_acm_certificate_validation" "sherlihyDotCom-prod-ami" {
+  certificate_arn         = aws_acm_certificate.sherlihyDotCom-cdnCert.arn
+  validation_record_fqdns = [for record in aws_route53_record.sherlihyDotCom-prod-ami-certRecs : record.fqdn]
+}
