@@ -18,6 +18,11 @@ variable "init_file_path" {
     type = string
 }
 
+variable "is_public" {
+    default = false
+    type = bool
+}
+
 variable "resource_tags" {
     type = map(string)
     default = {}

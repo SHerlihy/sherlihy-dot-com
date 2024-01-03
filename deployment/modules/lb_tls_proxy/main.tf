@@ -11,7 +11,7 @@ terraform {
 
 resource "aws_security_group" "inet_access" {
   tags = var.resource_tags
-  name   = "inetAccess"
+name = var.unique_id
   vpc_id = var.vpc_id
 }
 
@@ -38,7 +38,7 @@ resource "aws_security_group_rule" "inet_egress" {
 
 resource "aws_lb" "inet-server" {
   tags = var.resource_tags
-  name               = "sherlihyDotCom-lb"
+name = var.unique_id
   internal           = false
   load_balancer_type = "application"
 
@@ -48,7 +48,7 @@ resource "aws_lb" "inet-server" {
 
 resource "aws_lb_target_group" "sherlihy_dot_com-server" {
   tags = var.resource_tags
-  name     = "sherlihyDotCom-server"
+name = var.unique_id
   port     = var.target_port
   protocol = "HTTP"
   vpc_id   = var.vpc_id
