@@ -2,6 +2,7 @@
 import Header from './components/Header.vue'
 import Content from './components/Content.vue'
 import ProjectDesc from './components/ProjectDesc.vue'
+import Carousel from './components/Carousel.vue'
 
 const i2Points = [
     "Story lead",
@@ -34,6 +35,7 @@ const dataStructToDiagram = [
 <template>
     <Header />
     <main>
+        <Carousel/>
 
         <Content>
             <template v-slot:left>
