@@ -33,12 +33,20 @@ const dataStructToDiagram = [
 let i2Imgs = ['../../public/i2/color_picker.png','../../public/i2/i2Web.png','../../public/i2/i2WebSaveDrk.png']
 
 const shiftLeft = (imgPaths: string[]) => {
-    const swap = imgPaths.pop()
+    if (imgPaths.length < 1) {
+        return
+    }
+
+    const swap = imgPaths.pop() as string
     imgPaths.unshift(swap)
 }
 
 const shiftRight = (imgPaths: string[]) => {
-    const swap = imgPaths.shift()
+    if (imgPaths.length < 1) {
+        return
+    }
+
+    const swap = imgPaths.shift() as string
     imgPaths.push(swap)
 }
 

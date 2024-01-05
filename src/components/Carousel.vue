@@ -62,7 +62,7 @@ const next = async() => {
 <template>
     <div class="space_block">
     <div class="rail"
-            v-bind:id="shiftRight && 'shift_right' || shiftLeft && 'shift_left'"
+            v-bind:id="shiftRight && 'shift_right' || shiftLeft && 'shift_left' || ''"
             >
         <div 
             class="slide"
