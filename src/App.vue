@@ -37,12 +37,17 @@ const shiftLeft = (imgPaths: string[]) => {
     imgPaths.unshift(swap)
 }
 
+const shiftRight = (imgPaths: string[]) => {
+    const swap = imgPaths.shift()
+    imgPaths.push(swap)
+}
+
 </script>
 
 <template>
     <Header />
     <main>
-        <Carousel @shift-left="shiftLeft(i2Imgs)" :imgs="i2Imgs" img-width="400"/>
+        <Carousel @shift-left="shiftLeft(i2Imgs)" @shift-right="shiftRight(i2Imgs)" :imgs="i2Imgs" img-width="400"/>
 
         <Content>
             <template v-slot:left>

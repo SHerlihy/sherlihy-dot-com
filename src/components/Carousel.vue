@@ -6,7 +6,8 @@ defineProps<{
     imgWidth: number
 }>()
 const emit = defineEmits([
-    'shift-left'
+    'shift-left',
+    'shift-right'
 ])
 
     const renderComponent = ref(true);
@@ -20,8 +21,6 @@ const prev = async() => {
 
     emit('shift-left')
 
-//    const swap = imgs.pop()
-//    imgs.unshift(swap)
     renderComponent.value = false;
     renderComponent.value = true;
     shiftLeft.value = false
@@ -32,8 +31,8 @@ const next = async() => {
 
     await new Promise(resolve => setTimeout(resolve, 1000));
 
-    const swap = imgs.shift()
-    imgs.push(swap)
+    emit('shift-right')
+
     renderComponent.value = false;
     renderComponent.value = true;
     shiftRight.value = false
