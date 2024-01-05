@@ -47,8 +47,6 @@ const shiftRight = (imgPaths: string[]) => {
 <template>
     <Header />
     <main>
-        <Carousel @shift-left="shiftLeft(i2Imgs)" @shift-right="shiftRight(i2Imgs)" :imgs="i2Imgs" img-width="400"/>
-
         <Content>
             <template v-slot:left>
                 <ProjectDesc heading="Frontend Web Developer">
@@ -65,11 +63,8 @@ const shiftRight = (imgPaths: string[]) => {
                 </ProjectDesc>
             </template>
             <template v-slot:right>
-                <div class="multi_image">
-                    <img class="head_img" src="../public/i2/color_picker.png" />
-                    <img class="left_img" src="../public/i2/i2Web.png" />
-                    <img class="right_img" src="../public/i2/i2WebSaveDrk.png" />
-                </div>
+        <Carousel @shift-left="shiftLeft(i2Imgs)" @shift-right="shiftRight(i2Imgs)" :imgs="i2Imgs" :imgWidthPx="400" :imgGapPx="30" />
+
             </template>
         </Content>
 

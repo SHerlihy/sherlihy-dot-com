@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-defineProps<{
+const props = defineProps<{
     imgs: string[]
-    imgWidth: number
+    imgWidthPx: number
+    imgGapPx: number
 }>()
+
 const emit = defineEmits([
     'shift-left',
     'shift-right'
@@ -13,6 +15,24 @@ const emit = defineEmits([
     const renderComponent = ref(true);
     const shiftLeft = ref(false);
     const shiftRight = ref(false);
+
+const imgWidthCSS = `${props.imgWidthPx}px`
+
+const viewWidthPx = (props.imgWidthPx * 1.5)+(2*props.imgGapPx)
+const viewWidthCSS = `${viewWidthPx}px`
+
+const totWidthPx = (props.imgWidthPx*props.imgs.length) + (props.imgGapPx*(props.imgs.length+1))
+
+const midWidthPx = totWidthPx/4
+const midWidthCSS =`${midWidthPx}px`
+
+const slideWidthPx = props.imgWidthPx + (2*props.imgGapPx)
+
+const leftShift = midWidthPx+slideWidthPx
+const leftShiftCSS = `${leftShift}px`
+
+const rightShift = midWidthPx-slideWidthPx
+const rightShiftCSS = `${rightShift}px`
 
 const prev = async() => {
     shiftLeft.value = true
@@ -41,13 +61,11 @@ const next = async() => {
 
 <template>
     <div class="space_block">
-        <div 
-            class="slide" 
+    <div class="rail"
             v-bind:id="shiftRight && 'shift_right' || shiftLeft && 'shift_left'"
-        >
-    <div class="rail">
-        <div class="strip"> 
+            >
         <div 
+            class="slide"
             v-if="renderComponent"
             v-for="img in imgs"
             :key="img"
@@ -56,44 +74,57 @@ const next = async() => {
             <img :src="img" v-if="renderComponent" />
 </div>
     </div>
+    <button @click="prev" class="left_btn">Prev</button>
+    <button @click="next" class="right_btn">Next</button>
     </div>
-    </div>
-    </div>
-    <button @click="prev">Prev</button>
-    <button @click="next">Next</button>
 </template>
 
 <style scoped>
+.left_btn {
+    position: absolute;
+    left: 1rem;
+}
+
+.right_btn {
+    position: absolute;
+    right: 1rem;
+}
+
 .space_block {
     position: relative;
-    height: 300px;
+    display: flex;
+    align-items: center;
     overflow: hidden;
+
+    max-width: 100vw;
+
+    width: v-bind("viewWidthCSS");
+    height: v-bind("imgWidthCSS");
 }
 
 #shift_left {
     transition: left 1s linear;
-    left: 125%;
+    left: v-bind("leftShiftCSS");
 }
 
 #shift_right {
     transition: left 1s linear;
-    left: -25%;
-}
-
-.slide {
-    position: absolute;
-    left: 50%;
+    left: v-bind("rightShiftCSS");
 }
 
 .rail {
     position: absolute;
     display: flex;
-    left: 50%;
+    left: v-bind("midWidthCSS");
     transform: translateX(-50%);
-}
-
-.strip {
-    display: flex;
     gap: 30px;
 }
+
+.slide {
+    display: flex;
+    align-items: center;
+}
+
 </style>
+
+Shift ids used to apply css as more specific than class
