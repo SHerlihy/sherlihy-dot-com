@@ -30,12 +30,19 @@ const dataStructToDiagram = [
     "Golang",
 ]
 
+let i2Imgs = ['../../public/i2/color_picker.png','../../public/i2/i2Web.png','../../public/i2/i2WebSaveDrk.png']
+
+const shiftLeft = (imgPaths: string[]) => {
+    const swap = imgPaths.pop()
+    imgPaths.unshift(swap)
+}
+
 </script>
 
 <template>
     <Header />
     <main>
-        <Carousel/>
+        <Carousel @shift-left="shiftLeft(i2Imgs)" :imgs="i2Imgs" img-width="400"/>
 
         <Content>
             <template v-slot:left>

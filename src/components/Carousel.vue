@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-    let imgs: string[] = [
-    "../../public/i2/color_picker.png",
-    "../../public/i2/i2Web.png",
-    "../../public/i2/i2WebSaveDrk.png"
-    ];
+defineProps<{
+    imgs: string[]
+    imgWidth: number
+}>()
+const emit = defineEmits([
+    'shift-left'
+])
 
     const renderComponent = ref(true);
     const shiftLeft = ref(false);
@@ -16,8 +18,10 @@ const prev = async() => {
 
     await new Promise(resolve => setTimeout(resolve, 1000));
 
-    const swap = imgs.pop()
-    imgs.unshift(swap)
+    emit('shift-left')
+
+//    const swap = imgs.pop()
+//    imgs.unshift(swap)
     renderComponent.value = false;
     renderComponent.value = true;
     shiftLeft.value = false
@@ -34,21 +38,8 @@ const next = async() => {
     renderComponent.value = true;
     shiftRight.value = false
 }
-
-//const shiftSlide = computed(() => {
-//    if (shiftLeft === true) {
-//        return "shift_left"
-//    }
-//
-//    if (shiftRight === true) {
-//        return "shift_right"
-//    }
-//    return ""
-//})
 </script>
 
-            <!--v-bind:id="shiftLeft?'shift_left':''">-->
-            <!--v-bind:id="{shift_left: shiftLeft === true, shift_right: shiftRight === true}">-->
 <template>
     <div class="space_block">
         <div 
@@ -56,9 +47,8 @@ const next = async() => {
             v-bind:id="shiftRight && 'shift_right' || shiftLeft && 'shift_left'"
         >
     <div class="rail">
-        <section> 
+        <div class="strip"> 
         <div 
-            class="strip"
             v-if="renderComponent"
             v-for="img in imgs"
             :key="img"
@@ -66,7 +56,7 @@ const next = async() => {
         >
             <img :src="img" v-if="renderComponent" />
 </div>
-    </section>
+    </div>
     </div>
     </div>
     </div>
@@ -76,7 +66,9 @@ const next = async() => {
 
 <style scoped>
 .space_block {
+    position: relative;
     height: 300px;
+    overflow: hidden;
 }
 
 #shift_left {
@@ -101,7 +93,7 @@ const next = async() => {
     transform: translateX(-50%);
 }
 
-section {
+.strip {
     display: flex;
     gap: 30px;
 }
