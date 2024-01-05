@@ -2,6 +2,7 @@
 import Header from './components/Header.vue'
 import Content from './components/Content.vue'
 import ProjectDesc from './components/ProjectDesc.vue'
+import Carousel from './components/Carousel.vue'
 
 const i2Points = [
     "Story lead",
@@ -29,12 +30,23 @@ const dataStructToDiagram = [
     "Golang",
 ]
 
+let i2Imgs = ['../../public/i2/color_picker.png','../../public/i2/i2Web.png','../../public/i2/i2WebSaveDrk.png']
+
+const shiftLeft = (imgPaths: string[]) => {
+    const swap = imgPaths.pop()
+    imgPaths.unshift(swap)
+}
+
+const shiftRight = (imgPaths: string[]) => {
+    const swap = imgPaths.shift()
+    imgPaths.push(swap)
+}
+
 </script>
 
 <template>
     <Header />
     <main>
-
         <Content>
             <template v-slot:left>
                 <ProjectDesc heading="Frontend Web Developer">
@@ -51,11 +63,8 @@ const dataStructToDiagram = [
                 </ProjectDesc>
             </template>
             <template v-slot:right>
-                <div class="multi_image">
-                    <img class="head_img" src="../public/i2/color_picker.png" />
-                    <img class="left_img" src="../public/i2/i2Web.png" />
-                    <img class="right_img" src="../public/i2/i2WebSaveDrk.png" />
-                </div>
+        <Carousel @shift-left="shiftLeft(i2Imgs)" @shift-right="shiftRight(i2Imgs)" :imgs="i2Imgs" :imgWidthPx="400" :imgGapPx="30" />
+
             </template>
         </Content>
 
