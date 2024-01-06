@@ -1,5 +1,11 @@
 #! /bin/bash
 
+awk -i inplace '/^.*VITE_IMGS_PATH.*$/d' ../../../.env.production
+
+echo "VITE_IMGS_PATH=''" > ../../../.env.production
+
+npm run build
+
 terraform init -input=false
 
 find ../../../dist -type f > ./dist_file_paths.txt 

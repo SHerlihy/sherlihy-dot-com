@@ -14,7 +14,7 @@ provider "aws" {
 }
 
 resource "aws_cloudfront_cache_policy" "sherlihyDotCom-cdnS3" {
-    name = "sherlihyDotCom-cdnS3"
+    name = var.origin_id
 
     min_ttl     = 1
 
@@ -33,7 +33,7 @@ resource "aws_cloudfront_cache_policy" "sherlihyDotCom-cdnS3" {
     }
 }
 resource "aws_cloudfront_origin_access_control" "sherlihyDotCom-cdnS3" {
-  name                              = "sherlihyDotCom-cdnS3"
+  name                              = var.origin_id
   origin_access_control_origin_type = "s3"
   signing_behavior                  = "always"
   signing_protocol                  = "sigv4"
