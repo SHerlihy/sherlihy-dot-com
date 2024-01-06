@@ -12,6 +12,7 @@
 
 <style scoped>
 .header {
+    z-index: 99;
     top: 0;
     position: sticky;
 

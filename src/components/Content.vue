@@ -1,8 +1,9 @@
 <script setup lang="ts">
+defineProps<{ mongo?: boolean}>()
 </script>
 
 <template>
-    <section>
+    <section :class="mongo && 'sml_rev'">
         <slot name="left"></slot>
         <slot name="right"></slot>
     </section>
@@ -13,7 +14,20 @@ section {
     display: grid;
     grid-template-columns: 1fr 1fr;
     column-gap: 3vw;
-    
-    margin: 3vw;
 }
+
+@media screen and (max-width: 1200px) {
+    section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        padding: 1rem;
+    }
+
+    .sml_rev {
+        flex-flow: column-reverse;
+    }
+}
+
 </style>

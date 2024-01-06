@@ -44,14 +44,8 @@ jobs:
       - name: Build dist
         run: npm run build
 
-      - name: Image Build
-        run: npm run image
-        
-      - name: Plan prod
-        run: npm run plan-prod
-
-      - name: Deploy prod
-        run: npm run deploy-prod
+      - name: Replace s3 files
+        run: npm run replace-prod-s3
 
       - name: Push tf state
         run: |
