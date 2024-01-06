@@ -38,6 +38,9 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Set S3 img path
+        run: echo "VITE_IMGS_PATH=''" >> ./.env.production
+
       - name: Build project
         run: npm run build
 
