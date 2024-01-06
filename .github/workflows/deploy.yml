@@ -52,8 +52,11 @@ jobs:
           git config --global user.name 'SHerlihy'
           git config --global user.email 'steven_herlihy@yahoo.com'
 
-      - name: Add
+      - name: Add main state
         run: git add -f deployment/production/terraform.tfstate
+
+      - name: Add sub state
+        run: git add -f deployment/production/**/terraform.tfstate
 
       - name: Commit
         run: git commit -q -n -m"Auto updating tf state" > /dev/null 2>&1 || true
