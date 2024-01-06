@@ -19,13 +19,4 @@ defineProps<{ heading: string}>()
 h2 {
     padding-bottom: 1rem;
 }
-
-div {
-    background-color: blue;
-
-    border: none;
-}
-
-@media screen and (min-width: 960px) {
-}
 </style>

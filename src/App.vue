@@ -87,7 +87,7 @@ const shiftRight = (imgPaths: string[]) => {
 
         <div class="light_bg">
             <br/>
-        <Content>
+        <Content mongo>
             <template v-slot:right>
                 <ProjectDesc heading="Distributed Service Architecture">
                     <p>
@@ -158,7 +158,7 @@ const shiftRight = (imgPaths: string[]) => {
 
         <div class="light_bg">
             <br/>
-            <Content>
+            <Content mongo>
                 <template v-slot:right>
                     <ProjectDesc heading="Text Magnifier">
                         <p>
