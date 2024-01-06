@@ -41,13 +41,13 @@ jobs:
       - name: Set S3 img path
         run: echo "VITE_IMGS_PATH=''" >> ./.env.production
 
-      - name: Build project
-        run: npm run build
-
       - name: Image Build
         run: npm run image
+        
+      - name: Plan prod
+        run: npm run plan-prod
 
-      - name: Deploy demo image
+      - name: Deploy prod
         run: npm run deploy-prod
 
       - name: Push tf state
