@@ -79,34 +79,6 @@ resource "aws_s3_bucket_website_configuration" "sherlihy_dot_com-stage" {
     suffix = "index.html"
   }
 }
-
-resource "aws_s3_object" "dist-to-objects" {
-    depends_on = [
-        aws_s3_bucket_policy.sherlihy_dot_com-stage
-    ]
-
-  count = length(var.dist_files)
-
-  bucket = aws_s3_bucket.sherlihy_dot_com-stage.id
-  key    = var.dist_files[count.index].path
-  source = "../../../dist/${var.dist_files[count.index].path}"
-
-  acl = "public-read"
-
-    content_type = var.dist_files[count.index].type
-}
-
-output "bucket_doamin_name" {
-  value = aws_s3_bucket.sherlihy_dot_com-stage.bucket_domain_name
-}
-
-output "zone_id" {
-  value = aws_s3_bucket.sherlihy_dot_com-stage.hosted_zone_id
-}
-
-output "web_domain" {
-    value = aws_s3_bucket_website_configuration.sherlihy_dot_com-stage.website_domain
-}
 //
 //locals {
 //    s3_origin_id = "stageS3SherlihyDotCom"
