@@ -22,16 +22,14 @@ const viewWidthPx = (props.imgWidthPx * 1.5)+(2*props.imgGapPx)
 const viewWidthCSS = `${viewWidthPx}px`
 
 const totWidthPx = (props.imgWidthPx*props.imgs.length) + (props.imgGapPx*(props.imgs.length+1))
-
-const midWidthPx = totWidthPx/4
-const midWidthCSS =`${midWidthPx}px`
+const totWidthCSS =`${totWidthPx}px`
 
 const slideWidthPx = props.imgWidthPx + (2*props.imgGapPx)
 
-const leftShift = midWidthPx+slideWidthPx
+const leftShift = slideWidthPx
 const leftShiftCSS = `${leftShift}px`
 
-const rightShift = midWidthPx-slideWidthPx
+const rightShift = -slideWidthPx
 const rightShiftCSS = `${rightShift}px`
 
 const prev = async() => {
@@ -92,6 +90,8 @@ const next = async() => {
 
 .space_block {
     position: relative;
+    justify-self: center;
+
     display: flex;
     align-items: center;
     overflow: hidden;
@@ -99,6 +99,7 @@ const next = async() => {
     max-width: 100vw;
 
     width: v-bind("viewWidthCSS");
+
     height: v-bind("imgWidthCSS");
 }
 
@@ -115,8 +116,11 @@ const next = async() => {
 .rail {
     position: absolute;
     display: flex;
-    left: v-bind("midWidthCSS");
-    transform: translateX(-50%);
+
+    width: v-bind("totWidthCSS");
+
+    left: 0;
+    transform: translateX(-25%);
     gap: 30px;
 }
 

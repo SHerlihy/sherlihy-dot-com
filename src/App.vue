@@ -276,18 +276,54 @@ img {
 </style>
 
 <style>
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 * {
     margin: 0;
     padding: 0;
+
+    font: inherit;
 }
 
+html {
+    color-scheme: dark light;
+}
+
+body {
+    min-height: 100svh;
+}
+
+img,
+picture,
+svg,
+video {
+    display: block;
+    max-width: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    hanging-punctuation: first;
+    text-wrap: pretty;
+}
+
+p {
+    text-wrap: pretty;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    :has(:target) {
+        scroll-behavior: smooth;
+        scroll-padding-top: 1rem;
+    }
+}
 :root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
     font-weight: 400;
-    color-scheme: light dark;
-    color: rgba(255, 255, 255, 0.87);
-    background-color: #242424;
     font-synthesis: none;
     text-rendering: optimizeLegibility;
 }
@@ -300,11 +336,6 @@ a {
 
 a:hover {
     color: #535bf2;
-}
-
-body {
-    min-width: 320px;
-    min-height: 100vh;
 }
 
 li {
