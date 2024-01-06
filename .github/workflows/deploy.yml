@@ -41,6 +41,9 @@ jobs:
       - name: Set S3 img path
         run: echo "VITE_IMGS_PATH=''" >> ./.env.production
 
+      - name: Build dist
+        run: npm run build
+
       - name: Image Build
         run: npm run image
         
