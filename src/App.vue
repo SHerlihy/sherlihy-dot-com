@@ -310,6 +310,10 @@ h1, h2, h3, h4, h5, h6 {
     text-wrap: pretty;
 }
 
+h2 {
+    font-size: 1.5rem;
+}
+
 p {
     text-wrap: pretty;
 }
