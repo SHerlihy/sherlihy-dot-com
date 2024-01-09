@@ -3,7 +3,7 @@
 
 <template>
     <section>
-        <img src="../../public/sherlihy.jpeg"/>
+        <img src="../../public/intro/sherlihy.jpeg"/>
         <article class="grid_auto_center">
             <p class="grid_center_content">
             Welcome, here I reflect on projects I have worked on. The purpose of these reflections is to attribute my progression and learning to tangible artifacts.
