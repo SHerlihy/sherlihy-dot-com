@@ -21,8 +21,6 @@ section {
         display: flex;
         flex-direction: column;
         align-items: center;
-
-        padding: 1rem;
     }
 
     .sml_rev {

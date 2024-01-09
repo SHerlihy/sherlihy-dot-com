@@ -9,6 +9,7 @@ defineProps<{ heading: string}>()
         <h2>
                 {{heading}}
         </h2>
+        <br/>
         <article>
             <slot></slot>
         </article>
@@ -17,16 +18,6 @@ defineProps<{ heading: string}>()
 
 <style scoped>
 div {
-    padding: 1rem;
-}
-
-h2 {
-    padding-bottom: 1rem;
-}
-
-@media screen and (max-width: 1200px) {
-    .full_width{
-        width: 100%;
-    }
+    width: 100%;
 }
 </style>
