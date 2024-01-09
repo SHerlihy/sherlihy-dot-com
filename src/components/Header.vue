@@ -1,11 +1,11 @@
 <template>
     <header class="header">
-        <b class="head_text left_text">SHerlihy</b>
+        <b class="left_text">SHerlihy</b>
         <span/>
         <div class="right_flex">
-            <p class="head_text">steven_herlihy@yahoo.com</p>
-            <p class="head_text">|</p>
-            <p class="head_text">+44 73544 30588</p>
+            <p>steven_herlihy@yahoo.com</p>
+            <p class="details_partition">|</p>
+            <p>+44 73544 30588</p>
         </div>
     </header>
 </template>
@@ -23,6 +23,8 @@
 
     justify-content: space-between;
     align-content: center;
+
+    padding: 1rem;
 }
 
 .right_flex {
@@ -39,7 +41,30 @@
     font-size: 1.5rem;
 }
 
+.details_partition {
+    margin: 0 1rem;
+
+}
+
 .head_text {
-    padding: 0.5rem;
+    padding: 0 1rem;
+}
+
+@media screen and (max-width: 900px) {
+.header {
+    grid-template-columns: auto;
+    grid-template-rows: auto auto auto;
+
+        justify-items: center;
+        justify-content:unset;
+}
+
+    .right_flex {
+        flex-direction: column;
+    }
+
+    .details_partition {
+        display: none;
+    }
 }
 </style>

@@ -5,10 +5,11 @@ defineProps<{ heading: string}>()
 </script>
 
 <template>
-        <div>
+        <div class="full_width">
         <h2>
                 {{heading}}
         </h2>
+        <br/>
         <article>
             <slot></slot>
         </article>
@@ -16,7 +17,7 @@ defineProps<{ heading: string}>()
 </template>
 
 <style scoped>
-h2 {
-    padding-bottom: 1rem;
+div {
+    width: 100%;
 }
 </style>
