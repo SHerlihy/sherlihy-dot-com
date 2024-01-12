@@ -10,15 +10,46 @@
         <title></title>
     </head>
     <body>
+        <h1>Production</h1>
+        <h2>Service Flow</h2>
         <pre class="mermaid">
-            flowchart TD
-                DNS{Cloudfront}
-                R53[Route 53]
-                subgraph globall
-                    R53 --> DNS
+            flowchart LR
+                Client <--> Site
+                
+                subgraph namecheap
+                    Site[SHerlihy.com]
+                end
+
+                Site --> R53
+                R53 --> Site
+
+                subgraph AWS
+                subgraph global
+                    Admin[iam admin sherlihy.com]
+                    DNS{Cloudfront}
+                    R53[Route 53]
+                    Cert[HTTPS Cert]
+                    
+                    Cert --> R53
+                    R53 <--> DNS
+                    DNS <--> Cache
+                    DNS <--> S3
                     
                     subgraph eu-west-2
+                    S3AllActions[resource policy - allow all S3 actions]
+                    S3AllActions --> S3
+
+                        subgraph acl-public-read
+                            S3[S3 sherlihy.com]
+                        end
                     end
+                end
+                end
+
+                subgraph upload
+                Actions[CI/CD Pipeline]
+                Actions --> S3
+                Actions <--> Admin
                 end
         </pre>
     </body>

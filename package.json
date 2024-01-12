@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite ./application/",
-    "build_prod": "cd ./application/ && vue-tsc && vite build --outDir ../dist/ && cd ../",
+    "build": "cd ./application/ && vue-tsc && vite build --outDir ../dist/ && cd ../",
     "build_stage": "cd ./application/ && vue-tsc && vite build --mode staging --outDir ../dist/ && cd ../",
     "diagram": "live-server --open=./current-diagrams",
     "preview": "vite preview ./application/",
@@ -16,17 +16,15 @@
     "deploy-demo-image": "cd ./deployment/imaging/demo_instance && ./deploy_demo_image.sh && cd ../../../",
     "stage_s3": "cd ./deployment/staging/s3_deploy && ./plan_stage.sh && ./deploy_stage.sh && cd ../../../",
     "unstage_s3": "cd ./deployment/staging/s3_deploy && terraform destroy -var-file=\"./s3_vars.tfvars\" && cd ../../../",
-    "view-html": "live-server --open=./deployment/infrastructure_diagrams ."
+    "infra_diagrams": "live-server --open=./deployment/infrastructure_diagrams ."
   },
   "dependencies": {
     "live-server": "^1.2.2",
     "terraform": "^1.23.0",
-    "vue": "^3.3.8",
-    "zero-md": "^2.5.3"
+    "vue": "^3.3.8"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.5.0",
-    "marked": "^11.1.0",
     "mermaid": "^10.6.1",
     "typescript": "^5.2.2",
     "vite": "^5.0.0",
