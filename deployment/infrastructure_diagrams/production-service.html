@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <script type="module">
+            import mermaid from './node_modules/mermaid/dist/mermaid.esm.mjs';
+            let config = { startOnLoad: true, flowchart: { useMaxWidth: false, htmlLabels: true } };
+            mermaid.initialize(config);
+        </script>
+        <title></title>
+    </head>
+    <body>
+        <pre class="mermaid">
+            flowchart TD
+                DNS{Cloudfront}
+                R53[Route 53]
+                subgraph globall
+                    R53 --> DNS
+                    
+                    subgraph eu-west-2
+                    end
+                end
+        </pre>
+    </body>
+</html>
