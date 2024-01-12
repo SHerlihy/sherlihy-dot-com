@@ -4,31 +4,28 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc && vite build",
-    "build_stage": "vue-tsc && vite build --mode staging",
+    "dev": "vite ./application/",
+    "build": "cd ./application/ && vue-tsc && vite build --outDir ../dist/ && cd ../",
+    "build_stage": "cd ./application/ && vue-tsc && vite build --mode staging --outDir ../dist/ && cd ../",
     "diagram": "live-server --open=./current-diagrams",
-    "preview": "vite preview",
-    "image": "cd ./deployment/imaging && packer init aws-ubuntu.pkr.hcl && packer build aws-ubuntu.pkr.hcl && cd ../../",
-        "plan-prod": "cd ./deployment/production && ./plan_prod.sh && cd ../../",
-        "deploy-prod": "cd ./deployment/production && ./deploy_prod.sh && cd ../../",
-        "replace-prod-s3": "cd ./deployment/production/upload_s3 && ./replace_files.sh && cd ../../../",
+    "preview": "vite preview ./application/",
+    "plan-prod": "cd ./deployment/production && ./plan_prod.sh && cd ../../",
+    "deploy-prod": "cd ./deployment/production && ./deploy_prod.sh && cd ../../",
+    "replace-prod-s3": "cd ./deployment/production/upload_s3 && ./replace_files.sh && cd ../../../",
     "setup-demo-deploy": "cd ./deployment/imaging/demo_instance && ./setup_demo_deploy.sh && cd ../../../",
     "deploy-demo-image": "cd ./deployment/imaging/demo_instance && ./deploy_demo_image.sh && cd ../../../",
-        "stage_s3": "cd ./deployment/staging/s3_deploy && ./plan_stage.sh && ./deploy_stage.sh && cd ../../../",
-        "unstage_s3": "cd ./deployment/staging/s3_deploy && terraform destroy -var-file=\"./s3_vars.tfvars\" && cd ../../../"
-
+    "stage_s3": "cd ./deployment/staging/s3_deploy && ./plan_stage.sh && ./deploy_stage.sh && cd ../../../",
+    "unstage_s3": "cd ./deployment/staging/s3_deploy && terraform destroy -var-file=\"./s3_vars.tfvars\" && cd ../../../",
+    "infra_diagrams": "live-server --open=./deployment/infrastructure_diagrams ."
   },
   "dependencies": {
     "live-server": "^1.2.2",
-    "mermaid": "^10.6.1",
     "terraform": "^1.23.0",
-    "vue": "^3.3.8",
-    "zero-md": "^2.5.3"
+    "vue": "^3.3.8"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.5.0",
-    "marked": "^11.1.0",
+    "mermaid": "^10.6.1",
     "typescript": "^5.2.2",
     "vite": "^5.0.0",
     "vue-tsc": "^1.8.22"

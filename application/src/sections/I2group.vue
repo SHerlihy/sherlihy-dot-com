@@ -12,7 +12,7 @@ const i2Points = [
     "React",
 ]
 
-const imgPath = import.meta.env.VITE_IMGS_PATH === undefined ? "../../../public/" : import.meta.env.VITE_IMGS_PATH
+const imgPath = import.meta.env.VITE_IMGS_PATH === undefined ? "/public/" : import.meta.env.VITE_IMGS_PATH
 
 let i2Imgs = [
     `${imgPath}/i2/color_picker.png`,
