@@ -11,6 +11,31 @@ terraform {
 
 provider "aws" {
   region = "eu-west-2"
+    profile = "iam_admin"
+}
+
+data "aws_iam_user" "iam_admin" {
+  user_name = "iam_admin"
+}
+
+data "aws_iam_policy_document" "all_s3" {
+    statement {
+        effect = "Allow"
+        actions = [
+            "s3:*",
+            "servicecatalog:*"
+        ]
+        resources = ["*"]
+    }
+}
+
+resource "aws_iam_policy" "all_s3" {
+    policy = data.aws_iam_policy_document.all_s3.json
+}
+
+resource "aws_iam_user_policy_attachment" "s3_all" {
+    user = data.aws_iam_user.iam_admin.user_name
+    policy_arn = aws_iam_policy.all_s3.arn
 }
 
 resource "aws_s3_bucket" "sherlihy_dot_com-stage" {
@@ -43,8 +68,7 @@ resource "aws_s3_bucket_acl" "sherlihy_dot_com-stage" {
   acl    = "public-read"
 }
 
-// really I want to assume a role that allows me to upload to the bucket
-data "aws_iam_policy_document" "sherlihy_dot_com-stage" {
+data "aws_iam_policy_document" "bucket-access" {
     statement {
         principals {
             type = "*"
@@ -64,9 +88,8 @@ data "aws_iam_policy_document" "sherlihy_dot_com-stage" {
 
 resource "aws_s3_bucket_policy" "sherlihy_dot_com-stage" {
   bucket = aws_s3_bucket_public_access_block.sherlihy_dot_com-stage.id
-  #policy = templatefile("s3-policy.json", { bucket = var.bucketName })
 
-    policy = data.aws_iam_policy_document.sherlihy_dot_com-stage.json
+    policy = data.aws_iam_policy_document.bucket-access.json
 }
 
 resource "aws_s3_bucket_website_configuration" "sherlihy_dot_com-stage" {
@@ -79,73 +102,3 @@ resource "aws_s3_bucket_website_configuration" "sherlihy_dot_com-stage" {
     suffix = "index.html"
   }
 }
-//
-//locals {
-//    s3_origin_id = "stageS3SherlihyDotCom"
-//}
-//
-//resource "aws_cloudfront_cache_policy" "sherlihydotcom-stage" {
-//    name = "sherlihydotcom-stage"
-//
-//    min_ttl     = 1
-//
-//      parameters_in_cache_key_and_forwarded_to_origin {
-//        cookies_config {
-//            cookie_behavior = "none"
-//        }
-//
-//        headers_config {
-//            header_behavior = "none"
-//        }
-//
-//        query_strings_config {
-//            query_string_behavior = "none"
-//        }
-//    }
-//}
-//
-//resource "aws_cloudfront_distribution" "sherlihydotcom-stage" {
-//  origin {
-//    domain_name              = aws_s3_bucket.sherlihy_dot_com-stage.bucket_regional_domain_name
-//    origin_id                = local.s3_origin_id
-//  }
-//
-//  enabled             = true
-//  default_root_object = "index.html"
-//
-//      # aliases = ["mysite.example.com", "yoursite.example.com"]
-//
-//  default_cache_behavior {
-//    allowed_methods  = ["GET", "HEAD"]
-//    cached_methods   = ["GET", "HEAD"]
-//    target_origin_id = local.s3_origin_id
-//
-//        cache_policy_id = aws_cloudfront_cache_policy.sherlihydotcom-stage.id
-//
-//    viewer_protocol_policy = "allow-all"
-//    min_ttl                = 0
-//    default_ttl            = 3600
-//    max_ttl                = 86400
-//  }
-//
-//      price_class = "PriceClass_100"
-//
-//  restrictions {
-//    geo_restriction {
-//      restriction_type = "none"
-//      locations        = []
-//    }
-//  }
-//
-//  viewer_certificate {
-//    cloudfront_default_certificate = true
-//  }
-//}
-//
-//output "domain_name-CDN" {
-//    value = aws_cloudfront_distribution.sherlihydotcom-stage.domain_name
-//}
-//
-//output "hosted_zone_id-CDN" {
-//    value = aws_cloudfront_distribution.sherlihydotcom-stage.hosted_zone_id
-//}
