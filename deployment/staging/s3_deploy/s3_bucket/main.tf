@@ -13,10 +13,10 @@ provider "aws" {
   region = "eu-west-2"
 }
 
-module "upload" {
-    source = "../../../modules/upload_s3"
+#Here so its regionally bound and not global
 
-    dist_path = "../../../../dist"
-    dist_files = var.dist_files
-    bucket_id = var.bucket_id
+module "s3_bucket" {
+    source = "../../../modules/s3_bucket"
+
+    bucket_prefix = "sherlihydotcom-stage"
 }

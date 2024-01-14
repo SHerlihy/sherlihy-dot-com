@@ -1,9 +1,10 @@
 #! /bin/bash
 
-cd ./upload
+cd ./upload_s3
 ./delete_files.sh
 
-cd ..
+cd ../
+
 terraform destroy -auto-approve
 
 exit

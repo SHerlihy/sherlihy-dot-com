@@ -10,7 +10,7 @@ terraform {
 }
 
 provider "aws" {
-  region = "us-east-1"
+  region = "eu-west-2"
     profile = "iam_admin"
 }
 
@@ -45,6 +45,10 @@ resource "aws_iam_user_policy_attachment" "s3_all" {
     policy_arn = aws_iam_policy.all_s3.arn
 }
 
-module "s3_bucket" {
-    source = "./s3_bucket"
+module "upload" {
+    source = "../../../modules/upload_s3"
+
+    dist_path = "../../../../dist"
+    dist_files = var.dist_files
+    bucket_id = var.bucket_id
 }

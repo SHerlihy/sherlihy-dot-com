@@ -25,6 +25,7 @@
 
                 subgraph AWS
                 subgraph global
+                    Uploader[iam upload sherlihy.com bucket]
                     Admin[iam admin sherlihy.com]
                     DNS{Cloudfront}
                     R53[Route 53]
@@ -49,7 +50,7 @@
                 subgraph upload
                 Actions[CI/CD Pipeline]
                 Actions --> S3
-                Actions <--> Admin
+                Actions <--> Uploader
                 end
         </pre>
     </body>
