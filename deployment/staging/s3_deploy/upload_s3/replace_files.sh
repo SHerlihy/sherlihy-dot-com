@@ -11,8 +11,11 @@ terraform init -input=false
 find ../../../../dist -type f > ./dist_file_paths.txt 
 awk -f ./dist_paths_to_list.awk ./dist_file_paths.txt > ./upload_vars.tfvars
 
-BUCKET_ID=$(terraform -chdir=../ output bucket_id)
+BUCKET_ID=$(terraform -chdir=../s3_bucket output bucket_id)
 echo -e "\nbucket_id=$BUCKET_ID" >> ./upload_vars.tfvars
+
+PROFILE=$(terraform -chdir=../ output profile)
+echo -e "\nprofile=$PROFILE" >> ./upload_vars.tfvars
 
 terraform destroy -auto-approve -var-file=./upload_vars.tfvars
 

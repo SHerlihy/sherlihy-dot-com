@@ -11,38 +11,14 @@ terraform {
 
 provider "aws" {
   region = "eu-west-2"
-    profile = "iam_admin"
+    profile = var.profile
 }
 
 locals {
-  cost_tags = tomap({
+  resource_tags = {
     project = "sherlihyDotCom"
     env     = "staging"
-  })
-}
-
-data "aws_iam_user" "iam_admin" {
-  user_name = "iam_admin"
-}
-
-data "aws_iam_policy_document" "all_s3" {
-    statement {
-        effect = "Allow"
-        actions = [
-            "s3:*",
-            "servicecatalog:*"
-        ]
-        resources = ["*"]
-    }
-}
-
-resource "aws_iam_policy" "all_s3" {
-    policy = data.aws_iam_policy_document.all_s3.json
-}
-
-resource "aws_iam_user_policy_attachment" "s3_all" {
-    user = data.aws_iam_user.iam_admin.user_name
-    policy_arn = aws_iam_policy.all_s3.arn
+  }
 }
 
 module "upload" {

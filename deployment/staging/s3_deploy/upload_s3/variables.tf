@@ -1,3 +1,7 @@
+variable "profile" {
+    type = string
+}
+
 variable "bucket_id" {
     type = string
 }
