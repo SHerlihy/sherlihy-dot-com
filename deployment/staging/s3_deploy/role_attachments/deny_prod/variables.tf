@@ -1,4 +1,4 @@
-variable "profile" {
+variable "role_name" {
     type = string
 }
 
