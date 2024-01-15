@@ -1,20 +1,7 @@
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 4.16"
-    }
-  }
-
-  required_version = ">= 1.2.0"
-}
-
-provider "aws" {
-  region = "eu-west-2"
-}
-
 resource "aws_s3_bucket" "sherlihy_dot_com" {
   bucket_prefix = var.bucket_prefix
+
+    tags = var.resource_tags
 }
 
 resource "aws_s3_bucket_ownership_controls" "sherlihy_dot_com" {
