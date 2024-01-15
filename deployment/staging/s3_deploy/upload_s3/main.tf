@@ -12,6 +12,10 @@ terraform {
 provider "aws" {
   region = "eu-west-2"
     profile = var.profile
+
+    assume_role {
+        role_arn = var.role_arn
+    }
 }
 
 locals {

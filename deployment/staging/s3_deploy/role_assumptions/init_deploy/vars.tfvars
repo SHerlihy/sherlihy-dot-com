@@ -1,5 +1,5 @@
 profile = "sherlihyDotCom-staging"
 resource_tags = {
-  "env" = "staging"
+  "env"     = "staging"
   "project" = "sherlihyDotCom"
 }

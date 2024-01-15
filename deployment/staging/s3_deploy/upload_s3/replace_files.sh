@@ -2,6 +2,7 @@
 
 PROFILE=$1
 BUCKET_ID=$2
+ROLE_ARN=$3
 
 awk -i inplace '/^.*VITE_IMGS_PATH.*$/d' ../../../../.env.staging
 
@@ -16,6 +17,7 @@ awk -f ./dist_paths_to_list.awk ./dist_file_paths.txt > ./upload_vars.tfvars
 
 echo -e "\nbucket_id=$BUCKET_ID" >> ./upload_vars.tfvars
 echo -e "\nprofile=$PROFILE" >> ./upload_vars.tfvars
+echo -e "\nrole_arn=$ROLE_ARN" >> ./upload_vars.tfvars
 
 terraform destroy -auto-approve -var-file=./upload_vars.tfvars
 terraform plan -var-file=./upload_vars.tfvars -out=./upload.plan

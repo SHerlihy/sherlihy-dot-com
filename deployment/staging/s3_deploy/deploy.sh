@@ -15,9 +15,10 @@ terraform apply -var-file='./vars.tfvars' -auto-approve
 cd ..
 
 PROFILE=$(terraform -chdir=./role_assumptions/init_deploy output profile)
+ROLE_ARN=$(terraform -chdir=./role_assumptions/init_deploy output role_arn)
 BUCKET_ID=$(terraform -chdir=./s3_bucket output bucket_id)
 
 cd ./upload_s3
-./replace_files.sh $PROFILE $BUCKET_ID
+./replace_files.sh $PROFILE $BUCKET_ID $ROLE_ARN
 
 exit
