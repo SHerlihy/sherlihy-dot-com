@@ -5,11 +5,11 @@ cd ./upload_s3
 cd ../
 
 cd ./s3_bucket
-terraform destroy -var-file=./vars.tfvars --auto-aprove
+terraform destroy -var-file=./vars.tfvars --auto-approve
 cd ../
 
 cd ./role_assumptions/init_deploy
-terraform destroy -auto-approve
+terraform destroy --auto-approve
 cd ../../
 
 exit

@@ -33,9 +33,13 @@ data "aws_iam_policy_document" "all_s3" {
     statement {
         effect = "Allow"
         actions = [
-            "*"
-            #            "servicecatalog:*",
-            #            "s3:*"
+            "iam:*",
+            "sts:GetCallerIdentity",
+            "s3:Create*",
+            "s3:Delete*",
+            "s3:Get*",
+            "s3:List*",
+            "s3:Put*",
         ]
         resources = ["*"]
         #

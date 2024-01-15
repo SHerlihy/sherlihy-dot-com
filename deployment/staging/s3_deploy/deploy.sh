@@ -5,6 +5,8 @@ terraform init
 terraform apply -auto-approve
 cd ../../
 
+sleep 1
+
 terraform -chdir=./role_assumptions/init_deploy output > ./s3_bucket/vars.tfvars
 
 cd ./s3_bucket
