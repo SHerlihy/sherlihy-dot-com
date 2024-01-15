@@ -1,7 +1,7 @@
-output "bucket_id" {
-    value = module.s3_bucket.bucket_id
+output "resource_tags" {
+    value = local.resource_tags
 }
 
-output "bucket_address" {
-    value = module.s3_bucket.web_domain
+output "profile" {
+    value = local.profile
 }

@@ -9,42 +9,56 @@ terraform {
   required_version = ">= 1.2.0"
 }
 
+locals {
+    profile = "sherlihyDotCom-staging" 
+}
+
 provider "aws" {
   region = "us-east-1"
-    profile = "iam_admin"
+    profile = local.profile
 }
 
 locals {
-  cost_tags = tomap({
+  resource_tags = {
     project = "sherlihyDotCom"
     env     = "staging"
-  })
+  }
 }
 
-data "aws_iam_user" "iam_admin" {
-  user_name = "iam_admin"
+data "aws_iam_user" "stage_admin" {
+  user_name = local.profile
 }
 
 data "aws_iam_policy_document" "all_s3" {
     statement {
         effect = "Allow"
         actions = [
-            "s3:*",
-            "servicecatalog:*"
+            "*"
+            #            "servicecatalog:*",
+            #            "s3:*"
         ]
         resources = ["*"]
+        #
+        #        condition {
+        #            variable = "s3:resourceTag"
+        #            test = "StringEquals"
+        #            values = [local.resource_tags.project]
+        #        }
+        #
+        #        condition {
+        #            variable = "s3:resourceTag"
+        #            test = "StringEquals"
+        #            values = [local.resource_tags.env]
+        #        }
     }
 }
 
 resource "aws_iam_policy" "all_s3" {
+    name = "sherlihyDotCom-staging-all"
     policy = data.aws_iam_policy_document.all_s3.json
 }
 
 resource "aws_iam_user_policy_attachment" "s3_all" {
-    user = data.aws_iam_user.iam_admin.user_name
+    user = data.aws_iam_user.stage_admin.user_name
     policy_arn = aws_iam_policy.all_s3.arn
-}
-
-module "s3_bucket" {
-    source = "./s3_bucket"
 }

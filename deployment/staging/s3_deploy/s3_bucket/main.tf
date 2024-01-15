@@ -11,12 +11,15 @@ terraform {
 
 provider "aws" {
   region = "eu-west-2"
+    profile = var.profile
 }
 
 #Here so its regionally bound and not global
 
 module "s3_bucket" {
     source = "../../../modules/s3_bucket"
-
+    
     bucket_prefix = "sherlihydotcom-stage"
+
+    resource_tags = var.resource_tags
 }
