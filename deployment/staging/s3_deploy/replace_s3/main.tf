@@ -10,7 +10,17 @@ terraform {
 }
 
 locals {
-    profile = "sherlihyDotCom-staging-replace"
+    #profile = "sherlihyDotCom-staging-replace"
+    profile = "sherlihyDotCom-staging"
+}
+
+locals {
+  resource_tags = {
+    project = "sherlihyDotCom"
+    env     = "staging"
+  }
+
+    except_tags = [for k,v in local.resource_tags : v]
 }
 
 provider "aws" {
@@ -43,37 +53,24 @@ resource "aws_iam_role" "s3_upload" {
     assume_role_policy = data.aws_iam_policy_document.assume_s3_upload.json
 }
 
-data "aws_iam_policy_document" "enable_assume" {
-  statement {
-    effect = "Allow"
-    actions = [
-      "iam:*",
-      "sts:GetCallerIdentity",
-    ]
-    resources = ["*"]
-  }
+module "enable_assume" {
+    source = "../role_attachments/enable_assume"
+
+    role_name = aws_iam_role.s3_upload.name
 }
 
-resource "aws_iam_policy" "enable_assume" {
-    policy = data.aws_iam_policy_document.enable_assume.json
+module "s3_upload" {
+    source = "../role_attachments/s3_upload"
+
+    role_name = aws_iam_role.s3_upload.name
+
+    resource_tags = local.except_tags
 }
 
-resource "aws_iam_role_policy_attachment" "enable_assume" {
-    role = aws_iam_role.s3_upload.name
-    policy_arn = aws_iam_policy.enable_assume.arn
+module "except_tags" {
+    source = "../role_attachments/except_tags"
+
+    role_name = aws_iam_role.s3_upload.name
+
+    except_tags = local.except_tags
 }
-
-#module "s3_upload" {
-#    source = "../role_attachments/s3_upload"
-#
-#    role_name = aws_iam_role.s3_upload.name
-#
-#    resource_tags = var.resource_tags
-#}
-
-#module "deny_prod" {
-#    source = "../role_attachments/deny_prod"
-#
-#    role_name = aws_iam_role.s3_upload.name
-#}
-#

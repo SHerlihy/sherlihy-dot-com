@@ -3,6 +3,14 @@
 terraform init
 terraform apply -auto-approve
 
+STATUS=$?
+
+if [ $STATUS -gt 0 ]
+then
+    echo "create role failed"
+    exit $STATUS
+fi
+
 sleep 1
 
 terraform output > ../upload_s3/vars.tfvars

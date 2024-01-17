@@ -50,6 +50,12 @@ resource "aws_iam_role" "deploy_s3" {
     assume_role_policy = data.aws_iam_policy_document.assume_deploy_s3.json
 }
 
+module "enable_assume" {
+    source = "../role_attachments/enable_assume"
+
+    role_name = aws_iam_role.deploy_s3.name
+}
+
 module "create_s3" {
     source = "../role_attachments/create_bucket"
 

@@ -18,13 +18,6 @@ provider "aws" {
     }
 }
 
-locals {
-  resource_tags = {
-    project = "sherlihyDotCom"
-    env     = "staging"
-  }
-}
-
 module "upload" {
     source = "../../../modules/upload_s3"
 
@@ -32,5 +25,5 @@ module "upload" {
     dist_files = var.dist_files
     bucket_id = var.bucket_id
 
-    resource_tags = local.resource_tags
+    resource_tags = var.resource_tags
 }
