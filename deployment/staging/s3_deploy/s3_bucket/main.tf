@@ -23,7 +23,9 @@ provider "aws" {
 module "s3_bucket" {
     source = "../../../modules/s3_bucket"
     
-    profile_arn = var.role_arn
+    profile_arn = var.profile_arn
+
+    role_arn = var.role_arn
 
     bucket_prefix = "sherlihydotcom-stage"
 
