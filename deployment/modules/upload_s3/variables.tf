@@ -13,3 +13,7 @@ variable "dist_files" {
             })
         )
 }
+
+variable "resource_tags" {
+    type = map(string)
+}

@@ -1,6 +1,6 @@
 #! /bin/bash
 
-cd ./upload_s3
+cd ../upload_s3
 ./delete_files.sh
 cd ../
 

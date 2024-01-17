@@ -1,5 +1,5 @@
 #! /bin/bash
 
-terraform destroy -auto-approve -var-file=./upload_vars.tfvars
+terraform destroy -auto-approve -var-file=./vars.tfvars
 
 exit

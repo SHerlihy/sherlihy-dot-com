@@ -53,10 +53,12 @@ module "create_s3" {
     source = "../role_attachments/create_bucket"
 
     role_name = aws_iam_role.deploy_s3.name
+
+    profile = local.profile
 }
 
-module "deny_prod" {
-    source = "../role_attachments/deny_prod"
-
-    role_name = aws_iam_role.deploy_s3.name
-}
+#module "deny_prod" {
+#    source = "../role_attachments/deny_prod"
+#
+#    role_name = aws_iam_role.deploy_s3.name
+#}

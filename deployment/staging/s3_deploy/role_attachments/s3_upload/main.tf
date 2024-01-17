@@ -4,11 +4,6 @@ data "aws_iam_policy_document" "s3_upload" {
     actions = [
       "iam:*",
       "sts:GetCallerIdentity",
-      "s3:Create*",
-      "s3:Delete*",
-      "s3:Get*",
-      "s3:List*",
-      "s3:Put*",
     ]
     resources = ["*"]
 

@@ -1,3 +1,7 @@
+data "aws_iam_user" "stage_admin" {
+  user_name = var.profile
+}
+
 data "aws_iam_policy_document" "deploy_s3" {
   statement {
     effect = "Allow"

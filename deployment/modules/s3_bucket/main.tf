@@ -34,12 +34,29 @@ resource "aws_s3_bucket_acl" "sherlihy_dot_com" {
 data "aws_iam_policy_document" "sherlihy_dot_com" {
     statement {
         principals {
+            type = "AWS"
+            identifiers = [var.profile_arn]
+        }
+
+        actions = [
+            "s3:*",
+        ]
+
+        resources = [
+            aws_s3_bucket.sherlihy_dot_com.arn,
+            "${aws_s3_bucket.sherlihy_dot_com.arn}/*",
+        ]
+    }
+
+    statement {
+        principals {
             type = "*"
             identifiers = ["*"]
         }
 
         actions = [
-            "s3:*",
+            "s3:Get*",
+            "s3:List*",
         ]
 
         resources = [

@@ -31,4 +31,6 @@ module "upload" {
     dist_path = "../../../../dist"
     dist_files = var.dist_files
     bucket_id = var.bucket_id
+
+    resource_tags = local.resource_tags
 }

@@ -1,18 +1,3 @@
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 4.16"
-    }
-  }
-
-  required_version = ">= 1.2.0"
-}
-
-provider "aws" {
-  region = "eu-west-2"
-}
-
 resource "aws_s3_object" "dist-to-objects" {
   count = length(var.dist_files)
 
@@ -23,5 +8,7 @@ source = "${var.dist_path}/${var.dist_files[count.index].path}"
   acl = "public-read"
 
     content_type = var.dist_files[count.index].type
+
+    tags = var.resource_tags
 }
 

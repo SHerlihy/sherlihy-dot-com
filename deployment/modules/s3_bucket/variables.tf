@@ -1,3 +1,7 @@
+variable "profile_arn" {
+    type = string
+}
+
 variable "bucket_prefix" {
     type = string
 }
