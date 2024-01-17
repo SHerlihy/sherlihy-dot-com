@@ -23,6 +23,8 @@ locals {
     project = "sherlihyDotCom"
     env     = "staging"
   }
+
+    except_tags = [for k,v in local.resource_tags : v]
 }
 
 data "aws_iam_user" "stage_admin" {
@@ -40,7 +42,6 @@ data "aws_iam_policy_document" "assume_deploy_s3" {
             identifiers = [
                 data.aws_iam_user.stage_admin.arn
             ]
-
         }
     }
 }
@@ -57,8 +58,10 @@ module "create_s3" {
     profile = local.profile
 }
 
-#module "deny_prod" {
-#    source = "../role_attachments/deny_prod"
-#
-#    role_name = aws_iam_role.deploy_s3.name
-#}
+module "except_tags" {
+    source = "../role_attachments/except_tags"
+
+    role_name = aws_iam_role.deploy_s3.name
+
+    except_tags = local.except_tags
+}
