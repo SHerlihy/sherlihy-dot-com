@@ -1,3 +1,14 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.16"
+    }
+  }
+
+  required_version = ">= 1.2.0"
+}
+
 resource "aws_s3_bucket" "sherlihy_dot_com" {
   bucket_prefix = var.bucket_prefix
 
@@ -30,25 +41,9 @@ resource "aws_s3_bucket_acl" "sherlihy_dot_com" {
   acl    = "public-read"
 }
 
-// really I want to assume a role that allows me to upload to the bucket
 data "aws_iam_policy_document" "sherlihy_dot_com" {
     statement {
-        principals {
-            type = "AWS"
-            identifiers = [var.profile_arn]
-        }
-
-        actions = [
-            "s3:*",
-        ]
-
-        resources = [
-            aws_s3_bucket.sherlihy_dot_com.arn,
-            "${aws_s3_bucket.sherlihy_dot_com.arn}/*",
-        ]
-    }
-
-    statement {
+        effect = "Allow"
         principals {
             type = "*"
             identifiers = ["*"]
@@ -62,6 +57,59 @@ data "aws_iam_policy_document" "sherlihy_dot_com" {
         resources = [
             aws_s3_bucket.sherlihy_dot_com.arn,
             "${aws_s3_bucket.sherlihy_dot_com.arn}/*",
+        ]
+    }
+
+    statement {
+        effect = "Deny"
+
+        condition {
+            variable = "aws:principalArn"
+            test = "StringNotEquals"
+            values = [
+                var.bucket_create_arn
+            ]
+        }
+
+        principals {
+            type = "*"
+            identifiers = ["*"]
+        }
+
+        actions = [
+            "s3:Delete*",
+            "s3:Put*",
+        ]
+
+        resources = [
+            aws_s3_bucket.sherlihy_dot_com.arn
+        ]
+    }
+
+    statement {
+        effect = "Deny"
+
+        condition {
+            variable = "aws:principalArn"
+            test = "StringNotEquals"
+            values = [
+                var.bucket_create_arn,
+                var.obj_replace_arn
+            ]
+        }
+
+        principals {
+            type = "*"
+            identifiers = ["*"]
+        }
+
+        actions = [
+            "s3:Delete*",
+            "s3:Put*",
+        ]
+
+        resources = [
+            "${aws_s3_bucket.sherlihy_dot_com.arn}/*"
         ]
     }
 }
