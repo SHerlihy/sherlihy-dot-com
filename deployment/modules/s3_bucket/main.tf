@@ -9,12 +9,10 @@ terraform {
   required_version = ">= 1.2.0"
 }
 
-provider "aws" {
-  region = "eu-west-2"
-}
-
 resource "aws_s3_bucket" "sherlihy_dot_com" {
   bucket_prefix = var.bucket_prefix
+
+    tags = var.resource_tags
 }
 
 resource "aws_s3_bucket_ownership_controls" "sherlihy_dot_com" {
@@ -43,21 +41,75 @@ resource "aws_s3_bucket_acl" "sherlihy_dot_com" {
   acl    = "public-read"
 }
 
-// really I want to assume a role that allows me to upload to the bucket
 data "aws_iam_policy_document" "sherlihy_dot_com" {
     statement {
+        effect = "Allow"
         principals {
             type = "*"
             identifiers = ["*"]
         }
 
         actions = [
-            "s3:*",
+            "s3:Get*",
+            "s3:List*",
         ]
 
         resources = [
             aws_s3_bucket.sherlihy_dot_com.arn,
             "${aws_s3_bucket.sherlihy_dot_com.arn}/*",
+        ]
+    }
+
+    statement {
+        effect = "Deny"
+
+        condition {
+            variable = "aws:principalArn"
+            test = "StringNotEquals"
+            values = [
+                var.bucket_create_arn
+            ]
+        }
+
+        principals {
+            type = "*"
+            identifiers = ["*"]
+        }
+
+        actions = [
+            "s3:Delete*",
+            "s3:Put*",
+        ]
+
+        resources = [
+            aws_s3_bucket.sherlihy_dot_com.arn
+        ]
+    }
+
+    statement {
+        effect = "Deny"
+
+        condition {
+            variable = "aws:principalArn"
+            test = "StringNotEquals"
+            values = [
+                var.bucket_create_arn,
+                var.obj_replace_arn
+            ]
+        }
+
+        principals {
+            type = "*"
+            identifiers = ["*"]
+        }
+
+        actions = [
+            "s3:Delete*",
+            "s3:Put*",
+        ]
+
+        resources = [
+            "${aws_s3_bucket.sherlihy_dot_com.arn}/*"
         ]
     }
 }

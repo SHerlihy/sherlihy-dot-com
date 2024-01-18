@@ -1,12 +1,16 @@
+variable "profile" {
+    type = string
+}
+
 variable "bucket_create_arn" {
     type = string
 }
 
-variable "obj_replace_arn" {
+variable "obj_replace_name" {
     type = string
 }
 
-variable "bucket_prefix" {
+variable "obj_replace_arn" {
     type = string
 }
 

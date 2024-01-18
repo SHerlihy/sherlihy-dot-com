@@ -13,3 +13,7 @@ output "zone_id" {
 output "web_domain" {
     value = aws_s3_bucket_website_configuration.sherlihy_dot_com.website_domain
 }
+
+output "web_endpoint" {
+    value = aws_s3_bucket_website_configuration.sherlihy_dot_com.website_endpoint
+}

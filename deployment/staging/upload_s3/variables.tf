@@ -1,8 +1,12 @@
-variable "bucket_id" {
+variable "profile" {
     type = string
 }
 
-variable "dist_path" {
+variable "obj_replace_arn" {
+    type = string
+}
+
+variable "bucket_id" {
     type = string
 }
 
