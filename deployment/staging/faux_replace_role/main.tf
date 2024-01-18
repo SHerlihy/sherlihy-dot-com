@@ -61,13 +61,5 @@ module "obj_replace" {
 
     role_name = aws_iam_role.obj_replace.name
 
-    resource_tags = local.except_tags
-}
-
-module "replace_except_tags" {
-    source = "../../modules/role_attachments/except_tags"
-
-    role_name = aws_iam_role.obj_replace.name
-
-    except_tags = local.except_tags
+    bucket_name = var.bucket_id
 }

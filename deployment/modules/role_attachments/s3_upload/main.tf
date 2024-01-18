@@ -2,13 +2,14 @@ variable "role_name" {
     type = string
 }
 
-variable "resource_tags" {
-    type = list(string)
+variable "bucket_name" {
+    type = string
 }
 
 data "aws_iam_policy_document" "s3_upload" {
   statement {
     effect = "Allow"
+
     actions = [
       "s3:Create*",
       "s3:Delete*",
@@ -16,13 +17,26 @@ data "aws_iam_policy_document" "s3_upload" {
       "s3:List*",
       "s3:Put*",
     ]
-    resources = ["*"]
 
-   condition {
-     variable = "s3:resourceTag"
-     test     = "ForAllValues:StringEquals"
-     values   = var.resource_tags
-   }
+    resources = ["arn:aws:s3:::${var.bucket_name}/*"]
+
+  }
+
+  statement {
+    effect = "Deny"
+
+#    condition {
+#            variable = "s3:DataAccessPointArn"
+#            test = "StringNotEqual"
+#            values = ["arn:aws:s3:::${var.bucket_name}/*"]
+#        }
+
+    actions = [
+            "s3:*",
+        ]
+
+    not_resources = ["arn:aws:s3:::${var.bucket_name}","arn:aws:s3:::${var.bucket_name}/*"]
+
   }
 }
 

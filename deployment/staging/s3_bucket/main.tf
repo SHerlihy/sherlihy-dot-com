@@ -18,6 +18,10 @@ provider "aws" {
     }
 }
 
+locals {
+    except_tags = [for k,v in var.resource_tags : v]
+}
+
 #Here so its regionally bound and not global
 module "s3_bucket" {
     source = "../../modules/s3_bucket"
@@ -29,4 +33,12 @@ module "s3_bucket" {
     obj_replace_arn = var.obj_replace_arn
 
     resource_tags = var.resource_tags
+}
+
+module "obj_replace" {
+    source = "../../modules/role_attachments/s3_upload"
+
+    role_name = var.obj_replace_name
+
+    bucket_name = module.s3_bucket.bucket_id
 }

@@ -6,26 +6,15 @@ data "aws_iam_policy_document" "deploy_s3" {
   statement {
     effect = "Allow"
     actions = [
-      "s3:*",
-            #"s3:Create*",
-            #"s3:Delete*",
-            #"s3:Get*",
-            #"s3:List*",
-            #"s3:Put*",
+            "s3:Create*",
+            "s3:Delete*",
+            "s3:Get*",
+            "s3:List*",
+            "s3:Put*",
     ]
-    resources = ["*"]
-
-   # condition {
-   #   variable = "s3:resourceTag"
-   #   test     = "ForAnyValue:StringEquals"
-   #   values   = [local.resource_tags.project]
-   # }
-
-   # condition {
-   #   variable = "s3:resourceTag"
-   #   test     = "ForAnyValue:StringEquals"
-   #   values   = [local.resource_tags.env]
-   # }
+    resources = [
+        "arn:aws:s3:::*"
+        ]
   }
 }
 

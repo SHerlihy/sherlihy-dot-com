@@ -62,14 +62,6 @@ module "create_s3" {
     role_name = aws_iam_role.bucket_create.name
 }
 
-module "create_except_tags" {
-    source = "../../modules/role_attachments/except_tags"
-
-    role_name = aws_iam_role.bucket_create.name
-
-    except_tags = local.except_tags
-}
-
 resource "aws_iam_role" "obj_replace" {
     assume_role_policy = data.aws_iam_policy_document.assume_role.json
 }
@@ -78,20 +70,4 @@ module "replace_enable_assume" {
     source = "../../modules/role_attachments/enable_assume"
 
     role_name = aws_iam_role.obj_replace.name
-}
-
-module "obj_replace" {
-    source = "../../modules/role_attachments/s3_upload"
-
-    role_name = aws_iam_role.obj_replace.name
-
-    resource_tags = local.except_tags
-}
-
-module "replace_except_tags" {
-    source = "../../modules/role_attachments/except_tags"
-
-    role_name = aws_iam_role.obj_replace.name
-
-    except_tags = local.except_tags
 }

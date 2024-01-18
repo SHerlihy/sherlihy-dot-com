@@ -1,8 +1,12 @@
 #! /bin/bash
 
+terraform -chdir=./s3_bucket output bucket_id \
+    | awk '{print "\nbucket_id = "$1}' \
+    >> ./faux_replace_role/vars.tfvars
+
 cd ./faux_replace_role
 terraform init
-terraform apply --auto-approve
+terraform apply -var-file=./vars.tfvars --auto-approve
 terraform output > ../faux_upload_s3/vars.tfvars
 cd ../
 
