@@ -32,7 +32,7 @@ jobs:
         run: npm install
 
       - name: Deploy changes
-        run: npm run launch_prod
+        run: npm run replace_prod_files
 
       - name: Push tf state
         run: |
