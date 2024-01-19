@@ -20,17 +20,13 @@ locals {
   }
 }
 
-module "s3_bucket" {
-    source = "./s3_bucket"
-}
-
 resource "aws_acm_certificate" "sherlihyDotCom-cdnCert" {
   domain_name       = var.domain_name
   validation_method = "DNS"
 }
 
 module "cdn_s3" {
-    source = "../modules/cdn_s3"
+    source = "../../modules/cdn_s3"
     
     alias_domain_name = var.domain_name
 
@@ -41,10 +37,6 @@ module "cdn_s3" {
     cert_arn = aws_acm_certificate.sherlihyDotCom-cdnCert.arn
 
     resource_tags = local.resource_tags
-}
-
-variable "bucket_domain_name" {
-    type = string
 }
 
 data "aws_route53_zone" "sherlihyDotCom-prod" {

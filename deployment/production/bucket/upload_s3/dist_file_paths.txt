@@ -22,4 +22,6 @@
 ../../../../dist/assets/index-izd4mKXd.js
 ../../../../dist/assets/index-CcZHffk6.css
 ../../../../dist/assets/velmaModex4-JdjoxKEH.png
+../../../../dist/assets/index-UvvcGZor.js
+../../../../dist/assets/index-hRvimcEx.js
 ../../../../dist/index.html
