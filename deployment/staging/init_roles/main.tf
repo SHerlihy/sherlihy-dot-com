@@ -18,56 +18,12 @@ provider "aws" {
   profile = local.profile
 }
 
-locals {
-  resource_tags = {
-    project = "sherlihyDotCom"
-    env     = "staging"
-  }
-
-    except_tags = [for k,v in local.resource_tags : v]
-}
-
 data "aws_iam_user" "stage_admin" {
   user_name = local.profile
 }
 
-data "aws_iam_policy_document" "assume_role" {
-    statement {
-        effect = "Allow"
-        actions = [
-            "sts:AssumeRole"
-        ]
-        principals {
-            type = "AWS"
-            identifiers = [
-                data.aws_iam_user.stage_admin.arn
-            ]
-        }
-    }
-}
+module "bucket_roles" {
+    source = "../../modules/bucket_roles"
 
-resource "aws_iam_role" "bucket_create" {
-    assume_role_policy = data.aws_iam_policy_document.assume_role.json
-}
-
-module "create_enable_assume" {
-    source = "../../modules/role_attachments/enable_assume"
-
-    role_name = aws_iam_role.bucket_create.name
-}
-
-module "create_s3" {
-    source = "../../modules/role_attachments/create_bucket"
-
-    role_name = aws_iam_role.bucket_create.name
-}
-
-resource "aws_iam_role" "obj_replace" {
-    assume_role_policy = data.aws_iam_policy_document.assume_role.json
-}
-
-module "replace_enable_assume" {
-    source = "../../modules/role_attachments/enable_assume"
-
-    role_name = aws_iam_role.obj_replace.name
+    user_arn = data.aws_iam_user.stage_admin.arn
 }

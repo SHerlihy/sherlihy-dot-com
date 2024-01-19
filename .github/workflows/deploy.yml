@@ -5,13 +5,6 @@ on:
     branches:
       - 'main'
 
-env:
-  HCP_CLIENT_ID: ${{ secrets.HCP_CLIENT_ID }}
-  HCP_CLIENT_SECRET: ${{ secrets.HCP_CLIENT_SECRET }}
-  HCP_PROJECT_ID: ${{ secrets.HCP_PROJECT_ID }}
-  HCP_ORGANIZATION_ID: ${{ secrets.HCP_ORGANIZATION_ID }}
-  HCP_BUCKET_NAME: "sherlihy-dot-com"
-
 jobs:
   AWS_Provision:
     runs-on: ubuntu-latest
@@ -38,14 +31,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Set S3 img path
-        run: echo "VITE_IMGS_PATH=''" >> ./.env.production
-
-      - name: Build dist
-        run: npm run build
-
-      - name: Replace s3 files
-        run: npm run replace-prod-s3
+      - name: Deploy changes
+        run: npm run launch_prod
 
       - name: Push tf state
         run: |

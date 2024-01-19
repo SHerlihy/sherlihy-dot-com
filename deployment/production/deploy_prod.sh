@@ -1,8 +1,16 @@
 #! /bin/bash
 
-terraform apply -auto-approve ./tf.plan
+cd ./bucket
+./deploy.sh
+cd ../
 
-cd ./upload_s3
-./replace_files.sh
+terraform output -state=./bucket/s3_bucket/terraform.tfstate domain_name \
+    | awk '{print "bucket_domain_name = "$1}' \
+    > ./distribute/vars.tfvars
+
+cd ./distribute
+terraform init
+terraform apply -var-file=./vars.tfvars --auto-approve
+cd ../
 
 exit

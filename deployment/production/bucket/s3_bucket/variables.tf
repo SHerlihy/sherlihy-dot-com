@@ -1,7 +1,3 @@
-variable "profile" {
-    type = string
-}
-
 variable "bucket_create_arn" {
     type = string
 }

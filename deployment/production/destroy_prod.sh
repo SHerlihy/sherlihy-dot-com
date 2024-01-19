@@ -1,8 +1,11 @@
 #! /bin/bash
 
-terraform apply -auto-approve ./tf.plan
+cd ./distribute
+terraform destroy -var-file=./vars.varfile --auto-approve
+cd ../
 
-cd ./upload_s3
-./delete_files.sh
+cd ./bucket
+./destroy.sh
+cd ../
 
 exit
