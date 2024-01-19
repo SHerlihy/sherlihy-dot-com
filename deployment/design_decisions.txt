@@ -1,1 +1,7 @@
 20240118 | iam policies | unable to use tags to allow or deny s3 put or delete actions see note: https://docs.aws.amazon.com/AmazonS3/latest/userguide//tagging-and-policies.html | will prevent staging from being able to influence production by denying all actions on all s3 buckets that are not the staging bucket
+
+cloudfront key/value store not yet available in teraform see https://github.com/hashicorp/terraform-provider-aws/issues/34512
+
+using cloudfront redirect https://docs.aws.amazon.com/Route53/latest/APIReference/API_ChangeResourceRecordSets.html on budget change wont yet work in TF
+
+try using rote53 action to route to a more specific domain name ie budget.sherlihy.com see https://docs.aws.amazon.com/Route53/latest/APIReference/API_ChangeResourceRecordSets.html 

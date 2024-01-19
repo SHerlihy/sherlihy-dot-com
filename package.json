@@ -7,16 +7,10 @@
     "dev": "vite ./application/",
     "build": "cd ./application/ && vue-tsc && vite build --outDir ../dist/ && cd ../",
     "build_stage": "cd ./application/ && vue-tsc && vite build --mode staging --outDir ../dist/ && cd ../",
-    "diagram": "live-server --open=./current-diagrams",
     "preview": "vite preview ./application/",
-    "plan-prod": "cd ./deployment/production && ./plan_prod.sh && cd ../../",
-    "deploy-prod": "cd ./deployment/production && ./deploy_prod.sh && cd ../../",
-    "replace-prod-s3": "cd ./deployment/production/upload_s3 && ./replace_files.sh && cd ../../../",
-    "setup-demo-deploy": "cd ./deployment/imaging/demo_instance && ./setup_demo_deploy.sh && cd ../../../",
-    "deploy-demo-image": "cd ./deployment/imaging/demo_instance && ./deploy_demo_image.sh && cd ../../../",
-    "stage_s3": "cd ./deployment/staging/s3_deploy && ./plan_stage.sh && ./deploy_stage.sh && cd ../../../",
-    "unstage_s3": "cd ./deployment/staging/s3_deploy && terraform destroy -var-file=\"./s3_vars.tfvars\" && cd ../../../",
-    "infra_diagrams": "live-server --open=./deployment/infrastructure_diagrams ."
+    "infra_diagrams": "live-server --open=./deployment/infrastructure_diagrams .",
+        "launch_prod": "cd ./deployment/production && ./deploy_prod.sh && ../../",
+        "replace_prod_files": "cd ./deployment/production/bucket && ./replace_s3.sh && cd ../../../"
   },
   "dependencies": {
     "live-server": "^1.2.2",

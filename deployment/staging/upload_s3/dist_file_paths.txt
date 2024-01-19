@@ -19,7 +19,7 @@
 ../../../dist/assets/sherlihy-ZdwtGFnn.jpeg
 ../../../dist/assets/flow-RIasTS7Q.png
 ../../../dist/assets/velmaModeDisabled-y0woCqDl.png
+../../../dist/assets/index-izd4mKXd.js
 ../../../dist/assets/index-CcZHffk6.css
-../../../dist/assets/index-WChxAbC7.js
 ../../../dist/assets/velmaModex4-JdjoxKEH.png
 ../../../dist/index.html

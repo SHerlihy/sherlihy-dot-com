@@ -11,7 +11,6 @@ terraform {
 
 provider "aws" {
   region = "eu-west-2"
-    profile = var.profile
 
     assume_role {
         role_arn = var.bucket_create_arn
@@ -21,15 +20,15 @@ provider "aws" {
 locals {
     resource_tags = {
         project = "sherlihyDotCom"
-        env = "staging"
+        env = "production"
     }
 }
 
 #Here so its regionally bound and not global
 module "s3_bucket" {
-    source = "../../modules/s3_bucket"
+    source = "../../../modules/s3_bucket"
 
-    bucket_prefix = "sherlihydotcom-stage"
+    bucket_prefix = "sherlihydotcom-prod"
 
     bucket_create_arn = var.bucket_create_arn
 
@@ -39,7 +38,7 @@ module "s3_bucket" {
 }
 
 module "obj_replace" {
-    source = "../../modules/role_attachments/s3_upload"
+    source = "../../../modules/role_attachments/s3_upload"
 
     role_name = var.obj_replace_name
 

@@ -9,3 +9,7 @@ output "web_domain" {
 output "web_endpoint" {
     value = module.s3_bucket.web_endpoint
 }
+
+output "resource_tags" {
+    value = local.resource_tags
+}

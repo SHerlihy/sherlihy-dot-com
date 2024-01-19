@@ -1,5 +1,0 @@
-cloudfront key/value store not yet available in teraform see https://github.com/hashicorp/terraform-provider-aws/issues/34512
-
-using cloudfront redirect https://docs.aws.amazon.com/Route53/latest/APIReference/API_ChangeResourceRecordSets.html on budget change wont yet work in TF
-
-try using rote53 action to route to a more specific domain name ie budget.sherlihy.com see https://docs.aws.amazon.com/Route53/latest/APIReference/API_ChangeResourceRecordSets.html 
