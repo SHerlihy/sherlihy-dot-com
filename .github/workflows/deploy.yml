@@ -32,7 +32,7 @@ jobs:
         run: npm install
 
       - name: Deploy changes
-        run: npm run replace_prod_files
+        run: npm run launch_prod
 
       - name: Push tf state
         run: |
@@ -44,6 +44,9 @@ jobs:
 
       - name: Add sub state
         run: git add -f deployment/production/**/terraform.tfstate
+
+      - name: Add var files
+        run: git add -f deployment/production/**/vars.tfvars
 
       - name: Commit
         run: git commit -q -n -m"Auto updating tf state" > /dev/null 2>&1 || true
