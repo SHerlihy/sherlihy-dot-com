@@ -17,6 +17,7 @@
 ../../../dist/assets/sequence-4No3TmxO.png
 ../../../dist/assets/nodesToStrTest-WdmIuHIV.png
 ../../../dist/assets/sherlihy-ZdwtGFnn.jpeg
+../../../dist/assets/index-9PGrWWTw.js
 ../../../dist/assets/flow-RIasTS7Q.png
 ../../../dist/assets/velmaModeDisabled-y0woCqDl.png
 ../../../dist/assets/index-izd4mKXd.js

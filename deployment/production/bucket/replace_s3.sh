@@ -1,6 +1,8 @@
 #! /bin/bash
 
+cd ../
 ./env_vars.sh
+cd ./bucket
 
 terraform -chdir=./init_roles output > ./upload_s3/vars.tfvars
 

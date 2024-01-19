@@ -1,5 +1,7 @@
 #! /bin/bash
 
+./env_vars.sh
+
 cd ./init_roles
 terraform init
 terraform apply -auto-approve
