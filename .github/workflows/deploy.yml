@@ -35,8 +35,8 @@ jobs:
         run: |
           mkdir ~/.aws
           echo -e "[sherlihyDotCom-prod]\n" > ~/.aws/credentials
-          echo -e "aws_access_key_id = ${secrets.AWS_ACCESS_KEY_ID}\n" > ~/.aws/credentials
-          echo -e "aws_secret_access_key = ${secrets.AWS_SECRET_ACCESS_KEY}\n" > ~/.aws/credentials
+          echo -e "aws_access_key_id = ${{secrets.AWS_ACCESS_KEY_ID}}\n" >> ~/.aws/credentials
+          echo -e "aws_secret_access_key = ${{secrets.AWS_SECRET_ACCESS_KEY}}\n" >> ~/.aws/credentials
 
       - name: Deploy changes
         run: npm run launch_prod
