@@ -1,0 +1,2 @@
+prod ./bucket/replace_s3.sh npm run build
+stage ./bucket/replace_s3.sh npm run build-stage

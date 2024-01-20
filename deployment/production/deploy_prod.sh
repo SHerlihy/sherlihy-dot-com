@@ -1,16 +1,10 @@
 #! /bin/bash
 
-cd ./bucket
-./deploy.sh
-cd ../
+USER_NAME="\"sherlihyDotCom-prod\""
+INIT_ROLE_ARN="\"arn:aws:iam::111644099040:role/sherlihyDotCom-prod-iam\""
 
-terraform output -state=./bucket/s3_bucket/terraform.tfstate domain_name \
-    | awk '{print "bucket_domain_name = "$1}' \
-    > ./distribute/vars.tfvars
+RESOURCE_TAGS="{\n\"project\"=\"sherlihyDotCom\"\n\"env\"=\"production\"\n}"
 
-cd ./distribute
-terraform init
-terraform apply -var-file=./vars.tfvars --auto-approve
-cd ../
+DOMAIN_NAME="\"sherlihy.com\""
 
-exit
+./deploy_prod.sh $USER_NAME $INIT_ROLE_ARN $RESOURCE_TAGS $DOMAIN_NAME

@@ -1,10 +1,6 @@
 #! /bin/bash
 
-cd ./upload_s3
-terraform destroy -var-file=./vars.tfvars --auto-approve
-cd ../
-
-cd ./s3_bucket
+cd ./create_distribution
 terraform destroy -var-file=./vars.tfvars --auto-approve
 cd ../
 

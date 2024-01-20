@@ -1,6 +1,6 @@
 #! /bin/bash
 
-npm run build
+npm run build_stage
 
 terraform init -input=false
 
