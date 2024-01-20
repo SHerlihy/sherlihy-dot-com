@@ -46,10 +46,7 @@ jobs:
           git config --global user.name 'SHerlihy'
           git config --global user.email 'steven_herlihy@yahoo.com'
 
-      - name: Add main state
-        run: git add -f deployment/production/terraform.tfstate
-
-      - name: Add sub state
+      - name: Add state
         run: git add -f deployment/production/**/terraform.tfstate
 
       - name: Add var files
