@@ -9,19 +9,19 @@ terraform {
   required_version = ">= 1.2.0"
 }
 
-provider "aws" {
-  region = "eu-west-2"
-    profile = var.profile
-
-    assume_role {
-        role_arn = var.bucket_create_arn
-    }
-}
-
 locals {
     resource_tags = {
         project = "sherlihyDotCom"
         env = "staging"
+    }
+}
+
+provider "aws" {
+  region = "eu-west-2"
+  profile = "sherlihyDotCom-staging"
+
+    assume_role {
+        role_arn = var.bucket_create_arn
     }
 }
 

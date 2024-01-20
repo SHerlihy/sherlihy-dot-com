@@ -9,21 +9,21 @@ terraform {
   required_version = ">= 1.2.0"
 }
 
-locals {
-  profile = "sherlihyDotCom-staging"
-}
-
 provider "aws" {
   region  = "us-east-1"
-  profile = local.profile
+  profile = "sherlihyDotCom-staging"
+
+    assume_role {
+        role_arn = "arn:aws:iam::111644099040:role/sherlihyDotCom-staging-iam"
+    }
 }
 
-data "aws_iam_user" "stage_admin" {
-  user_name = local.profile
+data "aws_iam_user" "current" {
+    user_name = "sherlihyDotCom-staging"
 }
 
 module "bucket_roles" {
     source = "../../modules/bucket_roles"
 
-    user_arn = data.aws_iam_user.stage_admin.arn
+    user_arn = data.aws_iam_user.current.arn 
 }

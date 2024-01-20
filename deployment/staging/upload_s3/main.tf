@@ -11,7 +11,7 @@ terraform {
 
 provider "aws" {
   region = "eu-west-2"
-    profile = var.profile
+  profile = "sherlihyDotCom-staging"
 
     assume_role {
         role_arn = var.obj_replace_arn

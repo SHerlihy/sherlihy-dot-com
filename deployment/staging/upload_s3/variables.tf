@@ -1,7 +1,3 @@
-variable "profile" {
-    type = string
-}
-
 variable "obj_replace_arn" {
     type = string
 }

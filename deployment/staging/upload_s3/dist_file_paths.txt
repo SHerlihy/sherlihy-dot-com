@@ -20,7 +20,6 @@
 ../../../dist/assets/index-9PGrWWTw.js
 ../../../dist/assets/flow-RIasTS7Q.png
 ../../../dist/assets/velmaModeDisabled-y0woCqDl.png
-../../../dist/assets/index-izd4mKXd.js
 ../../../dist/assets/index-CcZHffk6.css
 ../../../dist/assets/velmaModex4-JdjoxKEH.png
 ../../../dist/index.html
