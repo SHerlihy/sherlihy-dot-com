@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="50mm"
+   height="50mm"
+   viewBox="0 0 50 50"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3.1 (9b9bdc1480, 2023-11-25, custom)"
+   sodipodi:docname="shfavicon.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#666666"
+     bordercolor="#000000"
+     borderopacity="0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="0.58838294"
+     inkscape:cx="396.00061"
+     inkscape:cy="561.70902"
+     inkscape:window-width="956"
+     inkscape:window-height="1041"
+     inkscape:window-x="960"
+     inkscape:window-y="18"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       d="m 19.987397,12.968031 v 3.393411 q -1.980925,-0.947399 -3.73792,-1.412486 -1.756995,-0.465087 -3.393411,-0.465087 -2.842198,0 -4.3924871,1.102428 -1.5330641,1.102428 -1.5330641,3.13503 0,1.705319 1.0163009,2.583816 1.0335263,0.861272 3.8929493,1.395261 l 2.101503,0.430636 q 3.89295,0.740693 5.736071,2.618266 1.860348,1.860348 1.860348,4.995377 0,3.737921 -2.514914,5.66717 -2.497689,1.929249 -7.338037,1.929249 -1.8258966,0 -3.8929492,-0.413411 -2.0498272,-0.41341 -4.2546834,-1.223006 v -3.582891 q 2.118729,1.188555 4.1513307,1.791446 2.0326018,0.60289 3.9963019,0.60289 2.980001,0 4.599192,-1.17133 1.619191,-1.17133 1.619191,-3.341735 0,-1.894798 -1.17133,-2.962775 -1.154104,-1.067978 -3.806821,-1.601966 L 10.806239,26.024913 Q 6.9132894,25.249768 5.1735201,23.596126 3.4337508,21.942484 3.4337508,18.996934 q 0,-3.410637 2.394336,-5.374337 2.4115614,-1.9637 6.6317942,-1.9637 1.808671,0 3.686244,0.327284 1.877572,0.327283 3.841272,0.98185 z M 26.9637,12.123984 h 3.479539 V 22.665953 H 43.086711 V 12.123984 h 3.479538 v 25.71758 H 43.086711 V 25.594277 H 30.443239 V 37.841564 H 26.9637 Z"
+       id="text1"
+       style="font-size:35.2777px;fill:#ffffff;stroke-width:0.264583"
+       aria-label="SH" />
+  </g>
+</svg>
