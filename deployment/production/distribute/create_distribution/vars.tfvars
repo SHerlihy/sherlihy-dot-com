@@ -1,15 +1,15 @@
-user_name = "sherlihyDotCom-staging"
+user_name = "sherlihyDotCom-prod"
 
-domain_name = "stagestaging.click"
+domain_name = "sherlihy.com"
 
 resource_tags = {
 "project"="sherlihyDotCom"
-"env"="stage"
+"env"="production"
 }
 
-bucket_domain_name = "sherlihydotcom-prod20240120044018007100000001.s3.eu-west-2.amazonaws.com"
+bucket_domain_name = "sherlihydotcom-prod20240120183504584800000001.s3.eu-west-2.amazonaws.com"
 
 
-distribute_create_arn = "arn:aws:iam::111644099040:role/terraform-20240120045954653300000005"
+distribute_create_arn = "arn:aws:iam::111644099040:role/terraform-20240120183601739100000004"
 
 
