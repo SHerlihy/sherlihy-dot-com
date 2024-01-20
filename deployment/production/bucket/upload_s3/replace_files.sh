@@ -1,13 +1,13 @@
 #! /bin/bash
 
-npm run build
+npm run build_stage
 
 terraform init -input=false
 
 find ../../../../dist -type f > ./dist_file_paths.txt 
 
-echo -e "\n" >> ./vars.tfvars
 awk -f ./dist_paths_to_list.awk ./dist_file_paths.txt >> ./vars.tfvars
+echo -e "\n" >> ./vars.tfvars
 
 terraform plan -var-file=./vars.tfvars
 STATUS=$?

@@ -1,11 +1,11 @@
 #! /bin/bash
 
-USER_NAME = $1
-INIT_ROLE_ARN = $2
+USER_NAME=$1
+INIT_ROLE_ARN=$2
 
-RESOURCE_TAGS = $3
+RESOURCE_TAGS=$3
 
-DOMAIN_NAME = $4
+DOMAIN_NAME=$4
 
 echo -e "user_name = $USER_NAME\n" > ./bucket/init_roles/vars.tfvars
 echo -e "init_role_arn = $INIT_ROLE_ARN\n" >> ./bucket/init_roles/vars.tfvars
@@ -38,6 +38,7 @@ echo -e "resource_tags = $RESOURCE_TAGS\n" >> ./distribute/create_distribution/v
 terraform output -state=./bucket/s3_bucket/terraform.tfstate domain_name \
     | awk '{print "bucket_domain_name = "$1}' \
     >> ./distribute/create_distribution/vars.tfvars
+echo -e "\n" >> ./distribute/create_distribution/vars.tfvars
 
 cd ./distribute
 ./create_distribution.sh

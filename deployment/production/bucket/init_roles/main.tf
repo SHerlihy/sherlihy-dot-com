@@ -23,7 +23,7 @@ data "aws_iam_user" "current" {
 }
 
 module "bucket_roles" {
-    source = "../../modules/bucket_roles"
+    source = "../../../modules/bucket_roles"
 
     user_arn = data.aws_iam_user.current.arn 
 }

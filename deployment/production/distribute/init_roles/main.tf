@@ -93,10 +93,14 @@ data "aws_iam_policy_document" "deploy_r53" {
   statement {
     effect = "Allow"
     actions = [
-        "route53:*"
+        "route53:*",
+        "route53domains:*",
+        "route53resolver:*"
     ]
     resources = [
-        "arn:aws:route53:::*"
+        #all due to domains
+        "*"
+        #"arn:aws:route53:::*",
         ]
   }
 }

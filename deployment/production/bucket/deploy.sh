@@ -2,7 +2,7 @@
 
 cd ./init_roles
 terraform init
-terraform apply -auto-approve
+terraform apply -var-file=vars.tfvars -auto-approve
 
 STATUS=$?
 if [ $STATUS -gt 0 ]
