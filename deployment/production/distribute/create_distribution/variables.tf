@@ -6,14 +6,14 @@ variable "resource_tags" {
     type = map(string)
     }
 
-variable "bucket_create_arn" {
+variable "distribute_create_arn" {
     type = string
 }
 
-variable "obj_replace_name" {
+variable "bucket_domain_name" {
     type = string
 }
 
-variable "obj_replace_arn" {
+variable "domain_name" {
     type = string
 }

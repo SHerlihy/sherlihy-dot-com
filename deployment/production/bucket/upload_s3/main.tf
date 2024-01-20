@@ -11,16 +11,10 @@ terraform {
 
 provider "aws" {
   region = "eu-west-2"
+    profile = var.user_name
 
     assume_role {
         role_arn = var.obj_replace_arn
-    }
-}
-
-locals {
-    resource_tags = {
-        project = "sherlihyDotCom"
-        env = "production"
     }
 }
 
@@ -31,5 +25,5 @@ module "upload" {
     dist_files = var.dist_files
     bucket_id = var.bucket_id
 
-    resource_tags = local.resource_tags
+    resource_tags = var.resource_tags
 }

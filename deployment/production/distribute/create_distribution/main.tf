@@ -11,13 +11,11 @@ terraform {
 
 provider "aws" {
   region = "us-east-1"
-}
+  profile = var.user_name
 
-locals {
-  resource_tags = {
-    project = "sherlihyDotCom"
-    env     = "production"
-  }
+    assume_role {
+        role_arn = var.distribute_create_arn
+    }
 }
 
 resource "aws_acm_certificate" "sherlihyDotCom-cdnCert" {
@@ -26,17 +24,17 @@ resource "aws_acm_certificate" "sherlihyDotCom-cdnCert" {
 }
 
 module "cdn_s3" {
-    source = "../../modules/cdn_s3"
+    source = "../../../modules/cdn_s3"
     
     alias_domain_name = var.domain_name
 
-    origin_id = "sherlihyDotCom-prod-s3"
+    origin_id = "${var.user_name}-s3"
 
     bucket_domain_name = var.bucket_domain_name
 
     cert_arn = aws_acm_certificate.sherlihyDotCom-cdnCert.arn
 
-    resource_tags = local.resource_tags
+    resource_tags = var.resource_tags
 }
 
 data "aws_route53_zone" "sherlihyDotCom-prod" {

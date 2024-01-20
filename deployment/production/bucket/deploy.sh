@@ -5,7 +5,6 @@ terraform init
 terraform apply -auto-approve
 
 STATUS=$?
-
 if [ $STATUS -gt 0 ]
 then
     echo "role creation failed"
@@ -14,17 +13,15 @@ fi
 
 sleep 1
 
-terraform output > ../s3_bucket/vars.tfvars
+terraform output >> ../s3_bucket/vars.tfvars
 
 cd ../
 
 cd ./s3_bucket
-
 terraform init
 terraform apply -var-file='./vars.tfvars' -auto-approve
 
 STATUS=$?
-
 if [ $STATUS -gt 0 ]
 then
     echo "create bucket failed"
@@ -36,7 +33,6 @@ cd ../
 ./replace_s3.sh
 
 STATUS=$?
-
 if [ $STATUS -gt 0 ]
 then
     echo "s3 upload failed"

@@ -11,16 +11,10 @@ terraform {
 
 provider "aws" {
   region = "eu-west-2"
+    profile = var.user_name
 
     assume_role {
         role_arn = var.bucket_create_arn
-    }
-}
-
-locals {
-    resource_tags = {
-        project = "sherlihyDotCom"
-        env = "production"
     }
 }
 
@@ -34,7 +28,7 @@ module "s3_bucket" {
 
     obj_replace_arn = var.obj_replace_arn
 
-    resource_tags = local.resource_tags
+    resource_tags = var.resource_tags
 }
 
 module "obj_replace" {
