@@ -39,7 +39,7 @@ jobs:
           echo -e "aws_secret_access_key = ${{secrets.AWS_SECRET_ACCESS_KEY}}\n" >> ~/.aws/credentials
 
       - name: Deploy changes
-        run: npm run launch_prod
+        run: npm run replace_prod_files
 
       - name: Push tf state
         run: |

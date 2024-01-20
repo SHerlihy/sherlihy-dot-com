@@ -11,6 +11,8 @@ then
     exit $STATUS
 fi
 
+sleep 1
+
 cd ../
 
 terraform output -state=./init_roles/terraform.tfstate \

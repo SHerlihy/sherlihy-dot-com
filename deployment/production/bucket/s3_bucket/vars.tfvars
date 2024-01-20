@@ -5,6 +5,6 @@ resource_tags = {
 "env"="production"
 }
 
-bucket_create_arn = "arn:aws:iam::111644099040:role/terraform-20240120183443099700000005"
-obj_replace_arn = "arn:aws:iam::111644099040:role/terraform-20240120183443090500000002"
-obj_replace_name = "terraform-20240120183443090500000002"
+bucket_create_arn = "arn:aws:iam::111644099040:role/terraform-20240120194634087700000001"
+obj_replace_arn = "arn:aws:iam::111644099040:role/terraform-20240120194634089400000002"
+obj_replace_name = "terraform-20240120194634089400000002"
