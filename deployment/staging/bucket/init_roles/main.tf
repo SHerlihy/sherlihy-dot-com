@@ -11,19 +11,19 @@ terraform {
 
 provider "aws" {
   region  = "us-east-1"
-  profile = "sherlihyDotCom-staging"
+  profile = var.user_name
 
     assume_role {
-        role_arn = "arn:aws:iam::111644099040:role/sherlihyDotCom-staging-iam"
+        role_arn = var.init_role_arn
     }
 }
 
 data "aws_iam_user" "current" {
-    user_name = "sherlihyDotCom-staging"
+    user_name = var.user_name
 }
 
 module "bucket_roles" {
-    source = "../../modules/bucket_roles"
+    source = "../../../modules/bucket_roles"
 
     user_arn = data.aws_iam_user.current.arn 
 }

@@ -11,7 +11,7 @@ terraform {
 
 provider "aws" {
   region = "eu-west-2"
-  profile = "sherlihyDotCom-staging"
+    profile = var.user_name
 
     assume_role {
         role_arn = var.obj_replace_arn
@@ -19,9 +19,9 @@ provider "aws" {
 }
 
 module "upload" {
-    source = "../../modules/upload_s3"
+    source = "../../../modules/upload_s3"
 
-    dist_path = "../../../dist"
+    dist_path = "../../../../dist"
     dist_files = var.dist_files
     bucket_id = var.bucket_id
 

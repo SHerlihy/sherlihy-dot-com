@@ -1,3 +1,11 @@
+variable "user_name" {
+    type = string
+    }
+
+variable "resource_tags" {
+    type = map(string)
+    }
+
 variable "obj_replace_arn" {
     type = string
 }
@@ -12,8 +20,4 @@ variable "dist_files" {
             type: string
             })
         )
-}
-
-variable "resource_tags" {
-    type = map(string)
 }
