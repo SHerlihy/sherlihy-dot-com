@@ -27,6 +27,12 @@
     padding: 1rem;
 }
 
+@media (prefers-color-scheme: light) {
+    .header{
+        color: #fff;
+    }
+}
+
 .right_flex {
     display: flex;
     flex-direction: row;
