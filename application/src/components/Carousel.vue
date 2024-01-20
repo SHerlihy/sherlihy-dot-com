@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import ShiftButton from './ShiftButton.vue';
 
 const props = defineProps<{
     imgs: string[]
@@ -72,8 +73,12 @@ const next = async() => {
             <img :src="img" v-if="renderComponent" />
 </div>
     </div>
-    <button @click="prev" class="left_btn">Prev</button>
-    <button @click="next" class="right_btn">Next</button>
+    <ShiftButton @shift="prev" class="left_btn">
+            &lt
+    </ShiftButton>
+    <ShiftButton @shift="next" class="right_btn">
+            &gt
+    </ShiftButton>
     </div>
 </template>
 
