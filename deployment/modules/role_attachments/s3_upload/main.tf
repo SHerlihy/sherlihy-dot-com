@@ -25,12 +25,6 @@ data "aws_iam_policy_document" "s3_upload" {
   statement {
     effect = "Deny"
 
-#    condition {
-#            variable = "s3:DataAccessPointArn"
-#            test = "StringNotEqual"
-#            values = ["arn:aws:s3:::${var.bucket_name}/*"]
-#        }
-
     actions = [
             "s3:*",
         ]

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <script type="module">
+            import mermaid from '/node_modules/mermaid/dist/mermaid.esm.mjs';
+            let config = { startOnLoad: true, flowchart: { useMaxWidth: false, htmlLabels: true } };
+            mermaid.initialize(config);
+        </script>
+        <title></title>
+    </head>
+    <body>
+        <h1>Production</h1>
+        <h2>IAM Policies</h2>
+        <pre class="mermaid">
+            ---
+            title: Bucket Policies
+            ---
+            flowchart TB
+                subgraph prod [user prod]
+                    subgraph prodAllow
+                    prodEnable("`
+                        iam:*
+                        sts:*
+                    `")
+                    end
+                end
+
+                prod --> init
+                prod --> create
+                prod --> replace
+
+                subgraph init [init]
+                    subgraph initAllow
+                    initInit("`
+                        iam:*
+                    `")
+                    end
+                end
+
+                subgraph create [create]
+                    subgraph createAllow
+                    createEnable("`
+                        iam:*
+                        sts:AssumeRole
+                        sts:GetCallerIdentity
+                    `")
+                    createCreate("`
+                        s3:Create
+                        s3:Delete
+                        s3:Get
+                        s3:List
+                        s3:Put
+                    `")
+                    end
+                end
+
+
+                subgraph replace [replace]
+                subgraph replaceDeny
+                replaceDenyRes{"`
+                    createdS3Bucket
+                    bucketObject
+                `"}
+                
+                replaceDenyRes -- false --> replaceDenyDeny
+                
+                replaceDenyDeny("`
+                    s3:*
+                `")
+                
+                end
+
+                replaceDeny --> replaceRes
+
+                replaceRes("`
+                    bucketS3 objects
+                `")
+
+                replaceRes --> replaceAllow
+
+                    subgraph replaceAllow
+                    replaceEnable("`
+                        iam:*
+                        sts:AssumeRole
+                        sts:GetCallerIdentity
+                    `")
+                    replaceReplace("`
+                        s3:Create
+                        s3:Delete
+                        s3:Get
+                        s3:List
+                        s3:Put
+                    `")
+                    end
+            end
+
+            subgraph bucketDeny
+            bucketDenyCond{"`
+                createRole
+            `"}
+
+            bucketDenyRes --> bucketDenyCond
+            bucketDenyCond -- false --x bucketDenyDeny
+            
+            bucketDenyDeny("`
+                    s3:Delete
+                    s3:Put
+            `")
+
+            bucketDenyRes("`
+                createdS3Bucket
+            `")
+
+            objDenyCond{"`
+                createRole
+                replaceRole
+            `"}
+
+            objDenyRes --> objDenyCond
+            objDenyCond -- false --x objDenyDeny
+            
+            objDenyDeny("`
+                    s3:Delete
+                    s3:Put
+            `")
+
+            objDenyRes("`
+                bucketObject
+            `")
+            end
+
+            bucketDeny --> bucketAllow
+
+            subgraph bucketAllow
+            bucketAllowRes("`
+                createdS3Bucket
+                bucketObject
+            `")
+
+            bucketAllowRes --> bucketAllowAllow
+
+            bucketAllowAllow("`
+                s3:Get
+                s3:List
+            `")
+            end
+
+
+
+        </pre>
+    </body>
+</html>

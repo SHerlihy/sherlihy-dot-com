@@ -1,6 +1,6 @@
-#SHerlihy Portfolio Showcase
+# SHerlihy Portfolio Showcase
 
-##Infrastructure Diagrams
+## Infrastructure Diagrams
 ```mermaid
             flowchart LR
                 Client <--> Site
