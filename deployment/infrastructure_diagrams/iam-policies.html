@@ -17,25 +17,43 @@
             title: Bucket Policies
             ---
             flowchart TB
-                subgraph prod [user prod]
-                    subgraph prodAllow
-                    prodEnable("`
-                        iam:*
-                        sts:*
-                    `")
-                    end
-                end
-
-                prod --> init
-                prod --> create
-                prod --> replace
-
                 subgraph init [init]
-                    subgraph initAllow
-                    initInit("`
-                        iam:*
+                    initProdCon{"`
+                        principal:user prod
+                    `"}
+                    
+                    initProdCon -- true --> initProdAllow
+                    
+                    initProdAllow("`
+                        sts:AssumeRole
                     `")
-                    end
+                    
+
+                    initCon{"`
+                        principal:oidc-provider
+                        repo:SHerlihyDotCom
+                        branch:main
+                    `"}
+                    
+                    initCon -- true --> initActionsAllow
+
+                    initActionsAllow("`
+                        sts:AssumeRoleWithWebIdentity
+                    `")
+
+                    initAllow("`
+                        iam:*
+                        organizations:DescribeAccount
+                        organizations:DescribeOrganization
+                        organizations:DescribeOrganizationalUnit
+                        organizations:DescribePolicy
+                        organizations:ListChildren
+                        organizations:ListParents
+                        organizations:ListPoliciesForTarget
+                        organizations:ListRoots
+                        organizations:ListPolicies
+                        organizations:ListTargetsForPolicy
+                    `")
                 end
 
                 subgraph create [create]
@@ -95,6 +113,9 @@
                     end
             end
 
+            create --- bucketDeny
+            replace --- bucketDeny
+
             subgraph bucketDeny
             bucketDenyCond{"`
                 createRole
@@ -147,6 +168,40 @@
             end
 
 
+            subgraph distCreate
+                dcaEnable("`
+                    sts:AssumeRole
+                    sts:GetCallerIdentity
+                    iam:*
+                `")
+
+                dcaACMRes{"`
+                    acm:*
+                `"}
+                
+                dcaACMRes --> dcaACMAllow
+                
+                dcaACMAllow("`
+                    acm:*
+                `")
+
+                dcCDNRes{"`
+                    cloudfront:*
+                `"}
+                
+                dcCDNRes --> dcCDNAllow
+                
+                dcCDNAllow("`
+                    cloudfront:*
+                `")
+
+                dcR53Allow("`
+                    route53:*
+                    route53domains:*
+                    route53resolver:*
+                `")
+
+            end
 
         </pre>
     </body>
