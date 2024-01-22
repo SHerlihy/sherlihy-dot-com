@@ -1,5 +1,5 @@
 ```mermaid
-            flowchart LR
+            flowchart TB
                 Client <--> Site
                 
                 subgraph namecheap
@@ -11,8 +11,6 @@
 
                 subgraph AWS
                 subgraph global
-                    Uploader[iam upload sherlihy.com bucket]
-                    Admin[iam admin sherlihy.com]
                     DNS{Cloudfront}
                     R53[Route 53]
                     Cert[HTTPS Cert]
@@ -23,9 +21,6 @@
                     DNS <--> S3
                     
                     subgraph eu-west-2
-                    S3AllActions[resource policy - allow all S3 actions]
-                    S3AllActions --> S3
-
                         subgraph acl-public-read
                             S3[S3 sherlihy.com]
                         end
@@ -36,6 +31,5 @@
                 subgraph upload
                 Actions[CI/CD Pipeline]
                 Actions --> S3
-                Actions <--> Uploader
                 end
 ```
