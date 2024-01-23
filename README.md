@@ -213,7 +213,6 @@ end
 
 ```
 ```mermaid
-```
             flowchart TB
 subgraph AWS
 subgraph global

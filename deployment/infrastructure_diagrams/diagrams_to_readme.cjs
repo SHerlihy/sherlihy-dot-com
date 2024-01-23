@@ -20,9 +20,8 @@ const mdNames = globSync("**/*.md", {})
 const diagramsStr = []
 for (let i=0; i<mdNames.length; i++) {
     const diaMD = fs.readFileSync(mdNames[i]).toString().trim();
-    const diaSpcSplit = diaMD.split("\n")
+    const diaSpcSplit = diaMD.toString().split("\n")
     diaSpcSplit.shift()
-    diaSpcSplit.pop()
 
     const diaSpcJoin = diaSpcSplit.join("\\n")
 
@@ -53,7 +52,7 @@ for (let i=0; i<diagramsStr.length; i++) {
     execSync(`awk -i inplace \
         'BEGIN {toAdd=0};\
         {print};\
-/\`\`\`mermaid/ {if (toAdd == 0) print "${diagramsStr[i]}"; print "\`\`\`"; toAdd=1}' \
+/\`\`\`mermaid/ {if (toAdd == 0) print "${diagramsStr[i]}"; toAdd=1}' \
         ../../README.md`,
         { encoding: 'utf-8' }
     )
