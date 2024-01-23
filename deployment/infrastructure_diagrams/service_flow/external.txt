@@ -1,0 +1,9 @@
+Client <--> Site
+
+subgraph namecheap
+    Site[SHerlihy.com]
+end
+
+Site --> R53
+R53 --> Site
+

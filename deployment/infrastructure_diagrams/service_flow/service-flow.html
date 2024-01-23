@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <script type="module">
+            import mermaid from '/node_modules/mermaid/dist/mermaid.esm.mjs';
+            let config = { startOnLoad: true, flowchart: { useMaxWidth: false, htmlLabels: true } };
+            mermaid.initialize(config);
+        </script>
+        <title></title>
+    </head>
+    <body>
+        <h1>Production</h1>
+        <h2>Service Flow</h2>
+        <pre class="mermaid">
+            flowchart TB
+subgraph AWS
+subgraph global
+    DNS{Cloudfront}
+    R53[Route 53]
+    Cert[HTTPS Cert]
+    
+    Cert --> R53
+    R53 <--> DNS
+    DNS <--> Cache
+    DNS <--> S3
+    
+    subgraph eu-west-2
+        subgraph acl-public-read
+            S3[S3 sherlihy.com]
+        end
+    end
+end
+end
+
+subgraph upload
+Actions[CI/CD Pipeline]
+Actions --> S3
+end
+
+Client <--> Site
+
+subgraph namecheap
+    Site[SHerlihy.com]
+end
+
+Site --> R53
+R53 --> Site
+
+
+        </pre>
+    </body>
+</html>

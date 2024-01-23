@@ -9,8 +9,8 @@
     "build_stage": "cd ./application/ && vue-tsc && vite build --mode staging --outDir ../dist/ && cd ../",
     "preview": "vite preview ./application/",
     "infra_diagrams": "live-server --open=./deployment/infrastructure_diagrams .",
-        "launch_prod": "cd ./deployment/production && ./deploy_prod.sh && ../../",
-        "replace_prod_files": "cd ./deployment/production/bucket && ./replace_s3.sh && cd ../../../"
+    "launch_prod": "cd ./deployment/production && ./deploy_prod.sh && ../../",
+    "replace_prod_files": "cd ./deployment/production/bucket && ./replace_s3.sh && cd ../../../"
   },
   "dependencies": {
     "live-server": "^1.2.2",
@@ -18,7 +18,9 @@
     "vue": "^3.3.8"
   },
   "devDependencies": {
+    "@mermaid-js/mermaid-cli": "^10.6.1",
     "@vitejs/plugin-vue": "^4.5.0",
+    "glob": "^10.3.10",
     "mermaid": "^10.6.1",
     "typescript": "^5.2.2",
     "vite": "^5.0.0",
