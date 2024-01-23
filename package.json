@@ -20,6 +20,7 @@
   "devDependencies": {
     "@mermaid-js/mermaid-cli": "^10.6.1",
     "@vitejs/plugin-vue": "^4.5.0",
+    "glob": "^10.3.10",
     "mermaid": "^10.6.1",
     "typescript": "^5.2.2",
     "vite": "^5.0.0",
