@@ -12,7 +12,10 @@ const velmaMode = [
 <template>
             <Content mongo>
                 <template v-slot:right>
-                    <ProjectDesc heading="Text Magnifier">
+                    <ProjectDesc 
+                    heading="Text Magnifier"
+                    linkId="velma"
+                    >
                         <p>
                             A wrapping component and state control system that allows desired text to be resized by a user.
                         </p>

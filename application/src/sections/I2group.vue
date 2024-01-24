@@ -42,7 +42,10 @@ const shiftRight = (imgPaths: string[]) => {
 <template>
         <Content>
             <template v-slot:left>
-                <ProjectDesc heading="Frontend Web Developer">
+                <ProjectDesc 
+                heading="Frontend Web Developer"
+                linkId="i2Grp"
+                >
                     <p>
                         Intelligence software for use in a web browser that enabled customers to create graph/web diagrams
                         of intelligence data.

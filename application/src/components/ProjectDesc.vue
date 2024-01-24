@@ -1,14 +1,18 @@
 <script setup lang="ts">
+import HLink from "./HLink.vue"
 
-defineProps<{ heading: string}>()
+defineProps<{
+    heading: string
+    linkId: string
+}>()
 
 </script>
 
 <template>
         <div class="full_width">
-        <h2>
-                {{heading}}
-        </h2>
+        <HLink :linkId='linkId' >
+            {{heading}}
+        </HLink>
         <br/>
         <article>
             <slot></slot>

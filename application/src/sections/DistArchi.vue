@@ -12,7 +12,10 @@ const authAndProfile = [
 <template>
         <Content mongo>
             <template v-slot:right>
-                <ProjectDesc heading="Distributed Service Architecture">
+                <ProjectDesc 
+                heading="Distributed Service Architecture"
+                linkId="distArch"
+                >
                     <p>
                         A REST based service Architecture designed to seperate sensitive data used for authorization (name, email, etc) from non-sensitive data.
                     </p>
