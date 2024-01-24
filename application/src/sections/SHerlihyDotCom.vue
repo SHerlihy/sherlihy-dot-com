@@ -2,7 +2,9 @@
 </script>
 <template>
     <section>
-        <h2>SHerlihy.com</h2>
+        <h2 id='sherlihyDotCom'>
+            <a href='#sherlihyDotCom'>SHerlihy.com</a>
+        </h2>
         <br class="min_br"/>
         <p>
             The functional purpose of this website has been described above, however, I have used this website as a vehicle for serveral technical purposes. Primarily, I wanted to create a CI/CD pipeline and Cloud provisioned infrastructure that could be used as a template for deploying other websites. I also wanted to refresh my raw CSS skills and basic Vue.js capabilities.

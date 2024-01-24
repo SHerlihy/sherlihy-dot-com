@@ -1,5 +1,42 @@
+<script setup lang="ts">
+import { ref } from 'vue'
+import { useResizeObserver } from '@vueuse/core'
+
+const headerEl = ref(null)
+let prevHeight = 0
+
+useResizeObserver(headerEl, (entries: ReadonlyArray<ResizeObserverEntry>) => {
+    const obsHeaderEl = entries[0]
+    const {height} = obsHeaderEl.contentRect
+
+    console.log("obs called")
+    if (height === prevHeight) {
+        return
+    }
+    console.log("height diff")
+
+    handleHeaderSizeChange()
+
+    prevHeight = height
+})
+
+    const handleHeaderSizeChange = () => {
+        console.log("header esize called")
+        const navigation = document.querySelector(".header")
+        if (!navigation) {
+            return
+        }
+
+        const navigationHeight = navigation.offsetHeight;
+        document.documentElement.style.setProperty(
+            "--scroll-padding",
+            navigationHeight + "px"
+        )
+    }
+</script>
+
 <template>
-    <header class="header">
+    <header ref="headerEl" class="header">
         <b class="left_text">SHerlihy</b>
         <span/>
         <div class="right_flex">
