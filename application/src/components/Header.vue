@@ -23,7 +23,7 @@ useResizeObserver(headerEl, (entries) => {
 })
 
     const handleHeaderSizeChange = () => {
-        const navigation = document.querySelector(".header") as HTMLElement
+        const navigation = document.querySelector(".banner") as HTMLElement
         if (!navigation) {
             return
         }
@@ -34,10 +34,13 @@ useResizeObserver(headerEl, (entries) => {
             navigationHeight + "px"
         )
     }
+
+const showRouting = ref(true)
 </script>
 
 <template>
-    <header ref="headerEl" class="header">
+    <div class="front_el">
+    <header ref="headerEl" class="banner">
         <b class="left_text"><a href="#">SHerlihy</a></b>
         <span/>
         <div class="right_flex">
@@ -46,14 +49,29 @@ useResizeObserver(headerEl, (entries) => {
             <p>+44 73544 30588</p>
         </div>
     </header>
+
+    <div class="appended">
+    <button @click="showRouting = !showRouting">
+        {{showRouting ? '&#10506; Hide' : '&#10507; Show'}}
+    </button>
+    <div v-if="showRouting">
+        <ul>
+            <li><a href="#/">Home</a></li>
+            <li><a href="#/infrastructure">Infrastructure</a></li>
+        </ul>
+    </div>
+    </div>
+    </div>
 </template>
 
 <style scoped>
-.header {
+.front_el {
     z-index: 99;
-    top: 0;
     position: sticky;
+    top: 0;
+}
 
+.banner {
     background-color: rgba(60, 30, 60);
 
     display: grid;
@@ -65,12 +83,16 @@ useResizeObserver(headerEl, (entries) => {
     padding: 1rem;
 }
 
+.appended {
+    position: absolute;
+}
+
 a {
     color: currentcolor;
 }
 
 @media (prefers-color-scheme: light) {
-    .header{
+    .banner{
         color: #fff;
     }
 }
@@ -99,7 +121,7 @@ a {
 }
 
 @media screen and (max-width: 900px) {
-.header {
+.banner {
     grid-template-columns: auto;
     grid-template-rows: auto auto auto;
 
