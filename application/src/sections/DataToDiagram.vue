@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Content from '../components/Content.vue'
 import ProjectDesc from '../components/ProjectDesc.vue'
+import ClickImg from "../components/ClickImg.vue"
 
 const dataStructToDiagram = [
     "Mermaid.js",
@@ -32,8 +33,8 @@ const dataStructToDiagram = [
             </template>
             <template v-slot:right>
                 <div class="multi_image">
-                    <img class="left_img" src="../../public/mermaidizer/nodesToStrTest.png" />
-                    <img class="right_img" src="../../public/mermaidizer/mermaidPointers.png" />
+                    <ClickImg class="left_img" path="../../public/mermaidizer/nodesToStrTest.png" />
+                    <ClickImg class="right_img" path="../../public/mermaidizer/mermaidPointers.png" />
                 </div>
             </template>
         </Content>
@@ -82,7 +83,11 @@ const dataStructToDiagram = [
         flex-direction: column;
     }
 
-    img {
+    .left_img {
+        margin-bottom: 1rem;
+    }
+
+    .right_img {
         margin-bottom: 1rem;
     }
 }

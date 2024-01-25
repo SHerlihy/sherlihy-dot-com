@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Content from '../components/Content.vue'
 import ProjectDesc from '../components/ProjectDesc.vue'
+import ClickImg from '../components/ClickImg.vue'
 
 const authAndProfile = [
     "MemoryDB, RDS",
@@ -46,8 +47,8 @@ const authAndProfile = [
             </template>
             <template v-slot:left>
                 <div class="duo_image">
-                    <img class="left_top_img" src="../../public/serviceArchitecture/flow.png" />
-                    <img class="right_low_img" src="../../public/serviceArchitecture/sequence.png" />
+                    <ClickImg class="clickImg left_top_img" path="../../public/serviceArchitecture/flow.png" />
+                    <ClickImg class="clickImg right_low_img" path="../../public/serviceArchitecture/sequence.png" />
                 </div>
             </template>
         </Content>
@@ -94,7 +95,7 @@ const authAndProfile = [
         flex-direction: column;
     }
 
-    img {
+    .clickImg {
         margin-bottom: 1rem;
     }
 }

@@ -43,7 +43,7 @@ import SHerlihyDotCom from './sections/SHerlihyDotCom.vue'
 
 <style scoped>
 .light_bg {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(128, 128, 128, 0.1);
 }
 </style>
 
