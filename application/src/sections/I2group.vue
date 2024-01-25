@@ -12,12 +12,10 @@ const i2Points = [
     "React",
 ]
 
-const imgPath = import.meta.env.VITE_IMGS_PATH === undefined ? "/public/" : import.meta.env.VITE_IMGS_PATH
-
 let i2Imgs = [
-    `${imgPath}/i2/color_picker.png`,
-    `${imgPath}/i2/i2Web.png`,
-    `${imgPath}/i2/i2WebSaveDrk.png`
+    `../../public/i2/color_picker.png`,
+    `../../public/i2/i2Web.png`,
+    `../../public/i2/i2WebSaveDrk.png`
 ]
 
 const shiftLeft = (imgPaths: string[]) => {

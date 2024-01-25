@@ -5,15 +5,17 @@ import { useResizeObserver } from '@vueuse/core'
 const headerEl = ref(null)
 let prevHeight = 0
 
-useResizeObserver(headerEl, (entries: ReadonlyArray<ResizeObserverEntry>) => {
+useResizeObserver(headerEl, (entries) => {
+    if (entries.length < 1) {
+        return
+    }
+
     const obsHeaderEl = entries[0]
     const {height} = obsHeaderEl.contentRect
 
-    console.log("obs called")
     if (height === prevHeight) {
         return
     }
-    console.log("height diff")
 
     handleHeaderSizeChange()
 
@@ -21,8 +23,7 @@ useResizeObserver(headerEl, (entries: ReadonlyArray<ResizeObserverEntry>) => {
 })
 
     const handleHeaderSizeChange = () => {
-        console.log("header esize called")
-        const navigation = document.querySelector(".header")
+        const navigation = document.querySelector(".header") as HTMLElement
         if (!navigation) {
             return
         }
