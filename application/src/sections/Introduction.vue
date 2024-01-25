@@ -16,11 +16,15 @@
 <style scoped>
 
 section {
+    height: 65vh;
     display: flex;
     flex-direction: row;
+
+    align-items: center;
 }
 
 img {
+    max-height: 350px;
     max-width: 350px;
     border-radius: 10%;
 
@@ -42,6 +46,7 @@ img {
 @media screen and (max-width: 1200px) {
 section {
     flex-direction: column;
+    justify-content: center;
 }
 
     img {

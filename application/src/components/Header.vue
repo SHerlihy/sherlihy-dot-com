@@ -37,7 +37,7 @@ useResizeObserver(headerEl, (entries: ReadonlyArray<ResizeObserverEntry>) => {
 
 <template>
     <header ref="headerEl" class="header">
-        <b class="left_text">SHerlihy</b>
+        <b class="left_text"><a href="#">SHerlihy</a></b>
         <span/>
         <div class="right_flex">
             <p>steven_herlihy@yahoo.com</p>
@@ -62,6 +62,10 @@ useResizeObserver(headerEl, (entries: ReadonlyArray<ResizeObserverEntry>) => {
     align-content: center;
 
     padding: 1rem;
+}
+
+a {
+    color: currentcolor;
 }
 
 @media (prefers-color-scheme: light) {

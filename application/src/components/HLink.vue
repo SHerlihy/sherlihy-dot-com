@@ -14,3 +14,8 @@ const hId = `#${props.linkId}`
     </h2>
 </template>
 
+<style scoped>
+a {
+    color: currentcolor;
+}
+</style>

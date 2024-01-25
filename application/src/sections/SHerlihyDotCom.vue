@@ -4,7 +4,7 @@ import HLink from "../components/HLink.vue"
 <template>
     <section>
         <HLink linkId='sherlihyDotCom'>
-            Sherlihy.com
+            SHerlihy.com
         </HLink>
         <br class="min_br"/>
         <p>
