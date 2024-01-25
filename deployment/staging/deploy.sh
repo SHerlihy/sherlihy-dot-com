@@ -28,6 +28,8 @@ fi
 
 cd ../
 
+exit
+
 echo -e "user_name = $USER_NAME\n" > ./distribute/init_roles/vars.tfvars
 echo -e "init_role_arn = $INIT_ROLE_ARN\n" >> ./distribute/init_roles/vars.tfvars
 

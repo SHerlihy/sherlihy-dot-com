@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Content from '../components/Content.vue'
 import ProjectDesc from '../components/ProjectDesc.vue'
+import ClickImg from '../components/ClickImg.vue'
 
 const velmaMode = [
     "Accessability",
@@ -12,7 +13,10 @@ const velmaMode = [
 <template>
             <Content mongo>
                 <template v-slot:right>
-                    <ProjectDesc heading="Text Magnifier">
+                    <ProjectDesc 
+                    heading="Text Magnifier"
+                    linkId="velma"
+                    >
                         <p>
                             A wrapping component and state control system that allows desired text to be resized by a user.
                         </p>
@@ -33,8 +37,8 @@ const velmaMode = [
                 </template>
                 <template v-slot:left>
                     <div class="duo_image">
-                        <img class="right_top_img" src="../../public/velmaMode/velmaModeDisabled.png" />
-                        <img class="left_low_img" src="../../public/velmaMode/velmaModex4.png" />
+                        <ClickImg class="clickImg right_top_img" path="../../public/velmaMode/velmaModeDisabled.png" />
+                        <ClickImg class="clickImg left_low_img" path="../../public/velmaMode/velmaModex4.png" />
                     </div>
                 </template>
             </Content>
@@ -82,7 +86,7 @@ const velmaMode = [
         flex-direction: column;
     }
 
-    img {
+    .clickImg {
         margin-bottom: 1rem;
     }
 }

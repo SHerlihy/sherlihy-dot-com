@@ -22,7 +22,7 @@ provider "aws" {
 module "s3_bucket" {
     source = "../../../modules/s3_bucket"
 
-    bucket_prefix = "sherlihydotcom-prod"
+    bucket_prefix = "sherlihydotcom-stage"
 
     bucket_create_arn = var.bucket_create_arn
 

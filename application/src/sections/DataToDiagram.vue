@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Content from '../components/Content.vue'
 import ProjectDesc from '../components/ProjectDesc.vue'
+import ClickImg from "../components/ClickImg.vue"
 
 const dataStructToDiagram = [
     "Mermaid.js",
@@ -11,7 +12,10 @@ const dataStructToDiagram = [
 <template>
         <Content>
             <template v-slot:left>
-                <ProjectDesc heading="Pointer Data Structure to Diagram">
+                <ProjectDesc 
+                heading="Pointer Data Structure to Diagram" 
+                linkId="ptrsDia"
+                >
                     <p>
                         A combination of tools to help see a data structure made of memory pointers to help debugging such a data structure. The first tool creates a string representation of a data structure and the second tool creates a diagram from a string representation of a data structure.
                     </p>
@@ -29,8 +33,8 @@ const dataStructToDiagram = [
             </template>
             <template v-slot:right>
                 <div class="multi_image">
-                    <img class="left_img" src="../../public/mermaidizer/nodesToStrTest.png" />
-                    <img class="right_img" src="../../public/mermaidizer/mermaidPointers.png" />
+                    <ClickImg class="left_img" path="../../public/mermaidizer/nodesToStrTest.png" />
+                    <ClickImg class="right_img" path="../../public/mermaidizer/mermaidPointers.png" />
                 </div>
             </template>
         </Content>
@@ -79,7 +83,11 @@ const dataStructToDiagram = [
         flex-direction: column;
     }
 
-    img {
+    .left_img {
+        margin-bottom: 1rem;
+    }
+
+    .right_img {
         margin-bottom: 1rem;
     }
 }

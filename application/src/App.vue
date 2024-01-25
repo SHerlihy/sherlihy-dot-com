@@ -8,13 +8,17 @@ import Introduction from './sections/Introduction.vue'
 import SHerlihyDotCom from './sections/SHerlihyDotCom.vue'
 </script>
 
-
 <template>
     <Header />
     <main>
+        <br/>
         <Introduction/>
         <br/>
-        <SHerlihyDotCom/>
+        <div class="light_bg">
+            <br/>
+            <SHerlihyDotCom/>
+            <br/>
+        </div>
         <br/>
         <I2group/>
         <br />
@@ -39,7 +43,7 @@ import SHerlihyDotCom from './sections/SHerlihyDotCom.vue'
 
 <style scoped>
 .light_bg {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(128, 128, 128, 0.1);
 }
 </style>
 
@@ -59,6 +63,8 @@ import SHerlihyDotCom from './sections/SHerlihyDotCom.vue'
 
 html {
     color-scheme: dark light;
+    scroll-behavior: smooth;
+    scroll-padding-top: var(--scroll-padding, 10vh);
 }
 
 body {
@@ -101,7 +107,7 @@ p {
 }
 
 section {
-    padding: 1rem;
+    margin: 0 10vw;
 }
 
 a {

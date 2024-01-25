@@ -1,9 +1,12 @@
 <script setup lang="ts">
+import ClickImg from "../components/ClickImg.vue"
 </script>
 
 <template>
     <section>
-        <img src="../../public/intro/sherlihy.jpeg"/>
+        <div class="portrait_img">
+        <ClickImg path="../../public/intro/sherlihy.jpeg"/>
+        </div>
         <article class="grid_auto_center">
             <p class="grid_center_content">
             Welcome, here I reflect on projects I have worked on. The purpose of these reflections is to attribute my progression and learning to tangible artifacts.
@@ -14,17 +17,41 @@
 </template>
 
 <style scoped>
-
-section {
-    display: flex;
-    flex-direction: row;
+@keyframes slideInLeft {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 
-img {
-    max-width: 350px;
+@keyframes slideInUp {
+  0% {
+    transform: translateY(200%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+section {
+    height: 65vh;
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+}
+
+.portrait_img {
+    min-height: 350px;
+    min-width: 350px;
     border-radius: 10%;
+    overflow: hidden;
 
     margin-right: 1rem;
+
+    animation: 1s ease-out 0s 1 slideInLeft;
 }
 
 .grid_auto_center {
@@ -37,14 +64,17 @@ img {
     grid-column: 2;
     grid-row: 2;
 
+    animation: 1s ease-out 0s 1 slideInUp;
+
 }
 
 @media screen and (max-width: 1200px) {
 section {
     flex-direction: column;
+    justify-content: center;
 }
 
-    img {
+    .portrait_img {
         align-self: center;
         margin-bottom: 1rem;
         margin-right: 0;

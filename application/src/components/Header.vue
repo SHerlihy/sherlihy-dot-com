@@ -1,6 +1,44 @@
+<script setup lang="ts">
+import { ref } from 'vue'
+import { useResizeObserver } from '@vueuse/core'
+
+const headerEl = ref(null)
+let prevHeight = 0
+
+useResizeObserver(headerEl, (entries) => {
+    if (entries.length < 1) {
+        return
+    }
+
+    const obsHeaderEl = entries[0]
+    const {height} = obsHeaderEl.contentRect
+
+    if (height === prevHeight) {
+        return
+    }
+
+    handleHeaderSizeChange()
+
+    prevHeight = height
+})
+
+    const handleHeaderSizeChange = () => {
+        const navigation = document.querySelector(".header") as HTMLElement
+        if (!navigation) {
+            return
+        }
+
+        const navigationHeight = navigation.offsetHeight;
+        document.documentElement.style.setProperty(
+            "--scroll-padding",
+            navigationHeight + "px"
+        )
+    }
+</script>
+
 <template>
-    <header class="header">
-        <b class="left_text">SHerlihy</b>
+    <header ref="headerEl" class="header">
+        <b class="left_text"><a href="#">SHerlihy</a></b>
         <span/>
         <div class="right_flex">
             <p>steven_herlihy@yahoo.com</p>
@@ -25,6 +63,10 @@
     align-content: center;
 
     padding: 1rem;
+}
+
+a {
+    color: currentcolor;
 }
 
 @media (prefers-color-scheme: light) {

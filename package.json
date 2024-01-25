@@ -7,12 +7,13 @@
     "dev": "vite ./application/",
     "build": "cd ./application/ && vue-tsc && vite build --outDir ../dist/ && cd ../",
     "build_stage": "cd ./application/ && vue-tsc && vite build --mode staging --outDir ../dist/ && cd ../",
-    "preview": "vite preview ./application/",
+    "preview": "vite preview ./",
     "infra_diagrams": "live-server --open=./deployment/infrastructure_diagrams .",
     "launch_prod": "cd ./deployment/production && ./deploy_prod.sh && ../../",
     "replace_prod_files": "cd ./deployment/production/bucket && ./replace_s3.sh && cd ../../../"
   },
   "dependencies": {
+    "@vueuse/core": "^10.7.2",
     "live-server": "^1.2.2",
     "terraform": "^1.23.0",
     "vue": "^3.3.8"
