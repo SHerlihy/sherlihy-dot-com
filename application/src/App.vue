@@ -1,47 +1,84 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { useUrlSearchParams } from '@vueuse/core'
+import { computed, ref } from 'vue';
+import { useEventListener } from '@vueuse/core';
+
+import useQueryParam from './queryState/useQueryParam.ts';
 
 import Header from './components/Header.vue'
-import Home from './Home.vue'
-import Infrastructure from './Infrastructure.vue'
+import Home from './routes/home/Home.vue'
+import Infrastructure from './routes/infrastructure/Infrastructure.vue'
 
+// Start: Routing
+
+const RoutePathsTuple = ['/','/infrastructure'] as const
 const routes = {
-  '/': Home,
-  '/infrastructure': Infrastructure
-}
+    '/': Home,
+    '/infrastructure': Infrastructure
+} as const
+
+const routePaths = Object.keys(routes)
 
 const currentPath = ref(window.location.hash)
 
 window.addEventListener('hashchange', () => {
-  currentPath.value = window.location.hash
+    currentPath.value = window.location.hash
 })
 
 const currentView = computed(() => {
-  return routes[currentPath.value.slice(1) || '/'] || NotFound
+    const newPath = currentPath.value.slice(1)
+    const validPath = (routePaths.includes(newPath) ? newPath : '/') as typeof RoutePathsTuple[number]
+    return routes[validPath]
 })
 
-const params = useUrlSearchParams('history')
-const showRouting = ref(params.showRouting)
+// End: Routing
 
-let previousUrl = '';
-const observer = new MutationObserver(function() {
-  if (window.location.href !== previousUrl) {
-      previousUrl = window.location.href;
-        const newParams = useUrlSearchParams('history')
-        showRouting.value = newParams.showRouting
+// Start: Routing open
+
+const routingParam = useQueryParam('showRouting')
+const showingRouting = computed(() => {
+    if (routingParam.value !== '1') {
+        return false
     }
-});
-const config = {subtree: true, childList: true};
-observer.observe(document, config);
+
+    return true
+})
+
+// End: Routing open
+
+// Start: Is window width thin
+
+const isThin = ref(window.innerWidth < 600)
+
+useEventListener(window, 'resize', () => {
+    if (window.innerWidth < 600) {
+        isThin.value = true
+        return
+    }
+
+    isThin.value = false
+})
+
+//End: Is window width thin
 </script>
 
 <template>
-    <div v-if="showRouting === '1'">
-        <Header/>
-    </div>
-    <div v-if="showRouting === '0'">
-        <Header/>
-        <component :is="currentView"/>
+    <Header />
+
+    <!-- <div :class="{ 'requires-no-scroll': isThin && showingRouting }"> -->
+
+    <div :class="{ 'requires-no-scroll': showingRouting && isThin }">
+        <component :is="currentView" />
     </div>
 </template>
+
+<style scoped>
+.requires-no-scroll {
+    overflow: hidden;
+}
+</style>
+
+<style>
+body:has(.requires-no-scroll) {
+    overflow: hidden;
+}
+</style>

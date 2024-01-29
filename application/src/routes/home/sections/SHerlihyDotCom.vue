@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import HLink from "../components/HLink.vue"
+import HLink from "../../../components/HLink.vue"
 </script>
 <template>
     <section>

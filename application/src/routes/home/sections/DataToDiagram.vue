@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import Content from '../components/Content.vue'
-import ProjectDesc from '../components/ProjectDesc.vue'
-import ClickImg from "../components/ClickImg.vue"
+import Content from '../../../components/Content.vue'
+import ProjectDesc from '../../../components/ProjectDesc.vue'
+import ClickImg from "../../../components/ClickImg.vue"
 
 const dataStructToDiagram = [
     "Mermaid.js",
