@@ -5,6 +5,6 @@ resource_tags = {
 "env"="stage"
 }
 
-bucket_create_arn = "arn:aws:iam::111644099040:role/terraform-20240125015855714100000003"
-obj_replace_arn = "arn:aws:iam::111644099040:role/terraform-20240125015855716700000005"
-obj_replace_name = "terraform-20240125015855716700000005"
+bucket_create_arn = "arn:aws:iam::111644099040:role/terraform-20240130135444318200000005"
+obj_replace_arn = "arn:aws:iam::111644099040:role/terraform-20240130135444318100000004"
+obj_replace_name = "terraform-20240130135444318100000004"
