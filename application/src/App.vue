@@ -2,33 +2,14 @@
 import { computed, ref } from 'vue';
 import { useEventListener } from '@vueuse/core';
 
+import useUrlHash from './routes/useUrlHash.ts'
 import useQueryParam from './queryState/useQueryParam.ts';
 
 import Header from './components/Header.vue'
-import Home from './routes/home/Home.vue'
-import Infrastructure from './routes/infrastructure/Infrastructure.vue'
 
 // Start: Routing
 
-const RoutePathsTuple = ['/','/infrastructure'] as const
-const routes = {
-    '/': Home,
-    '/infrastructure': Infrastructure
-} as const
-
-const routePaths = Object.keys(routes)
-
-const currentPath = ref(window.location.hash)
-
-window.addEventListener('hashchange', () => {
-    currentPath.value = window.location.hash
-})
-
-const currentView = computed(() => {
-    const newPath = currentPath.value.slice(1)
-    const validPath = (routePaths.includes(newPath) ? newPath : '/') as typeof RoutePathsTuple[number]
-    return routes[validPath]
-})
+const currentView = useUrlHash()
 
 // End: Routing
 
@@ -63,9 +44,6 @@ useEventListener(window, 'resize', () => {
 
 <template>
     <Header />
-
-    <!-- <div :class="{ 'requires-no-scroll': isThin && showingRouting }"> -->
-
     <div :class="{ 'requires-no-scroll': showingRouting && isThin }">
         <component :is="currentView" />
     </div>
