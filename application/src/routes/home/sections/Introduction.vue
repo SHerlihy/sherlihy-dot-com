@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ClickImg from "../components/ClickImg.vue"
+import ClickImg from "../../../components/ClickImg.vue"
 </script>
 
 <template>

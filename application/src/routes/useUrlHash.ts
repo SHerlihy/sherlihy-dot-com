@@ -1,0 +1,28 @@
+import { computed, ref } from 'vue'
+
+import Home from './home/Home.vue'
+
+const useUrlHash = () => {
+    const RoutePathsTuple = ['/'] as const
+    const routes = {
+        '/': Home
+    } as const
+    
+    const routePaths = Object.keys(routes)
+    
+    const currentPath = ref(window.location.hash)
+    
+    window.addEventListener('hashchange', () => {
+        currentPath.value = window.location.hash
+    })
+    
+    const currentView = computed(() => {
+        const newPath = currentPath.value.slice(1)
+        const validPath = (routePaths.includes(newPath) ? newPath : '/') as typeof RoutePathsTuple[number]
+        return routes[validPath]
+    })
+    
+    return currentView
+}
+
+export default useUrlHash

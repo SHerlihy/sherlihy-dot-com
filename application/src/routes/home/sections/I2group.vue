@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import Content from "../components/Content.vue"
-import ProjectDesc from "../components/ProjectDesc.vue"
-import Carousel from "../components/Carousel.vue"
+import Content from "../../../components/Content.vue"
+import ProjectDesc from "../../../components/ProjectDesc.vue"
+import Carousel from "../../../components/Carousel.vue"
 
 const i2Points = [
     "Story lead",
