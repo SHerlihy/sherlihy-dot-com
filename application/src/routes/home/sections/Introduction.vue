@@ -40,6 +40,23 @@ article {
     animation: 1s ease-out 0s 1 slideInLeft;
 }
 
+@media screen and (max-width: 1200px) {
+    section {
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .portrait_img {
+        align-self: center;
+        margin-bottom: 1rem;
+        margin-right: 0;
+    }
+
+    .grid_center_content {
+    animation: 1s ease-out 0s 1 slideInDown;
+    }
+}
+
 @keyframes slideInLeft {
   0% {
     transform: translateX(-100%);
@@ -49,17 +66,12 @@ article {
   }
 }
 
-
-@media screen and (max-width: 1200px) {
-section {
-    flex-direction: column;
-    justify-content: center;
-}
-
-    .portrait_img {
-        align-self: center;
-        margin-bottom: 1rem;
-        margin-right: 0;
-    }
+@keyframes slideInDown {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 </style>
