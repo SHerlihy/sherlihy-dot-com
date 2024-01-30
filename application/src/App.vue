@@ -5,7 +5,7 @@ import { useEventListener } from '@vueuse/core';
 import useUrlHash from './routes/useUrlHash.ts'
 import useQueryParam from './queryState/useQueryParam.ts';
 
-import Header from './components/Header.vue'
+import Header from './components/header/Header.vue'
 
 // Start: Routing
 

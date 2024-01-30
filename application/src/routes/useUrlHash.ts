@@ -4,10 +4,9 @@ import Home from './home/Home.vue'
 import Infrastructure from './infrastructure/Infrastructure.vue'
 
 const useUrlHash = () => {
-    const RoutePathsTuple = ['/','/infrastructure'] as const
+    const RoutePathsTuple = ['/'] as const
     const routes = {
-        '/': Home,
-        '/infrastructure': Infrastructure
+        '/': Home
     } as const
     
     const routePaths = Object.keys(routes)

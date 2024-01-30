@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 import { useResizeObserver } from '@vueuse/core'
-import { useUrlSearchParams } from '@vueuse/core'
+
+import Routing from './Routing.vue'
 
 const headerEl = ref(null)
 let prevHeight = 0
@@ -35,55 +36,23 @@ useResizeObserver(headerEl, (entries) => {
             navigationHeight + "px"
         )
     }
-
-const params = useUrlSearchParams('history')
-const showRouting = ref(params.showRouting)
-
-watch(params, async(newParams) => {
-    showRouting.value = newParams.showRouting
-})
-
-function handleToggleRoutes() {
-    if (!params.showRouting) {
-        params.showRouting = '1'
-        return
-    }
-
-    if (params.showRouting === '0') {
-        params.showRouting = '1'
-        return
-    }
-
-    if (params.showRouting === '1') {
-        params.showRouting = '0'
-        return
-    }
-}
 </script>
 
 <template>
     <div class="front_el">
-    <header ref="headerEl" class="banner">
-        <b class="left_text"><a href="#">SHerlihy</a></b>
-        <span/>
-        <div class="right_flex">
-            <p>steven_herlihy@yahoo.com</p>
-            <p class="details_partition">|</p>
-            <p>+44 73544 30588</p>
-        </div>
-    </header>
+        <header ref="headerEl" class="banner">
+            <b class="left_text"><a href="#">SHerlihy</a></b>
+            <span/>
+            <div class="right_flex">
+                <p>steven_herlihy@yahoo.com</p>
+                <p class="details_partition">|</p>
+                <p>+44 73544 30588</p>
+            </div>
+        </header>
 
-    <div class="appended">
-    <button @click="handleToggleRoutes">
-        {{showRouting === '1' ? '&#10506; Hide' : '&#10507; Show'}}
-    </button>
-    <div v-if="showRouting === '1'">
-        <ul>
-            <li><a href="#/">Home</a></li>
-            <li><a href="#/infrastructure">Infrastructure</a></li>
-        </ul>
-    </div>
-    </div>
+        <div class="appended">
+            <Routing/>
+        </div>
     </div>
 </template>
 
