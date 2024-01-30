@@ -1,7 +1,6 @@
 import { computed, ref } from 'vue'
 
 import Home from './home/Home.vue'
-import Infrastructure from './infrastructure/Infrastructure.vue'
 
 const useUrlHash = () => {
     const RoutePathsTuple = ['/'] as const
