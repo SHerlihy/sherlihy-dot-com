@@ -1,7 +1,3 @@
-<script setup lang="ts">
-    import ClickImg from '../../../components/ClickImg.vue'
-</script>
-
 <template>
     <div class="container_padding">
     <div class="profile_img_container">
