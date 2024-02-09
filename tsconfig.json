@@ -1,0 +1,10 @@
+{
+  "extends": "@tsconfig/node18/tsconfig.json",
+  "include": ["deployment/infrastructure_diagrams/**/*"],
+  "exclude": ["node_modules"],
+    "compilerOptions": {
+        "allowJs": true,
+        "esModuleInterop": true,
+        "allowImportingTsExtensions": true
+    }
+}

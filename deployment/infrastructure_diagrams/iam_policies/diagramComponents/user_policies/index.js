@@ -1,5 +1,5 @@
-subgraph prod [user prod]
-    prodEnable("`
+const userPolicies = `subgraph prod [user prod]
+    prodEnable("\`
         iam:*
         sts:*
         organizations:DescribeAccount
@@ -12,11 +12,13 @@ subgraph prod [user prod]
         organizations:ListRoots
         organizations:ListPolicies
         organizations:ListTargetsForPolicy
-    `")
+    \`")
 end
 
 prod --> init
 prod --> create
 prod --> replace
 prod --> distCreate
+`
 
+export default userPolicies

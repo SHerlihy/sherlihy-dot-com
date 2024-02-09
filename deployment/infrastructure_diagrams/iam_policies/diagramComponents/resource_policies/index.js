@@ -1,51 +1,54 @@
+const resourcePolicies = `
 subgraph bucketDeny
-bucketDenyCond{"`
+bucketDenyCond{"\`
     createRole
-`"}
+\`"}
 
 bucketDenyRes --> bucketDenyCond
 bucketDenyCond -- false --x bucketDenyDeny
 
-bucketDenyDeny("`
+bucketDenyDeny("\`
         s3:Delete
         s3:Put
-`")
+\`")
 
-bucketDenyRes("`
+bucketDenyRes("\`
     createdS3Bucket
-`")
+\`")
 
-objDenyCond{"`
+objDenyCond{"\`
     createRole
     replaceRole
-`"}
+\`"}
 
 objDenyRes --> objDenyCond
 objDenyCond -- false --x objDenyDeny
 
-objDenyDeny("`
+objDenyDeny("\`
         s3:Delete
         s3:Put
-`")
+\`")
 
-objDenyRes("`
+objDenyRes("\`
     bucketObject
-`")
+\`")
 end
 
 bucketDeny --> bucketAllow
 
 subgraph bucketAllow
-bucketAllowRes("`
+bucketAllowRes("\`
     createdS3Bucket
     bucketObject
-`")
+\`")
 
 bucketAllowRes --> bucketAllowAllow
 
-bucketAllowAllow("`
+bucketAllowAllow("\`
     s3:Get
     s3:List
-`")
+\`")
 end
+`
 
+export default resourcePolicies

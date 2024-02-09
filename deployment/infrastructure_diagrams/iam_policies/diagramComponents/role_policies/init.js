@@ -1,28 +1,28 @@
-subgraph init [init]
-     initProdCon{"`
+const init = `subgraph init [init]
+     initProdCon{"\`
          principal:user prod
-     `"}
+     \`"}
      
      initProdCon -- true --> initProdAllow
      
-     initProdAllow("`
+     initProdAllow("\`
          sts:AssumeRole
-     `")
+     \`")
      
 
-     initCon{"`
+     initCon{"\`
          principal:oidc-provider
          repo:SHerlihyDotCom
          branch:main
-     `"}
+     \`"}
      
      initCon -- true --> initActionsAllow
 
-     initActionsAllow("`
+     initActionsAllow("\`
          sts:AssumeRoleWithWebIdentity
-     `")
+     \`")
 
-     initAllow("`
+     initAllow("\`
          iam:*
          organizations:DescribeAccount
          organizations:DescribeOrganization
@@ -34,6 +34,8 @@ subgraph init [init]
          organizations:ListRoots
          organizations:ListPolicies
          organizations:ListTargetsForPolicy
-     `")
+     \`")
  end
+`
 
+export default init

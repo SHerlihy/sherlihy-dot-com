@@ -1,35 +1,37 @@
-subgraph distCreate
-    dcaEnable("`
+const createDist = `subgraph distCreate
+    dcaEnable("\`
         sts:AssumeRole
         sts:GetCallerIdentity
         iam:*
-    `")
+    \`")
 
-    dcaACMRes{"`
+    dcaACMRes{"\`
         acm:*
-    `"}
+    \`"}
     
     dcaACMRes --> dcaACMAllow
     
-    dcaACMAllow("`
+    dcaACMAllow("\`
         acm:*
-    `")
+    \`")
 
-    dcCDNRes{"`
+    dcCDNRes{"\`
         cloudfront:*
-    `"}
+    \`"}
     
     dcCDNRes --> dcCDNAllow
     
-    dcCDNAllow("`
+    dcCDNAllow("\`
         cloudfront:*
-    `")
+    \`")
 
-    dcR53Allow("`
+    dcR53Allow("\`
         route53:*
         route53domains:*
         route53resolver:*
-    `")
+    \`")
 
 end
+`
 
+export default createDist
