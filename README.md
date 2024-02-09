@@ -1,31 +1,110 @@
 # SHerlihy Portfolio Showcase
 
 ## Infrastructure Diagrams
+
+## Overview
+
+## Diagram
+
 ```mermaid
-            flowchart TB
-subgraph prod [user prod]
-    prodEnable("`
+
+    flowchart LR
+
+    
+    subgraph init [init]
+     initProdCon{"`
+         principal:user prod
+     `"}
+     
+     initProdCon -- true --> initProdAllow
+     
+     initProdAllow("`
+         sts:AssumeRole
+     `")
+     
+
+     initCon{"`
+         principal:oidc-provider
+         repo:SHerlihyDotCom
+         branch:main
+     `"}
+     
+     initCon -- true --> initActionsAllow
+
+     initActionsAllow("`
+         sts:AssumeRoleWithWebIdentity
+     `")
+
+     initAllow("`
+         iam:*
+         organizations:DescribeAccount
+         organizations:DescribeOrganization
+         organizations:DescribeOrganizationalUnit
+         organizations:DescribePolicy
+         organizations:ListChildren
+         organizations:ListParents
+         organizations:ListPoliciesForTarget
+         organizations:ListRoots
+         organizations:ListPolicies
+         organizations:ListTargetsForPolicy
+     `")
+ end
+
+    subgraph distCreate
+    dcaEnable("`
+        sts:AssumeRole
+        sts:GetCallerIdentity
         iam:*
-        sts:*
-        organizations:DescribeAccount
-        organizations:DescribeOrganization
-        organizations:DescribeOrganizationalUnit
-        organizations:DescribePolicy
-        organizations:ListChildren
-        organizations:ListParents
-        organizations:ListPoliciesForTarget
-        organizations:ListRoots
-        organizations:ListPolicies
-        organizations:ListTargetsForPolicy
     `")
+
+    dcaACMRes{"`
+        acm:*
+    `"}
+    
+    dcaACMRes --> dcaACMAllow
+    
+    dcaACMAllow("`
+        acm:*
+    `")
+
+    dcCDNRes{"`
+        cloudfront:*
+    `"}
+    
+    dcCDNRes --> dcCDNAllow
+    
+    dcCDNAllow("`
+        cloudfront:*
+    `")
+
+    dcR53Allow("`
+        route53:*
+        route53domains:*
+        route53resolver:*
+    `")
+
 end
 
-prod --> init
-prod --> create
-prod --> replace
-prod --> distCreate
+    subgraph create [create]
+    subgraph createAllow
+    createEnable("`
+        iam:*
+        sts:AssumeRole
+        sts:GetCallerIdentity
+    `")
+    createCreate("`
+        s3:Create
+        s3:Delete
+        s3:Get
+        s3:List
+        s3:Put
+    `")
+    end
+end
 
-subgraph replace [replace]
+create --- bucketDeny
+
+    subgraph replace [replace]
     subgraph replaceDeny
     replaceDenyRes{"`
         createdS3Bucket
@@ -66,99 +145,8 @@ end
 
 replace --- bucketDeny
 
-subgraph init [init]
-     initProdCon{"`
-         principal:user prod
-     `"}
-     
-     initProdCon -- true --> initProdAllow
-     
-     initProdAllow("`
-         sts:AssumeRole
-     `")
-     
 
-     initCon{"`
-         principal:oidc-provider
-         repo:SHerlihyDotCom
-         branch:main
-     `"}
-     
-     initCon -- true --> initActionsAllow
-
-     initActionsAllow("`
-         sts:AssumeRoleWithWebIdentity
-     `")
-
-     initAllow("`
-         iam:*
-         organizations:DescribeAccount
-         organizations:DescribeOrganization
-         organizations:DescribeOrganizationalUnit
-         organizations:DescribePolicy
-         organizations:ListChildren
-         organizations:ListParents
-         organizations:ListPoliciesForTarget
-         organizations:ListRoots
-         organizations:ListPolicies
-         organizations:ListTargetsForPolicy
-     `")
- end
-
-subgraph distCreate
-    dcaEnable("`
-        sts:AssumeRole
-        sts:GetCallerIdentity
-        iam:*
-    `")
-
-    dcaACMRes{"`
-        acm:*
-    `"}
     
-    dcaACMRes --> dcaACMAllow
-    
-    dcaACMAllow("`
-        acm:*
-    `")
-
-    dcCDNRes{"`
-        cloudfront:*
-    `"}
-    
-    dcCDNRes --> dcCDNAllow
-    
-    dcCDNAllow("`
-        cloudfront:*
-    `")
-
-    dcR53Allow("`
-        route53:*
-        route53domains:*
-        route53resolver:*
-    `")
-
-end
-
-subgraph create [create]
-    subgraph createAllow
-    createEnable("`
-        iam:*
-        sts:AssumeRole
-        sts:GetCallerIdentity
-    `")
-    createCreate("`
-        s3:Create
-        s3:Delete
-        s3:Get
-        s3:List
-        s3:Put
-    `")
-    end
-end
-
-create --- bucketDeny
-
 subgraph bucketDeny
 bucketDenyCond{"`
     createRole
@@ -210,42 +198,71 @@ bucketAllowAllow("`
 `")
 end
 
+    subgraph prod [user prod]
+    prodEnable("`
+        iam:*
+        sts:*
+        organizations:DescribeAccount
+        organizations:DescribeOrganization
+        organizations:DescribeOrganizationalUnit
+        organizations:DescribePolicy
+        organizations:ListChildren
+        organizations:ListParents
+        organizations:ListPoliciesForTarget
+        organizations:ListRoots
+        organizations:ListPolicies
+        organizations:ListTargetsForPolicy
+    `")
+end
+
+prod --> init
+prod --> create
+prod --> replace
+prod --> distCreate
+
 
 ```
+
+## Overview
+
+## Diagram
+
 ```mermaid
-            flowchart TB
-subgraph AWS
-subgraph global
-    DNS{Cloudfront}
-    R53[Route 53]
-    Cert[HTTPS Cert]
+
+    flowchart LR
+
+    Client <--> Site
     
-    Cert --> R53
-    R53 <--> DNS
-    DNS <--> Cache
-    DNS <--> S3
+    subgraph namecheap
+        Site[SHerlihy.com]
+    end
     
-    subgraph eu-west-2
-        subgraph acl-public-read
-            S3[S3 sherlihy.com]
+    Site --> R53
+    R53 --> Site
+
+    subgraph AWS
+    subgraph global
+        DNS{Cloudfront}
+        R53[Route 53]
+        Cert[HTTPS Cert]
+        
+        Cert --> R53
+        R53 <--> DNS
+        DNS <--> Cache
+        DNS <--> S3
+        
+        subgraph eu-west-2
+            subgraph acl-public-read
+                S3[S3 sherlihy.com]
+            end
         end
     end
-end
-end
-
-subgraph upload
-Actions[CI/CD Pipeline]
-Actions --> S3
-end
-
-Client <--> Site
-
-subgraph namecheap
-    Site[SHerlihy.com]
-end
-
-Site --> R53
-R53 --> Site
+    end
+    
+    subgraph upload
+    Actions[CI/CD Pipeline]
+    Actions --> S3
+    end
 
 
 ```
