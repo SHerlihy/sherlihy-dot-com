@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { RouterLink } from 'vue-router'
 import { useUrlSearchParams } from '@vueuse/core';
 import { ref, watch } from 'vue';
 
@@ -35,8 +36,8 @@ function handleToggleRoutes() {
         </button>
         <div v-if="showRouting === '1'" class="route_links_container">
             <ul class="route_links_list">
-                <li><a href="#/">Home</a></li>
-                <li><a href="#/infrastructure">Infrastructure</a></li>
+                <li><RouterLink to="/">Home</RouterLink></li>
+                <li><RouterLink to="shdotcom">SHerlihyDotCom</RouterLink></li>
             </ul>
         </div>
     </div>

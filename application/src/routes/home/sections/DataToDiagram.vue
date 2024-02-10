@@ -14,7 +14,7 @@ const dataStructToDiagram = [
             <template v-slot:left>
                 <ProjectDesc 
                 heading="Pointer Data Structure to Diagram" 
-                linkId="ptrsDia"
+                linkId="/pointersToDiagrams"
                 >
                     <p>
                         A combination of tools to help see a data structure made of memory pointers to help debugging such a data structure. The first tool creates a string representation of a data structure and the second tool creates a diagram from a string representation of a data structure.

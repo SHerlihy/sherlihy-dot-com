@@ -15,7 +15,7 @@ const authAndProfile = [
             <template v-slot:right>
                 <ProjectDesc 
                 heading="Distributed Service Architecture"
-                linkId="distArch"
+                linkId="/distributedArchitecture"
                 >
                     <p>
                         A REST based service Architecture designed to seperate sensitive data used for authorization (name, email, etc) from non-sensitive data.

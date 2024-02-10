@@ -15,7 +15,7 @@ const velmaMode = [
                 <template v-slot:right>
                     <ProjectDesc 
                     heading="Text Magnifier"
-                    linkId="velma"
+                    linkId="/velmaMode"
                     >
                         <p>
                             A wrapping component and state control system that allows desired text to be resized by a user.
