@@ -1,5 +1,7 @@
 <script setup lang="ts">
-defineProps<{ mongo?: boolean}>()
+defineProps<{ 
+    mongo?: boolean
+}>()
 </script>
 
 <template>

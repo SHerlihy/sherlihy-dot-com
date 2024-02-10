@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import Content from '../../../components/Content.vue'
 import ProjectDesc from '../../../components/ProjectDesc.vue'
 import ClickImg from '../../../components/ClickImg.vue'
+
+import Content from "../components/Content.vue"
 
 const authAndProfile = [
     "MemoryDB, RDS",
@@ -11,7 +12,7 @@ const authAndProfile = [
 </script>
 
 <template>
-        <Content mongo>
+        <Content mongo linkId="/distArchi">
             <template v-slot:right>
                 <ProjectDesc 
                 heading="Distributed Service Architecture"

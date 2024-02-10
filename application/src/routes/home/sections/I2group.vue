@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import Content from "../../../components/Content.vue"
 import ProjectDesc from "../../../components/ProjectDesc.vue"
 import Carousel from "../../../components/Carousel.vue"
+
+import Content from "../components/Content.vue"
 
 const i2Points = [
     "Story lead",
@@ -38,28 +39,25 @@ const shiftRight = (imgPaths: string[]) => {
 </script>
 
 <template>
-        <Content>
+        <Content linkId="i2Group">
             <template v-slot:left>
                 <ProjectDesc 
                 heading="Frontend Web Developer"
                 linkId="/i2Group"
                 >
                     <p>
-                        Intelligence software for use in a web browser that enabled customers to create graph/web diagrams
-                        of intelligence data.
+                        Intelligence software for use in a web browser that enabled customers to create graph/web diagrams of intelligence data.
                     </p>
-                <br/>
+                    <br/>
                     <ul>
                         <li v-for="point in i2Points">
                             {{ point }}
                         </li>
                     </ul>
-                    <br />
                 </ProjectDesc>
             </template>
             <template v-slot:right>
-        <Carousel @shift-left="shiftLeft(i2Imgs)" @shift-right="shiftRight(i2Imgs)" :imgs="i2Imgs" :imgWidthPx="400" :imgGapPx="30" />
-
+            <Carousel @shift-left="shiftLeft(i2Imgs)" @shift-right="shiftRight(i2Imgs)" :imgs="i2Imgs" :imgWidthPx="400" :imgGapPx="30" />
             </template>
         </Content>
 </template>
