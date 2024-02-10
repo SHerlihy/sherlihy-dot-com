@@ -8,7 +8,7 @@
             <template #right>
                 <ProjectDesc 
                 heading="Fun"
-                linkId="/shdotcom/fun"
+                linkId="fun"
                 >
                     <p>
                         I want to be excited to update this website and I believe the best way to do this is to commit to adding a few processes to the framework that I find fun whenever creating a new section.

@@ -7,8 +7,6 @@ import useQueryParam from './queryState/useQueryParam.ts';
 
 import Header from './components/header/Header.vue'
 
-// End: Routing
-
 // Start: Routing open
 
 const routingParam = useQueryParam('showRouting')

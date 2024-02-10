@@ -20,10 +20,6 @@ const dataStructToDiagram = [
                         A combination of tools to help see a data structure made of memory pointers to help debugging such a data structure. The first tool creates a string representation of a data structure and the second tool creates a diagram from a string representation of a data structure.
                     </p>
                         <br />
-                <p>
-                    Prior to this project I didn't have much experience developing command line tools but I was very comfortable using Mermaid.js. I was a little less confident with Golang as the majority of my experience was with algorithms but once I familiarised myself with standatd libraries to interact with the operating system I gained confidence and was able to make a working set of tools.
-                </p>
-                <br/>
                         <ul>
                             <li v-for="point in dataStructToDiagram">
                                 {{ point }}

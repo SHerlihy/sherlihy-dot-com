@@ -8,7 +8,7 @@
             <template #left>
                 <ProjectDesc 
                 heading="Documentation"
-                linkId="/shdotcom/documentation"
+                linkId="documentation"
                 >
                     <p>
                         I have two prevailing reasons for the documentation I've created in this project. The first is for transparency, specifically so sombody who is not me can undestand the wonderful work I've put into this website more easily. The second is for my own benifit and this has several meanins to me.
