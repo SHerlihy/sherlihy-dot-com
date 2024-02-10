@@ -18,21 +18,21 @@ import SHerlihyDotCom from './sections/SHerlihyDotCom.vue'
             <br/>
         </div>
         <br/>
-        <I2group/>
+            <I2group/>
         <br />
         <br />
         <div class="light_bg">
             <br/>
-                <DistArchi/>
+                <DistArchi mongo/>
             <br/>
         </div>
         <br />
-        <DataToDiagram/>
+            <DataToDiagram/>
         <br/>
 
         <div class="light_bg">
             <br/>
-            <VelmaMode/>
+                <VelmaMode mongo/>
             <br/>
         </div>
 

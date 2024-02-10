@@ -4,6 +4,10 @@ import ClickImg from '../../../components/ClickImg.vue'
 
 import Content from "../components/Content.vue"
 
+defineProps<{ 
+    mongo?: boolean
+}>()
+
 const velmaMode = [
     "Accessability",
     "CSS",
@@ -12,8 +16,8 @@ const velmaMode = [
 </script>
 
 <template>
-            <Content mongo linkId="textmag">
-                <template v-slot:right>
+            <Content :mongo="mongo" linkId="textmag">
+                <template v-slot:left>
                     <ProjectDesc 
                     heading="Text Magnifier"
                     linkId="/velmaMode"
@@ -29,7 +33,7 @@ const velmaMode = [
                         </ul>
                     </ProjectDesc>
                 </template>
-                <template v-slot:left>
+                <template v-slot:right>
                     <div class="duo_image">
                         <ClickImg class="clickImg right_top_img" path="../../public/velmaMode/velmaModeDisabled.png" />
                         <ClickImg class="clickImg left_low_img" path="../../public/velmaMode/velmaModex4.png" />

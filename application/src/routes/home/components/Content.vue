@@ -7,16 +7,18 @@ defineProps<{
 
 <template>
     <section>
-        <div class="content">
-    <template v-if="mongo">
-            <slot name="right"></slot>
-            <slot name="left"></slot>
-    </template>
-    <template v-else>
-            <slot name="left"></slot>
-            <slot name="right"></slot>
-    </template>
-        </div>
+            <template v-if="mongo === true">
+                <div class="content">
+                        <slot name="left"></slot>
+                        <slot name="right"></slot>
+                </div>
+            </template>
+            <template v-else>
+                <div class="content sml_rev">
+                        <slot name="right"></slot>
+                        <slot name="left"></slot>
+                </div>
+            </template>
             <br/>
             <RouterLink :to="linkId">Learn More...</RouterLink>
     </section>
@@ -34,6 +36,10 @@ defineProps<{
         display: flex;
         flex-direction: column;
         align-items: center;
+    }
+
+    .sml_rev {
+        flex-flow: column-reverse;
     }
 }
 

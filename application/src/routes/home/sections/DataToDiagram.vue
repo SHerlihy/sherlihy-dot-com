@@ -4,6 +4,10 @@ import ClickImg from "../../../components/ClickImg.vue"
 
 import Content from '../components/Content.vue'
 
+defineProps<{ 
+    mongo?: boolean
+}>()
+
 const dataStructToDiagram = [
     "Mermaid.js",
     "Golang",
@@ -11,7 +15,7 @@ const dataStructToDiagram = [
 </script>
 
 <template>
-        <Content linkId="/pointerstodiagram">
+        <Content :mongo="mongo" linkId="/pointerstodiagram">
             <template v-slot:left>
                 <ProjectDesc 
                 heading="Pointer Data Structure to Diagram" 

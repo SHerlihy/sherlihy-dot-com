@@ -4,6 +4,11 @@ import Carousel from "../../../components/Carousel.vue"
 
 import Content from "../components/Content.vue"
 
+defineProps<{ 
+    mongo?: boolean
+}>()
+
+
 const i2Points = [
     "Story lead",
     "Rapid prototyping",
@@ -39,7 +44,7 @@ const shiftRight = (imgPaths: string[]) => {
 </script>
 
 <template>
-        <Content linkId="i2Group">
+        <Content :mongo="mongo" linkId="i2Group">
             <template v-slot:left>
                 <ProjectDesc 
                 heading="Frontend Web Developer"

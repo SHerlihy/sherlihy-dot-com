@@ -4,6 +4,10 @@ import ClickImg from '../../../components/ClickImg.vue'
 
 import Content from "../components/Content.vue"
 
+defineProps<{ 
+    mongo?: boolean
+}>()
+
 const authAndProfile = [
     "MemoryDB, RDS",
     "Redis, MySQL",
@@ -12,8 +16,8 @@ const authAndProfile = [
 </script>
 
 <template>
-        <Content mongo linkId="/distArchi">
-            <template v-slot:right>
+        <Content :mongo="mongo" linkId="/distArchi">
+            <template v-slot:left>
                 <ProjectDesc 
                 heading="Distributed Service Architecture"
                 linkId="/distributedArchitecture"
@@ -29,7 +33,7 @@ const authAndProfile = [
                     </ul>
                 </ProjectDesc>
             </template>
-            <template v-slot:left>
+            <template v-slot:right>
                 <div class="duo_image">
                     <ClickImg class="clickImg left_top_img" path="../../public/serviceArchitecture/flow.png" />
                     <ClickImg class="clickImg right_low_img" path="../../public/serviceArchitecture/sequence.png" />
