@@ -1,6 +1,7 @@
 <script setup lang="ts">
     import ProjectDesc from "../../../components/ProjectDesc.vue"
     import Content from "../../../components/Content.vue"
+    import ClickImg from "../../../components/ClickImg.vue"
 </script>
 
 <template>
@@ -21,12 +22,11 @@
                     <p>
                         I've found producing good documentation to lead to better software. In writting the documentation it requires reflection, often leads to identifying oversights and creates a self feedback mechanism for promoting quality work. In the long term it allows me to create more sophisticated software if I have documents that allow me to understand systems "at a glance" as I'm not having to allocate a portion of my memory and concentration to remember how a system works while also trying to plan new functionality.
                     </p>
+                    <br/>
                 </ProjectDesc>
             </template>
             <template #right>
-                <p>
-                    images
-                </p>
+                <ClickImg path="../../../../public/documentationGorilla.png"/>
             </template>
         </Content>
 </template>
