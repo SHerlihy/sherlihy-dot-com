@@ -9,7 +9,7 @@
         </template>
         <template #text>
             <p >
-                Statement
+                The core idea of this project was to provide users with the control to change the size of text and at the same time respect the existing layout of the applications the wrapping component is used in.
             </p>
         </template>
     </Introduction>

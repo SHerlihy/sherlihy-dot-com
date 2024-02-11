@@ -9,7 +9,7 @@
         </template>
         <template #text>
             <p >
-                Statement
+                The concept of managing data can start as a simple idea, however, when considering security and compliance management becomes complex and complex solutions are required.
             </p>
         </template>
     </Introduction>
