@@ -1,19 +1,18 @@
 <script setup lang="ts">
 import HLink from "../../../components/HLink.vue"
+import {RouterLink} from "vue-router"
 </script>
 <template>
     <section>
-        <HLink linkId='sherlihyDotCom'>
+        <HLink linkId='/sherlihyDotCom'>
             SHerlihy.com
         </HLink>
         <br class="min_br"/>
         <p>
-            The functional purpose of this website has been described above, however, I have used this website as a vehicle for serveral technical purposes. Primarily, I wanted to create a CI/CD pipeline and Cloud provisioned infrastructure that could be used as a template for deploying other websites. I also wanted to refresh my raw CSS skills and basic Vue.js capabilities.
+            The technical purpose of this site started as an architeture and CI/CD pipeline for simple websites. Several iterations have been built upon to create the current architecture as my personal knowledge has expanded. There are also some non-technical architecture descisions/features that I believe to be important and say alot about how I think about software engineering.
         </p>
         <br/>
-        <p>
-            The CI/CD pripline went through several iterations. Originally I used a load balancer for a terminationg HTTPS connection as it allowed my to use an AWS issued certificate. In short time I saw unexpected costs associated with the deployment and narrowed it down to excessive usage of NAT gateways. I removed the NAT gateways and provisioned my servers in public subnets but eventaully decided I would use S3 instead as the content is static and rarely accessed.
-        </p>
+        <RouterLink to="/shdotcom">Learn More...</RouterLink>
         <br/>
     </section>
 </template>

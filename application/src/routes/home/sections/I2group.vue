@@ -1,16 +1,12 @@
 <script setup lang="ts">
-import Content from "../../../components/Content.vue"
 import ProjectDesc from "../../../components/ProjectDesc.vue"
 import Carousel from "../../../components/Carousel.vue"
 
-const i2Points = [
-    "Story lead",
-    "Rapid prototyping",
-    "Agile",
-    "SDK development and tutorial author",
-    "Test Driven Development (TDD)",
-    "React",
-]
+import Content from "../components/Content.vue"
+
+defineProps<{ 
+    mongo?: boolean
+}>()
 
 let i2Imgs = [
     `../../public/i2/color_picker.png`,
@@ -38,35 +34,21 @@ const shiftRight = (imgPaths: string[]) => {
 </script>
 
 <template>
-        <Content>
-            <template v-slot:left>
+        <Content :mongo="mongo" linkId="i2Group">
+            <template v-slot:text>
                 <ProjectDesc 
                 heading="Frontend Web Developer"
-                linkId="i2Grp"
+                linkId="/i2Group"
                 >
                     <p>
-                        Intelligence software for use in a web browser that enabled customers to create graph/web diagrams
-                        of intelligence data.
-                    </p>
-                    <br />
-                    <p>
-                        As this was my first job in sorftware development I learned much agile methodologies, collaboration tools, creating story specs, leading stories, various frontend technologies and perspectives on how to create professional software.
+                        I was a frontend developer for a browser based application that allowed customers to create graphs for the purpose of indentifying criminal behaviour.
+                        I also contributed to developing and documenting an SDK that allowed those same customers to create their own functionaliity in the application through plugins.
                     </p>
                     <br/>
-                    <p>
-                        The largest struggle I had in this position was accountion for state mutations. For performance state and data was mutable and able to be mutated by several internal and external libraries. Furthermore, knowledge of systems created was primarily "tribal knowledge" but as the application had been in development for years it was rare any developer would have comprehensive knowledge of a system. To account for this I decided to produce mermaid diagrams detailing the state flow of systems when preparing story specifications.
-                </p>
-                <br/>
-                    <ul>
-                        <li v-for="point in i2Points">
-                            {{ point }}
-                        </li>
-                    </ul>
                 </ProjectDesc>
             </template>
-            <template v-slot:right>
-        <Carousel @shift-left="shiftLeft(i2Imgs)" @shift-right="shiftRight(i2Imgs)" :imgs="i2Imgs" :imgWidthPx="400" :imgGapPx="30" />
-
+            <template v-slot:image>
+            <Carousel @shift-left="shiftLeft(i2Imgs)" @shift-right="shiftRight(i2Imgs)" :imgs="i2Imgs" :imgWidthPx="400" :imgGapPx="30" />
             </template>
         </Content>
 </template>

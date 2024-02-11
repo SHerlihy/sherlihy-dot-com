@@ -41,7 +41,7 @@ useResizeObserver(headerEl, (entries) => {
 <template>
     <div class="front_el">
         <header ref="headerEl" class="banner">
-            <b class="left_text"><a href="#">SHerlihy</a></b>
+            <b class="left_text"><RouterLink to="/">SHerlihy</RouterLink></b>
             <span/>
             <div class="right_flex">
                 <p>steven_herlihy@yahoo.com</p>

@@ -1,7 +1,12 @@
 <script setup lang="ts">
-import Content from '../../../components/Content.vue'
 import ProjectDesc from '../../../components/ProjectDesc.vue'
 import ClickImg from '../../../components/ClickImg.vue'
+
+import Content from "../components/Content.vue"
+
+defineProps<{ 
+    mongo?: boolean
+}>()
 
 const velmaMode = [
     "Accessability",
@@ -11,23 +16,20 @@ const velmaMode = [
 </script>
 
 <template>
-            <Content mongo>
-                <template v-slot:right>
+            <Content :mongo="mongo" linkId="textmag">
+                <template v-slot:text>
                     <ProjectDesc 
                     heading="Text Magnifier"
-                    linkId="velma"
+                    linkId="/velmaMode"
                     >
                         <p>
-                            A wrapping component and state control system that allows desired text to be resized by a user.
+                    While watching a YouTube video from Kevin Powell (<a href="https://www.youtube.com/watch?v=N5wpD9Ov_To">CSS units</a>) I really wanted to remember the difference between "em" and "rem" he highlighted and decided creating a project would be a great way to remember.
                         </p>
                         <br/>
-                <p>
-                    Developing the core functionality was a simple matter, however, after I had proved it was possible to crete the functionality I moved on the considering how it would work as part of a third party codebase. Which presented a core issue of how or if I preserve the layout of the project the component is applied to.
-                </p>
-                        <br />
-                <p>
-                    Ultimately I decided preserving layout was vital to the user experience. It led to a more complex design and implementation being required but it was unavoidable.
-                </p>
+                        <p>
+                            This is that project, where a wrapping component and state control system will wrap content with css attributes using "em" values and will then allow the content to be resized by resizing those attributes using "em" values.
+                        </p>
+                        <br/>
                         <ul>
                             <li v-for="point in velmaMode">
                                 {{ point }}
@@ -35,7 +37,7 @@ const velmaMode = [
                         </ul>
                     </ProjectDesc>
                 </template>
-                <template v-slot:left>
+                <template v-slot:image>
                     <div class="duo_image">
                         <ClickImg class="clickImg right_top_img" path="../../public/velmaMode/velmaModeDisabled.png" />
                         <ClickImg class="clickImg left_low_img" path="../../public/velmaMode/velmaModex4.png" />
