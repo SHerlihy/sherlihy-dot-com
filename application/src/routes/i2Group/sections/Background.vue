@@ -7,19 +7,21 @@
         <Content>
             <template #right>
                 <ProjectDesc 
-                heading="Background"
-                linkId="/background"
+                heading="Perspective"
+                linkId="/perspective"
                 >
                     <p>
-                        Creating new functionality, leading the team through stories and promoting knowledge exchange for internal and external stakeholders.
-                    </p>
-                    <p>
-                        As this was my first job in sorftware development I learned much agile methodologies, collaboration tools, creating story specs, leading stories, various frontend technologies and perspectives on how to create professional software.
+                        When starting this position I focused heavily on improving my technical capabilities to be more capable in my role and to better understand the conversations of more senior developers.
                     </p>
                     <br/>
                     <p>
-                        The largest struggle I had in this position was accountion for state mutations. For performance state and data was mutable and able to be mutated by several internal and external libraries. Furthermore, knowledge of systems created was primarily "tribal knowledge" but as the application had been in development for years it was rare any developer would have comprehensive knowledge of a system. To account for this I decided to produce mermaid diagrams detailing the state flow of systems when preparing story specifications.
-                </p>
+                        Though valuable, improving my technical capabilities didn't yield as much progress as I had expected. While talking to more senior developers I realised, it was their perspective that accounted for most of the difference between us.
+                    </p>
+                    <br/>
+                    <p>
+                        To align my perspective more with the project I decided to take on the responsibility of leading stories. This led to me understanding the codebase better, understanding the customers better and overall did improve my perspective in relation to the project.
+                    </p>
+                    <br/>
                 </ProjectDesc>
             </template>
             <template #left>

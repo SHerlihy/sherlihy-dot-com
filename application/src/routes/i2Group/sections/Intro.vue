@@ -9,7 +9,7 @@
         </template>
         <template #text>
             <p >
-                Statement
+                Imagine that scene from Minority Report where Tom Cruise is looking at footage of "future crimes" but instead of it being a 3D hologram it's a 2D, on a browser and only shows text.
             </p>
         </template>
     </Introduction>

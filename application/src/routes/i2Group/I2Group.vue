@@ -1,6 +1,8 @@
 <script setup lang="ts">
     import Intro from "./sections/Intro.vue"
     import Background from "./sections/Background.vue"
+    import Progression from "./sections/Progression.vue"
+    import Innovation from "./sections/Innovation.vue"
 </script>
 
 <template>
@@ -14,7 +16,12 @@
             <br/>
         </div>
         <br/>
-        <p>sec1</p>
+        <Progression/>
         <br/>
+        <div class="light_bg">
+            <br/>
+            <Innovation/>
+            <br/>
+        </div>
     </main>
 </template>
