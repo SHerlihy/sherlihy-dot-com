@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import I2group from './sections/I2group.vue'
 import DistArchi from './sections/DistArchi.vue'
-import DataToDiagram from './sections/DataToDiagram.vue'
 import VelmaMode from './sections/VelmaMode.vue'
 import Introduction from './sections/Introduction.vue'
 import SHerlihyDotCom from './sections/SHerlihyDotCom.vue'
@@ -27,14 +26,8 @@ import SHerlihyDotCom from './sections/SHerlihyDotCom.vue'
             <br/>
         </div>
         <br />
-            <DataToDiagram/>
+            <VelmaMode/>
         <br/>
-
-        <div class="light_bg">
-            <br/>
-                <VelmaMode mongo/>
-            <br/>
-        </div>
 
     </main>
 </template>

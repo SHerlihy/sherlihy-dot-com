@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import Intro from "./sections/Intro.vue"
-    import Background from "./sections/Background.vue"
+    import Inspiration from "./sections/Inspiration.vue"
 </script>
 
 <template>
@@ -10,11 +10,8 @@
         <br/>
         <div class="light_bg">
             <br/>
-            <Background/>
+            <Inspiration/>
             <br/>
         </div>
-        <br/>
-        <p>sec1</p>
-        <br/>
     </main>
 </template>
