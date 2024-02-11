@@ -17,7 +17,7 @@ const velmaMode = [
 
 <template>
             <Content :mongo="mongo" linkId="textmag">
-                <template v-slot:left>
+                <template v-slot:text>
                     <ProjectDesc 
                     heading="Text Magnifier"
                     linkId="/velmaMode"
@@ -37,7 +37,7 @@ const velmaMode = [
                         </ul>
                     </ProjectDesc>
                 </template>
-                <template v-slot:right>
+                <template v-slot:image>
                     <div class="duo_image">
                         <ClickImg class="clickImg right_top_img" path="../../public/velmaMode/velmaModeDisabled.png" />
                         <ClickImg class="clickImg left_low_img" path="../../public/velmaMode/velmaModex4.png" />

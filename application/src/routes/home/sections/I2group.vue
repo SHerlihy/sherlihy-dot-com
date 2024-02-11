@@ -45,7 +45,7 @@ const shiftRight = (imgPaths: string[]) => {
 
 <template>
         <Content :mongo="mongo" linkId="i2Group">
-            <template v-slot:left>
+            <template v-slot:text>
                 <ProjectDesc 
                 heading="Frontend Web Developer"
                 linkId="/i2Group"
@@ -57,7 +57,7 @@ const shiftRight = (imgPaths: string[]) => {
                     <br/>
                 </ProjectDesc>
             </template>
-            <template v-slot:right>
+            <template v-slot:image>
             <Carousel @shift-left="shiftLeft(i2Imgs)" @shift-right="shiftRight(i2Imgs)" :imgs="i2Imgs" :imgWidthPx="400" :imgGapPx="30" />
             </template>
         </Content>

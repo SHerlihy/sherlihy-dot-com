@@ -16,7 +16,7 @@ const dataStructToDiagram = [
 
 <template>
         <Content :mongo="mongo" linkId="/pointerstodiagram">
-            <template v-slot:left>
+            <template v-slot:text>
                 <ProjectDesc 
                 heading="Pointer Data Structure to Diagram" 
                 linkId="/pointersToDiagrams"
@@ -36,7 +36,7 @@ const dataStructToDiagram = [
                     </ul>
                 </ProjectDesc>
             </template>
-            <template v-slot:right>
+            <template v-slot:image>
                 <div class="multi_image">
                     <ClickImg class="left_img" path="../../public/mermaidizer/nodesToStrTest.png" />
                     <ClickImg class="right_img" path="../../public/mermaidizer/mermaidPointers.png" />

@@ -9,18 +9,30 @@ defineProps<{
     <section>
             <template v-if="mongo === true">
                 <div class="content">
-                        <slot name="left"></slot>
-                        <slot name="right"></slot>
+                        <div>
+                        <slot name="text"></slot>
+                        <br/>
+                        <RouterLink :to="linkId">Learn More...</RouterLink>
+                        <br/>
+                        </div>
+                        <slot name="image"></slot>
                 </div>
             </template>
             <template v-else>
                 <div class="content sml_rev">
-                        <slot name="right"></slot>
-                        <slot name="left"></slot>
+                        <slot name="image"></slot>
+                        <div>
+                        <slot name="text"></slot>
+                        <br/>
+                        <RouterLink :to="linkId">Learn More...</RouterLink>
+                        <br/>
+                        </div>
                 </div>
             </template>
+            <div class="sml_link">
             <br/>
             <RouterLink :to="linkId">Learn More...</RouterLink>
+            </div>
     </section>
 </template>
 
@@ -29,6 +41,12 @@ defineProps<{
     display: grid;
     grid-template-columns: 1fr 1fr;
     column-gap: 3vw;
+
+    align-items: center;
+}
+
+.sml_link {
+    visibility: hidden;
 }
 
 @media screen and (max-width: 1200px) {
@@ -40,6 +58,10 @@ defineProps<{
 
     .sml_rev {
         flex-flow: column-reverse;
+    }
+
+    .sml_link {
+        visibility: visible;
     }
 }
 

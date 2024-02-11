@@ -17,7 +17,7 @@ const authAndProfile = [
 
 <template>
         <Content :mongo="mongo" linkId="/distArchi">
-            <template v-slot:left>
+            <template v-slot:text>
                 <ProjectDesc 
                 heading="Distributed Service Architecture"
                 linkId="/distributedArchitecture"
@@ -34,7 +34,7 @@ const authAndProfile = [
                     <br />
                 </ProjectDesc>
             </template>
-            <template v-slot:right>
+            <template v-slot:image>
                 <div class="duo_image">
                     <ClickImg class="clickImg left_top_img" path="../../public/serviceArchitecture/flow.png" />
                     <ClickImg class="clickImg right_low_img" path="../../public/serviceArchitecture/sequence.png" />
