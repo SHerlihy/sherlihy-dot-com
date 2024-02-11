@@ -16,7 +16,7 @@
             <br/>
         </div>
         <br/>
-        <Progression/>
+        <Progression mongo/>
         <br/>
         <div class="light_bg">
             <br/>

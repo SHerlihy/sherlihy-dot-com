@@ -2,11 +2,15 @@
     import ProjectDesc from "../../../components/ProjectDesc.vue"
     import Content from "../../../components/Content.vue"
     import ClickImg from "../../../components/ClickImg.vue"
+
+    defineProps<{ 
+        mongo?: boolean
+    }>()
 </script>
 
 <template>
-        <Content>
-            <template #right>
+        <Content :mongo="mongo">
+            <template #text>
                 <ProjectDesc 
                 heading="Fun"
                 linkId="fun"
@@ -20,7 +24,7 @@
                     </p>
                 </ProjectDesc>
             </template>
-            <template #left>
+            <template #image>
                 <ClickImg path="../../../../public/funWizard.png"/>
             </template>
         </Content>

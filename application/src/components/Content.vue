@@ -5,10 +5,18 @@ defineProps<{
 </script>
 
 <template>
-    <section :class="mongo && 'sml_rev'">
-        <slot name="left"></slot>
-        <slot name="right"></slot>
+    <template v-if="mongo === true">
+    <section class="sml_rev">
+        <slot name="image"></slot>
+        <slot name="text"></slot>
     </section>
+    </template>
+    <template v-else>
+    <section>
+        <slot name="text"></slot>
+        <slot name="image"></slot>
+    </section>
+    </template>
 </template>
 
 <style scoped>

@@ -15,7 +15,7 @@
             <br/>
         </div>
         <br/>
-        <Documentation/>
+        <Documentation mongo/>
         <br/>
     </main>
 </template>
