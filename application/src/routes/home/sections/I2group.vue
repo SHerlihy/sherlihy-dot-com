@@ -8,16 +8,6 @@ defineProps<{
     mongo?: boolean
 }>()
 
-
-const i2Points = [
-    "Story lead",
-    "Rapid prototyping",
-    "Agile",
-    "SDK development and tutorial author",
-    "Test Driven Development (TDD)",
-    "React",
-]
-
 let i2Imgs = [
     `../../public/i2/color_picker.png`,
     `../../public/i2/i2Web.png`,
