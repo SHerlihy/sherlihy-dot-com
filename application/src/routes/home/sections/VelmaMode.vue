@@ -23,7 +23,11 @@ const velmaMode = [
                     linkId="/velmaMode"
                     >
                         <p>
-                            A wrapping component and state control system that allows desired text to be resized by a user.
+                    While watching a YouTube video from Kevin Powell (<a href="https://www.youtube.com/watch?v=N5wpD9Ov_To">CSS units</a>) I really wanted to remember the difference between "em" and "rem" he highlighted and decided creating a project would be a great way to remember.
+                        </p>
+                        <br/>
+                        <p>
+                            This is that project, where a wrapping component and state control system will wrap content with css attributes using "em" values and will then allow the content to be resized by resizing those attributes using "em" values.
                         </p>
                         <br/>
                         <ul>

@@ -22,8 +22,12 @@ const dataStructToDiagram = [
                 linkId="/pointersToDiagrams"
                 >
                     <p>
-                        While implementing solutions using algorithms with memory pointers I found as the size of data structures increases errors become more difficult to identify and patterns in these errors also become more difficult to identify. So I decided to create some software that could accept such memory pointer based data structures and produce graphical representations of the data.
+                        While implementing solutions using algorithms with memory pointers I found as the size of data structures increases errors become more difficult to identify and patterns in these errors also become more difficult to identify.
                     </p>
+                <br/>
+                <p>
+                To better visualise the data beyond "log statements" I decided to create some software that could accept such memory pointer based data structures and produce graphical representations of the data.
+                </p>
                     <br />
                     <ul>
                         <li v-for="point in dataStructToDiagram">

@@ -11,6 +11,9 @@
                 linkId="/background"
                 >
                     <p>
+                        Creating new functionality, leading the team through stories and promoting knowledge exchange for internal and external stakeholders.
+                    </p>
+                    <p>
                         As this was my first job in sorftware development I learned much agile methodologies, collaboration tools, creating story specs, leading stories, various frontend technologies and perspectives on how to create professional software.
                     </p>
                     <br/>

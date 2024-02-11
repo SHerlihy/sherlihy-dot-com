@@ -23,7 +23,7 @@ const authAndProfile = [
                 linkId="/distributedArchitecture"
                 >
                     <p>
-                        A REST based service Architecture designed to seperate sensitive data used for authorization (name, email, etc) from non-sensitive data.
+                        I wanted to create a cloud based architecture that would isolate sesitive data into its own database. I created a service based architecture that made use of a mediator to handle communication between the client and each database.
                     </p>
                     <br />
                     <ul>
@@ -31,6 +31,7 @@ const authAndProfile = [
                             {{ point }}
                         </li>
                     </ul>
+                    <br />
                 </ProjectDesc>
             </template>
             <template v-slot:right>

@@ -51,14 +51,10 @@ const shiftRight = (imgPaths: string[]) => {
                 linkId="/i2Group"
                 >
                     <p>
-                        Intelligence software for use in a web browser that enabled customers to create graph/web diagrams of intelligence data.
+                        I was a frontend developer for a browser based application that allowed customers to create graphs for the purpose of indentifying criminal behaviour.
+                        I also contributed to developing and documenting an SDK that allowed those same customers to create their own functionaliity in the application through plugins.
                     </p>
                     <br/>
-                    <ul>
-                        <li v-for="point in i2Points">
-                            {{ point }}
-                        </li>
-                    </ul>
                 </ProjectDesc>
             </template>
             <template v-slot:right>
