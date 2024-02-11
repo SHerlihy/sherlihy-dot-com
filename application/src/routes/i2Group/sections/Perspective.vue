@@ -1,6 +1,7 @@
 <script setup lang="ts">
     import ProjectDesc from "../../../components/ProjectDesc.vue"
     import Content from "../../../components/Content.vue"
+    import ClickImg from "../../../components/ClickImg.vue"
 </script>
 
 <template>
@@ -25,9 +26,7 @@
                 </ProjectDesc>
             </template>
             <template #left>
-                <p>
-                    images of css stuff???
-                </p>
+                <ClickImg path="../../../../public/perspective.png"/>
             </template>
         </Content>
 </template>
