@@ -17,8 +17,6 @@ img {
     animation: 1s ease-out 0s 1 slideInUp;
 }
 
-
-
 .container_padding {
     padding: 1rem;
 }
