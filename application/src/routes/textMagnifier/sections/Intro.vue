@@ -35,7 +35,7 @@ img {
 }
 
 .mask {
-    mask-image: url("/velmaMode/velmaMask.png");
+    mask-image: url("/velmaMode/intro/velmaMask.png");
 
     mask-size: 350px 350px;
 }
