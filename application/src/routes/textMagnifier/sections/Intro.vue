@@ -22,8 +22,8 @@
 <style scoped>
 div {
     position: relative;
-    height: 100%;
-    width: 100%;
+    height: 350px;
+    width: 350px;
 }
 
 img {
@@ -31,7 +31,7 @@ img {
 }
 
 .blur {
-    filter: blur(4px);
+    animation: blur-in 3000ms;
 }
 
 .mask {
@@ -47,6 +47,20 @@ img {
 
 .blur_up {
     animation: blur-up 1500ms;
+}
+
+@keyframes blur-in {
+    0% {
+        filter: blur(4px);
+    }
+
+    50% {
+        filter: blur(4px);
+    }
+
+    100% {
+        filter: blur(0px);
+    }
 }
 
 @keyframes blur-up {
