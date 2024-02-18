@@ -25,7 +25,7 @@
                 </ProjectDesc>
             </template>
             <template #image>
-                <ClickImg path="../../../../public/funWizard.png"/>
+                <ClickImg path="sherlihyDotCom/funWizard.png"/>
             </template>
         </Content>
 </template>

@@ -22,7 +22,7 @@
                 </ProjectDesc>
             </template>
             <template #image>
-                <ClickImg path="../../../../public/innovationSoup.png"/>
+                <ClickImg path="i2/innovationSoup.png"/>
             </template>
         </Content>
 </template>

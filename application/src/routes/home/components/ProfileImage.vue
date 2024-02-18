@@ -2,7 +2,7 @@
     <div class="container_padding">
     <div class="profile_img_container">
         <div class="constrained">
-        <img src="../../../../public/intro/sherlihy.png"/>
+        <img src="/intro/sherlihy.png"/>
             </div>
     </div>
     </div>
@@ -16,8 +16,6 @@ img {
     max-width: 350px;
     animation: 1s ease-out 0s 1 slideInUp;
 }
-
-
 
 .container_padding {
     padding: 1rem;

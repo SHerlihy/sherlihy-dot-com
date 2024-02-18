@@ -26,7 +26,7 @@
                 </ProjectDesc>
             </template>
             <template #image>
-                <ClickImg path="../../../../public/inspirationMonkey.png"/>
+                <ClickImg path="velmaMode/inspirationMonkey.png"/>
             </template>
         </Content>
 </template>
