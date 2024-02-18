@@ -6,10 +6,10 @@
     <Introduction>
         <template #image>
             <div>
-            <img src="/public/spiderweb.png" />
-            <img src="/public/crimes1.png" class="drop_bounce1"/>
-            <img src="/public/crimes2.png" class="drop_bounce2"/>
-            <img src="/public/crimes3.png" class="drop_bounce3"/>
+            <img src="/i2/intro/spiderweb.png" />
+            <img src="/i2/intro/crimes1.png" class="drop_bounce1"/>
+            <img src="/i2/intro/crimes2.png" class="drop_bounce2"/>
+            <img src="/i2/intro/crimes3.png" class="drop_bounce3"/>
             </div>
         </template>
         <template #text>

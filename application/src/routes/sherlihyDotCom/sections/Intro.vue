@@ -5,7 +5,7 @@
 <template>
     <Introduction>
         <template #image>
-            <img src="/public/map-pin.png" />
+            <img src="/sherlihyDotCom/intro/map-pin.png" />
         </template>
         <template #text>
             <div class="txt_container">

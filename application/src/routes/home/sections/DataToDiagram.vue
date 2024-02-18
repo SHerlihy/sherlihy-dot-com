@@ -38,8 +38,8 @@ const dataStructToDiagram = [
             </template>
             <template v-slot:image>
                 <div class="multi_image">
-                    <ClickImg class="left_img" path="../../public/mermaidizer/nodesToStrTest.png" />
-                    <ClickImg class="right_img" path="../../public/mermaidizer/mermaidPointers.png" />
+                    <ClickImg class="left_img" path="mermaidizer/nodesToStrTest.png" />
+                    <ClickImg class="right_img" path="mermaidizer/mermaidPointers.png" />
                 </div>
             </template>
         </Content>

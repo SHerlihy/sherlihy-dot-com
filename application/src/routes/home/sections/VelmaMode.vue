@@ -39,8 +39,8 @@ const velmaMode = [
                 </template>
                 <template v-slot:image>
                     <div class="duo_image">
-                        <ClickImg class="clickImg right_top_img" path="../../public/velmaMode/velmaModeDisabled.png" />
-                        <ClickImg class="clickImg left_low_img" path="../../public/velmaMode/velmaModex4.png" />
+                        <ClickImg class="clickImg right_top_img" path="velmaMode/velmaModeDisabled.png" />
+                        <ClickImg class="clickImg left_low_img" path="velmaMode/velmaModex4.png" />
                     </div>
                 </template>
             </Content>

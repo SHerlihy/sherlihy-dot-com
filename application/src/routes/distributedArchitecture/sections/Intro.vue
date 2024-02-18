@@ -6,13 +6,13 @@
     <Introduction>
         <template #image>
             <div>
-                <img src="/public/robo3.png" class="queue_up3"/>
-                <img src="/public/robo2.png" class="queue_up2"/>
-                <img src="/public/robo1.png" class="queue_up1"/>
-                <img src="/public/boop3.png" class="talk3"/>
-                <img src="/public/boop2.png" class="talk2" />
-                <img src="/public/notAToaster.png" class="talk1"/>
-                <img src="/public/queueBarrier.png" />
+                <img src="/serviceArchitecture/intro/robo3.png" class="queue_up3"/>
+                <img src="/serviceArchitecture/intro/robo2.png" class="queue_up2"/>
+                <img src="/serviceArchitecture/intro/robo1.png" class="queue_up1"/>
+                <img src="/serviceArchitecture/intro/boop3.png" class="talk3"/>
+                <img src="/serviceArchitecture/intro/boop2.png" class="talk2" />
+                <img src="/serviceArchitecture/intro/notAToaster.png" class="talk1"/>
+                <img src="/serviceArchitecture/intro/queueBarrier.png" />
             </div>
         </template>
         <template #text>

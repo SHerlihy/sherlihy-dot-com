@@ -6,9 +6,9 @@
     <Introduction>
         <template #image>
             <div>
-                <img src="/velmaMode/velmaNoGlasses.png" class="blur"/>
-                <img src="/velmaMode/velmaNoGlasses.png" class="mask blur_up"/>
-                <img src="/velmaMode/velmaGlasses.png" class="move_up"/>
+                <img src="/velmaMode/intro/velmaNoGlasses.png" class="blur"/>
+                <img src="/velmaMode/intro/velmaNoGlasses.png" class="mask blur_up"/>
+                <img src="/velmaMode/intro/velmaGlasses.png" class="move_up"/>
             </div>
         </template>
         <template #text>
@@ -35,8 +35,7 @@ img {
 }
 
 .mask {
-    mask-image: url("/velmaMode/velmaGlasses.png");
-    -webkit-mask-image: url("/velmaMode/velmaGlasses.png");
+    mask-image: url("/velmaMode/velmaMask.png");
 
     mask-size: 350px 350px;
 }

@@ -30,7 +30,7 @@
                 </ProjectDesc>
             </template>
             <template #image>
-                <ClickImg path="../../../../public/documentationGorilla.png"/>
+                <ClickImg path="sherlihyDotCom/documentationGorilla.png"/>
             </template>
         </Content>
 </template>

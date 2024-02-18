@@ -36,8 +36,8 @@ const authAndProfile = [
             </template>
             <template v-slot:image>
                 <div class="duo_image">
-                    <ClickImg class="clickImg left_top_img" path="../../public/serviceArchitecture/flow.png" />
-                    <ClickImg class="clickImg right_low_img" path="../../public/serviceArchitecture/sequence.png" />
+                    <ClickImg class="clickImg left_top_img" path="serviceArchitecture/flow.png" />
+                    <ClickImg class="clickImg right_low_img" path="serviceArchitecture/sequence.png" />
                 </div>
             </template>
         </Content>

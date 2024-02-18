@@ -2,7 +2,7 @@
     <div class="container_padding">
     <div class="profile_img_container">
         <div class="constrained">
-        <img src="../../../../public/intro/sherlihy.png"/>
+        <img src="/intro/sherlihy.png"/>
             </div>
     </div>
     </div>

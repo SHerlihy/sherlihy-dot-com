@@ -9,9 +9,9 @@ defineProps<{
 }>()
 
 let i2Imgs = [
-    `../../public/i2/color_picker.png`,
-    `../../public/i2/i2Web.png`,
-    `../../public/i2/i2WebSaveDrk.png`
+    `i2/color_picker.png`,
+    `i2/i2Web.png`,
+    `i2/i2WebSaveDrk.png`
 ]
 
 const shiftLeft = (imgPaths: string[]) => {
