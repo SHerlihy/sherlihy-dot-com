@@ -6,12 +6,12 @@
     <Introduction>
         <template #image>
             <div>
-                <img src="/public/robo3.png" />
-                <img src="/public/robo2.png" />
-                <img src="/public/robo1.png" />
-                <img src="/public/boop3.png" />
-                <img src="/public/boop2.png" />
-                <img src="/public/notAToaster.png" />
+                <img src="/public/robo3.png" class="queue_up3"/>
+                <img src="/public/robo2.png" class="queue_up2"/>
+                <img src="/public/robo1.png" class="queue_up1"/>
+                <img src="/public/boop3.png" class="talk3"/>
+                <img src="/public/boop2.png" class="talk2" />
+                <img src="/public/notAToaster.png" class="talk1"/>
                 <img src="/public/queueBarrier.png" />
             </div>
         </template>
@@ -31,5 +31,57 @@ div {
 
 img {
     position: absolute;
+}
+
+.queue_up3 {
+    animation: queue-up 3000ms;
+}
+
+.queue_up2 {
+    animation: queue-up 800ms;
+}
+
+.queue_up1 {
+    animation: queue-up 500ms;
+}
+
+.talk3 {
+    animation: show-text 3000ms;
+}
+
+.talk2 {
+    animation: show-text 3300ms;
+}
+
+.talk1 {
+    animation: show-text 3800ms;
+}
+
+@keyframes queue-up {
+    0% {
+        left: 100px;
+        top: -100px;
+        scale: 0.5;
+    }
+
+    100% {
+        left: 0px;
+        top: 0px;
+        scale: 1;
+    }
+}
+
+@keyframes show-text {
+    0% {
+        visibility: hidden;
+    }
+
+    99% {
+        visibility: hidden;
+    }
+
+    100% {
+        visibility: visible;
+    }
 }
 </style>
