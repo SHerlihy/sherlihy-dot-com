@@ -5,7 +5,11 @@
 <template>
     <Introduction>
         <template #image>
-            <img src="/public/velma.png" />
+            <div>
+                <img src="/velmaMode/velmaNoGlasses.png" class="blur"/>
+                <img src="/velmaMode/velmaNoGlasses.png" class="mask blur_up"/>
+                <img src="/velmaMode/velmaGlasses.png" class="move_up"/>
+            </div>
         </template>
         <template #text>
             <p >
@@ -14,3 +18,54 @@
         </template>
     </Introduction>
 </template>
+
+<style scoped>
+div {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+img {
+    position: absolute;
+}
+
+.blur {
+    filter: blur(4px);
+}
+
+.mask {
+    mask-image: url("/velmaMode/velmaGlasses.png");
+    -webkit-mask-image: url("/velmaMode/velmaGlasses.png");
+
+    mask-size: 350px 350px;
+}
+
+.move_up {
+    animation: move-up 1500ms;
+}
+
+.blur_up {
+    animation: blur-up 1500ms;
+}
+
+@keyframes blur-up {
+    0% {
+        mask-position: 0 100px;
+    }
+
+    100% {
+        mask-position: 0 0px;
+    }
+}
+
+@keyframes move-up {
+    0% {
+        top: 100px;
+    }
+
+    100% {
+        top: 0px;
+    }
+}
+</style>
