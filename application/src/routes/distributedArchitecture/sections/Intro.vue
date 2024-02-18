@@ -5,7 +5,15 @@
 <template>
     <Introduction>
         <template #image>
-            <img src="/public/roboYell.png" />
+            <div>
+                <img src="/public/robo3.png" />
+                <img src="/public/robo2.png" />
+                <img src="/public/robo1.png" />
+                <img src="/public/boop3.png" />
+                <img src="/public/boop2.png" />
+                <img src="/public/notAToaster.png" />
+                <img src="/public/queueBarrier.png" />
+            </div>
         </template>
         <template #text>
             <p >
@@ -14,3 +22,14 @@
         </template>
     </Introduction>
 </template>
+<style scoped>
+div {
+    position: relative;
+    height: 450px;
+    width: 450px;
+}
+
+img {
+    position: absolute;
+}
+</style>
