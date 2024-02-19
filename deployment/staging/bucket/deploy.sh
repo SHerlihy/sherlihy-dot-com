@@ -39,4 +39,8 @@ then
     exit $STATUS
 fi
 
+cd ./s3_bucket
+terraform output
+cd ../
+
 exit 0

@@ -40,6 +40,12 @@ resource "aws_cloudfront_origin_access_control" "sherlihyDotCom-cdnS3" {
 }
 
 resource "aws_cloudfront_distribution" "sherlihyDotCom-cdnS3" {
+    custom_error_response {
+        error_code = 404
+        response_page_path = "/"
+        response_code = 200
+    }
+
   origin {
     domain_name              = var.bucket_domain_name
     origin_id                = var.origin_id

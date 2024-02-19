@@ -7,4 +7,4 @@ RESOURCE_TAGS="{\n\"project\"=\"sherlihyDotCom\"\n\"env\"=\"stage\"\n}"
 
 DOMAIN_NAME="\"stagestaging.click\""
 
-./deploy.sh $USER_NAME $INIT_ROLE_ARN $RESOURCE_TAGS $DOMAIN_NAME
+../deploy.sh $USER_NAME $INIT_ROLE_ARN $RESOURCE_TAGS $DOMAIN_NAME

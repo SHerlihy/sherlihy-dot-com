@@ -126,7 +126,12 @@ resource "aws_s3_bucket_website_configuration" "sherlihy_dot_com" {
     ]
 
   bucket = aws_s3_bucket.sherlihy_dot_com.id
+
   index_document {
     suffix = "index.html"
+  }
+
+  error_document {
+    key = "index.html"
   }
 }
