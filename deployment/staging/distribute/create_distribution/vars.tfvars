@@ -7,9 +7,9 @@ resource_tags = {
 "env"="stage"
 }
 
-bucket_domain_name = "sherlihydotcom-prod20240120044018007100000001.s3.eu-west-2.amazonaws.com"
+bucket_domain_name = "sherlihydotcom-stage20240219221519502500000001.s3.eu-west-2.amazonaws.com"
 
 
-distribute_create_arn = "arn:aws:iam::111644099040:role/terraform-20240120045954653300000005"
+distribute_create_arn = "arn:aws:iam::111644099040:role/terraform-20240219221555973500000003"
 
 
