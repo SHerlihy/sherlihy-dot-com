@@ -7,6 +7,7 @@ import SherlihyDotCom from "./routes/sherlihyDotCom/SherlihyDotCom.vue"
 import I2Group from "./routes/i2Group/I2Group.vue"
 import TextMagnifier from "./routes/textMagnifier/TextMagnifier.vue"
 import DistributedArchitecture from "./routes/distributedArchitecture/DistributedArchitecture.vue"
+import Opinions from "./routes/opinions/Opinions.vue"
 
 const routes = [
     {path:"/",component: Home},
@@ -14,6 +15,7 @@ const routes = [
     {path:"/i2Group",component: I2Group},
     {path:"/distArchi",component: DistributedArchitecture},
     {path:"/textmag",component: TextMagnifier},
+    {path:"/opinions",component: Opinions},
 ]
 
 const router = createRouter({

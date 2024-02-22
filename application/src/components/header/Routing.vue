@@ -41,6 +41,7 @@ function handleToggleRoutes() {
                 <li><RouterLink to="i2Group">i2 Group</RouterLink></li>
                 <li><RouterLink to="distArchi">Distributed Architecture</RouterLink></li>
                 <li><RouterLink to="textmag">Text Magnifier</RouterLink></li>
+                <li><RouterLink to="opinions">Opinions</RouterLink></li>
             </ul>
         </div>
     </div>
