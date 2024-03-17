@@ -1,7 +1,16 @@
 import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
+import { TanStackRouterVite } from '@tanstack/router-vite-plugin'
+import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [
+        TanStackRouterVite(),
+        react()
+    ],
+    css: {
+        modules: {
+            scopeBehaviour: "local",
+        },
+    }
 })
