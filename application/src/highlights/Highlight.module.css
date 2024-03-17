@@ -1,0 +1,22 @@
+.container_image {
+    position: relative;
+    height: 350px;
+    width: 350px;
+}
+
+.container_standout {
+    padding-right: 1rem;
+}
+
+.container_content {
+    height: inherit;
+    overflow: scroll;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.img {
+    position: absolute;
+}
