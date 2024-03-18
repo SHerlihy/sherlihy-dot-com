@@ -1,5 +1,0 @@
-2024-01-27 Dont use queryParam to store generic global state. i.e dont want a url to be shared that has queryPrams that will not apply i.e storing whether the screen width is thin
-2024-01-26 MutionObserver used to infer queryParam changes in url, reasons:
-- history popstate only showing hashchanges
-- navigation api not available on firefox
-2024-01-25 Mobile Second

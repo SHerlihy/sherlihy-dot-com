@@ -1,10 +1,25 @@
 {
-  "extends": "@tsconfig/node18/tsconfig.json",
-  "include": ["deployment/infrastructure_diagrams/**/*"],
-  "exclude": ["node_modules"],
-    "compilerOptions": {
-        "allowJs": true,
-        "esModuleInterop": true,
-        "allowImportingTsExtensions": true
-    }
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["src"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }
