@@ -3,7 +3,6 @@
 npm run build
 
 terraform init -input=false
-
 find ../../../../dist -type f > ./dist_file_paths.txt 
 
 awk -f ./dist_paths_to_list.awk ./dist_file_paths.txt >> ./vars.tfvars

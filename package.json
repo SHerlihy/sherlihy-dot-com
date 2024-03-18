@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite ./application/",
-    "build": "cd ./application/ && vue-tsc && vite build --outDir ../dist/ && cd ../",
+    "build": "cd ./application/ && tsc && vite build --outDir ../dist/ && cd ../",
     "build_stage": "cd ./application/ && vue-tsc && vite build --mode staging --outDir ../dist/ && cd ../",
     "preview": "vite preview ./",
     "infra_diagrams": "live-server --open=./deployment/infrastructure_diagrams .",
