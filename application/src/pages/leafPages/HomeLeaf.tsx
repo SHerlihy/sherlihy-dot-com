@@ -1,4 +1,4 @@
-import { Panel, PanelCol, PanelLeaf, PanelRow } from "../../panels/Panel"
+import { Panel, PanelCol, PanelLeaf, PanelInfo, PanelRow } from "../../panels/Panel"
 import SherlihyDotComContent from "../../shared/panels/SherlihyDotComContent"
 import I2Content from "../../shared/panels/I2Content"
 import ResumeGraderContent from "../../shared/panels/ResumeGrader"
@@ -6,6 +6,7 @@ import AuthServiceContent from "../../shared/panels/AuthService"
 import VelmaModeContent from "../../shared/panels/VelmaModeContent"
 
 import bentoStyles from "../../shared/styles/bentoStyles.module.css"
+import containers from "../../shared/styles/containers.module.css"
 import { Route } from "../../routes/index"
 import VelmaModeHighlight from "../../highlights/VelmaModeHighlight"
 import I2GroupHighlight from "../../highlights/I2GroupHighlight"
@@ -105,8 +106,23 @@ function HomeLeaf() {
                     </PanelRow>
                 </PanelLeaf>
 
+                <PanelInfo 
+                    rowBegin={2} 
+                    rowEnd={5} 
+                    colBegin={25} 
+                    colEnd={32}
+                >
+                    <PanelCol>
+                    <div className={`${containers.centerUnflex}`}>
+                        <p>+44 73544 30588</p>
+                        <hr/>
+                        <p>steven_herlihy@yahoo.com</p>
+                        </div>
+                    </PanelCol>
+                </PanelInfo>
+
                 <PanelLeaf 
-                    rowBegin={8} 
+                    rowBegin={10} 
                     rowEnd={15} 
                     colBegin={25} 
                     colEnd={32}
@@ -118,8 +134,8 @@ function HomeLeaf() {
                 </PanelLeaf>
 
                 <PanelLeaf
-                    rowBegin={2} 
-                    rowEnd={8} 
+                    rowBegin={5} 
+                    rowEnd={10} 
                     colBegin={25} 
                     colEnd={32}
                     queryParam="authService"

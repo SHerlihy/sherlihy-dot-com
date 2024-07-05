@@ -50,6 +50,27 @@ export const PanelLeaf = (props: {
     )
 }
 
+export const PanelInfo = (props: {
+    rowBegin: number
+    rowEnd: number
+    colBegin: number
+    colEnd: number
+    children: ReactNode
+}) => {
+    const gridStyle = {
+        gridRow: `${props.rowBegin}/${props.rowEnd}`,
+        gridColumn: `${props.colBegin}/${props.colEnd}`
+    }
+
+    return (
+        <section style={gridStyle}>
+            <div className={`${panelCss.card}`}>
+                        {props.children}
+            </div>
+        </section>
+    )
+}
+
 export const PanelContent = (props : {
     items: string[]
     title?: string
