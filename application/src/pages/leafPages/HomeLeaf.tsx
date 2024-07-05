@@ -12,6 +12,8 @@ import I2GroupHighlight from "../../highlights/I2GroupHighlight"
 import AuthServiceHighlight from "../../highlights/AuthService"
 import HomeHighlight from "../../highlights/HomeHighlight"
 import ComingSoonHighlight from "../../highlights/ComingSoonHighlight"
+import CertifiedPractionerHighlight from "../../highlights/CertifiedPractionerHighlight"
+import AwsCertContent from "../../shared/panels/AwsCertContent"
 
 function HomeLeaf() {
     const { highlight } = Route.useSearch()
@@ -43,6 +45,8 @@ function HomeLeaf() {
                                 return <I2GroupHighlight/>
                                 case "authService":
                                 return <AuthServiceHighlight/>
+                                case "awsCert":
+                                return <CertifiedPractionerHighlight/>
                                 case "highlight":
                                 return <HomeHighlight/>
                                 default:
@@ -55,13 +59,25 @@ function HomeLeaf() {
 
                 <PanelLeaf 
                     rowBegin={5} 
-                    rowEnd={15} 
+                    rowEnd={11} 
                     colBegin={2} 
                     colEnd={9} 
                     queryParam="velma"
                 >
                     <PanelCol>
                         <VelmaModeContent/>
+                    </PanelCol>
+                </PanelLeaf>
+
+                <PanelLeaf 
+                    rowBegin={11} 
+                    rowEnd={15} 
+                    colBegin={2} 
+                    colEnd={9} 
+                    queryParam="awsCert"
+                >
+                    <PanelCol>
+                        <AwsCertContent/>
                     </PanelCol>
                 </PanelLeaf>
 
