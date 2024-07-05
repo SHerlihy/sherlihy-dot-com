@@ -12,6 +12,7 @@ import I2GroupHighlight from "../../highlights/I2GroupHighlight"
 import AuthServiceHighlight from "../../highlights/AuthService"
 import HomeHighlight from "../../highlights/HomeHighlight"
 import ComingSoonHighlight from "../../highlights/ComingSoonHighlight"
+import CertifiedPractionerHighlight from "../../highlights/CertifiedPractionerHighlight"
 
 function HomeLeaf() {
     const { highlight } = Route.useSearch()
@@ -44,7 +45,8 @@ function HomeLeaf() {
                                 case "authService":
                                 return <AuthServiceHighlight/>
                                 case "highlight":
-                                return <HomeHighlight/>
+                                return <CertifiedPractionerHighlight/>
+                                // return <HomeHighlight/>
                                 default:
                                 return <ComingSoonHighlight/>
                             }
