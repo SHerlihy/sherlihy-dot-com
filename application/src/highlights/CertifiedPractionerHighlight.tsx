@@ -14,12 +14,12 @@ const CertifiedPractionerHighlight = () => {
             </div>
             </div>
             <div className={`${highlightCss.container_content}`}>
-            <p >
-                Cloud prac sell
+            <p>
+                    Thanks to my previous experience using AWS to provision infrastructure, I was already familiar with key services such as EC2, S3 and RDS and this provided a significant foundation of knowledge and confidence making earning my Cloud Practitioner certifiaction an enjoyable journey.
             </p>
                 &nbsp;
                 <p>
-                    Personal reflection
+                     I believe the knowledge I have gained on managing spending will be of most value in the future. Before gaining my certification I used Cost and Usage to investigate issues with spending in a reactive manner but now I feel much more confident to predict costs and use services to help me forecast spending to prevent overspending.
                 </p>
             </div>
     </>
