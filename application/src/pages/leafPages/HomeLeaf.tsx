@@ -5,6 +5,7 @@ import ResumeGraderContent from "../../shared/panels/ResumeGrader"
 import AuthServiceContent from "../../shared/panels/AuthService"
 import VelmaModeContent from "../../shared/panels/VelmaModeContent"
 
+import appStyles from "../../shared/styles/app.module.css"
 import bentoStyles from "../../shared/styles/bentoStyles.module.css"
 import containers from "../../shared/styles/containers.module.css"
 import { Route } from "../../routes/index"
@@ -20,7 +21,7 @@ function HomeLeaf() {
     const { highlight } = Route.useSearch()
 
   return (
-        <main className={`${bentoStyles.grid}`}>
+        <main className={`${bentoStyles.grid} ${appStyles}`}>
                 <PanelLeaf 
                     rowBegin={2}
                     rowEnd={5}
