@@ -1,7 +1,7 @@
 import { Panel, PanelCol, PanelRow, PanelContent } from './panels/Panel'
-import css from './App.module.css'
+import css from './shared/styles/App.module.css'
 css
-import bentoStyles from './bentoStyles.module.css'
+import bentoStyles from './shared/styles/bentoStyles.module.css'
 
 function App() {
   return (
