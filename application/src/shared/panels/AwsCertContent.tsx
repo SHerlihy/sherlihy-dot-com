@@ -2,7 +2,7 @@ import {PanelContent} from "../../panels/Panel.tsx"
 
 const AwsCertContent = () => {
     return <PanelContent
-    title="AWS Certifications"
+    title="AWS Certs"
     items={
         [
             "Cloud Practitioner",

@@ -20,133 +20,127 @@ import AwsCertContent from "../../shared/panels/AwsCertContent"
 function HomeLeaf() {
     const { highlight } = Route.useSearch()
 
-  return (
-        <main className={`${bentoStyles.grid} ${appStyles}`}>
-                <PanelLeaf 
-                    rowBegin={1}
-                    rowEnd={3}
-                    colBegin={2}
-                    colEnd={9}
-                    queryParam="highlight"
-                >
-                    <article>
-                        <p>
-                            Reset
-                        </p>
-                    </article>
-                </PanelLeaf>
+    return (
+        <main className={`${bentoStyles.grid_mobile} ${appStyles}`}>
+            <PanelLeaf
+                rowBegin={1}
+                rowEnd={5}
+                colBegin={1}
+                colEnd={6}
+                queryParam="highlight"
+            >
+                <article>
+                    <p>
+                        Reset
+                    </p>
+                </article>
+            </PanelLeaf>
 
-                <Panel rowBegin={3} rowEnd={12} colBegin={1} colEnd={25}>
-                    <PanelRow>
-                        {(
-                            ()=>{
-                            switch (highlight) {
-                                case "velma":
-                                return <VelmaModeHighlight/>
-                                case "i2":
-                                return <I2GroupHighlight/>
-                                case "authService":
-                                return <AuthServiceHighlight/>
-                                case "awsCert":
-                                return <CertifiedPractionerHighlight/>
-                                case "highlight":
-                                return <HomeHighlight/>
-                                default:
-                                return <ComingSoonHighlight/>
-                            }
-                            }
-                        )()}
-                    </PanelRow>
-                </Panel>
-
-                <PanelLeaf 
-                    rowBegin={12} 
-                    rowEnd={14}
-                    colBegin={2} 
-                    colEnd={18} 
-                    queryParam="velma"
-                >
-                    <PanelCol>
-                        <VelmaModeContent/>
-                    </PanelCol>
-                </PanelLeaf>
-
-                <PanelLeaf 
-                    rowBegin={14} 
-                    rowEnd={16} 
-                    colBegin={2} 
-                    colEnd={18} 
-                    queryParam="awsCert"
-                >
-                    <PanelCol>
-                        <AwsCertContent/>
-                    </PanelCol>
-                </PanelLeaf>
-
-                <PanelLeaf
-                    rowBegin={16} 
-                    rowEnd={18} 
-                    colBegin={2} 
-                    colEnd={18} 
-                    queryParam="sherlihyDotCom"
-                >
-                    <PanelRow>
-                        <SherlihyDotComContent/>
-                    </PanelRow>
-                </PanelLeaf>
-
-                <PanelLeaf 
-                    rowBegin={16} 
-                    rowEnd={18} 
-                    colBegin={18} 
-                    colEnd={28}
-                    queryParam="i2"
-                >
-                    <PanelRow>
-                        <I2Content/>
-                    </PanelRow>
-                </PanelLeaf>
-
-                <PanelInfo 
-                    rowBegin={1} 
-                    rowEnd={3} 
-                    colBegin={8} 
-                    colEnd={32}
-                >
-                    <PanelCol>
+            <PanelInfo
+                rowBegin={1}
+                rowEnd={5}
+                colBegin={6}
+                colEnd={19}
+            >
+                <PanelCol>
                     <div className={`${containers.centerUnflex}`}>
                         <p>+44 73544 30588</p>
-                        <hr/>
+                        <hr />
                         <p>steven_herlihy@yahoo.com</p>
-                        </div>
-                    </PanelCol>
-                </PanelInfo>
+                    </div>
+                </PanelCol>
+            </PanelInfo>
 
-                <PanelLeaf 
-                    rowBegin={14} 
-                    rowEnd={16} 
-                    colBegin={18} 
-                    colEnd={28}
-                    queryParam="resumeGrader"
-                >
-                    <PanelCol>
-                        <ResumeGraderContent/>
-                    </PanelCol>
-                </PanelLeaf>
 
-                <PanelLeaf
-                    rowBegin={12} 
-                    rowEnd={14} 
-                    colBegin={18} 
-                    colEnd={28}
-                    queryParam="authService"
-                >
-                    <PanelCol>
-                        <AuthServiceContent/>
-                    </PanelCol>
-                </PanelLeaf>
+            <Panel
+                rowBegin={5}
+                rowEnd={25}
+                colBegin={1}
+                colEnd={19}
+            >
+                <PanelCol>
+                    {(
+                        () => {
+                            switch (highlight) {
+                                case "velma":
+                                    return <VelmaModeHighlight />
+                                case "i2":
+                                    return <I2GroupHighlight />
+                                case "authService":
+                                    return <AuthServiceHighlight />
+                                case "awsCert":
+                                    return <CertifiedPractionerHighlight />
+                                case "highlight":
+                                    return <HomeHighlight />
+                                default:
+                                    return <ComingSoonHighlight />
+                            }
+                        }
+                    )()}
+                </PanelCol>
+            </Panel>
+
+            <PanelLeaf
+                rowBegin={25}
+                rowEnd={29}
+                colBegin={1}
+                colEnd={7}
+                queryParam="velma"
+            >
+                <PanelCol>
+                    <VelmaModeContent />
+                </PanelCol>
+            </PanelLeaf>
+
+            <PanelLeaf
+                rowBegin={25}
+                rowEnd={29}
+                colBegin={13}
+                colEnd={19}
+                queryParam="awsCert"
+            >
+                <PanelCol>
+                    <AwsCertContent />
+                </PanelCol>
+            </PanelLeaf>
+
+            <PanelLeaf
+                rowBegin={25}
+                rowEnd={29}
+                colBegin={7}
+                colEnd={13}
+                queryParam="authService"
+            >
+                <PanelCol>
+                    <AuthServiceContent />
+                </PanelCol>
+            </PanelLeaf>
+
+            <PanelLeaf
+                rowBegin={29}
+                rowEnd={33}
+                colBegin={1}
+                colEnd={12}
+                queryParam="sherlihyDotCom"
+            >
+                <PanelRow>
+                    <SherlihyDotComContent />
+                </PanelRow>
+            </PanelLeaf>
+
+            <PanelLeaf
+                rowBegin={29}
+                rowEnd={33}
+                colBegin={12}
+                colEnd={19}
+                queryParam="i2"
+            >
+                <PanelRow>
+                    <I2Content />
+                </PanelRow>
+            </PanelLeaf>
         </main>
-  )
+    )
 }
 
 export default HomeLeaf
