@@ -23,8 +23,8 @@ function HomeLeaf() {
   return (
         <main className={`${bentoStyles.grid} ${appStyles}`}>
                 <PanelLeaf 
-                    rowBegin={2}
-                    rowEnd={5}
+                    rowBegin={1}
+                    rowEnd={3}
                     colBegin={2}
                     colEnd={9}
                     queryParam="highlight"
@@ -36,7 +36,7 @@ function HomeLeaf() {
                     </article>
                 </PanelLeaf>
 
-                <Panel rowBegin={2} rowEnd={15} colBegin={9} colEnd={25}>
+                <Panel rowBegin={3} rowEnd={12} colBegin={1} colEnd={25}>
                     <PanelRow>
                         {(
                             ()=>{
@@ -60,10 +60,10 @@ function HomeLeaf() {
                 </Panel>
 
                 <PanelLeaf 
-                    rowBegin={5} 
-                    rowEnd={11} 
+                    rowBegin={12} 
+                    rowEnd={14}
                     colBegin={2} 
-                    colEnd={9} 
+                    colEnd={18} 
                     queryParam="velma"
                 >
                     <PanelCol>
@@ -72,10 +72,10 @@ function HomeLeaf() {
                 </PanelLeaf>
 
                 <PanelLeaf 
-                    rowBegin={11} 
-                    rowEnd={15} 
+                    rowBegin={14} 
+                    rowEnd={16} 
                     colBegin={2} 
-                    colEnd={9} 
+                    colEnd={18} 
                     queryParam="awsCert"
                 >
                     <PanelCol>
@@ -84,7 +84,7 @@ function HomeLeaf() {
                 </PanelLeaf>
 
                 <PanelLeaf
-                    rowBegin={15} 
+                    rowBegin={16} 
                     rowEnd={18} 
                     colBegin={2} 
                     colEnd={18} 
@@ -96,10 +96,10 @@ function HomeLeaf() {
                 </PanelLeaf>
 
                 <PanelLeaf 
-                    rowBegin={15} 
+                    rowBegin={16} 
                     rowEnd={18} 
                     colBegin={18} 
-                    colEnd={32}
+                    colEnd={28}
                     queryParam="i2"
                 >
                     <PanelRow>
@@ -108,9 +108,9 @@ function HomeLeaf() {
                 </PanelLeaf>
 
                 <PanelInfo 
-                    rowBegin={2} 
-                    rowEnd={5} 
-                    colBegin={25} 
+                    rowBegin={1} 
+                    rowEnd={3} 
+                    colBegin={8} 
                     colEnd={32}
                 >
                     <PanelCol>
@@ -123,10 +123,10 @@ function HomeLeaf() {
                 </PanelInfo>
 
                 <PanelLeaf 
-                    rowBegin={10} 
-                    rowEnd={15} 
-                    colBegin={25} 
-                    colEnd={32}
+                    rowBegin={14} 
+                    rowEnd={16} 
+                    colBegin={18} 
+                    colEnd={28}
                     queryParam="resumeGrader"
                 >
                     <PanelCol>
@@ -135,10 +135,10 @@ function HomeLeaf() {
                 </PanelLeaf>
 
                 <PanelLeaf
-                    rowBegin={5} 
-                    rowEnd={10} 
-                    colBegin={25} 
-                    colEnd={32}
+                    rowBegin={12} 
+                    rowEnd={14} 
+                    colBegin={18} 
+                    colEnd={28}
                     queryParam="authService"
                 >
                     <PanelCol>
