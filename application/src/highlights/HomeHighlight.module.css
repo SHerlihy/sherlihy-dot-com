@@ -1,8 +1,8 @@
 .img {
-    min-height: 350px;
-    max-height: 350px;
-    min-width: 350px;
-    max-width: 350px;
+    min-height: 150px;
+    max-height: 150px;
+    min-width: 150px;
+    max-width: 150px;
     animation: 1s ease-out 0s 1 slideInUp;
 }
 
@@ -16,10 +16,10 @@
     display: flex;
     flex-direction: column-reverse;
 
-    min-height: 250px;
-    max-height: 250px;
-    min-width: 250px;
-    max-width: 250px;
+    min-height: 150px;
+    max-height: 150px;
+    min-width: 150px;
+    max-width: 150px;
     background-color: rgba(128, 128, 160, 0.7);
 
     border: 10px solid rgba(60, 30, 60, 1);
@@ -33,10 +33,10 @@
     flex-direction: column-reverse;
     align-items: center;
 
-    min-height: 350px;
-    max-height: 350px;
-    min-width: 230px;
-    max-width: 230px;
+    min-height: 180px;
+    max-height: 180px;
+    min-width: 130px;
+    max-width: 130px;
 
     overflow: hidden;
 

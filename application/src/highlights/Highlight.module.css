@@ -1,20 +1,26 @@
 .container_image {
     position: relative;
-    height: 350px;
-    width: 350px;
+    height: 200px;
+    width: 200px;
 }
 
-.container_standout {
+.container_standout_desktop {
     padding-right: 1rem;
 }
 
+.container_standout_mobile {
+    padding-bottom: 1rem;
+}
+
 .container_content {
-    height: inherit;
-    overflow: scroll;
+    overflow-y: scroll;
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
+}
+
+.hide_overflow {
+    overflow: hidden;
 }
 
 .img {

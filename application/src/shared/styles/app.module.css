@@ -25,6 +25,10 @@ body:has(.requires-no-scroll) {
     overflow: hidden;
 }
 
+main {
+    padding: 0.5rem;
+}
+
 img,
 picture,
 svg,
