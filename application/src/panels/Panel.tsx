@@ -3,6 +3,7 @@ import {Link} from '@tanstack/react-router'
 import { ReactNode } from "react"
 import panelCss from "./panel.module.css"
 import { HomeQueryOptions } from '../routes'
+import useIsDesktop from '../shared/hooks/useIsDesktop'
 
 // logic to serve PanelDesktop v PanelMobile
 export const Panel = (props: {
@@ -88,12 +89,22 @@ export const PanelContent = (props : {
     items: string[]
     title?: string
 }) => {
+    const isDesktop = useIsDesktop()
     return (
         <>
             {props.title && 
                 <div className={`${panelCss.title}`}>
                     <h2>{props.title}</h2>
                 </div>
+            }
+            {isDesktop &&
+            <div className={`${panelCss.points}`}>
+            <ul className={`${panelCss.list_flex}`}>
+            {props.items.map((item)=>{
+                return <li key={item}>{item}</li>
+            })}
+            </ul>
+            </div>
             }
         </>
     )

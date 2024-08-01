@@ -1,12 +1,11 @@
+import FeatureLayout from "./layouts/FeatureLayout.tsx"
 import highlightCss from "./Highlight.module.css"
 import authHighlightCss from "./AuthHighlight.module.css"
-import HighlightFeatureMobile from "./layouts/HighlightFeatureMobile"
 
 const AuthServiceHighlight=()=>{
     return (
         <>
-            <HighlightFeatureMobile>
-            <div className={`${highlightCss.container_standout}`}>
+            <FeatureLayout>
             <div className={`${highlightCss.container_image}`}>
                 <img src="/authService/robo3.png" className={`${highlightCss.img} ${authHighlightCss.queue_up3}`}/>
                 <img src="/authService/robo2.png" className={`${highlightCss.img} ${authHighlightCss.queue_up2}`}/>
@@ -16,8 +15,7 @@ const AuthServiceHighlight=()=>{
                 <img src="/authService/notAToaster.png" className={`${highlightCss.img} ${authHighlightCss.talk1}`}/>
                 <img src="/authService/queueBarrier.png" className={`${highlightCss.img}`}/>
             </div>
-            </div>
-            </HighlightFeatureMobile>
+            </FeatureLayout>
             <div className={`${highlightCss.container_content}`}>
             <p>
                 Using Go v1.22 and only the standard http package, I created a backend REST service to handle authentication requests.
