@@ -5,6 +5,7 @@ function useIsDesktop() {
 
     useEffect(()=>{
         window.addEventListener("resize", handleResize);
+        handleResize();
 
         return () => {
             window.removeEventListener("resize", handleResize);
