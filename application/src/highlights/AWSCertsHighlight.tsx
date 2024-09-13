@@ -26,7 +26,7 @@ const ArchitectImg = () => {
     )
 }
 
-const CertifiedPractionerHighlight = () => {
+const AWSCertsHighlight = () => {
     return (
         <>
             <div>
@@ -36,16 +36,19 @@ const CertifiedPractionerHighlight = () => {
             </div >
             <div className={`${highlightCss.container_content}`}>
                 <p>
-                    Thanks to my previous experience using AWS to provision infrastructure, I was already familiar with key services such as EC2, S3 and RDS and this provided a significant foundation of knowledge and confidence making earning my Cloud Practitioner certifiaction an enjoyable journey.
+                    Unlike the Cloud Practitioner exam, my previous experience of provisioning AWS infrastructure was not broad enough to provide the needed foundation to meet the new challanges required for the Solutions Architect exam.
                 </p>
                 &nbsp;
                 <p>
-                    I believe the knowledge I have gained on managing spending will be of most value in the future. Before gaining my certification I used Cost and Usage to investigate issues with spending in a reactive manner but now I feel much more confident to predict costs and use services to help me forecast spending to prevent overspending.
+                    To overcome my lack of foundational experience, I leveraged the use of guided practices such as Labs and AWS Cloud Quest to remember, reinforce and retain the new fundemental concepts to explore new topics the Solutions Architct exam covers. After gaining this needed foundational expereince I was able to engauge in tech deep dives and use practice exams to successfully prepare for the Solutions Architect exam just as I had done for the Cloud Practioner exam.
+                </p>
+                &nbsp;
+                <p>
+                    Though I am proud of my AWS certifications, I'm excited to grow my existing knowledge of AWS services to meet project demands but also continually improve how I plan and provision infrastructure to include fellow developers using collaborative and scalable practices. 
                 </p>
             </div>
         </>
     )
 }
 
-
-export default CertifiedPractionerHighlight
+export default AWSCertsHighlight
