@@ -17,9 +17,9 @@ const PractitionerImg = () => {
 const ArchitectImg = () => {
     return (
         <div>
-            <a href="https://www.credly.com/badges/64a19493-6171-4c41-9b45-fe86e31d16f6/public_url">
+            <a href="https://www.credly.com/badges/ee291c64-d1af-4b2c-9757-e0768efb4575/public_url">
                 <img
-                    src="/awsCerts/aws-certified-cloud-practitioner.png"
+                    src="/awsCerts/aws-certified-solutions-architect-associate.png"
                 />
             </a>
         </div>
