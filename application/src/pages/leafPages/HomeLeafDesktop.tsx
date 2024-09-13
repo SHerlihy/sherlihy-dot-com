@@ -14,8 +14,8 @@ import I2GroupHighlight from "../../highlights/I2GroupHighlight"
 import AuthServiceHighlight from "../../highlights/AuthService"
 import HomeHighlight from "../../highlights/HomeHighlight"
 import ComingSoonHighlight from "../../highlights/ComingSoonHighlight"
-import CertifiedPractionerHighlight from "../../highlights/CertifiedPractionerHighlight"
 import AwsCertContent from "../../shared/panels/AwsCertContent"
+import AWSCertsHighlight from "../../highlights/AWSCertsHighlight"
 
 function HomeLeaf() {
     const { highlight } = Route.useSearch()
@@ -48,7 +48,7 @@ function HomeLeaf() {
                                 case "authService":
                                 return <AuthServiceHighlight/>
                                 case "awsCert":
-                                return <CertifiedPractionerHighlight/>
+                                return <AWSCertsHighlight/>
                                 case "highlight":
                                 return <HomeHighlight/>
                                 default:

@@ -5,6 +5,7 @@ const AwsCertContent = () => {
     title="AWS Certs"
     items={
         [
+            "Solutions Architect",
             "Cloud Practitioner",
         ]
     }
