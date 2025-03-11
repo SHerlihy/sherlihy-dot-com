@@ -15,21 +15,21 @@
     "readme_add_diagrams": "cd ./deployment/infrastructure_diagrams && node ./diagrams_to_readme.cjs"
   },
   "dependencies": {
-      "@tanstack/react-router": "^1.19.15",
-      "@tanstack/router-devtools": "^1.19.15",
-      "react": "^18.2.0",
-      "react-dom": "^18.2.0",
-      "terraform": "^1.23.0"
+    "@tanstack/react-router": "^1.19.15",
+    "@tanstack/router-devtools": "^1.19.15",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "terraform": "^1.23.0"
   },
   "devDependencies": {
+    "@mermaid-js/mermaid-cli": "^10.6.1",
     "@tanstack/router-vite-plugin": "^1.19.6",
+    "@tsconfig/node18": "^18.2.2",
     "@types/react": "^18.2.56",
     "@types/react-dom": "^18.2.19",
     "@typescript-eslint/eslint-plugin": "^7.0.2",
     "@typescript-eslint/parser": "^7.0.2",
     "@vitejs/plugin-react": "^4.2.1",
-    "@mermaid-js/mermaid-cli": "^10.6.1",
-    "@tsconfig/node18": "^18.2.2",
     "eslint": "^8.56.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
@@ -38,6 +38,6 @@
     "mermaid": "^10.6.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.2.2",
-    "vite": "^5.0.0"
+    "vite": "^6.2.1"
   }
 }
