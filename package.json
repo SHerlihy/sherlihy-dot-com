@@ -10,13 +10,14 @@
     "preview": "vite preview ./",
     "infra_diagrams": "live-server --open=./deployment/infrastructure_diagrams .",
     "launch_prod": "cd ./deployment/production && ./deploy_prod.sh && ../../",
-    "replace_prod_files": "cd ./deployment/production/bucket && ls && ./replace_s3.sh && cd ../../../",
+    "replace_prod_files": "cd ./deployment/production/bucket && ./test.sh && ./replace_s3.sh && cd ../../../",
     "compose_diagrams": "cd ./deployment/infrastructure_diagrams && ts-node-esm diagramsToMd.ts",
     "readme_add_diagrams": "cd ./deployment/infrastructure_diagrams && node ./diagrams_to_readme.cjs"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.13",
     "@tanstack/react-router": "^1.114.15",
+    "live-server": "^1.2.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "tailwindcss": "^4.0.13",
@@ -24,6 +25,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
+    "@mermaid-js/mermaid-cli": "^10.6.1",
     "@tanstack/router-devtools": "^1.114.15",
     "@tanstack/router-plugin": "^1.114.15",
     "@types/react": "^19.0.10",
@@ -32,13 +34,11 @@
     "eslint": "^9.21.0",
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.19",
+    "glob": "^10.3.10",
     "globals": "^15.15.0",
+    "mermaid": "^10.6.1",
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.24.1",
-    "vite": "^6.2.0",
-    "@mermaid-js/mermaid-cli": "^10.6.1",
-    "glob": "^10.3.10",
-    "mermaid": "^10.6.1"
+    "vite": "^6.2.0"
   }
 }
-
