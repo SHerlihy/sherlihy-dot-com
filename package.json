@@ -4,17 +4,23 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "dev": "vite ./application/",
+    "build": "cd ./application/ && tsc && vite build --outDir ../dist/ && cd ../",
+    "build_stage": "cd ./application/ && vue-tsc && vite build --mode staging --outDir ../dist/ && cd ../",
+    "preview": "vite preview ./",
+    "infra_diagrams": "live-server --open=./deployment/infrastructure_diagrams .",
+    "launch_prod": "cd ./deployment/production && ./deploy_prod.sh && ../../",
+    "replace_prod_files": "cd ./deployment/production/bucket && ./replace_s3.sh && cd ../../../",
+    "compose_diagrams": "cd ./deployment/infrastructure_diagrams && ts-node-esm diagramsToMd.ts",
+    "readme_add_diagrams": "cd ./deployment/infrastructure_diagrams && node ./diagrams_to_readme.cjs"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.13",
     "@tanstack/react-router": "^1.114.15",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "tailwindcss": "^4.0.13"
+    "tailwindcss": "^4.0.13",
+    "terraform": "^1.23.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
@@ -29,6 +35,10 @@
     "globals": "^15.15.0",
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.24.1",
-    "vite": "^6.2.0"
+    "vite": "^6.2.0",
+    "@mermaid-js/mermaid-cli": "^10.6.1",
+    "glob": "^10.3.10",
+    "mermaid": "^10.6.1"
   }
 }
+
