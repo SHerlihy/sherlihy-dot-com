@@ -12,7 +12,7 @@ type GridPos = {
     colEnd: number
 }
 
-    //background-color: rgba(133, 133, 155, 0.3);
+//background-color: rgba(133, 133, 155, 0.3);
 export const PanelLayout = (props: {
     gridPos: GridPos,
     children: ReactNode
@@ -25,7 +25,8 @@ export const PanelLayout = (props: {
     return (
         <div
             className={`
-            overflow-hidden h-full w-full p-1 rounded-md bg-gray-400/30
+            overflow-hidden h-full w-full rounded-md bg-gray-400/30
+            flex justify-center items-center
             hover:shadow-[0_0_0.5rem_0.1rem] hover:shadow-current
             `}
             style={gridStyle}
@@ -45,9 +46,14 @@ export const PanelLeaf = (props: {
             <Link
                 to='/'
                 search={() => ({ highlight: props.queryParam })}
-                className={`${panelCss.link}`}
+                className={`
+                    ${panelCss.link}
+                    w-full h-full flex justify-center items-center
+                `}
             >
-                {props.children}
+                <div className='w-full h-full p-6'>
+                    {props.children}
+                </div>
             </Link>
         </PanelLayout>
     )
@@ -59,22 +65,23 @@ export const PanelContent = (props: {
 }) => {
     const isDesktop = useIsDesktop()
     return (
-        <div>
+        <>
             {props.title &&
-                <div className="p-1">
-                    <h2>{props.title}</h2>
+                <div className='flex justify-center items-center'>
+                    <h2 className='text-center'>{props.title}</h2>
                 </div>
             }
+            <span className='p-4' />
             {isDesktop &&
-                <div className={`${panelCss.points}`}>
-                    <ul className={`${panelCss.list_flex}`}>
+                <div className='w-full h-full p-4'>
+                    <ul className="w-full h-full flex flex-col flex-wrap">
                         {props.items.map((item) => {
-                            return <li key={item}>{item}</li>
+                            return <p key={item}>{item}</p>
                         })}
                     </ul>
                 </div>
             }
-        </div>
+        </>
     )
 }
 
@@ -82,7 +89,7 @@ export const PanelRow = (props: {
     children: ReactNode
 }) => {
     return (
-        <div className="flex flex-row space-evenly">
+        <div className="w-full h-full flex flex-row">
             {props.children}
         </div>
     )
@@ -92,7 +99,7 @@ export const PanelCol = (props: {
     children: ReactNode
 }) => {
     return (
-        <div className="flex flex-col space-evenly">
+        <div className="w-full h-full flex flex-col">
             {props.children}
         </div>
     )

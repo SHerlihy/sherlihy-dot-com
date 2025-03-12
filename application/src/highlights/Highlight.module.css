@@ -13,6 +13,7 @@
 }
 
 .container_content {
+    height: inherit;
     overflow-y: scroll;
 
     display: flex;

@@ -1,32 +1,7 @@
-.card {
-    height: 100%;
-    width: 100%;
-}
-
-.card:hover {
-    border-radius: 10px;
-    box-shadow: 0 0 0.9rem 0.1rem currentColor;
-}
-
 .link {
     color: currentColor;
 }
 
 .link:hover {
     color: currentColor;
-}
-
-.points {
-    height: 100%;
-    width: 100%;
-
-    padding: 1rem;
-}
-
-.list_flex {
-    height: inherit;
-
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
 }
