@@ -1,269 +1,54 @@
-# SHerlihy Portfolio Showcase
+# React + TypeScript + Vite
 
-## Infrastructure Diagrams
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Overview
+Currently, two official plugins are available:
 
-## Diagram
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-```mermaid
+## Expanding the ESLint configuration
 
-    flowchart LR
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-    
-    subgraph init [init]
-     initProdCon{"`
-         principal:user prod
-     `"}
-     
-     initProdCon -- true --> initProdAllow
-     
-     initProdAllow("`
-         sts:AssumeRole
-     `")
-     
-
-     initCon{"`
-         principal:oidc-provider
-         repo:SHerlihyDotCom
-         branch:main
-     `"}
-     
-     initCon -- true --> initActionsAllow
-
-     initActionsAllow("`
-         sts:AssumeRoleWithWebIdentity
-     `")
-
-     initAllow("`
-         iam:*
-         organizations:DescribeAccount
-         organizations:DescribeOrganization
-         organizations:DescribeOrganizationalUnit
-         organizations:DescribePolicy
-         organizations:ListChildren
-         organizations:ListParents
-         organizations:ListPoliciesForTarget
-         organizations:ListRoots
-         organizations:ListPolicies
-         organizations:ListTargetsForPolicy
-     `")
- end
-
-    subgraph distCreate
-    dcaEnable("`
-        sts:AssumeRole
-        sts:GetCallerIdentity
-        iam:*
-    `")
-
-    dcaACMRes{"`
-        acm:*
-    `"}
-    
-    dcaACMRes --> dcaACMAllow
-    
-    dcaACMAllow("`
-        acm:*
-    `")
-
-    dcCDNRes{"`
-        cloudfront:*
-    `"}
-    
-    dcCDNRes --> dcCDNAllow
-    
-    dcCDNAllow("`
-        cloudfront:*
-    `")
-
-    dcR53Allow("`
-        route53:*
-        route53domains:*
-        route53resolver:*
-    `")
-
-end
-
-    subgraph create [create]
-    subgraph createAllow
-    createEnable("`
-        iam:*
-        sts:AssumeRole
-        sts:GetCallerIdentity
-    `")
-    createCreate("`
-        s3:Create
-        s3:Delete
-        s3:Get
-        s3:List
-        s3:Put
-    `")
-    end
-end
-
-create --- bucketDeny
-
-    subgraph replace [replace]
-    subgraph replaceDeny
-    replaceDenyRes{"`
-        createdS3Bucket
-        bucketObject
-    `"}
-    
-    replaceDenyRes -- false --> replaceDenyDeny
-    
-    replaceDenyDeny("`
-        s3:*
-    `")
-    
-    end
-    
-    replaceDeny --> replaceRes
-    
-    replaceRes("`
-        bucketS3 objects
-    `")
-    
-    replaceRes --> replaceAllow
-    
-        subgraph replaceAllow
-        replaceEnable("`
-            iam:*
-            sts:AssumeRole
-            sts:GetCallerIdentity
-        `")
-        replaceReplace("`
-            s3:Create
-            s3:Delete
-            s3:Get
-            s3:List
-            s3:Put
-        `")
-    end
-end
-
-replace --- bucketDeny
-
-
-    
-subgraph bucketDeny
-bucketDenyCond{"`
-    createRole
-`"}
-
-bucketDenyRes --> bucketDenyCond
-bucketDenyCond -- false --x bucketDenyDeny
-
-bucketDenyDeny("`
-        s3:Delete
-        s3:Put
-`")
-
-bucketDenyRes("`
-    createdS3Bucket
-`")
-
-objDenyCond{"`
-    createRole
-    replaceRole
-`"}
-
-objDenyRes --> objDenyCond
-objDenyCond -- false --x objDenyDeny
-
-objDenyDeny("`
-        s3:Delete
-        s3:Put
-`")
-
-objDenyRes("`
-    bucketObject
-`")
-end
-
-bucketDeny --> bucketAllow
-
-subgraph bucketAllow
-bucketAllowRes("`
-    createdS3Bucket
-    bucketObject
-`")
-
-bucketAllowRes --> bucketAllowAllow
-
-bucketAllowAllow("`
-    s3:Get
-    s3:List
-`")
-end
-
-    subgraph prod [user prod]
-    prodEnable("`
-        iam:*
-        sts:*
-        organizations:DescribeAccount
-        organizations:DescribeOrganization
-        organizations:DescribeOrganizationalUnit
-        organizations:DescribePolicy
-        organizations:ListChildren
-        organizations:ListParents
-        organizations:ListPoliciesForTarget
-        organizations:ListRoots
-        organizations:ListPolicies
-        organizations:ListTargetsForPolicy
-    `")
-end
-
-prod --> init
-prod --> create
-prod --> replace
-prod --> distCreate
-
-
+```js
+export default tseslint.config({
+  extends: [
+    // Remove ...tseslint.configs.recommended and replace with this
+    ...tseslint.configs.recommendedTypeChecked,
+    // Alternatively, use this for stricter rules
+    ...tseslint.configs.strictTypeChecked,
+    // Optionally, add this for stylistic rules
+    ...tseslint.configs.stylisticTypeChecked,
+  ],
+  languageOptions: {
+    // other options...
+    parserOptions: {
+      project: ['./tsconfig.node.json', './tsconfig.app.json'],
+      tsconfigRootDir: import.meta.dirname,
+    },
+  },
+})
 ```
 
-## Overview
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-## Diagram
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
-```mermaid
-
-    flowchart LR
-
-    Client <--> Site
-    
-    subgraph namecheap
-        Site[SHerlihy.com]
-    end
-    
-    Site --> R53
-    R53 --> Site
-
-    subgraph AWS
-    subgraph global
-        DNS{Cloudfront}
-        R53[Route 53]
-        Cert[HTTPS Cert]
-        
-        Cert --> R53
-        R53 <--> DNS
-        DNS <--> Cache
-        DNS <--> S3
-        
-        subgraph eu-west-2
-            subgraph acl-public-read
-                S3[S3 sherlihy.com]
-            end
-        end
-    end
-    end
-    
-    subgraph upload
-    Actions[CI/CD Pipeline]
-    Actions --> S3
-    end
-
-
+export default tseslint.config({
+  plugins: {
+    // Add the react-x and react-dom plugins
+    'react-x': reactX,
+    'react-dom': reactDom,
+  },
+  rules: {
+    // other rules...
+    // Enable its recommended typescript rules
+    ...reactX.configs['recommended-typescript'].rules,
+    ...reactDom.configs.recommended.rules,
+  },
+})
 ```
----

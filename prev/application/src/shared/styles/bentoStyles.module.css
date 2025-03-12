@@ -1,0 +1,55 @@
+.grid {
+    position: fixed;
+
+    width: 100%;
+    height: 100%;
+
+    display: grid;
+
+    grid-template-columns: repeat(32, 1fr);
+    grid-template-rows: repeat(18, 1fr);
+
+    column-gap: 5px;
+    row-gap: 5px;
+}
+
+.grid_mobile {
+    position: fixed;
+
+    width: 100%;
+    height: 100%;
+
+    display: grid;
+
+    grid-template-columns: repeat(18, 1fr);
+    grid-template-rows: repeat(32, 1fr);
+
+    column-gap: 5px;
+    row-gap: 5px;
+}
+
+article {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+    background-color: rgba(133, 133, 155, 0.3);
+}
+
+.return {
+    grid-row: 2/6;
+    grid-column: 2/6;
+}
+
+.invis_button {
+    border: none;
+    background-color: transparent;
+}
+
+.invis_button:hover {
+    cursor: pointer;
+}

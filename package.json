@@ -1,43 +1,34 @@
 {
-  "name": "sherlihy_dot_com",
+  "name": "sherlihy-dot-com",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite ./application/",
-    "build": "cd ./application/ && tsc && vite build --outDir ../dist/ && cd ../",
-    "build_stage": "cd ./application/ && vue-tsc && vite build --mode staging --outDir ../dist/ && cd ../",
-    "preview": "vite preview ./",
-    "infra_diagrams": "live-server --open=./deployment/infrastructure_diagrams .",
-    "launch_prod": "cd ./deployment/production && ./deploy_prod.sh && ../../",
-    "replace_prod_files": "cd ./deployment/production/bucket && ./replace_s3.sh && cd ../../../",
-    "compose_diagrams": "cd ./deployment/infrastructure_diagrams && ts-node-esm diagramsToMd.ts",
-    "readme_add_diagrams": "cd ./deployment/infrastructure_diagrams && node ./diagrams_to_readme.cjs"
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
   },
   "dependencies": {
-    "@tanstack/react-router": "^1.19.15",
-    "@tanstack/router-devtools": "^1.19.15",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "terraform": "^1.23.0"
+    "@tailwindcss/vite": "^4.0.13",
+    "@tanstack/react-router": "^1.114.15",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwindcss": "^4.0.13"
   },
   "devDependencies": {
-    "@mermaid-js/mermaid-cli": "^10.6.1",
-    "@tanstack/router-vite-plugin": "^1.19.6",
-    "@tsconfig/node18": "^18.2.2",
-    "@types/react": "^18.2.56",
-    "@types/react-dom": "^18.2.19",
-    "@typescript-eslint/eslint-plugin": "^7.0.2",
-    "@typescript-eslint/parser": "^7.0.2",
-    "@vitejs/plugin-react": "^4.2.1",
-    "eslint": "^8.56.0",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.5",
-    "glob": "^10.3.10",
-    "live-server": "^1.2.2",
-    "mermaid": "^10.6.1",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.2.2",
-    "vite": "^6.2.1"
+    "@eslint/js": "^9.21.0",
+    "@tanstack/router-devtools": "^1.114.15",
+    "@tanstack/router-plugin": "^1.114.15",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "@vitejs/plugin-react": "^4.3.4",
+    "eslint": "^9.21.0",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
+    "globals": "^15.15.0",
+    "typescript": "~5.7.2",
+    "typescript-eslint": "^8.24.1",
+    "vite": "^6.2.0"
   }
 }
