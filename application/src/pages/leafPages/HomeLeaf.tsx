@@ -7,9 +7,6 @@ function HomeLeaf() {
 
     return (
         <>
-            <h1 className="text-blue-600 text-3xl font-bold underline">
-                Hello world!
-            </h1>
             {isDesktop && <HomeLeafDesktop />}
             {!isDesktop && <HomeLeafMobile />}
         </>
