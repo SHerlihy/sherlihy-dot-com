@@ -1,131 +1,99 @@
-import {Link} from '@tanstack/react-router'
+import { Link } from '@tanstack/react-router'
 
 import { ReactNode } from "react"
 import panelCss from "./panel.module.css"
 import { HomeQueryOptions } from '../routes'
 import useIsDesktop from '../shared/hooks/useIsDesktop'
 
-// logic to serve PanelDesktop v PanelMobile
-export const Panel = (props: {
-    rowBegin: number
-    rowEnd: number
-    colBegin: number
+type GridPos = {
+    rowStart: number,
+    rowEnd: number,
+    colStart: number,
     colEnd: number
+}
+
+    //background-color: rgba(133, 133, 155, 0.3);
+export const PanelLayout = (props: {
+    gridPos: GridPos,
     children: ReactNode
 }) => {
+    const { gridPos } = props
     const gridStyle = {
-        gridRow: `${props.rowBegin}/${props.rowEnd}`,
-        gridColumn: `${props.colBegin}/${props.colEnd}`
+        gridRow: `${gridPos.rowStart}/${gridPos.rowEnd}`,
+        gridColumn: `${gridPos.colStart}/${gridPos.colEnd}`
     }
-
     return (
-        <section style={gridStyle}>
-            <div className={`${panelCss.card}`}>
-                        {props.children}
-            </div>
-        </section>
+        <div
+            className={`
+            overflow-hidden h-full w-full p-1 rounded-md bg-gray-400/30
+            hover:shadow-[0_0_0.5rem_0.1rem] hover:shadow-current
+            `}
+            style={gridStyle}
+        >
+            {props.children}
+        </div>
     )
 }
 
-//change hardcoded to later
 export const PanelLeaf = (props: {
-    rowBegin: number
-    rowEnd: number
-    colBegin: number
-    colEnd: number
+    gridPos: GridPos,
     queryParam: HomeQueryOptions
     children: ReactNode
 }) => {
-    const gridStyle = {
-        gridRow: `${props.rowBegin}/${props.rowEnd}`,
-        gridColumn: `${props.colBegin}/${props.colEnd}`
-    }
-
     return (
-        <section style={gridStyle}>
-            <div className={`${panelCss.card}`}>
-                    <Link to='/' search={()=>({highlight: props.queryParam})} className={`${panelCss.link}`}>
-                        {props.children}
-                    </Link>
-            </div>
-        </section>
+        <PanelLayout {...props}>
+            <Link
+                to='/'
+                search={() => ({ highlight: props.queryParam })}
+                className={`${panelCss.link}`}
+            >
+                {props.children}
+            </Link>
+        </PanelLayout>
     )
 }
 
-export const PanelInfo = (props: {
-    rowBegin: number
-    rowEnd: number
-    colBegin: number
-    colEnd: number
-    children: ReactNode
-}) => {
-    const gridStyle = {
-        gridRow: `${props.rowBegin}/${props.rowEnd}`,
-        gridColumn: `${props.colBegin}/${props.colEnd}`
-    }
-
-    return (
-        <section style={gridStyle}>
-            <div className={`${panelCss.card}`}>
-                        {props.children}
-            </div>
-        </section>
-    )
-}
-
-export const PanelButton = (props : {
-    title: string
-}) => {
-    return (
-        <>
-                <div className={`${panelCss.title}`}>
-                    <h2>{props.title}</h2>
-                </div>
-        </>
-    )
-}
-
-export const PanelContent = (props : {
+export const PanelContent = (props: {
     items: string[]
     title?: string
 }) => {
     const isDesktop = useIsDesktop()
     return (
-        <>
-            {props.title && 
-                <div className={`${panelCss.title}`}>
+        <div>
+            {props.title &&
+                <div className="p-1">
                     <h2>{props.title}</h2>
                 </div>
             }
             {isDesktop &&
-            <div className={`${panelCss.points}`}>
-            <ul className={`${panelCss.list_flex}`}>
-            {props.items.map((item)=>{
-                return <li key={item}>{item}</li>
-            })}
-            </ul>
-            </div>
+                <div className={`${panelCss.points}`}>
+                    <ul className={`${panelCss.list_flex}`}>
+                        {props.items.map((item) => {
+                            return <li key={item}>{item}</li>
+                        })}
+                    </ul>
+                </div>
             }
-        </>
+        </div>
     )
 }
 
 export const PanelRow = (props: {
     children: ReactNode
-    }) => {
+}) => {
     return (
-        <article className={`${panelCss.panel_row}`}>
+        <div className="flex flex-row space-evenly">
             {props.children}
-        </article>
+        </div>
     )
 }
 
 export const PanelCol = (props: {
     children: ReactNode
-    }) => {
+}) => {
     return (
-        <article className={`${panelCss.panel_col}`}>
+        <div className="flex flex-col space-evenly">
             {props.children}
-        </article>
+        </div>
     )
 }

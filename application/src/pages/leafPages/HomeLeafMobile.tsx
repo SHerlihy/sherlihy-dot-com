@@ -1,12 +1,9 @@
-import { Panel, PanelCol, PanelLeaf, PanelInfo, PanelRow } from "../../panels/Panel"
+import { PanelCol, PanelLeaf, PanelRow, PanelLayout } from "../../panels/Panel"
 import SherlihyDotComContent from "../../shared/panels/SherlihyDotComContent"
 import I2Content from "../../shared/panels/I2Content"
 import AuthServiceContent from "../../shared/panels/AuthService"
 import VelmaModeContent from "../../shared/panels/VelmaModeContent"
 
-import appStyles from "../../shared/styles/app.module.css"
-import bentoStyles from "../../shared/styles/bentoStyles.module.css"
-import containers from "../../shared/styles/containers.module.css"
 import { Route } from "../../routes/index"
 import VelmaModeHighlight from "../../highlights/VelmaModeHighlight"
 import I2GroupHighlight from "../../highlights/I2GroupHighlight"
@@ -15,17 +12,31 @@ import HomeHighlight from "../../highlights/HomeHighlight"
 import ComingSoonHighlight from "../../highlights/ComingSoonHighlight"
 import AwsCertContent from "../../shared/panels/AwsCertContent"
 import AWSCertsHighlight from "../../highlights/AWSCertsHighlight"
+import useIsDesktop from "../../shared/hooks/useIsDesktop"
+
 
 function HomeLeaf() {
     const { highlight } = Route.useSearch()
+    const isDesktop = useIsDesktop()
 
     return (
-        <main className={`${bentoStyles.grid_mobile} ${appStyles}`}>
+        <main className="fixed w-full h-full grid grid-cols-18 grid-rows-32 gap-2">
             <PanelLeaf
-                rowBegin={1}
-                rowEnd={5}
-                colBegin={1}
-                colEnd={6}
+                gridPos={isDesktop ? 
+                    {
+                        rowStart:2,
+                        rowEnd:5,
+                        colStart:2,
+                        colEnd:9
+                    }
+                    :
+                    {
+                        rowStart:1,
+                        rowEnd:5,
+                        colStart:1,
+                        colEnd:6
+                    }
+                }
                 queryParam="highlight"
             >
                 <article>
@@ -35,27 +46,57 @@ function HomeLeaf() {
                 </article>
             </PanelLeaf>
 
-            <PanelInfo
-                rowBegin={1}
-                rowEnd={5}
-                colBegin={6}
-                colEnd={19}
+            <PanelLayout
+                gridPos={isDesktop ? 
+                    {
+                        rowStart:2,
+                        rowEnd:5,
+                        colStart:25,
+                        colEnd:32
+                    }
+                    :
+                    {
+                        rowStart:1,
+                        rowEnd:5,
+                        colStart:6,
+                        colEnd:19
+                    }
+                }
             >
-                <PanelCol>
-                    <div className={`${containers.centerUnflex}`}>
-                        <p>+44 73544 30588</p>
-                        <hr />
-                        <p>steven_herlihy@yahoo.com</p>
-                    </div>
-                </PanelCol>
-            </PanelInfo>
+                <section className="w-full h-full">
+                    <PanelCol>
+                        <div className="text-center">
+                            <p>+44 73544 30588</p>
+                            <hr />
+                            <p>steven_herlihy@yahoo.com</p>
+                        </div>
+                    </PanelCol>
+                    <PanelCol>
+                        <div className="text-center">
+                            <p>+44 73544 30588</p>
+                            <hr />
+                            <p>steven_herlihy@yahoo.com</p>
+                        </div>
+                    </PanelCol>
+                </section>
+            </PanelLayout>
 
-
-            <Panel
-                rowBegin={5}
-                rowEnd={25}
-                colBegin={1}
-                colEnd={19}
+            <PanelLayout
+                gridPos={isDesktop ? 
+                    {
+                        rowStart:2,
+                        rowEnd:15,
+                        colStart:9,
+                        colEnd:25
+                    }
+                    :
+                    {
+                        rowStart:5,
+                        rowEnd:25,
+                        colStart:1,
+                        colEnd:19
+                    }
+                }
             >
                 <PanelCol>
                     {(
@@ -77,13 +118,24 @@ function HomeLeaf() {
                         }
                     )()}
                 </PanelCol>
-            </Panel>
+            </PanelLayout>
 
             <PanelLeaf
-                rowBegin={25}
-                rowEnd={29}
-                colBegin={1}
-                colEnd={7}
+                gridPos={isDesktop ? 
+                    {
+                        rowStart:5,
+                        rowEnd:11,
+                        colStart:2,
+                        colEnd:9
+                    }
+                    :
+                    {
+                        rowStart:25,
+                        rowEnd:29,
+                        colStart:1,
+                        colEnd:7
+                    }
+                }
                 queryParam="velma"
             >
                 <PanelCol>
@@ -92,10 +144,21 @@ function HomeLeaf() {
             </PanelLeaf>
 
             <PanelLeaf
-                rowBegin={25}
-                rowEnd={29}
-                colBegin={13}
-                colEnd={19}
+                gridPos={isDesktop ? 
+                    {
+                        rowStart:11,
+                        rowEnd:15,
+                        colStart:2,
+                        colEnd:9
+                    }
+                    :
+                    {
+                        rowStart:25,
+                        rowEnd:29,
+                        colStart:13,
+                        colEnd:19
+                    }
+                }
                 queryParam="awsCert"
             >
                 <PanelCol>
@@ -104,10 +167,21 @@ function HomeLeaf() {
             </PanelLeaf>
 
             <PanelLeaf
-                rowBegin={25}
-                rowEnd={29}
-                colBegin={7}
-                colEnd={13}
+                gridPos={isDesktop ? 
+                    {
+                        rowStart:5,
+                        rowEnd:10,
+                        colStart:25,
+                        colEnd:32
+                    }
+                    :
+                    {
+                        rowStart:25,
+                        rowEnd:29,
+                        colStart:7,
+                        colEnd:13
+                    }
+                }
                 queryParam="authService"
             >
                 <PanelCol>
@@ -116,10 +190,21 @@ function HomeLeaf() {
             </PanelLeaf>
 
             <PanelLeaf
-                rowBegin={29}
-                rowEnd={33}
-                colBegin={1}
-                colEnd={12}
+                gridPos={isDesktop ? 
+                    {
+                        rowStart:15,
+                        rowEnd:18,
+                        colStart:2,
+                        colEnd:18
+                    }
+                    :
+                    {
+                        rowStart:29,
+                        rowEnd:33,
+                        colStart:1,
+                        colEnd:12
+                    }
+                }
                 queryParam="sherlihyDotCom"
             >
                 <PanelRow>
@@ -128,10 +213,21 @@ function HomeLeaf() {
             </PanelLeaf>
 
             <PanelLeaf
-                rowBegin={29}
-                rowEnd={33}
-                colBegin={12}
-                colEnd={19}
+                gridPos={isDesktop ? 
+                    {
+                        rowStart:15,
+                        rowEnd:18,
+                        colStart:18,
+                        colEnd:32
+                    }
+                    :
+                    {
+                        rowStart:29,
+                        rowEnd:33,
+                        colStart:12,
+                        colEnd:19
+                    }
+                }
                 queryParam="i2"
             >
                 <PanelRow>

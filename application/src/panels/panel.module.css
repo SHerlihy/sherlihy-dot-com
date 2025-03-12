@@ -1,27 +1,3 @@
-section {
-    overflow: hidden;
-    height: 100%;
-    width: 100%;
-
-    padding: 0.5rem;
-}
-
-.panel_row {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-
-    padding: 1rem;
-}
-
-.panel_col {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-
-    padding: 1rem;
-}
-
 .card {
     height: 100%;
     width: 100%;
@@ -38,10 +14,6 @@ section {
 
 .link:hover {
     color: currentColor;
-}
-
-.title {
-    padding: 1rem 2rem;
 }
 
 .points {
