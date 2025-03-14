@@ -1,6 +1,6 @@
-import React, { ComponentType, ReactNode } from "react"
+import { ComponentType } from "react"
 
-import containerCss  from "./CoupleContainer.module.css"
+import useIsDesktop from "../hooks/useIsDesktop"
 
 const CoupleContainer = (props: {
     TlImg: ComponentType,
@@ -8,13 +8,25 @@ const CoupleContainer = (props: {
 }) => {
     const TopLeftImg = props.TlImg
     const BottomRightImg = props.BrImg
+
+    const isDesktop = useIsDesktop()
     return (
-        <div className={`${containerCss.container} ${containerCss.imageDefaults}`}>
-            <div className={`${containerCss.br}`} >
-                <BottomRightImg/>
+        <div className={`
+w-full h-full
+${isDesktop && "grid grid-cols-9 grid-rows-9"}
+${!isDesktop && "flex flex-row-reverse justify-center items-center"}
+`}>
+            <div className={`
+h-full 
+${isDesktop && "col-start-4 col-end-9 row-start-4 row-end-9"}
+`} >
+                <BottomRightImg />
             </div>
-            <div className={`${containerCss.tl}`} >
-                <TopLeftImg/>
+            <div className={`
+h-full 
+${isDesktop && "col-start-1 col-end-7 row-start-1 row-end-7"}
+`}>
+                <TopLeftImg />
             </div>
         </div>
     )
