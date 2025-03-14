@@ -6,15 +6,15 @@ import HighlightMobileLayout from "../shared/components/HighlightMobileLayout.ts
 
 const AuthHighlightImg = () => {
     return (
-            <div className={`h-full w-1/2 relative`}>
-                <img src="/authService/robo3.png" className={`${highlightCss.img} ${authHighlightCss.queue_up3}`} />
-                <img src="/authService/robo2.png" className={`${highlightCss.img} ${authHighlightCss.queue_up2}`} />
-                <img src="/authService/robo1.png" className={`${highlightCss.img} ${authHighlightCss.queue_up1}`} />
-                <img src="/authService/boop3.png" className={`${highlightCss.img} ${authHighlightCss.talk3}`} />
-                <img src="/authService/boop2.png" className={`${highlightCss.img} ${authHighlightCss.talk2}`} />
-                <img src="/authService/notAToaster.png" className={`${highlightCss.img} ${authHighlightCss.talk1}`} />
-                <img src="/authService/queueBarrier.png" className={`${highlightCss.img}`} />
-            </div>
+        <>
+            <img src="/authService/robo3.png" className={`${highlightCss.img} ${authHighlightCss.queue_up3}`} />
+            <img src="/authService/robo2.png" className={`${highlightCss.img} ${authHighlightCss.queue_up2}`} />
+            <img src="/authService/robo1.png" className={`${highlightCss.img} ${authHighlightCss.queue_up1}`} />
+            <img src="/authService/boop3.png" className={`${highlightCss.img} ${authHighlightCss.talk3}`} />
+            <img src="/authService/boop2.png" className={`${highlightCss.img} ${authHighlightCss.talk2}`} />
+            <img src="/authService/notAToaster.png" className={`${highlightCss.img} ${authHighlightCss.talk1}`} />
+            <img src="/authService/queueBarrier.png" className={`${highlightCss.img}`} />
+        </>
     )
 }
 
@@ -35,12 +35,16 @@ ${!isDesktop && 'w-full h-full flex flex-col'}
 `}>
             {isDesktop &&
                 <HighlightDesktopLayout paragraphs={paragraphs}>
-                    <AuthHighlightImg />
+                    <div className="h-30 w-30 relative">
+                        <AuthHighlightImg />
+                    </div>
                 </HighlightDesktopLayout>
             }
             {!isDesktop &&
                 <HighlightMobileLayout paragraphs={paragraphs}>
-                    <AuthHighlightImg />
+                    <div className="h-30 w-30 relative">
+                        <AuthHighlightImg />
+                    </div>
                 </HighlightMobileLayout>
             }
         </div>

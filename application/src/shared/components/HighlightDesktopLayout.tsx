@@ -9,7 +9,7 @@ const HighlightDesktopLayout = ({
 }) => {
     return (
         <>
-            <div className='float-left h-1/3 w-1/3'>
+            <div className='float-left overflow-hidden p-4'>
                 {children}
             </div>
             {paragraphs.map((para, idx) => <>

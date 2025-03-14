@@ -42,12 +42,16 @@ ${!isDesktop && 'w-full h-full flex flex-col'}
 `}>
             {isDesktop &&
                 <HighlightDesktopLayout paragraphs={paragraphs}>
-                    <CoupleContainer TlImg={ArchitectImg} BrImg={PractitionerImg} />
+                    <div className="h-30 w-30 relative">
+                        <CoupleContainer TlImg={ArchitectImg} BrImg={PractitionerImg} />
+                    </div>
                 </HighlightDesktopLayout>
             }
             {!isDesktop &&
                 <HighlightMobileLayout paragraphs={paragraphs}>
-                    <CoupleContainer TlImg={ArchitectImg} BrImg={PractitionerImg} />
+                    <div className="h-30 w-full relative">
+                        <CoupleContainer TlImg={ArchitectImg} BrImg={PractitionerImg} />
+                    </div>
                 </HighlightMobileLayout>
             }
         </div>
