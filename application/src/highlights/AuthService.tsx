@@ -1,15 +1,9 @@
-import FeatureLayout from "./layouts/FeatureLayout.tsx"
 import highlightCss from "./Highlight.module.css"
 import authHighlightCss from "./AuthHighlight.module.css"
 import useIsDesktop from "../shared/hooks/useIsDesktop.tsx"
 import HighlightDesktopLayout from "../shared/components/HighlightDesktopLayout.tsx"
 import HighlightMobileLayout from "../shared/components/HighlightMobileLayout.tsx"
 
-// .container_image {
-//     position: relative;
-//     height: 200px;
-//     width: 200px;
-// }
 const AuthHighlightImg = () => {
     return (
             <div className={`h-full w-1/2 relative`}>

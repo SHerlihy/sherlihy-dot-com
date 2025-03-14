@@ -15,7 +15,7 @@ const HighlightMobileLayout = ({
             <span className='h-1/12' />
             <div className='w-full h-7/12 flex flex-col'>
                 <span />
-                <div className='p-4 overflow-scroll shadow-[inset_0_-2rem_1rem_-2rem,inset_0_2rem_1rem_-2rem]
+                <div className='h-full p-4 overflow-scroll shadow-[inset_0_-2rem_1rem_-2rem,inset_0_2rem_1rem_-2rem]
             '>
                     {paragraphs.map((para, idx) => <div key={idx}>
                         <p>{para}</p>
