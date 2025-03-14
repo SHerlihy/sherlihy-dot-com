@@ -1,22 +1,29 @@
 import HomeHighlightCss from "./HomeHighlight.module.css"
-import highlightCss from "./Highlight.module.css"
+import useIsDesktop from "../shared/hooks/useIsDesktop"
 
-const HomeHighlight = () => {
+const HomeImage = () => {
     return (
-    <>
-        <div className={`${HomeHighlightCss.container_padding}`}>
         <div className={`${HomeHighlightCss.profile_img_container}`}>
             <div className={`${HomeHighlightCss.constrained}`}>
-                <img src="/sherlihy.png" className={`${HomeHighlightCss.img}`}/>
+                <img src="/sherlihy.png" className={`${HomeHighlightCss.img}`} />
             </div>
         </div>
-        </div>
-            <div className={`${highlightCss.container_content}`}>
+    )
+}
+
+const HomeHighlight = () => {
+    const isDesktop = useIsDesktop()
+    return (
+        <div className={`
+w-full h-full p-4 flex justify-center items-center
+${isDesktop ? "flex-row" : "flex-col"}
+`}>
+            <HomeImage />
+            <span className="p-4" />
             <p>
                 Welcome, here I reflect on projects I have worked on.
             </p>
-            </div>
-    </>
+        </div>
     )
 }
 

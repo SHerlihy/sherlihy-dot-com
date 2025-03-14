@@ -1,7 +1,4 @@
-import React, { ReactNode } from 'react'
-import highlightCss from "./Highlight.module.css"
 import CoupleContainer from '../shared/layouts/CoupleContainer'
-import FlexDirectionOnDesktop from '../shared/components/FlexDirectionOnDesktop'
 import useIsDesktop from '../shared/hooks/useIsDesktop'
 import HighlightDesktopLayout from '../shared/components/HighlightDesktopLayout'
 import HighlightMobileLayout from '../shared/components/HighlightMobileLayout'
