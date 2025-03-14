@@ -12,10 +12,10 @@ const HighlightDesktopLayout = ({
             <div className='float-left overflow-hidden p-4'>
                 {children}
             </div>
-            {paragraphs.map((para, idx) => <>
-                <p key={idx}>{para}</p>
+            {paragraphs.map((para, idx) => <div key={idx}>
+                <p>{para}</p>
                 &nbsp;
-            </>)}
+            </div>)}
         </>
     )
 }
