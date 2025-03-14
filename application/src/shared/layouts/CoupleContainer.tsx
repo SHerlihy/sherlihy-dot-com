@@ -1,6 +1,5 @@
-import React, { ComponentType, ReactNode } from "react"
+import { ComponentType } from "react"
 
-import containerCss from "./CoupleContainer.module.css"
 import useIsDesktop from "../hooks/useIsDesktop"
 
 const CoupleContainer = (props: {
