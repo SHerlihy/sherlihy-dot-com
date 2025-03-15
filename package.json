@@ -10,7 +10,7 @@
     "preview": "vite preview ./",
     "infra_diagrams": "live-server --open=./deployment/infrastructure_diagrams .",
     "launch_prod": "cd ./deployment/production && ./deploy_prod.sh && ../../",
-    "replace_prod_files": "cd ./deployment/production/bucket && ./test.sh && ./replace_s3.sh && cd ../../../",
+    "replace_prod_files": "cd ./deployment/production/bucket && ./replace_s3.sh && cd ../../../",
     "compose_diagrams": "cd ./deployment/infrastructure_diagrams && ts-node-esm diagramsToMd.ts",
     "readme_add_diagrams": "cd ./deployment/infrastructure_diagrams && node ./diagrams_to_readme.cjs"
   },
