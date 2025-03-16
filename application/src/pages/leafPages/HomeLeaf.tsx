@@ -13,6 +13,7 @@ import ComingSoonHighlight from "../../highlights/ComingSoonHighlight"
 import AwsCertContent from "../../shared/panels/AwsCertContent"
 import AWSCertsHighlight from "../../highlights/AWSCertsHighlight"
 import useIsDesktop from "../../shared/hooks/useIsDesktop"
+import SherlihyHighlight from "../../highlights/SherlihyHighlight"
 
 
 function HomeLeaf() {
@@ -109,6 +110,8 @@ function HomeLeaf() {
                                 return <AWSCertsHighlight />
                             case "highlight":
                                 return <HomeHighlight />
+                            case "sherlihyDotCom":
+                                return <SherlihyHighlight />
                             default:
                                 return <ComingSoonHighlight />
                         }
