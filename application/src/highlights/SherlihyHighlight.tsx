@@ -18,7 +18,7 @@ ${!isDesktop && 'w-full h-full flex flex-col'}
 `}>
             {isDesktop &&
                 <HighlightDesktopLayout paragraphs={paragraphs}>
-                    <div className="h-30 w-30 relative">
+                    <div className="h-40 w-40 relative">
                         <SherlihyImage />
                     </div>
                 </HighlightDesktopLayout>

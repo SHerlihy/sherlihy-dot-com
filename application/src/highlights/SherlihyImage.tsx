@@ -1,6 +1,6 @@
 import HomeHighlightCss from "./HomeHighlight.module.css"
 
-const SherlihyImage = ({ height = "150px", width = "150px" }: { height: string, width: string }) => {
+const SherlihyImage = ({ height = "150px", width = "150px" }) => {
     const imgStyles = {
         "maxHeight": height,
         "minHeight": height,
