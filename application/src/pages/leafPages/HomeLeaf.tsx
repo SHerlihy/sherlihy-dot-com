@@ -48,9 +48,9 @@ function HomeLeaf() {
                 queryParam="highlight"
             >
                 <div className='w-full h-full flex justify-center items-center'>
-                    <p>
+                    <h2>
                         Home
-                    </p>
+                    </h2>
                 </div>
             </PanelLeaf>
 
