@@ -1,26 +1,7 @@
 import HighlightDesktopLayout from "../shared/components/HighlightDesktopLayout"
 import HighlightMobileLayout from "../shared/components/HighlightMobileLayout"
 import useIsDesktop from "../shared/hooks/useIsDesktop"
-import velmaHighlightCss from "./VelmaModeHighlight.module.css"
-
-const VelmaImages = () => {
-    return (
-        <>
-            <img
-                src="/velmaMode/velmaNoGlasses.png"
-                className={`absolute ${velmaHighlightCss.blur}`}
-            />
-            <img
-                src="/velmaMode/velmaNoGlasses.png"
-                className={`absolute ${velmaHighlightCss.mask} ${velmaHighlightCss.blur_up}`}
-            />
-            <img
-                src="/velmaMode/velmaGlasses.png"
-                className={`absolute ${velmaHighlightCss.move_up}`}
-            />
-        </>
-    )
-}
+import SherlihyImage from "./SherlihyImage"
 
 const SherlihyHighlight = () => {
     const isDesktop = useIsDesktop()
@@ -38,14 +19,14 @@ ${!isDesktop && 'w-full h-full flex flex-col'}
             {isDesktop &&
                 <HighlightDesktopLayout paragraphs={paragraphs}>
                     <div className="h-30 w-30 relative">
-                        <VelmaImages />
+                        <SherlihyImage />
                     </div>
                 </HighlightDesktopLayout>
             }
             {!isDesktop &&
                 <HighlightMobileLayout paragraphs={paragraphs}>
                     <div className="h-30 w-30 relative">
-                        <VelmaImages />
+                        <SherlihyImage />
                     </div>
                 </HighlightMobileLayout>
             }
