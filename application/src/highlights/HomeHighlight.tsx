@@ -11,7 +11,7 @@ ${isDesktop ? "flex-row" : "flex-col"}
             <SherlihyImage />
             <span className="p-4" />
             <p>
-                Welcome, here I reflect on projects I have worked on.
+                Welcome, here I reflect on all things software engineering.
             </p>
         </div>
     )

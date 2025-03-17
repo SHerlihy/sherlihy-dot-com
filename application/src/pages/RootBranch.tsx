@@ -1,6 +1,6 @@
 import useIsDesktop from "../shared/hooks/useIsDesktop"
 
-import { PanelCol, PanelLeaf } from "../panels/Panel"
+import { PanelCol, PanelContent, PanelLeaf } from "../panels/Panel"
 
 import LeafCommon from "../shared/layouts/LeafCommon"
 import HomeHighlight from "../highlights/HomeHighlight"
@@ -24,15 +24,15 @@ function RootBranch() {
             <PanelLeaf
                 gridPos={isDesktop ?
                     {
-                        rowStart: 11,
-                        rowEnd: 15,
+                        rowStart: 5,
+                        rowEnd: 8,
                         colStart: 2,
                         colEnd: 9
                     }
                     :
                     {
-                        rowStart: 28,
-                        rowEnd: 33,
+                        rowStart: 26,
+                        rowEnd: 31,
                         colStart: 10,
                         colEnd: 19
                     }
@@ -40,21 +40,21 @@ function RootBranch() {
                 pathname="/events"
             >
                 <PanelCol>
-                    <p>events</p>
+                    <PanelContent title="Events" items={[]} />
                 </PanelCol>
             </PanelLeaf>
             <PanelLeaf
                 gridPos={isDesktop ?
                     {
-                        rowStart: 11,
-                        rowEnd: 15,
-                        colStart: 2,
-                        colEnd: 9
+                        rowStart: 5,
+                        rowEnd: 8,
+                        colStart: 25,
+                        colEnd: 32
                     }
                     :
                     {
-                        rowStart: 28,
-                        rowEnd: 33,
+                        rowStart: 26,
+                        rowEnd: 31,
                         colStart: 1,
                         colEnd: 10
                     }
@@ -62,7 +62,7 @@ function RootBranch() {
                 pathname="/projects"
             >
                 <PanelCol>
-                    <p>projects</p>
+                    <PanelContent title="Projects" items={[]} />
                 </PanelCol>
             </PanelLeaf>
         </main>

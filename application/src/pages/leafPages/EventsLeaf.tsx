@@ -2,7 +2,7 @@ import CambridgeAIHighlight from "../../highlights/events/CambridgeAIHighlight"
 import DayOfCodeHighlight from "../../highlights/events/DayOfCodeHighlight"
 import SoftwareCraftersHighlight from "../../highlights/events/SoftwareCraftersHighlight"
 import TechWeekHighlight from "../../highlights/events/TechWeekHighlight"
-import { PanelCol, PanelLeaf } from "../../panels/Panel"
+import { PanelCol, PanelLeaf, PanelRow } from "../../panels/Panel"
 import { Route } from "../../routes/events"
 
 import useIsDesktop from "../../shared/hooks/useIsDesktop"
@@ -44,23 +44,23 @@ function EventsLeaf() {
             <PanelLeaf
                 gridPos={isDesktop ?
                     {
-                        rowStart: 11,
-                        rowEnd: 15,
+                        rowStart: 5,
+                        rowEnd: 10,
                         colStart: 2,
                         colEnd: 9
                     }
                     :
                     {
-                        rowStart: 28,
-                        rowEnd: 33,
-                        colStart: 11,
+                        rowStart: 24,
+                        rowEnd: 28,
+                        colStart: 1,
                         colEnd: 19
                     }
                 }
-                queryParam="DoC"
+                queryParam="SCC"
             >
                 <PanelCol>
-                    <DayOfCodeContent />
+                    <SoftwareCraftersCambridgeContent />
                 </PanelCol>
             </PanelLeaf>
             <PanelLeaf
@@ -88,10 +88,32 @@ function EventsLeaf() {
             <PanelLeaf
                 gridPos={isDesktop ?
                     {
-                        rowStart: 11,
-                        rowEnd: 15,
+                        rowStart: 15,
+                        rowEnd: 19,
                         colStart: 2,
-                        colEnd: 9
+                        colEnd: 19
+                    }
+                    :
+                    {
+                        rowStart: 28,
+                        rowEnd: 33,
+                        colStart: 11,
+                        colEnd: 19
+                    }
+                }
+                queryParam="DoC"
+            >
+                <PanelRow>
+                    <DayOfCodeContent />
+                </PanelRow>
+            </PanelLeaf>
+            <PanelLeaf
+                gridPos={isDesktop ?
+                    {
+                        rowStart: 9,
+                        rowEnd: 15,
+                        colStart: 25,
+                        colEnd: 32
                     }
                     :
                     {
@@ -105,28 +127,6 @@ function EventsLeaf() {
             >
                 <PanelCol>
                     <CamTechWeekContent />
-                </PanelCol>
-            </PanelLeaf>
-            <PanelLeaf
-                gridPos={isDesktop ?
-                    {
-                        rowStart: 11,
-                        rowEnd: 15,
-                        colStart: 2,
-                        colEnd: 9
-                    }
-                    :
-                    {
-                        rowStart: 24,
-                        rowEnd: 28,
-                        colStart: 1,
-                        colEnd: 19
-                    }
-                }
-                queryParam="SCC"
-            >
-                <PanelCol>
-                    <SoftwareCraftersCambridgeContent />
                 </PanelCol>
             </PanelLeaf>
         </main>
