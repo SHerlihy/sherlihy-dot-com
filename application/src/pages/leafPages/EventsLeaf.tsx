@@ -1,5 +1,9 @@
-import DayOfCodeHighlight from "../../highlights/events/DayOfCode"
-import { PanelCol, PanelLeaf, PanelRow, PanelLayout } from "../../panels/Panel"
+import CambridgeAIHighlight from "../../highlights/events/CambridgeAIHighlight"
+import DayOfCodeHighlight from "../../highlights/events/DayOfCodeHighlight"
+import SoftwareCraftersHighlight from "../../highlights/events/SoftwareCraftersHighlight"
+import TechWeekHighlight from "../../highlights/events/TechWeekHighlight"
+import { PanelCol, PanelLeaf } from "../../panels/Panel"
+import { Route } from "../../routes/events"
 
 import useIsDesktop from "../../shared/hooks/useIsDesktop"
 import LeafCommon from "../../shared/layouts/LeafCommon"
@@ -9,7 +13,7 @@ import DayOfCodeContent from "../../shared/panels/events/DayOfCodeContent"
 import SoftwareCraftersCambridgeContent from "../../shared/panels/events/SoftwareCraftersCambridge"
 
 function EventsLeaf() {
-    // const { highlight } = Route.useSearch()
+    const { highlight } = Route.useSearch()
     const isDesktop = useIsDesktop()
 
     const gridMobileStyles = "grid-cols-18 grid-rows-32"
@@ -22,7 +26,20 @@ function EventsLeaf() {
                 gridDeskStyles : gridMobileStyles
             }`}>
             <LeafCommon>
-                <DayOfCodeHighlight />
+                {(
+                    () => {
+                        switch (highlight) {
+                            case 'DoC':
+                                return <DayOfCodeHighlight />
+                            case 'TechWeek':
+                                return <TechWeekHighlight />
+                            case 'CamAI':
+                                return <CambridgeAIHighlight />
+                            default:
+                                return <SoftwareCraftersHighlight />
+                        }
+                    }
+                )()}
             </LeafCommon>
             <PanelLeaf
                 gridPos={isDesktop ?

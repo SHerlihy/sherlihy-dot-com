@@ -2,7 +2,7 @@ import { ReactNode } from "react"
 import { PanelLayout, PanelLeaf } from "../../panels/Panel"
 import useIsDesktop from "../hooks/useIsDesktop"
 
-function LeafCommon({children}:{children:ReactNode}) {
+function LeafCommon({ children }: { children: ReactNode }) {
     const isDesktop = useIsDesktop()
 
     return (
@@ -24,6 +24,7 @@ function LeafCommon({children}:{children:ReactNode}) {
                     }
                 }
                 queryParam="highlight"
+                pathname="/"
             >
                 <div className='w-full h-full flex justify-center items-center'>
                     <h2>

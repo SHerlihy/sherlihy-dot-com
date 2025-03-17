@@ -5,12 +5,8 @@ export type HomeQueryOptions = "highlight" | "velma" | "i2" | "authService" | "s
 
 export type AllQueryOptions = HomeQueryOptions | EventQueryOptions
 
-type ProductSearch = {
-    highlight: AllQueryOptions
-}
-
 export const Route = createFileRoute('/')({
-  validateSearch: (search: Record<string, unknown>): ProductSearch => {
+  validateSearch: (search: Record<string, unknown>): {highlight: AllQueryOptions} => {
     // validate and parse the search params into a typed state
     return {
       highlight: (search.highlight as AllQueryOptions) || "highlight",

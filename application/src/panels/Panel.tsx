@@ -40,12 +40,13 @@ export const PanelLeaf = (props: {
     gridPos: GridPos,
     queryParam: AllQueryOptions
     children: ReactNode
+    pathname?: string
 }) => {
     const location = useLocation()
     return (
         <PanelLayout {...props}>
             <Link
-                to={location.pathname}
+                to={props.pathname? props.pathname : location.pathname}
                 search={() => ({ highlight: props.queryParam })}
                 className={`
                     ${panelCss.link}
