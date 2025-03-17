@@ -1,22 +1,21 @@
-import { PanelCol, PanelLeaf, PanelRow, PanelLayout } from "../../panels/Panel"
+import { PanelCol, PanelLeaf, PanelRow } from "../../panels/Panel"
 import SherlihyDotComContent from "../../shared/panels/SherlihyDotComContent"
 import I2Content from "../../shared/panels/I2Content"
 import AuthServiceContent from "../../shared/panels/AuthService"
 import VelmaModeContent from "../../shared/panels/VelmaModeContent"
 
-import { Route } from "../../routes/index"
-import VelmaModeHighlight from "../../highlights/VelmaModeHighlight"
-import I2GroupHighlight from "../../highlights/I2GroupHighlight"
-import AuthServiceHighlight from "../../highlights/AuthService"
-import HomeHighlight from "../../highlights/HomeHighlight"
-import ComingSoonHighlight from "../../highlights/ComingSoonHighlight"
-import AwsCertContent from "../../shared/panels/AwsCertContent"
-import AWSCertsHighlight from "../../highlights/AWSCertsHighlight"
 import useIsDesktop from "../../shared/hooks/useIsDesktop"
-import SherlihyHighlight from "../../highlights/SherlihyHighlight"
 
+import LeafCommon from "../../shared/layouts/LeafCommon"
+import VelmaModeHighlight from "../../highlights/projects/VelmaModeHighlight"
+import I2GroupHighlight from "../../highlights/projects/I2GroupHighlight"
+import AuthServiceHighlight from "../../highlights/projects/AuthService"
+import AWSCertsHighlight from "../../highlights/projects/AWSCertsHighlight"
+import SherlihyHighlight from "../../highlights/projects/SherlihyHighlight"
+import AwsCertContent from "../../shared/panels/AwsCertContent"
+import { Route } from "../../routes/projects"
 
-function HomeLeaf() {
+function ProjectsLeaf() {
     const { highlight } = Route.useSearch()
     const isDesktop = useIsDesktop()
 
@@ -29,74 +28,8 @@ function HomeLeaf() {
             ${isDesktop ?
                 gridDeskStyles : gridMobileStyles
             }`}>
-            <PanelLeaf
-                gridPos={isDesktop ?
-                    {
-                        rowStart: 2,
-                        rowEnd: 5,
-                        colStart: 2,
-                        colEnd: 9
-                    }
-                    :
-                    {
-                        rowStart: 1,
-                        rowEnd: 5,
-                        colStart: 1,
-                        colEnd: 6
-                    }
-                }
-                queryParam="highlight"
-            >
-                <div className='w-full h-full flex justify-center items-center'>
-                    <h2>
-                        Home
-                    </h2>
-                </div>
-            </PanelLeaf>
 
-            <PanelLayout
-                gridPos={isDesktop ?
-                    {
-                        rowStart: 2,
-                        rowEnd: 5,
-                        colStart: 25,
-                        colEnd: 32
-                    }
-                    :
-                    {
-                        rowStart: 1,
-                        rowEnd: 5,
-                        colStart: 6,
-                        colEnd: 19
-                    }
-                }
-            >
-                <section className="w-full h-full">
-                    <article className="text-center">
-                        <p>+44 73544 30588</p>
-                        <hr />
-                        <p>steven_herlihy@yahoo.com</p>
-                    </article>
-                </section>
-            </PanelLayout>
-
-            <PanelLayout
-                gridPos={isDesktop ?
-                    {
-                        rowStart: 2,
-                        rowEnd: 15,
-                        colStart: 9,
-                        colEnd: 25
-                    }
-                    :
-                    {
-                        rowStart: 5,
-                        rowEnd: 24,
-                        colStart: 1,
-                        colEnd: 19
-                    }
-                }
-            >
+            <LeafCommon>
                 {(
                     () => {
                         switch (highlight) {
@@ -108,17 +41,12 @@ function HomeLeaf() {
                                 return <AuthServiceHighlight />
                             case "awsCert":
                                 return <AWSCertsHighlight />
-                            case "highlight":
-                                return <HomeHighlight />
-                            case "sherlihyDotCom":
-                                return <SherlihyHighlight />
                             default:
-                                return <ComingSoonHighlight />
+                                return <SherlihyHighlight />
                         }
                     }
                 )()}
-            </PanelLayout>
-
+            </LeafCommon>
             <PanelLeaf
                 gridPos={isDesktop ?
                     {
@@ -237,4 +165,4 @@ function HomeLeaf() {
     )
 }
 
-export default HomeLeaf
+export default ProjectsLeaf

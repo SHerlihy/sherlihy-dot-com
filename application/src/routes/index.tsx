@@ -1,16 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router"
+import { EventQueryOptions } from "./events"
+import RootBranch from "../pages/RootBranch"
 
-export type HomeQueryOptions = "highlight" | "velma" | "i2" | "authService" | "sherlihyDotCom" | "resumeGrader"| "awsCert"
-
-type ProductSearch = {
-    highlight: HomeQueryOptions
-}
+export type AllQueryOptions =  EventQueryOptions
 
 export const Route = createFileRoute('/')({
-  validateSearch: (search: Record<string, unknown>): ProductSearch => {
-    // validate and parse the search params into a typed state
-    return {
-      highlight: (search.highlight as HomeQueryOptions) || "highlight",
-    }
-  },
+  component: RootBranch,
 })
