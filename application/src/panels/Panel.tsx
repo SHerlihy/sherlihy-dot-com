@@ -38,8 +38,8 @@ export const PanelLayout = (props: {
 
 export const PanelLeaf = (props: {
     gridPos: GridPos,
-    queryParam: AllQueryOptions
     children: ReactNode
+    queryParam?: AllQueryOptions
     pathname?: string
 }) => {
     const location = useLocation()

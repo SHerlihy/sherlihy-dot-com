@@ -1,7 +1,9 @@
-import HighlightDesktopLayout from "../shared/components/HighlightDesktopLayout"
-import HighlightMobileLayout from "../shared/components/HighlightMobileLayout"
-import useIsDesktop from "../shared/hooks/useIsDesktop"
+import useIsDesktop from "../../shared/hooks/useIsDesktop"
+
 import velmaHighlightCss from "./VelmaModeHighlight.module.css"
+
+import HighlightDesktopLayout from "../../shared/components/HighlightDesktopLayout"
+import HighlightMobileLayout from "../../shared/components/HighlightMobileLayout"
 
 const VelmaImages = () => {
     return (

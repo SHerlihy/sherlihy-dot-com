@@ -4,20 +4,18 @@ import I2Content from "../../shared/panels/I2Content"
 import AuthServiceContent from "../../shared/panels/AuthService"
 import VelmaModeContent from "../../shared/panels/VelmaModeContent"
 
-import { Route } from "../../routes/index"
-import VelmaModeHighlight from "../../highlights/VelmaModeHighlight"
-import I2GroupHighlight from "../../highlights/I2GroupHighlight"
-import AuthServiceHighlight from "../../highlights/AuthService"
-import HomeHighlight from "../../highlights/HomeHighlight"
-import ComingSoonHighlight from "../../highlights/ComingSoonHighlight"
-import AwsCertContent from "../../shared/panels/AwsCertContent"
-import AWSCertsHighlight from "../../highlights/AWSCertsHighlight"
 import useIsDesktop from "../../shared/hooks/useIsDesktop"
-import SherlihyHighlight from "../../highlights/SherlihyHighlight"
+
 import LeafCommon from "../../shared/layouts/LeafCommon"
+import VelmaModeHighlight from "../../highlights/projects/VelmaModeHighlight"
+import I2GroupHighlight from "../../highlights/projects/I2GroupHighlight"
+import AuthServiceHighlight from "../../highlights/projects/AuthService"
+import AWSCertsHighlight from "../../highlights/projects/AWSCertsHighlight"
+import SherlihyHighlight from "../../highlights/projects/SherlihyHighlight"
+import AwsCertContent from "../../shared/panels/AwsCertContent"
+import { Route } from "../../routes/projects"
 
-
-function HomeLeaf() {
+function ProjectsLeaf() {
     const { highlight } = Route.useSearch()
     const isDesktop = useIsDesktop()
 
@@ -43,12 +41,8 @@ function HomeLeaf() {
                                 return <AuthServiceHighlight />
                             case "awsCert":
                                 return <AWSCertsHighlight />
-                            case "highlight":
-                                return <HomeHighlight />
-                            case "sherlihyDotCom":
-                                return <SherlihyHighlight />
                             default:
-                                return <ComingSoonHighlight />
+                                return <SherlihyHighlight />
                         }
                     }
                 )()}
@@ -171,4 +165,4 @@ function HomeLeaf() {
     )
 }
 
-export default HomeLeaf
+export default ProjectsLeaf

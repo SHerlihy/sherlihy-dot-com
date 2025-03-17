@@ -1,7 +1,8 @@
-import HighlightDesktopLayout from "../shared/components/HighlightDesktopLayout"
-import HighlightMobileLayout from "../shared/components/HighlightMobileLayout"
-import useIsDesktop from "../shared/hooks/useIsDesktop"
-import SherlihyImage from "./SherlihyImage"
+import useIsDesktop from "../../shared/hooks/useIsDesktop"
+
+import HighlightDesktopLayout from "../../shared/components/HighlightDesktopLayout"
+import HighlightMobileLayout from "../../shared/components/HighlightMobileLayout"
+import SherlihyImage from "../SherlihyImage"
 
 const SherlihyHighlight = () => {
     const isDesktop = useIsDesktop()

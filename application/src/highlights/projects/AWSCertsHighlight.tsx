@@ -1,7 +1,8 @@
-import CoupleContainer from '../shared/layouts/CoupleContainer'
-import useIsDesktop from '../shared/hooks/useIsDesktop'
-import HighlightDesktopLayout from '../shared/components/HighlightDesktopLayout'
-import HighlightMobileLayout from '../shared/components/HighlightMobileLayout'
+import useIsDesktop from '../../shared/hooks/useIsDesktop'
+
+import CoupleContainer from '../../shared/layouts/CoupleContainer'
+import HighlightDesktopLayout from '../../shared/components/HighlightDesktopLayout'
+import HighlightMobileLayout from '../../shared/components/HighlightMobileLayout'
 
 const PractitionerImg = () => {
     return (

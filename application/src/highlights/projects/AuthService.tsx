@@ -1,7 +1,9 @@
+import useIsDesktop from "../../shared/hooks/useIsDesktop.tsx"
+
 import authHighlightCss from "./AuthHighlight.module.css"
-import useIsDesktop from "../shared/hooks/useIsDesktop.tsx"
-import HighlightDesktopLayout from "../shared/components/HighlightDesktopLayout.tsx"
-import HighlightMobileLayout from "../shared/components/HighlightMobileLayout.tsx"
+
+import HighlightDesktopLayout from "../../shared/components/HighlightDesktopLayout.tsx"
+import HighlightMobileLayout from "../../shared/components/HighlightMobileLayout.tsx"
 
 const AuthHighlightImg = () => {
     return (
