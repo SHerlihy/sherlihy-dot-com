@@ -1,10 +1,12 @@
 import DayOfCodeHighlight from "../../highlights/events/DayOfCode"
 import { PanelCol, PanelLeaf, PanelRow, PanelLayout } from "../../panels/Panel"
 
-import { Route } from "../../routes/index"
 import useIsDesktop from "../../shared/hooks/useIsDesktop"
 import LeafCommon from "../../shared/layouts/LeafCommon"
+import CamAIContent from "../../shared/panels/events/CamAIContent"
+import CamTechWeekContent from "../../shared/panels/events/CamTechWeekContent"
 import DayOfCodeContent from "../../shared/panels/events/DayOfCodeContent"
+import SoftwareCraftersCambridgeContent from "../../shared/panels/events/SoftwareCraftersCambridge"
 
 function EventsLeaf() {
     // const { highlight } = Route.useSearch()
@@ -32,9 +34,9 @@ function EventsLeaf() {
                     }
                     :
                     {
-                        rowStart: 24,
-                        rowEnd: 29,
-                        colStart: 10,
+                        rowStart: 28,
+                        rowEnd: 33,
+                        colStart: 11,
                         colEnd: 19
                     }
                 }
@@ -42,6 +44,72 @@ function EventsLeaf() {
             >
                 <PanelCol>
                     <DayOfCodeContent />
+                </PanelCol>
+            </PanelLeaf>
+            <PanelLeaf
+                gridPos={isDesktop ?
+                    {
+                        rowStart: 11,
+                        rowEnd: 15,
+                        colStart: 2,
+                        colEnd: 9
+                    }
+                    :
+                    {
+                        rowStart: 28,
+                        rowEnd: 33,
+                        colStart: 1,
+                        colEnd: 6
+                    }
+                }
+                queryParam="CamAI"
+            >
+                <PanelCol>
+                    <CamAIContent />
+                </PanelCol>
+            </PanelLeaf>
+            <PanelLeaf
+                gridPos={isDesktop ?
+                    {
+                        rowStart: 11,
+                        rowEnd: 15,
+                        colStart: 2,
+                        colEnd: 9
+                    }
+                    :
+                    {
+                        rowStart: 28,
+                        rowEnd: 33,
+                        colStart: 6,
+                        colEnd: 11
+                    }
+                }
+                queryParam="TechWeek"
+            >
+                <PanelCol>
+                    <CamTechWeekContent />
+                </PanelCol>
+            </PanelLeaf>
+            <PanelLeaf
+                gridPos={isDesktop ?
+                    {
+                        rowStart: 11,
+                        rowEnd: 15,
+                        colStart: 2,
+                        colEnd: 9
+                    }
+                    :
+                    {
+                        rowStart: 24,
+                        rowEnd: 28,
+                        colStart: 1,
+                        colEnd: 19
+                    }
+                }
+                queryParam="SCC"
+            >
+                <PanelCol>
+                    <SoftwareCraftersCambridgeContent />
                 </PanelCol>
             </PanelLeaf>
         </main>
