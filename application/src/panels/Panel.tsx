@@ -1,8 +1,8 @@
-import { Link } from '@tanstack/react-router'
+import { Link, useLocation } from '@tanstack/react-router'
 
 import { ReactNode } from "react"
 import panelCss from "./panel.module.css"
-import { HomeQueryOptions } from '../routes'
+import { AllQueryOptions, HomeQueryOptions } from '../routes'
 import useIsDesktop from '../shared/hooks/useIsDesktop'
 
 type GridPos = {
@@ -38,13 +38,14 @@ export const PanelLayout = (props: {
 
 export const PanelLeaf = (props: {
     gridPos: GridPos,
-    queryParam: HomeQueryOptions
+    queryParam: AllQueryOptions
     children: ReactNode
 }) => {
+    const location = useLocation()
     return (
         <PanelLayout {...props}>
             <Link
-                to='/'
+                to={location.pathname}
                 search={() => ({ highlight: props.queryParam })}
                 className={`
                     ${panelCss.link}

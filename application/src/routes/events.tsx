@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router"
 import Events from '../pages/leafPages/Events.tsx'
 import EventsLeaf from "../pages/leafPages/EventsLeaf.tsx"
 
+export type EventQueryOptions = "DoC"
 // export type HomeQueryOptions = "highlight" | "velma" | "i2" | "authService" | "sherlihyDotCom" | "resumeGrader"| "awsCert"
 
 export const Route = createFileRoute('/events')({
