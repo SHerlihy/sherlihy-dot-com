@@ -1,3 +1,8 @@
+.pop {
+    visibility: visible;
+    animation: pop-in 3000ms;
+}
+
 .blur {
     animation: blur-in 3000ms;
 }
@@ -16,6 +21,15 @@
 
 .blur_up {
     animation: blur-up 1500ms;
+}
+
+@keyframes pop-in {
+    0% {
+        visibility: hidden;
+    }
+    100% {
+        visibility: hidden;
+    }
 }
 
 @keyframes blur-in {
@@ -44,7 +58,7 @@
 
 @keyframes move-up {
     0% {
-        top: 100px;
+        top: 5rem;
     }
 
     100% {
