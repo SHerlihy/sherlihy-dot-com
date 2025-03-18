@@ -10,15 +10,11 @@ const VelmaImages = () => {
         <>
             <img
                 src="/velmaMode/velmaNoGlasses.png"
-                className={`absolute ${velmaHighlightCss.blur}`}
-            />
-            <img
-                src="/velmaMode/velmaNoGlasses.png"
                 className={`absolute ${velmaHighlightCss.mask} ${velmaHighlightCss.blur_up}`}
             />
             <img
-                src="/velmaMode/velmaGlasses.png"
-                className={`absolute ${velmaHighlightCss.move_up}`}
+                src="/velmaMode/velmaNoGlasses.png"
+                className={`absolute ${velmaHighlightCss.blur}`}
             />
         </>
     )

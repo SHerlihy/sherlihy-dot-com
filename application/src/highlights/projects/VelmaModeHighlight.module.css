@@ -3,9 +3,11 @@
 }
 
 .mask {
-    mask-image: url("/velmaMode/intro/velmaMask.png");
-
-    mask-size: 350px 350px;
+    mask-image: url("/velmaMode/velmaMask.png");
+    mask-repeat: no-repeat;
+    mask-origin: content-box;
+    mask-position: center;
+    mask-size: 100%;
 }
 
 .move_up {
@@ -32,11 +34,11 @@
 
 @keyframes blur-up {
     0% {
-        mask-position: 0 100px;
+        mask-position: center 5rem;
     }
 
     100% {
-        mask-position: 0 0px;
+        mask-position: center;
     }
 }
 
