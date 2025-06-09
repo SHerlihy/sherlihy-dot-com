@@ -1,4 +1,6 @@
 import { ReactNode } from "react"
+import HighlightMobileImage from "./HighlightMobileImage"
+import HighlightMobileContent from "./HighlightMobileContent"
 
 const HighlightMobileLayout = ({
     paragraphs,
@@ -9,20 +11,16 @@ const HighlightMobileLayout = ({
 }) => {
     return (
         <>
-            <div className='h-4/12 flex justify-center items-center'>
+            <HighlightMobileImage>
                 {children}
-            </div>
+            </HighlightMobileImage>
             <span className='h-1/12' />
-            <div className='w-full h-7/12 flex flex-col'>
-                <span />
-                <div className='h-full p-4 overflow-scroll shadow-[inset_0_-2rem_1rem_-2rem,inset_0_2rem_1rem_-2rem]
-            '>
-                    {paragraphs.map((para, idx) => <div key={idx}>
-                        <p>{para}</p>
-                        &nbsp;
-                    </div>)}
-                </div>
-            </div>
+            <HighlightMobileContent>
+                {paragraphs.map((para, idx) => <div key={idx}>
+                    <p>{para}</p>
+                    &nbsp;
+                </div>)}
+            </HighlightMobileContent>
         </>
     )
 }
