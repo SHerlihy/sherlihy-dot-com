@@ -1,4 +1,5 @@
 import { ReactNode } from "react"
+import HighlightDesktopImage from "./HighlightDesktopImage"
 
 const HighlightDesktopLayout = ({
     paragraphs,
@@ -9,9 +10,9 @@ const HighlightDesktopLayout = ({
 }) => {
     return (
         <>
-            <div className='float-left overflow-hidden p-4'>
+            <HighlightDesktopImage>
                 {children}
-            </div>
+            </HighlightDesktopImage>
             {paragraphs.map((para, idx) => <div key={idx}>
                 <p>{para}</p>
                 &nbsp;
