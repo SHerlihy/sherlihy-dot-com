@@ -7,30 +7,26 @@ import SherlihyImage from "./SherlihyImage"
 const HomeHighlight = () => {
     const isDesktop = useIsDesktop()
 
+    if (isDesktop) {
+        return (
+            <div>
+                <HighlightDesktopImage>
+                    <SherlihyImage />
+                </HighlightDesktopImage>
+                <Content />
+            </div>
+        )
+    }
+
     return (
-        <div className={`
-p-6
-${!isDesktop && 'w-full h-full flex flex-col'}
-`}>
-            {isDesktop &&
-                <>
-                    <HighlightDesktopImage>
-                        <SherlihyImage />
-                    </HighlightDesktopImage>
-                    <Content />
-                </>
-            }
-            {!isDesktop &&
-                <>
-                    <HighlightMobileImage>
-                        <SherlihyImage />
-                    </HighlightMobileImage>
-                    <span className='h-1/12' />
-                    <HighlightMobileContent>
-                        <Content />
-                    </HighlightMobileContent>
-                </>
-            }
+        <div className={'w-full h-full flex flex-col'}>
+            <HighlightMobileImage>
+                <SherlihyImage />
+            </HighlightMobileImage>
+            <span className='h-1/12' />
+            <HighlightMobileContent>
+                <Content />
+            </HighlightMobileContent>
         </div>
     )
 }

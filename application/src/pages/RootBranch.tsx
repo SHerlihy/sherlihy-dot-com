@@ -9,43 +9,12 @@ import SoftwareCraftersCambridgeContent from "../shared/panels/events/SoftwareCr
 import DayOfCodeContent from "../shared/panels/events/DayOfCodeContent"
 import I2Content from "../shared/panels/I2Content"
 import { ReactNode } from "@tanstack/react-router"
-
-function DesktopLayout({ content, navigate }: { content: ReactNode, navigate: ReactNode }) {
-    return (
-        <div className={`
-            fixed w-full h-full grid gap-4
-grid-cols-6
-`
-        }>
-            <div className={`col-start-1 col-end-5`}>
-                {content}
-            </div>
-            <div className={`col-start-5 col-end-6`}>
-                {navigate}
-            </div>
-        </div>
-    )
-}
-
-function PageLayout({ content, navigate }: { content: ReactNode, navigate: ReactNode }) {
-    const isDesktop = useIsDesktop()
-
-    return (
-        <main>
-            <p>Contact Info</p>
-            <hr />
-            {isDesktop && <DesktopLayout
-                content={content}
-                navigate={navigate}
-            />}
-        </main>
-    )
-}
+import PageLayout from "../shared/layouts/PageLayout"
 
 function RootBranch() {
     return (
         <PageLayout
-            content={<p>Content</p>}
+            content={<HomeHighlight/>}
             navigate={<p>Navigate</p>}
         />
     )
