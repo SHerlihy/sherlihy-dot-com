@@ -8,12 +8,47 @@ import VelmaModeContent from "../shared/panels/VelmaModeContent"
 import SoftwareCraftersCambridgeContent from "../shared/panels/events/SoftwareCraftersCambridge"
 import DayOfCodeContent from "../shared/panels/events/DayOfCodeContent"
 import I2Content from "../shared/panels/I2Content"
+import { ReactNode } from "@tanstack/react-router"
 
-function RootBranch() {
+function DesktopLayout({ content, navigate }: { content: ReactNode, navigate: ReactNode }) {
+    return (
+        <div className={`
+            fixed w-full h-full grid gap-4
+grid-cols-6
+`
+        }>
+            <div className={`col-start-1 col-end-5`}>
+                {content}
+            </div>
+            <div className={`col-start-5 col-end-6`}>
+                {navigate}
+            </div>
+        </div>
+    )
+}
+
+function PageLayout({ content, navigate }: { content: ReactNode, navigate: ReactNode }) {
     const isDesktop = useIsDesktop()
 
-    const gridMobileStyles = "grid-cols-18 grid-rows-32"
-    const gridDeskStyles = "grid-cols-32 grid-rows-18"
+    return (
+        <main>
+            <p>Contact Info</p>
+            <hr />
+            {isDesktop && <DesktopLayout
+                content={content}
+                navigate={navigate}
+            />}
+        </main>
+    )
+}
+
+function RootBranch() {
+    return (
+        <PageLayout
+            content={<p>Content</p>}
+            navigate={<p>Navigate</p>}
+        />
+    )
 
     return (
         <main className={`
@@ -22,16 +57,21 @@ function RootBranch() {
                 gridDeskStyles : gridMobileStyles
             }`}>
 
+            <PageLayout
+                content={<HomeHighlight />}
+                navigate={<HomeNav />}
+            />
+
             <LeafCommon>
                 <HomeHighlight />
             </LeafCommon>
             <PanelLeaf
                 gridPos={isDesktop ?
                     {
-                        rowStart: 5,
-                        rowEnd: 8,
-                        colStart: 2,
-                        colEnd: 9
+                        rowStart: 3,
+                        rowEnd: 5,
+                        colStart: 25,
+                        colEnd: 32
                     }
                     :
                     {
@@ -51,7 +91,7 @@ function RootBranch() {
                 gridPos={isDesktop ?
                     {
                         rowStart: 5,
-                        rowEnd: 8,
+                        rowEnd: 7,
                         colStart: 25,
                         colEnd: 32
                     }
@@ -73,10 +113,10 @@ function RootBranch() {
                 <PanelLeaf
                     gridPos={
                         {
-                            rowStart: 8,
-                            rowEnd: 15,
-                            colStart: 2,
-                            colEnd: 9
+                            rowStart: 7,
+                            rowEnd: 10,
+                            colStart: 25,
+                            colEnd: 32
                         }
                     }
                     pathname="/events"
@@ -89,10 +129,10 @@ function RootBranch() {
                 <PanelLeaf
                     gridPos={
                         {
-                            rowStart: 15,
-                            rowEnd: 18,
-                            colStart: 2,
-                            colEnd: 17
+                            rowStart: 10,
+                            rowEnd: 13,
+                            colStart: 25,
+                            colEnd: 32
                         }
                     }
                     pathname="/events"
@@ -105,8 +145,8 @@ function RootBranch() {
                 <PanelLeaf
                     gridPos={
                         {
-                            rowStart: 8,
-                            rowEnd: 15,
+                            rowStart: 13,
+                            rowEnd: 16,
                             colStart: 25,
                             colEnd: 32
                         }
@@ -121,9 +161,9 @@ function RootBranch() {
                 <PanelLeaf
                     gridPos={
                         {
-                            rowStart: 15,
-                            rowEnd: 18,
-                            colStart: 17,
+                            rowStart: 16,
+                            rowEnd: 19,
+                            colStart: 25,
                             colEnd: 32
                         }
                     }
@@ -131,7 +171,9 @@ function RootBranch() {
                     queryParam="i2"
                 >
                     <PanelRow>
-                        <I2Content />
+                        <div className='flex justify-center items-center'>
+                            <h2 className='text-center'>Employment</h2>
+                        </div>
                     </PanelRow>
                 </PanelLeaf>
             </>}

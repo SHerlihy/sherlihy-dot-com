@@ -11,9 +11,9 @@ function LeafCommon({ children }: { children: ReactNode }) {
                 gridPos={isDesktop ?
                     {
                         rowStart: 2,
-                        rowEnd: 5,
+                        rowEnd: 3,
                         colStart: 2,
-                        colEnd: 9
+                        colEnd: 16
                     }
                     :
                     {
@@ -37,8 +37,8 @@ function LeafCommon({ children }: { children: ReactNode }) {
                 gridPos={isDesktop ?
                     {
                         rowStart: 2,
-                        rowEnd: 5,
-                        colStart: 25,
+                        rowEnd: 3,
+                        colStart: 16,
                         colEnd: 32
                     }
                     :
@@ -52,18 +52,16 @@ function LeafCommon({ children }: { children: ReactNode }) {
             >
                 <section className="w-full h-full">
                     <article className="text-center">
-                        <p>+44 73544 30588</p>
-                        <hr />
-                        <p>steven_herlihy@yahoo.com</p>
+                        <p>+44 73544 30588 | steven_herlihy@yahoo.com</p>
                     </article>
                 </section>
             </PanelLayout>
             <PanelLayout
                 gridPos={isDesktop ?
                     {
-                        rowStart: 2,
-                        rowEnd: 15,
-                        colStart: 9,
+                        rowStart: 3,
+                        rowEnd: 18,
+                        colStart: 2,
                         colEnd: 25
                     }
                     :
