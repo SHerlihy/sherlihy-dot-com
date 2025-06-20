@@ -7,13 +7,13 @@ grow-1
             grid grid-cols-6
 `
         }>
-            <div className={`col-start-1 col-end-5
+            <div className={`col-start-1 col-end-6
 pr-4 flex flex-col justify-center align-center
 `}>
                 {content}
             </div>
-            <div className={`col-start-5 col-end-7
-pl-4 border-l
+            <div className={`col-start-6 col-end-7
+pl-4 border-l flex flex-col
 `}>
                 {navigate}
             </div>
