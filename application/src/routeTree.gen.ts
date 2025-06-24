@@ -52,10 +52,10 @@ export interface FileRoutesById {
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' 
+  fullPaths: '/'
   fileRoutesByTo: FileRoutesByTo
   to: '/'
-  id: '__root__' | '/' 
+  id: '__root__' | '/'
   fileRoutesById: FileRoutesById
 }
 
@@ -77,19 +77,11 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/",
-        "/events",
-        "/projects"
+        "/"
       ]
     },
     "/": {
       "filePath": "index.tsx"
-    },
-    "/events": {
-      "filePath": "events.tsx"
-    },
-    "/projects": {
-      "filePath": "projects.tsx"
     }
   }
 }
