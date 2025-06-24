@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router"
-import { EventQueryOptions } from "./events"
 import RootBranch from "../pages/RootBranch"
-import { ProjectsQueryOptions } from "./projects"
 
+type ProjectsQueryOptions = "velma" | "i2" | "authService" | "sherlihyDotCom" | "resumeGrader" | "awsCert"
+type EventQueryOptions = "DoC" | "SCC" | "CamAI" | "TechWeek"
 export type AllQueryOptions =  EventQueryOptions | ProjectsQueryOptions
 
 export const Route = createFileRoute('/')({
