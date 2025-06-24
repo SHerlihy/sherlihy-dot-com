@@ -1,5 +1,6 @@
 import { ReactNode } from "react"
 import HighlightDesktopImage from "./HighlightDesktopImage"
+import useIsDesktop from "../hooks/useIsDesktop"
 
 const HighlightDesktopLayout = ({
     paragraphs,
@@ -8,8 +9,12 @@ const HighlightDesktopLayout = ({
     paragraphs: string[],
     children: ReactNode
 }) => {
+    const isDesktop = useIsDesktop()
+
     return (
-        <>
+        <div className={`
+${!isDesktop && 'flex flex-col'}
+`}>
             <HighlightDesktopImage>
                 {children}
             </HighlightDesktopImage>
@@ -17,7 +22,7 @@ const HighlightDesktopLayout = ({
                 <p>{para}</p>
                 &nbsp;
             </div>)}
-        </>
+        </div>
     )
 }
 

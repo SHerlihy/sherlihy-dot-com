@@ -19,15 +19,15 @@ const HomeHighlight = () => {
     }
 
     return (
-        <div className={'w-full h-full flex flex-col'}>
+        <>
             <HighlightMobileImage>
                 <SherlihyImage />
             </HighlightMobileImage>
-            <span className='h-1/12' />
+            <span className='pb-4' />
             <HighlightMobileContent>
                 <Content />
             </HighlightMobileContent>
-        </div>
+        </>
     )
 }
 

@@ -17,7 +17,7 @@ import NavButton from "../shared/components/NavButton"
 
 function HomeNav() {
     return (
-        <div className={`flex-grow grid grid-cols-5 grid-rows-20`}>
+        <div className={`flex-grow grid grid-cols-5 grid-rows-10`}>
             <NavButton
                 className={`col-start-1 col-end-6 row-start-1 row-end-2`}
                 queryParam="i2"
@@ -82,7 +82,7 @@ function HomeNav() {
                 Go App
             </NavButton>
             <NavButton
-                className={`col-start-1 col-end-6 row-start-18 row-end-21`}
+                className={`col-start-1 col-end-6 row-start-10 row-end-11`}
                 queryParam=""
                 pathname="/"
             >

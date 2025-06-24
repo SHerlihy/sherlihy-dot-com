@@ -13,9 +13,7 @@ const DayOfCodeHighlight = () => {
 
 
     return (
-        <div className={`
-${!isDesktop && 'w-full h-full flex flex-col'}
-`}>
+        <>
             {isDesktop &&
                 <HighlightDesktopLayout paragraphs={paragraphs}>
                     <span />
@@ -26,7 +24,7 @@ ${!isDesktop && 'w-full h-full flex flex-col'}
                     <span />
                 </HighlightMobileLayout>
             }
-        </div>
+        </>
     )
 }
 

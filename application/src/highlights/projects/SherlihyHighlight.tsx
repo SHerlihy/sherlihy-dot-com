@@ -13,9 +13,7 @@ const SherlihyHighlight = () => {
     ]
 
     return (
-        <div className={`
-${!isDesktop && 'w-full h-full flex flex-col'}
-`}>
+        <>
             {isDesktop &&
                 <HighlightDesktopLayout paragraphs={paragraphs}>
                     <div className="h-40 w-40 relative">
@@ -30,7 +28,7 @@ ${!isDesktop && 'w-full h-full flex flex-col'}
                     </div>
                 </HighlightMobileLayout>
             }
-        </div>
+        </>
     )
 }
 

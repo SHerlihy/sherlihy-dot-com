@@ -26,9 +26,7 @@ const I2GroupHighlight = () => {
     ]
 
     return (
-        <div className={`
-${!isDesktop && 'flex flex-col overflow-hidden'}
-`}>
+        <>
             {isDesktop &&
                 <HighlightDesktopLayout paragraphs={paragraphs}>
                     <div className="h-30 w-30 relative">
@@ -43,7 +41,7 @@ ${!isDesktop && 'flex flex-col overflow-hidden'}
                     </div>
                 </HighlightMobileLayout>
             }
-        </div>
+        </>
     )
 }
 
