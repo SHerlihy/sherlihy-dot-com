@@ -2,6 +2,7 @@ import { ReactNode } from "react"
 import useIsDesktop from "../hooks/useIsDesktop"
 import DesktopLayout from "./DesktopLayout"
 import ContactInfo from "../components/ContactInfo"
+import MobileLayout from "./MobileLayout"
 
 function PageLayout({ content, navigate }: { content: ReactNode, navigate: ReactNode }) {
     const isDesktop = useIsDesktop()
@@ -13,6 +14,10 @@ function PageLayout({ content, navigate }: { content: ReactNode, navigate: React
             </div>
             <hr className={`pb-4`} />
                     {isDesktop && <DesktopLayout
+                        content={content}
+                        navigate={navigate}
+                    />}
+                    {!isDesktop && <MobileLayout
                         content={content}
                         navigate={navigate}
                     />}

@@ -1,34 +1,19 @@
 import HomeHighlight from "../highlights/HomeHighlight"
-import { Link, ReactNode, useLocation } from "@tanstack/react-router"
 import PageLayout from "../shared/layouts/PageLayout"
-import { AllQueryOptions } from "../routes"
 import { Route } from "../routes"
+
 import DayOfCodeHighlight from "../highlights/events/DayOfCodeHighlight"
 import TechWeekHighlight from "../highlights/events/TechWeekHighlight"
 import CambridgeAIHighlight from "../highlights/events/CambridgeAIHighlight"
+import SoftwareCraftersHighlight from "../highlights/events/SoftwareCraftersHighlight"
+
 import VelmaModeHighlight from "../highlights/projects/VelmaModeHighlight"
 import I2GroupHighlight from "../highlights/projects/I2GroupHighlight"
 import AuthServiceHighlight from "../highlights/projects/AuthService"
 import AWSCertsHighlight from "../highlights/projects/AWSCertsHighlight"
-import SoftwareCraftersHighlight from "../highlights/events/SoftwareCraftersHighlight"
+import SherlihyHighlight from "../highlights/projects/SherlihyHighlight"
 
-function NavButton(props: {
-    children: ReactNode
-    className?: string
-    queryParam?: AllQueryOptions
-    pathname?: string
-}) {
-    const location = useLocation()
-    return (
-        <Link
-            className={`flex justify-center items-center ${props.className}`}
-            to={props.pathname ? props.pathname : location.pathname}
-            search={() => ({ highlight: props.queryParam })}
-        >
-            {props.children}
-        </Link>
-    )
-}
+import NavButton from "../shared/components/NavButton"
 
 function HomeNav() {
     return (
@@ -62,7 +47,43 @@ function HomeNav() {
                 Craftsmanship
             </NavButton>
             <NavButton
+                className={`col-start-1 col-end-6 row-start-5 row-end-6`}
+                queryParam="velma"
+                pathname="/"
+            >
+                Accessable Text
+            </NavButton>
+            <NavButton
+                className={`col-start-1 col-end-6 row-start-6 row-end-7`}
+                queryParam="DoC"
+                pathname="/"
+            >
+                Day of Code
+            </NavButton>
+            <NavButton
+                className={`col-start-1 col-end-6 row-start-7 row-end-8`}
+                queryParam="CamAI"
+                pathname="/"
+            >
+                AI
+            </NavButton>
+            <NavButton
+                className={`col-start-1 col-end-6 row-start-8 row-end-9`}
+                queryParam="TechWeek"
+                pathname="/"
+            >
+                2024 Tech Week
+            </NavButton>
+            <NavButton
+                className={`col-start-1 col-end-6 row-start-9 row-end-10`}
+                queryParam="authService"
+                pathname="/"
+            >
+                Go App
+            </NavButton>
+            <NavButton
                 className={`col-start-1 col-end-6 row-start-18 row-end-21`}
+                queryParam=""
                 pathname="/"
             >
                 Home
@@ -94,6 +115,9 @@ function CurrentHighlight() {
                             return <CambridgeAIHighlight />
                         case 'SCC':
                             return <SoftwareCraftersHighlight />
+                        case 'sherlihyDotCom':
+                            return <SherlihyHighlight />
+
                         default:
                             return <HomeHighlight />
                     }

@@ -6,7 +6,7 @@ const HighlightDesktopImage = ({
     children: ReactNode
 }) => {
     return (
-        <div className='float-left overflow-hidden p-4'>
+        <div className='float-left overflow-hidden p-6'>
             {children}
         </div>
     )

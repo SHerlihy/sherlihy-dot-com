@@ -8,7 +8,7 @@ grow-1
 `
         }>
             <div className={`col-start-1 col-end-6
-pr-4 flex flex-col justify-center align-center
+p-[15%] flex flex-col justify-center align-center
 `}>
                 {content}
             </div>
