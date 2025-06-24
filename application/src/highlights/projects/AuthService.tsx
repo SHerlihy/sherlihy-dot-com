@@ -31,7 +31,6 @@ const AuthServiceHighlight = () => {
 
     return (
         <div className={`
-p-6
 ${!isDesktop && 'w-full h-full flex flex-col'}
 `}>
             {isDesktop &&
