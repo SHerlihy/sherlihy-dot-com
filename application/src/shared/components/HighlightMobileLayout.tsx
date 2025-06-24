@@ -14,7 +14,7 @@ const HighlightMobileLayout = ({
             <HighlightMobileImage>
                 {children}
             </HighlightMobileImage>
-            <span className='h-1/12' />
+            <span className='pb-4'/>
             <HighlightMobileContent>
                 {paragraphs.map((para, idx) => <div key={idx}>
                     <p>{para}</p>
