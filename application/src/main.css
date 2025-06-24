@@ -12,6 +12,11 @@
     font: inherit;
 }
 
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
 html {
     color-scheme: dark light;
     scroll-behavior: smooth;
@@ -26,8 +31,9 @@ body:has(.requires-no-scroll) {
     overflow: hidden;
 }
 
-main {
-    padding: 0.5rem;
+#root {
+    height: 100%;
+    width: 100%;
 }
 
 img,

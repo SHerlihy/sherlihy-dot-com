@@ -34,10 +34,7 @@ const AWSCertsHighlight = () => {
     ]
 
     return (
-        <div className={`
-p-6
-${!isDesktop && 'w-full h-full flex flex-col'}
-`}>
+        <>
             {isDesktop &&
                 <HighlightDesktopLayout paragraphs={paragraphs}>
                     <div className="h-30 w-30 relative">
@@ -52,7 +49,7 @@ ${!isDesktop && 'w-full h-full flex flex-col'}
                     </div>
                 </HighlightMobileLayout>
             }
-        </div>
+        </>
     )
 }
 

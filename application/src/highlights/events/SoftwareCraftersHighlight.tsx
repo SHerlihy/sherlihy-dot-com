@@ -3,7 +3,7 @@ import HighlightMobileLayout from "../../shared/components/HighlightMobileLayout
 import useIsDesktop from "../../shared/hooks/useIsDesktop"
 
 const paragraphs = [
-"Here I get hands on working with a wide range of other developers to improve in every area of software engineering. It's really fun meeting other developers and finding out how diverse our skillsets and perspectives are."
+    "Here I get hands on working with a wide range of other developers to improve in every area of software engineering. It's really fun meeting other developers and finding out how diverse our skillsets and perspectives are."
 ]
 
 const SoftwareCraftersHighlight = () => {
@@ -11,10 +11,7 @@ const SoftwareCraftersHighlight = () => {
 
 
     return (
-        <div className={`
-p-6
-${!isDesktop && 'w-full h-full flex flex-col'}
-`}>
+        <>
             {isDesktop &&
                 <HighlightDesktopLayout paragraphs={paragraphs}>
                     <span />
@@ -25,7 +22,7 @@ ${!isDesktop && 'w-full h-full flex flex-col'}
                     <span />
                 </HighlightMobileLayout>
             }
-        </div>
+        </>
     )
 }
 

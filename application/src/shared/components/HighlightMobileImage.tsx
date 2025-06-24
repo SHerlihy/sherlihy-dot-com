@@ -6,7 +6,7 @@ const HighlightMobileImage = ({
     children: ReactNode
 }) => {
     return (
-        <div className='h-4/12 flex justify-center items-center'>
+        <div className='flex justify-center items-center'>
             {children}
         </div>
     )
