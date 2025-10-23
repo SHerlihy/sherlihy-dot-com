@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react";
+import { Dispatch, ReactNode, SetStateAction, useState } from "react";
 import ContactInfo from "../components/ContactInfo";
 
 function MobileLayout({ content, navigate }: { content: ReactNode, navigate: ReactNode }) {
@@ -17,16 +17,28 @@ function MobileLayout({ content, navigate }: { content: ReactNode, navigate: Rea
                     <hr />
                 </div>
                 <div className={`flex justify-center row-start-9 row-end-10`}>
-                    <button
-                        className={`p-4 hover:cursor-pointer`}
-                        onClick={() => setIsNav((prev) => !prev)}>
-                        {isNav && <p>View</p>}
-                        {!isNav && <p>Navigate</p>}
-                    </button>
+<ControlBar isNav={isNav} setIsNav={setIsNav} />
                 </div>
             </div>
         </main>
     )
+}
+
+function ControlBar({isNav, setIsNav}: {isNav: boolean, setIsNav: Dispatch<SetStateAction<boolean>>}){
+return (
+<section>
+<div className={`grid grid-cols-4`}>
+                    <button
+                        className={`col-start-1 col-end-2
+                        p-4 hover:cursor-pointer`}
+                        onClick={() => setIsNav((prev) => !prev)}>
+                        {isNav && <p>View</p>}
+                        {!isNav && <p>Navigate</p>}
+                    </button>
+                    <ContactInfo style={`col-start-2 col-end-5`}/>
+</div>
+</section>
+)
 }
 
 export default MobileLayout
