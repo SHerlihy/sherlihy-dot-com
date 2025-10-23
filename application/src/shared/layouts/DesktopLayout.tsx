@@ -1,27 +1,20 @@
-import { ReactNode } from "react";
-import ContactInfo from "../components/ContactInfo";
+import { ReactNode, useContext } from "react";
+import { NavContext } from "../context/NavContext";
+import ControlBar from "../components/ControlBar";
 
 function DesktopLayout({ content, navigate }: { content: ReactNode, navigate: ReactNode }) {
+    const { isNav } = useContext(NavContext)
     return (
-        <main className={`flex flex-col w-full h-full p-10`}>
-            <ContactInfo />
-            <hr className={`pb-4`} />
-            <div className={`
-grow-1
-            grid grid-cols-6
-`
-            }>
-                <div className={`col-start-1 col-end-6
-p-[15%] flex flex-col justify-center align-center
-`}>
-                    {content}
-                </div>
-                <div className={`col-start-6 col-end-7
-pl-4 border-l flex flex-col
-`}>
-                    {navigate}
-                </div>
+        <main className={`w-full h-full p-10`}>
+            <div>
+                <ControlBar />
             </div>
+            <hr className={`pb-4`} />
+            <article>
+                {isNav && navigate}
+                {!isNav && content}
+                <hr />
+            </article>
         </main>
     )
 }
