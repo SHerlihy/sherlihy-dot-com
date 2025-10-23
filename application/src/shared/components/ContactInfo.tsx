@@ -4,10 +4,14 @@ function ContactInfo({style}:{style:string}) {
     const isDesktop = useIsDesktop()
     return (
         <div className={`flex justify-center items-center
-${isDesktop ? 'flex-row' : 'flex-col'}
 ${style}
 `}>
-<div>
+<div
+className={`
+flex justify-center items-center
+${isDesktop ? 'flex-row' : 'flex-col'}
+`}
+>
             <p>+44 7354430588</p>
             {isDesktop && <p>&nbsp;|&nbsp;</p>}
             <p> steven_herlihy@yahoo.com</p>
