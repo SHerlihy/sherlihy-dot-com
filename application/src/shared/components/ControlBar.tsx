@@ -1,8 +1,9 @@
 import useIsDesktop from "../hooks/useIsDesktop"
 
 import { useContext } from "react";
-import { BackIcon, MenuIcon } from "../icons";
+import { BackIcon, CopyIcon, MenuIcon } from "../icons";
 import { NavContext } from "../context/NavContext";
+import { Button } from "./button";
 
 function ControlBar() {
     const { isNav, toggleIsNav } = useContext(NavContext)
@@ -27,19 +28,11 @@ function ControlBar() {
 function ContactInfo({ style }: { style: string }) {
     const isDesktop = useIsDesktop()
     return (
-        <div className={`flex justify-center items-center
-${style}
-`}>
-            <div
-                className={`
-flex
-${isDesktop ? 'flex-row' : 'flex-col'}
-`}
-            >
-                {isDesktop && <ContactInfoDesktop/>}
-                {!isDesktop && <ContactInfoMobile/>}
-            </div>
-        </div>
+        <section className={`
+${style}`}>
+            {isDesktop && <ContactInfoDesktop />}
+            {!isDesktop && <ContactInfoMobile />}
+        </section>
     )
 }
 
@@ -58,20 +51,41 @@ function ContactInfoDesktop() {
 
 function ContactInfoMobile() {
     return (
-        <div className={`grid grid-cols-2 grid-rows-2`}>
-            <p className={`row-start-1 row-end-2 col-start-1 col-end-2`}>
+        <div className={`flex-1 grid gap-1 grid-cols-5 grid-rows-2`}>
+            <p className={`text-right row-start-1 row-end-2 col-start-1 col-end-5`}>
                 {PHONE_NO}
             </p>
-            <p className={`row-start-1 row-end-2 col-start-2 col-end-3`}>
-                copy
+            <p className={`row-start-1 row-end-2 col-start-5 col-end-6`}>
+                <CopyButton content={PHONE_NO} />
             </p>
-            <p className={`row-start-2 row-end-3 col-start-1 col-end-2`}>
+            <p className={`text-right row-start-2 row-end-3 col-start-1 col-end-5`}>
                 {EMAIL}
             </p>
-            <p className={`row-start-2 row-end-3 col-start-2 col-end-3`}>
-                copy
+            <p className={`row-start-2 row-end-3 col-start-5 col-end-6`}>
+                <CopyButton content={EMAIL} />
             </p>
         </div>
+    )
+}
+
+function CopyButton({ content }: { content: string }) {
+    function updateClipboard() {
+        navigator.clipboard.writeText(content).then(
+            () => {
+                /* clipboard successfully set */
+            },
+            () => {
+                /* clipboard write failed */
+            },
+        );
+    }
+
+    return (
+        <button className={`cursor-pointer`}
+            onClick={() => updateClipboard()}
+        >
+            <CopyIcon />
+        </button>
     )
 }
 
