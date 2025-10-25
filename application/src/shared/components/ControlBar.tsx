@@ -7,20 +7,35 @@ import { NavContext } from "../context/NavContext";
 function ControlBar() {
     const { isNav, toggleIsNav } = useContext(NavContext)
     return (
-        <section className={`p-1`}>
-            <div className={`flex-1 grid grid-cols-4`}>
-                <div className={`col-start-1 col-end-2`}>
-                    <button
-                        className={`col-start-1 col-end-2
-                        p-4 hover:cursor-pointer`}
-                        onClick={() => toggleIsNav()}>
-                        {isNav && <BackIcon />}
-                        {!isNav && <MenuIcon />}
-                    </button>
-                </div>
-                <ContactInfo style={`col-start-2 col-end-5`} />
-            </div>
+<>
+        <section className="">
+<div className="
+absolute left-0 top-0
+">
+<div className="
+absolute
+rotate-45
+-translate-x-1/2
+-translate-y-1/2
+h-32
+w-32
+border-r-1
+bg-[Canvas]
+"/>
+</div>
+                <button
+                    className={`
+z-1
+p-4
+hover:cursor-pointer`}
+                    onClick={() => toggleIsNav()}>
+                    {isNav && <BackIcon />}
+                    {!isNav && <MenuIcon />}
+                </button>
+            <ContactInfo style={``} />
         </section>
+<hr/>
+</>
     )
 }
 
@@ -40,7 +55,7 @@ const EMAIL = "steven_herlihy@yahoo.com"
 
 function ContactInfoDesktop() {
     return (
-        <div className={`flex-1 flex justify-end`}>
+        <div className={`flex-1 flex justify-center`}>
             <p>{PHONE_NO}&nbsp;</p>
             <CopyButton content={PHONE_NO} />
             <p>&nbsp;|&nbsp;</p>
@@ -52,7 +67,7 @@ function ContactInfoDesktop() {
 
 function ContactInfoMobile() {
     return (
-        <div className={`flex-1 grid gap-1 grid-cols-5 grid-rows-2`}>
+        <div className={`grid gap-1 grid-cols-5 grid-rows-2`}>
             <p className={`text-right row-start-1 row-end-2 col-start-1 col-end-5`}>
                 {PHONE_NO}
             </p>
