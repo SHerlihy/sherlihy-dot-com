@@ -6,17 +6,16 @@ function MobileLayout({ content, navigate }: { content: ReactNode, navigate: Rea
     const { isNav } = useContext(NavContext)
 
     return (
-        <main className={`h-full flex flex-col`}>
-            <div className={`grow-1 grid gap-4 grid-rows-9 min-h-0 min-w-0`}>
-                <div className={`flex justify-center row-start-1 row-end-2`}>
-                    <ControlBar />
-                </div>
-                <div className={`flex flex-col row-start-2 row-end-10`}>
-                    {isNav && navigate}
-                    {!isNav && content}
-                    <hr />
-                </div>
+        <main className={`flex flex-col w-full h-full overflow-hidden`}>
+            <div>
+                <ControlBar />
             </div>
+            <hr className={`pb-4`} />
+            <article className={`flex flex-col flex-1 overflow-hidden`}>
+                {isNav && navigate}
+                {!isNav && content}
+                <hr />
+            </article>
         </main>
     )
 }

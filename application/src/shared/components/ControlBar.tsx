@@ -8,7 +8,7 @@ import { Button } from "./button";
 function ControlBar() {
     const { isNav, toggleIsNav } = useContext(NavContext)
     return (
-        <section>
+        <section className={`p-1`}>
             <div className={`flex-1 grid grid-cols-4`}>
                 <div className={`col-start-1 col-end-2`}>
                     <button
@@ -41,10 +41,12 @@ const EMAIL = "steven_herlihy@yahoo.com"
 
 function ContactInfoDesktop() {
     return (
-        <div>
-            <p>{PHONE_NO}</p>
+        <div className={`flex-1 flex justify-end`}>
+            <p>{PHONE_NO}&nbsp;</p>
+            <CopyButton content={PHONE_NO} />
             <p>&nbsp;|&nbsp;</p>
-            <p>{EMAIL}</p>
+            <p>{EMAIL}&nbsp;</p>
+            <CopyButton content={EMAIL} />
         </div>
     )
 }
