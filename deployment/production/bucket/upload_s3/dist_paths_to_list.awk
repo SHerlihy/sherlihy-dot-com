@@ -12,6 +12,7 @@ NR==1 {$0="dist_files = ["$0}
 /.png$/ { $0=$0"\",type:\"image/x-png\"}"}
 /.svg$/ { $0=$0"\",type:\"image/svg+xml\"}"}
 /.jpeg$/ { $0=$0"\",type:\"image/jpeg\"}"}
+/.webp$/ { $0=$0"\",type:\"image/webp\"}"}
 
 NR>1 { print prev }
 
