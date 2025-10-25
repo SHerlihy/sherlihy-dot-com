@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router"
 import RootBranch from "../pages/RootBranch"
 
-type ProjectsQueryOptions = "velma" | "i2" | "authService" | "sherlihyDotCom" | "resumeGrader" | "awsCert"
+type ProjectsQueryOptions = "velma" | "i2" | "authService" | "sherlihyDotCom" | "resumeGrader" | "awsCert" | ""
 type EventQueryOptions = "DoC" | "SCC" | "CamAI" | "TechWeek"
 export type AllQueryOptions =  EventQueryOptions | ProjectsQueryOptions
 

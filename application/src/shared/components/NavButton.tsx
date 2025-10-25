@@ -1,6 +1,6 @@
 import { Link, useLocation } from "@tanstack/react-router"
-import { ReactNode } from "react"
-import { AllQueryOptions, Route } from "../../routes"
+import type { ReactNode } from "react"
+import { Route, type AllQueryOptions } from "../../routes"
 
 function NavButton(props: {
     children: ReactNode
