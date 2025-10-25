@@ -12,13 +12,22 @@ import { NavContext } from "../context/NavContext";
 function ControlBar() {
     const { isNav, toggleIsNav } = useContext(NavContext)
     return (
+<>
         <section className="">
 <div className="
-absolute left-0
-h-28
-w-28
-bg-[linear-gradient(135deg,rgba(155,55,155,100%)50%,rgba(255,255,255,0)50%)]
+absolute left-0 top-0
+">
+<div className="
+absolute
+rotate-45
+-translate-x-1/2
+-translate-y-1/2
+h-32
+w-32
+border-r-1
+bg-[Canvas]
 "/>
+</div>
                 <button
                     className={`
 z-1
@@ -30,6 +39,8 @@ hover:cursor-pointer`}
                 </button>
             <ContactInfo style={``} />
         </section>
+<hr/>
+</>
     )
 }
 
