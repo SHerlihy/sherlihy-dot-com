@@ -30,7 +30,7 @@ function ContentLayout({ children }: { children: ReactNode }) {
 
     if (isDesktop) {
         return (
-            <div className={`flex-1 flex flex-col justify-center`}>
+            <div className={`p-16 flex-1 flex flex-col justify-center`}>
                 {children}
             </div>
         )
