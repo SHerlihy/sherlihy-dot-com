@@ -4,22 +4,31 @@ import { useContext } from "react";
 import { BackIcon, CopyIcon, MenuIcon } from "../icons";
 import { NavContext } from "../context/NavContext";
 
+// <div className="
+// absolute left-0
+// border-t-100 border-t-red-950 border-r-100 border-r-transparent
+// "/>
+
 function ControlBar() {
     const { isNav, toggleIsNav } = useContext(NavContext)
     return (
-        <section className={`p-1`}>
-            <div className={`flex-1 grid grid-cols-4`}>
-                <div className={`col-start-1 col-end-2`}>
-                    <button
-                        className={`col-start-1 col-end-2
-                        p-4 hover:cursor-pointer`}
-                        onClick={() => toggleIsNav()}>
-                        {isNav && <BackIcon />}
-                        {!isNav && <MenuIcon />}
-                    </button>
-                </div>
-                <ContactInfo style={`col-start-2 col-end-5`} />
-            </div>
+        <section className="">
+<div className="
+absolute left-0
+h-28
+w-28
+bg-[linear-gradient(135deg,rgba(155,55,155,100%)50%,rgba(255,255,255,0)50%)]
+"/>
+                <button
+                    className={`
+z-1
+p-4
+hover:cursor-pointer`}
+                    onClick={() => toggleIsNav()}>
+                    {isNav && <BackIcon />}
+                    {!isNav && <MenuIcon />}
+                </button>
+            <ContactInfo style={``} />
         </section>
     )
 }
@@ -52,7 +61,7 @@ function ContactInfoDesktop() {
 
 function ContactInfoMobile() {
     return (
-        <div className={`flex-1 grid gap-1 grid-cols-5 grid-rows-2`}>
+        <div className={`grid gap-1 grid-cols-5 grid-rows-2`}>
             <p className={`text-right row-start-1 row-end-2 col-start-1 col-end-5`}>
                 {PHONE_NO}
             </p>
