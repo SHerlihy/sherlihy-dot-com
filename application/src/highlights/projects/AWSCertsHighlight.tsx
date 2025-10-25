@@ -37,16 +37,12 @@ const AWSCertsHighlight = () => {
         <>
             {isDesktop &&
                 <HighlightDesktopLayout paragraphs={paragraphs}>
-                    <div className="h-30 w-30 relative">
                         <CoupleContainer TlImg={ArchitectImg} BrImg={PractitionerImg} />
-                    </div>
                 </HighlightDesktopLayout>
             }
             {!isDesktop &&
                 <HighlightMobileLayout paragraphs={paragraphs}>
-                    <div className="h-30 w-full relative">
                         <CoupleContainer TlImg={ArchitectImg} BrImg={PractitionerImg} />
-                    </div>
                 </HighlightMobileLayout>
             }
         </>

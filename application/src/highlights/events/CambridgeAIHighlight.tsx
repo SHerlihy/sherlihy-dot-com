@@ -15,12 +15,12 @@ const CambridgeAIHighlight = () => {
         <>
             {isDesktop &&
                 <HighlightDesktopLayout paragraphs={paragraphs}>
-                    <span />
+<img src="/camAI/camAI.webp"/>
                 </HighlightDesktopLayout>
             }
             {!isDesktop &&
                 <HighlightMobileLayout paragraphs={paragraphs}>
-                    <span />
+<img src="/camAI/camAI.webp"/>
                 </HighlightMobileLayout>
             }
         </>

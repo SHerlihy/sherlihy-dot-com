@@ -16,12 +16,12 @@ const DayOfCodeHighlight = () => {
         <>
             {isDesktop &&
                 <HighlightDesktopLayout paragraphs={paragraphs}>
-                    <span />
+                    <img src="/doc/Raspberry_Pi_Logo.svg" />
                 </HighlightDesktopLayout>
             }
             {!isDesktop &&
                 <HighlightMobileLayout paragraphs={paragraphs}>
-                    <span />
+                    <img src="/doc/Raspberry_Pi_Logo.svg" />
                 </HighlightMobileLayout>
             }
         </>
