@@ -9,13 +9,15 @@ function PageLayout({ content, navigate }: { content: ReactNode, navigate: React
 
     return (
         <main className={`
-${isDesktop && "p-10"}
 flex flex-col w-full h-full overflow-hidden
 `}>
             <div>
                 <ControlBar />
             </div>
-            <article className={`flex flex-col flex-1 overflow-hidden`}>
+            <article className={`
+${isDesktop && "p-10"}
+flex flex-col flex-1 overflow-hidden
+`}>
                 {isNav && navigate}
                 {!isNav && <ContentLayout>{content}</ContentLayout>}
                 <hr />

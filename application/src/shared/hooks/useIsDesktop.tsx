@@ -13,7 +13,7 @@ function useIsDesktop() {
     }, []);
 
     const handleResize = () => {
-        if (window.innerWidth > 1200) {
+        if (window.innerWidth > 720) {
             setIsDesktop(true)
         } else {
             setIsDesktop(false)

@@ -4,11 +4,6 @@ import { useContext } from "react";
 import { BackIcon, CopyIcon, MenuIcon } from "../icons";
 import { NavContext } from "../context/NavContext";
 
-// <div className="
-// absolute left-0
-// border-t-100 border-t-red-950 border-r-100 border-r-transparent
-// "/>
-
 function ControlBar() {
     const { isNav, toggleIsNav } = useContext(NavContext)
     return (
@@ -60,7 +55,7 @@ const EMAIL = "steven_herlihy@yahoo.com"
 
 function ContactInfoDesktop() {
     return (
-        <div className={`flex-1 flex justify-end`}>
+        <div className={`flex-1 flex justify-center`}>
             <p>{PHONE_NO}&nbsp;</p>
             <CopyButton content={PHONE_NO} />
             <p>&nbsp;|&nbsp;</p>
