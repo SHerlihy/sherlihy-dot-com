@@ -3,7 +3,6 @@ import useIsDesktop from "../hooks/useIsDesktop"
 import { useContext } from "react";
 import { BackIcon, CopyIcon, MenuIcon } from "../icons";
 import { NavContext } from "../context/NavContext";
-import { Button } from "./button";
 
 function ControlBar() {
     const { isNav, toggleIsNav } = useContext(NavContext)
