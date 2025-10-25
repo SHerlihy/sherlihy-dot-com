@@ -7,7 +7,9 @@ const HighlightMobileImage = ({
 }) => {
     return (
         <div className='flex justify-center items-center'>
-            {children}
+            <div className="h-30 relative">
+                {children}
+            </div>
         </div>
     )
 }

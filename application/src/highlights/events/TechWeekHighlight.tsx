@@ -14,12 +14,12 @@ const TechWeekHighlight = () => {
         <>
             {isDesktop &&
                 <HighlightDesktopLayout paragraphs={paragraphs}>
-                    <span />
+                        <img src="/techWeek/techweek.png" />
                 </HighlightDesktopLayout>
             }
             {!isDesktop &&
                 <HighlightMobileLayout paragraphs={paragraphs}>
-                    <span />
+                        <img src="/techWeek/techweek.png" />
                 </HighlightMobileLayout>
             }
         </>

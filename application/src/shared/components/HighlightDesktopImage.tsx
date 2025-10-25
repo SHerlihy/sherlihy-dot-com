@@ -7,7 +7,9 @@ const HighlightDesktopImage = ({
 }) => {
     return (
         <div className='float-left overflow-hidden p-6'>
-            {children}
+            <div className="h-30 w-30 relative">
+                {children}
+            </div>
         </div>
     )
 }
