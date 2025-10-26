@@ -17,76 +17,66 @@ import NavButton from "../shared/components/NavButton"
 
 function HomeNav() {
     return (
-        <div className={`flex-grow grid grid-cols-5 grid-rows-10`}>
+        <div className={`flex-grow flex flex-col justify-evenly`}>
             <NavButton
-                className={`col-start-1 col-end-6 row-start-1 row-end-2`}
+                queryParam=""
+                pathname="/"
+            >
+                Home
+            </NavButton>
+            <NavButton
                 queryParam="i2"
                 pathname="/"
             >
-                Professional
+                i2 Group
             </NavButton>
             <NavButton
-                className={`col-start-1 col-end-6 row-start-2 row-end-3`}
                 queryParam="awsCert"
                 pathname="/"
             >
                 AWS
             </NavButton>
             <NavButton
-                className={`col-start-1 col-end-6 row-start-3 row-end-4`}
                 queryParam="sherlihyDotCom"
                 pathname="/"
             >
                 sherlihy.com
             </NavButton>
             <NavButton
-                className={`col-start-1 col-end-6 row-start-4 row-end-5`}
                 queryParam="SCC"
                 pathname="/"
             >
                 Craftsmanship
             </NavButton>
             <NavButton
-                className={`col-start-1 col-end-6 row-start-5 row-end-6`}
                 queryParam="velma"
                 pathname="/"
             >
                 Accessable Text
             </NavButton>
             <NavButton
-                className={`col-start-1 col-end-6 row-start-6 row-end-7`}
                 queryParam="DoC"
                 pathname="/"
             >
                 Day of Code
             </NavButton>
             <NavButton
-                className={`col-start-1 col-end-6 row-start-7 row-end-8`}
                 queryParam="CamAI"
                 pathname="/"
             >
                 AI
             </NavButton>
             <NavButton
-                className={`col-start-1 col-end-6 row-start-8 row-end-9`}
                 queryParam="TechWeek"
                 pathname="/"
             >
                 2024 Tech Week
             </NavButton>
             <NavButton
-                className={`col-start-1 col-end-6 row-start-9 row-end-10`}
                 queryParam="authService"
                 pathname="/"
             >
                 Go App
-            </NavButton>
-            <NavButton
-                className={`col-start-1 col-end-6 row-start-10 row-end-11`}
-                queryParam=""
-                pathname="/"
-            >
-                Home
             </NavButton>
         </div>
     )

@@ -1,8 +1,9 @@
 import useIsDesktop from '../../shared/hooks/useIsDesktop'
 
 import CoupleContainer from '../../shared/layouts/CoupleContainer'
-import HighlightDesktopLayout from '../../shared/components/HighlightDesktopLayout'
-import HighlightMobileLayout from '../../shared/components/HighlightMobileLayout'
+import HighlightDesktopImage from '../../shared/components/HighlightDesktopImage'
+import HighlightMobileImage from '../../shared/components/HighlightMobileImage'
+import HighlightMobileContent from '../../shared/components/HighlightMobileContent'
 
 const PractitionerImg = () => {
     return (
@@ -27,24 +28,46 @@ const ArchitectImg = () => {
 const AWSCertsHighlight = () => {
     const isDesktop = useIsDesktop()
 
-    const paragraphs = [
-        "Unlike the Cloud Practitioner exam, my previous experience of provisioning AWS infrastructure was not broad enough to provide the needed foundation to meet the new challanges required for the Solutions Architect exam.",
-        "To overcome my lack of foundational experience, I leveraged the use of guided practices such as Labs and AWS Cloud Quest to remember, reinforce and retain the new fundemental concepts to explore new topics the Solutions Architct exam covers. After gaining this needed foundational expereince I was able to engauge in tech deep dives and use practice exams to successfully prepare for the Solutions Architect exam just as I had done for the Cloud Practioner exam.",
-        "Though I am proud of my AWS certifications, I'm excited to grow my existing knowledge of AWS services to meet project demands but also continually improve how I plan and provision infrastructure to include fellow developers using collaborative and scalable practices."
-    ]
+    if (isDesktop) {
+        return (
+            <div>
+                <HighlightDesktopImage>
+                    <CoupleContainer TlImg={ArchitectImg} BrImg={PractitionerImg} />
+                </HighlightDesktopImage>
+                <Content />
+            </div>
+        )
+    }
 
     return (
         <>
-            {isDesktop &&
-                <HighlightDesktopLayout paragraphs={paragraphs}>
-                        <CoupleContainer TlImg={ArchitectImg} BrImg={PractitionerImg} />
-                </HighlightDesktopLayout>
-            }
-            {!isDesktop &&
-                <HighlightMobileLayout paragraphs={paragraphs}>
-                        <CoupleContainer TlImg={ArchitectImg} BrImg={PractitionerImg} />
-                </HighlightMobileLayout>
-            }
+            <HighlightMobileImage>
+                <CoupleContainer TlImg={ArchitectImg} BrImg={PractitionerImg} />
+            </HighlightMobileImage>
+            <span className='pb-4' />
+            <HighlightMobileContent>
+                <Content />
+            </HighlightMobileContent>
+        </>
+    )
+}
+
+
+
+const Content = () => {
+    return (
+        <>
+            <p>
+                I really enjoy using AWS to provision cloud infrastructure. It’s a service that affords me the capability to share any software I develop with the world and this is the reason why I started as a  software developer.
+            </p>
+            &nbsp;
+            <p>
+                I’m currently studying and practicing for my AWS DevOps Professional certification. I’ve chosen the DevOps certification because I’m a huge fan of DevOps practices. I find it really cool to create a tool/pipeline that enables software to go from being in development to being used by its intended audience with as little friction as possible. Examples of my work can be found here <a href={'https://github.com/SHerlihy/cantrill-devops'}> cantrill-devops </a>.
+            </p>
+            &nbsp;
+            <p>
+                I previously earned my AWS Solution Architect Associate certification, which I’m really proud of, and found it very useful in creating infrastructure for my applications. However, as I became more adventurous with my infrastructure practices, I found I wanted more knowledge and this is why I’m currently practicing for the DevOps Professional certification.
+            </p>
         </>
     )
 }
