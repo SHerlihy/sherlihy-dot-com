@@ -1,6 +1,7 @@
 import { Link, useLocation } from "@tanstack/react-router"
-import type { ReactNode } from "react"
+import { useContext, type ReactNode } from "react"
 import { Route, type AllQueryOptions } from "../../routes"
+import { NavContext } from "../context/NavContext"
 
 function NavButton(props: {
     children: ReactNode
@@ -8,6 +9,8 @@ function NavButton(props: {
     queryParam?: AllQueryOptions
     pathname?: string
 }) {
+
+    const {toggleIsNav} = useContext(NavContext)
     const { highlight } = Route.useSearch()
     const location = useLocation()
     return (
@@ -15,6 +18,7 @@ function NavButton(props: {
             className={`flex justify-center items-center ${props.className}`}
             to={props.pathname ? props.pathname : location.pathname}
             search={() => ({ highlight: props.queryParam })}
+            onClick={()=>toggleIsNav()}
         >
             <p className={`
 hover:underline
