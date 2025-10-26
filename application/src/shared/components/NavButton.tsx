@@ -1,8 +1,7 @@
 import { Link, useLocation } from "@tanstack/react-router"
-import { useCallback, useContext, useEffect, useRef, useState, type ReactNode } from "react"
+import { useContext, type ReactNode } from "react"
 import { Route, type AllQueryOptions } from "../../routes"
 import { NavContext } from "../context/NavContext"
-import { createPortal } from "react-dom"
 
 function NavButton(props: {
     children: ReactNode
