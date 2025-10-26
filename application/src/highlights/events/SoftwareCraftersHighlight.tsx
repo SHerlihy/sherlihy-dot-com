@@ -11,41 +11,24 @@ const SCCImage = () => {
 }
 
 const paragraphs = [
-    "Here I get hands on working with a wide range of other developers to improve in every area of software engineering. It's really fun meeting other developers and finding out how diverse our skillsets and perspectives are."
+"Every month I meet up with fellow software engineers where we improve our engineering capabilities through collaborative practice, open discussions and presentations.",
+"I really enjoy being able to work with fellow engineers. My favourite activities are the Architecture Katas where we form teams of roughly five and work together to plan a software architecture that will satisfy a given brief. The last kata was to create a highly scalable architecture for a growing chain of restaurants that require AI to be used by customers to order their meals.",
+"Aside from Architecture Katas, common events include Test Driven Development (TDD) Katas, Lightning Talks and Unconferences. The assortment of events allows me to broaden my perspectives on software engineering topics and hone my engineering skills in a fun and friendly environment."
 ]
 
 const SoftwareCraftersHighlight = () => {
     const isDesktop = useIsDesktop()
 
-
-    // return (
-    //     <>
-    //         {isDesktop &&
-    //             <HighlightDesktopLayout paragraphs={paragraphs}>
-    //                 <span />
-    //             </HighlightDesktopLayout>
-    //         }
-    //         {!isDesktop &&
-    //             <HighlightMobileLayout paragraphs={paragraphs}>
-    //                 <span />
-    //             </HighlightMobileLayout>
-    //         }
-    //     </>
-    // )
     return (
         <>
             {isDesktop &&
                 <HighlightDesktopLayout paragraphs={paragraphs}>
-                    <div className="h-30 w-30 relative">
                         <SCCImage/>
-                    </div>
                 </HighlightDesktopLayout>
             }
             {!isDesktop &&
                 <HighlightMobileLayout paragraphs={paragraphs}>
-                    <div className="h-30 w-full relative">
                         <SCCImage/>
-                    </div>
                 </HighlightMobileLayout>
             }
         </>

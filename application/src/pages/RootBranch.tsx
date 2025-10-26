@@ -37,16 +37,22 @@ function HomeNav() {
                 AWS
             </NavButton>
             <NavButton
+                queryParam="SCC"
+                pathname="/"
+            >
+                Software Crafters Cambridge
+            </NavButton>
+            <NavButton
+                queryParam="CamAI"
+                pathname="/"
+            >
+                AI Cambridge
+            </NavButton>
+            <NavButton
                 queryParam="sherlihyDotCom"
                 pathname="/"
             >
                 sherlihy.com
-            </NavButton>
-            <NavButton
-                queryParam="SCC"
-                pathname="/"
-            >
-                Craftsmanship
             </NavButton>
             <NavButton
                 queryParam="velma"
@@ -61,16 +67,10 @@ function HomeNav() {
                 Day of Code
             </NavButton>
             <NavButton
-                queryParam="CamAI"
-                pathname="/"
-            >
-                AI
-            </NavButton>
-            <NavButton
                 queryParam="TechWeek"
                 pathname="/"
             >
-                2024 Tech Week
+                Tech Week
             </NavButton>
             <NavButton
                 queryParam="authService"
