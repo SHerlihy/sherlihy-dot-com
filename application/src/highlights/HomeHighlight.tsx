@@ -36,30 +36,24 @@ const Content = () => {
     return (
         <>
             <p>
-                Hello, I'm a web developer currently studying for my AWS DevOps Engineer Professional certification.
+                Welcome to my website!
             </p>
             &nbsp;
             <p>
-                I used to work as a Front End Web Developer and over the past two years I have:
+                Here you’ll find events, projects and hobbies that I enjoy so you can get to know me better.
             </p>
             &nbsp;
-            <ul className="list-disc">
-                <li>
-                    Improved my algorithm design skills.
-                </li>
-                <li>
-                    Joined a monthly software meetup "Software Crafters Cambridge" because I enjoy working with other developers and discussing software topics.
-                </li>
-                <li>
-                    Earned my AWS Solutions Architect Associate certification.
-                </li>
-                <li>
-                    Learned how to use Next.js for full stack development.
-                </li>
-                <li>
-                    Learned how to use React Native through the Meta course on Coursera.
-                </li>
-            </ul>
+            <p>
+                I spend the majority of my time helping Amazon improve their Alexa AI model but I also find time to practice my web development skills.
+            </p>
+            &nbsp;
+            <p>
+                I’m currently studying for my AWS DevOps Professional certification and examples of my DevOps work can be found here &nbsp;
+                <a
+                    href={"https://github.com/SHerlihy/cantrill-devops"}>
+                    cantrill-devops
+                </a>.
+            </p>
         </>
     )
 }
