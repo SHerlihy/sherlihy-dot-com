@@ -39,7 +39,11 @@ jobs:
           terraform_wrapper: false
 
       - name: Install dependencies
-        run: npm install
+        run: |
+          npm install
+          cd ./application
+          npm install
+          cd ..
 
       - name: AWS user creds
         run: |
