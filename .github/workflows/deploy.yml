@@ -23,10 +23,12 @@ jobs:
           aws-region: us-east-1
 
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v6
+        with:
+          node-version: lts/jod
 
       # https://github.com/actions/runner-images/issues/10796
       # terraform not included in ubuntu-latest
