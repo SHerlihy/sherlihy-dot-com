@@ -50,39 +50,25 @@ const HomeHighlight = () => {
             <div
                 className="whitespace-pre-line"
             >
-                {chat.map(utter =><p>{utter}</p>)}
+                {chat.map((utter, i) =><>
+                    <p
+                    className={`
+                        ${i%2 && "text-right"}
+                    `}
+                    >
+                    {utter}
+                    </p>
+                    &nbsp;
+                    <hr/>
+                    &nbsp;
+                    </>
+                    )}
             </div>
             <QueryModel
                 postQuery={handlePostQuery}
                 abortQuery={abortQuery}
             />
         </QueryClientProvider>
-    )
-}
-
-const Content = () => {
-    return (
-        <>
-            <p>
-                Welcome to my website!
-            </p>
-            &nbsp;
-            <p>
-                Here you’ll find events, projects and hobbies that I enjoy so you can get to know me better.
-            </p>
-            &nbsp;
-            <p>
-                I spend the majority of my time helping Amazon improve their Alexa AI model but I also find time to practice my web development skills.
-            </p>
-            &nbsp;
-            <p>
-                I’m currently studying for my AWS DevOps Professional certification and examples of my DevOps work can be found here &nbsp;
-                <a
-                    href={"https://github.com/SHerlihy/cantrill-devops"}>
-                    cantrill-devops
-                </a>.
-            </p>
-        </>
     )
 }
 
