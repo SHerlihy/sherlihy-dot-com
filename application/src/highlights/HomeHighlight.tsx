@@ -4,33 +4,44 @@ import HighlightMobileImage from "../shared/components/HighlightMobileImage"
 import useIsDesktop from "../shared/hooks/useIsDesktop"
 import SherlihyImage from "./SherlihyImage"
 
-const HomeHighlight = () => {
-    const isDesktop = useIsDesktop()
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 
-    if (isDesktop) {
-        return (
-            <div>
-                <HighlightDesktopImage>
-                    <SherlihyImage />
-                </HighlightDesktopImage>
-                <Content />
-            </div>
-        )
+import QueryModel from "../features/query/QueryModel"
+import QueryControl from "../features/query/QueryControl"
+
+import QueryView from "../features/query/QueryView"
+
+import {catchError} from "../lib/async.ts"
+
+const queryClient = new QueryClient()
+
+const QUERY_URL = "https://rtuard82z7.execute-api.us-east-1.amazonaws.com/prod/query/"
+
+const { postQuery, demarshall, abortQuery } = new QueryControl(QUERY_URL)
+
+const HomeHighlight = () => {
+    const handlePostQuery = async (query: string) => {
+        const [error, response] = await catchError(postQuery(query))
+
+        if (error) {
+            throw error
+        }
+
+        const answer = await demarshall(response)
+
+        console.log(answer)
+        return answer
     }
 
     return (
-        <>
-            <HighlightMobileImage>
-                <SherlihyImage />
-            </HighlightMobileImage>
-            <span className='pb-4' />
-            <HighlightMobileContent>
-                <Content />
-            </HighlightMobileContent>
-        </>
+        <QueryClientProvider client={queryClient}>
+            <QueryModel
+                postQuery={handlePostQuery}
+                abortQuery={abortQuery}
+            />
+        </QueryClientProvider>
     )
 }
-
 
 const Content = () => {
     return (
