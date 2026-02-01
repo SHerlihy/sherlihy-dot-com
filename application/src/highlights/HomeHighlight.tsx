@@ -1,3 +1,4 @@
+import {useState} from "react"
 import HighlightDesktopImage from "../shared/components/HighlightDesktopImage"
 import HighlightMobileContent from "../shared/components/HighlightMobileContent"
 import HighlightMobileImage from "../shared/components/HighlightMobileImage"
@@ -19,7 +20,19 @@ const QUERY_URL = "https://rtuard82z7.execute-api.us-east-1.amazonaws.com/prod/q
 
 const { postQuery, demarshall, abortQuery } = new QueryControl(QUERY_URL)
 
+const introText = "\
+    Welcome to my website!\
+    \n \
+    \n \
+    Here you’ll find events, projects and hobbies that I enjoy so you can get to know me better.\
+    \n \
+    I spend the majority of my time helping Amazon improve their Alexa AI model but I also find time to practice my web development skills.\
+    \n \
+"
+
 const HomeHighlight = () => {
+    const [chat, setChat] = useState([introText])
+
     const handlePostQuery = async (query: string) => {
         const [error, response] = await catchError(postQuery(query))
 
@@ -29,12 +42,16 @@ const HomeHighlight = () => {
 
         const answer = await demarshall(response)
 
-        console.log(answer)
-        return answer
+        setChat((prev)=>[...prev, query, answer])
     }
 
     return (
         <QueryClientProvider client={queryClient}>
+            <div
+                className="whitespace-pre-line"
+            >
+                {chat.map(utter =><p>{utter}</p>)}
+            </div>
             <QueryModel
                 postQuery={handlePostQuery}
                 abortQuery={abortQuery}

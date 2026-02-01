@@ -21,7 +21,7 @@ function Field({
                     }
                 }}
                 placeholder="What would you like to know?"
-                //className={"h-full overflow-hidden"}
+                className={"h-full overflow-hidden"}
                 name={name}
                 value={state}
                 onChange={(e) => handleChange(e.target.value)}
