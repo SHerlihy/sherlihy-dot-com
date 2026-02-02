@@ -16,33 +16,13 @@ flex flex-col w-full h-full overflow-hidden
             </div>
             <article className={`
 ${isDesktop && "p-10"}
-flex flex-col flex-1 overflow-hidden
+flex flex-col flex-1 overflow-hidden justify-between align-center
 `}>
                 {isNav && navigate}
-                {!isNav && <ContentLayout>{content}</ContentLayout>}
+                {!isNav && content}
                 <hr />
             </article>
         </main>
-    )
-}
-
-function ContentLayout({ children }: { children: ReactNode }) {
-    const isDesktop = useIsDesktop()
-
-    if (isDesktop) {
-        return (
-            <div className={`p-16 flex-1 flex flex-row justify-center align-center`}>
-                <div className={`flex flex-col justify-center align-center`}>
-                    {children}
-                </div>
-            </div>
-        )
-    }
-
-    return (
-        <>
-            {children}
-        </>
     )
 }
 
