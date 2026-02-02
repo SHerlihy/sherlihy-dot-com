@@ -55,6 +55,7 @@ function QueryView({
                         state={field.state.value}
                         handleChange={field.handleChange}
                         errors={field.state.meta.errorMap.onChange}
+                        className="w-full"
                     />
                 )}
             />
@@ -62,6 +63,7 @@ function QueryView({
                 feedback={feedback}
                 phase={phase}
                 onClick={() => { handleClick(form.handleSubmit) }}
+                className="w-full"
             />
         </form >
     )

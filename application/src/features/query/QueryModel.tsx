@@ -8,7 +8,7 @@ export const FEEDBACK_ERROR = "retry?"
 export const FEEDBACK_PENDING = "cancel?"
 
 type Props = {
-    postQuery: (story: string) => Promise<string>,
+    postQuery: (story: string) => Promise<void>,
     abortQuery: (reason?: any) => void
 }
 
@@ -22,18 +22,6 @@ function QueryModel({
     const { data, mutateAsync, isError, isPending, isSuccess } = useMutation({
         mutationFn: postQuery
     })
-
-    const [marked, setMarked] = useState<string | null>(null)
-
-    useEffect(() => {
-
-        setMarked(null)
-
-        if (isSuccess && data) {
-            setMarked(data)
-        }
-
-    }, [isPending])
 
     useEffect(() => {
 

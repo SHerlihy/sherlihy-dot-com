@@ -1,4 +1,4 @@
-import {useState} from "react"
+import { useState } from "react"
 import HighlightDesktopImage from "../shared/components/HighlightDesktopImage"
 import HighlightMobileContent from "../shared/components/HighlightMobileContent"
 import HighlightMobileImage from "../shared/components/HighlightMobileImage"
@@ -12,13 +12,60 @@ import QueryControl from "../features/query/QueryControl"
 
 import QueryView from "../features/query/QueryView"
 
-import {catchError} from "../lib/async.ts"
+import { catchError } from "../lib/async.ts"
 
 const queryClient = new QueryClient()
 
 const QUERY_URL = "https://rtuard82z7.execute-api.us-east-1.amazonaws.com/prod/query/"
 
 const { postQuery, demarshall, abortQuery } = new QueryControl(QUERY_URL)
+
+const HomeHighlight = () => {
+    const [chat, setChat] = useState<string[]>([])
+
+    const handlePostQuery = async (query: string) => {
+        const [error, response] = await catchError(postQuery(query))
+
+        if (error) {
+            throw error
+        }
+
+        const answer = await demarshall(response)
+
+        setChat((prev) => [...prev, query, answer])
+    }
+
+    return (
+        <article className="h-full flex flex-col flex-1 justify-between">
+            <div
+                className="whitespace-pre-line overflow-scroll scroll-smooth"
+            >
+                <Intro />
+                {chat.map((utter, i) => <>
+                    <p
+                        className={`
+                        ${i % 2 === 0 && "text-right"}
+                    `}
+                    >
+                        {utter}
+                    </p>
+                    &nbsp;
+                    <hr />
+                    &nbsp;
+                </>
+                )}
+            </div>
+            <div className="py-4">
+                <QueryClientProvider client={queryClient}>
+                    <QueryModel
+                        postQuery={handlePostQuery}
+                        abortQuery={abortQuery}
+                    />
+                </QueryClientProvider>
+            </div>
+        </article>
+    )
+}
 
 const introText = "\
     Welcome to my website!\
@@ -30,45 +77,30 @@ const introText = "\
     \n \
 "
 
-const HomeHighlight = () => {
-    const [chat, setChat] = useState([introText])
+const Intro = () => {
+    const isDesktop = useIsDesktop()
 
-    const handlePostQuery = async (query: string) => {
-        const [error, response] = await catchError(postQuery(query))
-
-        if (error) {
-            throw error
-        }
-
-        const answer = await demarshall(response)
-
-        setChat((prev)=>[...prev, query, answer])
+    if (isDesktop) {
+        return (
+            <div>
+                <HighlightDesktopImage>
+                    <SherlihyImage />
+                </HighlightDesktopImage>
+                {introText}
+            </div>
+        )
     }
 
     return (
-        <QueryClientProvider client={queryClient}>
-            <div
-                className="whitespace-pre-line"
-            >
-                {chat.map((utter, i) =><>
-                    <p
-                    className={`
-                        ${i%2 && "text-right"}
-                    `}
-                    >
-                    {utter}
-                    </p>
-                    &nbsp;
-                    <hr/>
-                    &nbsp;
-                    </>
-                    )}
-            </div>
-            <QueryModel
-                postQuery={handlePostQuery}
-                abortQuery={abortQuery}
-            />
-        </QueryClientProvider>
+        <>
+            <HighlightMobileImage>
+                <SherlihyImage />
+            </HighlightMobileImage>
+            <span className='pb-4' />
+            <HighlightMobileContent>
+                {introText}
+            </HighlightMobileContent>
+        </>
     )
 }
 
