@@ -20,21 +20,12 @@ function Field({
             {...props}
         >
             <textarea
-                // ref={(textarea) => {
-                //     if (textarea) {
-                //         textarea.style.height = "0px";
-                //         textarea.style.height = textarea.scrollHeight + "px";
-                //     }
-                // }}
                 placeholder="What would you like to know?"
-//                 style={{
-// height: "attr(style.scrollHeight px)"
-// }}
                 className={`
-${"firefox"===true && "field-sizing-content"}
-h-full w-full
-outline-double
-`}
+                    ${"firefox"===true && "field-sizing-content"}
+                    h-full w-full
+                    outline-double
+                `}
                 name={name}
                 value={state}
                 onChange={(e) => handleChange(e.target.value)}
