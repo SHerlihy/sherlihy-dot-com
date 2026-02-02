@@ -56,6 +56,7 @@ const HomeHighlight = () => {
                 )}
             </div>
             <div className="py-4">
+                <hr className="pb-4" />
                 <QueryClientProvider client={queryClient}>
                     <QueryModel
                         postQuery={handlePostQuery}

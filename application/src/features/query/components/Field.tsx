@@ -33,6 +33,7 @@ function Field({
                 className={`
 ${"firefox"===true && "field-sizing-content"}
 h-full w-full
+outline-double
 `}
                 name={name}
                 value={state}

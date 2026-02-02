@@ -63,7 +63,6 @@ function QueryView({
                 feedback={feedback}
                 phase={phase}
                 onClick={() => { handleClick(form.handleSubmit) }}
-                className="w-full"
             />
         </form >
     )
