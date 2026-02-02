@@ -40,8 +40,12 @@ const HomeHighlight = () => {
             <div
                 className="whitespace-pre-line overflow-scroll scroll-smooth"
             >
+
                 <Intro />
                 {chat.map((utter, i) => <>
+                    &nbsp;
+                    <hr />
+                    &nbsp;
                     <p
                         className={`
                         ${i % 2 === 0 && "text-right"}
@@ -49,9 +53,6 @@ const HomeHighlight = () => {
                     >
                         {utter}
                     </p>
-                    &nbsp;
-                    <hr />
-                    &nbsp;
                 </>
                 )}
             </div>
@@ -83,11 +84,13 @@ const Intro = () => {
 
     if (isDesktop) {
         return (
-            <div>
-                <HighlightDesktopImage>
-                    <SherlihyImage />
-                </HighlightDesktopImage>
-                {introText}
+            <div className="flex justify-center">
+                <p className="inline-block">
+                    <HighlightDesktopImage>
+                        <SherlihyImage />
+                    </HighlightDesktopImage>
+                    {introText}
+                </p>
             </div>
         )
     }
