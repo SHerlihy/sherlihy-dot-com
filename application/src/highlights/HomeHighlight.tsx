@@ -18,8 +18,13 @@ const QUERY_URL = "https://rtuard82z7.execute-api.us-east-1.amazonaws.com/prod/q
 
 const { postQuery, demarshall, abortQuery } = new QueryControl(QUERY_URL)
 
+const guff = "Yes, Steven Herlihy is highly proficient in using React. According to his CV/resume, he has extensive experience working with React in various professional roles. Here are some key points from his resume that highlight his expertise in React"
+
 const HomeHighlight = () => {
-    const [chat, setChat] = useState<string[]>([])
+    const [chat, setChat] = useState<string[]>(
+[]
+//["can he?", guff,"can he?", guff,"can he?", guff,"can he?", guff,"can he?", guff,"can he?", guff,"can he?", guff,]
+)
 
     const handlePostQuery = async (query: string) => {
         const [error, response] = await catchError(postQuery(query))
@@ -34,9 +39,9 @@ const HomeHighlight = () => {
     }
 
     return (
-        <article className="h-full flex flex-col justify-between">
+        <article className="h-full p-4 flex flex-col justify-between">
             <div
-                className="flex-1 overflow-scroll scroll-smooth"
+                className="flex-1 overflow-scroll p-4 scroll-p-20"
             >
                 <div className="min-h-full whitespace-pre-line flex flex-col justify-center align-center">
                     <Intro />
@@ -96,13 +101,12 @@ const Intro = () => {
 
     return (
         <>
-            <HighlightMobileImage>
+            <div className="flex justify-center">
                 <SherlihyImage />
-            </HighlightMobileImage>
-            <span className='pb-4' />
-            <HighlightMobileContent>
+            </div>
+            <p className="pt-4 inline-block">
                 {introText}
-            </HighlightMobileContent>
+            </p>
         </>
     )
 }
