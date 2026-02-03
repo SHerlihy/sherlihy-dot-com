@@ -10,8 +10,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import QueryModel from "../features/query/QueryModel"
 import QueryControl from "../features/query/QueryControl"
 
-import QueryView from "../features/query/QueryView"
-
 import { catchError } from "../lib/async.ts"
 
 const queryClient = new QueryClient()
@@ -36,25 +34,26 @@ const HomeHighlight = () => {
     }
 
     return (
-        <article className="h-full flex flex-col flex-1 justify-between">
+        <article className="h-full flex flex-col justify-between">
             <div
-                className="whitespace-pre-line overflow-scroll scroll-smooth"
+                className="flex-1 overflow-scroll scroll-smooth"
             >
-
-                <Intro />
-                {chat.map((utter, i) => <>
-                    &nbsp;
-                    <hr />
-                    &nbsp;
-                    <p
-                        className={`
+                <div className="min-h-full whitespace-pre-line flex flex-col justify-center align-center">
+                    <Intro />
+                    {chat.map((utter, i) => <div key={i}>
+                        &nbsp;
+                        <hr />
+                        &nbsp;
+                        <p
+                            className={`
                         ${i % 2 === 0 && "text-right"}
                     `}
-                    >
-                        {utter}
-                    </p>
-                </>
-                )}
+                        >
+                            {utter}
+                        </p>
+                    </div>
+                    )}
+                </div>
             </div>
             <div className="py-4">
                 <hr className="pb-4" />
@@ -85,10 +84,10 @@ const Intro = () => {
     if (isDesktop) {
         return (
             <div className="flex justify-center">
+                <HighlightDesktopImage>
+                    <SherlihyImage />
+                </HighlightDesktopImage>
                 <p className="inline-block">
-                    <HighlightDesktopImage>
-                        <SherlihyImage />
-                    </HighlightDesktopImage>
                     {introText}
                 </p>
             </div>
