@@ -89,10 +89,10 @@ const Intro = () => {
     if (isDesktop) {
         return (
             <div className="flex justify-center">
+                <p className="inline-block">
                 <HighlightDesktopImage>
                     <SherlihyImage />
                 </HighlightDesktopImage>
-                <p className="inline-block">
                     {introText}
                 </p>
             </div>
