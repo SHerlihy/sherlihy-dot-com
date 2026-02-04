@@ -31,7 +31,10 @@ const AWSCertsHighlight = () => {
     if (isDesktop) {
         return (
             <div>
-                <HighlightDesktopImage>
+                <HighlightDesktopImage
+                    boxDimension={180}
+                    imageDimension={150}
+                >
                     <CoupleContainer TlImg={ArchitectImg} BrImg={PractitionerImg} />
                 </HighlightDesktopImage>
                 <Content />

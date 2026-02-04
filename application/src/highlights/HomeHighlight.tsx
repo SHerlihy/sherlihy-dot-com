@@ -1,7 +1,5 @@
 import { useState } from "react"
 import HighlightDesktopImage from "../shared/components/HighlightDesktopImage"
-import HighlightMobileContent from "../shared/components/HighlightMobileContent"
-import HighlightMobileImage from "../shared/components/HighlightMobileImage"
 import useIsDesktop from "../shared/hooks/useIsDesktop"
 import SherlihyImage from "./SherlihyImage"
 
@@ -18,13 +16,8 @@ const QUERY_URL = "https://rtuard82z7.execute-api.us-east-1.amazonaws.com/prod/q
 
 const { postQuery, demarshall, abortQuery } = new QueryControl(QUERY_URL)
 
-const guff = "Yes, Steven Herlihy is highly proficient in using React. According to his CV/resume, he has extensive experience working with React in various professional roles. Here are some key points from his resume that highlight his expertise in React"
-
 const HomeHighlight = () => {
-    const [chat, setChat] = useState<string[]>(
-[]
-//["can he?", guff,"can he?", guff,"can he?", guff,"can he?", guff,"can he?", guff,"can he?", guff,"can he?", guff,]
-)
+    const [chat, setChat] = useState<string[]>([])
 
     const handlePostQuery = async (query: string) => {
         const [error, response] = await catchError(postQuery(query))

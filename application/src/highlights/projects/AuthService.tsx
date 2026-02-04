@@ -4,6 +4,7 @@ import authHighlightCss from "./AuthHighlight.module.css"
 
 import HighlightDesktopLayout from "../../shared/components/HighlightDesktopLayout.tsx"
 import HighlightMobileLayout from "../../shared/components/HighlightMobileLayout.tsx"
+import HighlightDesktopImage from "../../shared/components/HighlightDesktopImage.tsx"
 
 const AuthHighlightImg = () => {
     return (
@@ -33,9 +34,7 @@ const AuthServiceHighlight = () => {
         <>
             {isDesktop &&
                 <HighlightDesktopLayout paragraphs={paragraphs}>
-                    <div className="h-30 w-30 relative">
-                        <AuthHighlightImg />
-                    </div>
+                    <AuthHighlightImg />
                 </HighlightDesktopLayout>
             }
             {!isDesktop &&

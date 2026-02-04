@@ -4,6 +4,7 @@ import velmaHighlightCss from "./VelmaModeHighlight.module.css"
 
 import HighlightDesktopLayout from "../../shared/components/HighlightDesktopLayout"
 import HighlightMobileLayout from "../../shared/components/HighlightMobileLayout"
+import HighlightDesktopImage from "../../shared/components/HighlightDesktopImage"
 
 const VelmaImages = () => {
     return (
@@ -37,9 +38,7 @@ const VelmaModeHighlight = () => {
         <>
             {isDesktop &&
                 <HighlightDesktopLayout paragraphs={paragraphs}>
-                    <div className="h-30 w-30 relative">
-                        <VelmaImages />
-                    </div>
+                    <VelmaImages />
                 </HighlightDesktopLayout>
             }
             {!isDesktop &&
