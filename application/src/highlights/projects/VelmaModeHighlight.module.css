@@ -1,35 +1,5 @@
-.pop {
-    visibility: visible;
-    animation: pop-in 3000ms;
-}
-
-.blur {
-    animation: blur-in 3000ms;
-}
-
-.mask {
-    mask-image: url("/velmaMode/velmaMask.png");
-    mask-repeat: no-repeat;
-    mask-origin: content-box;
-    mask-position: center;
-    mask-size: 100%;
-}
-
-.move_up {
-    animation: move-up 1500ms;
-}
-
-.blur_up {
-    animation: blur-up 1500ms;
-}
-
-@keyframes pop-in {
-    0% {
-        visibility: hidden;
-    }
-    100% {
-        visibility: hidden;
-    }
+.blur_in {
+    animation: blur-in 8000ms;
 }
 
 @keyframes blur-in {
@@ -46,22 +16,38 @@
     }
 }
 
-@keyframes blur-up {
+.glasses_on {
+    animation: glasses-on 4000ms;
+}
+
+@keyframes glasses-on {
     0% {
-        mask-position: center 5rem;
+        transform: translate(0px, 100px);
     }
 
     100% {
-        mask-position: center;
+        transform: translate(0px, 0px);
     }
 }
 
-@keyframes move-up {
+.mask {
+    mask-image: url("/velmaMode/velmaMask.png");
+    mask-repeat: no-repeat;
+    mask-origin: content-box;
+    mask-position: center;
+    mask-size: 100%;
+}
+
+.mask_up {
+    animation: mask-up 4000ms;
+}
+
+@keyframes mask-up {
     0% {
-        top: 5rem;
+        mask-position: 0px 100px;
     }
 
     100% {
-        top: 0px;
+        mask-position: 0px 0px;
     }
 }
