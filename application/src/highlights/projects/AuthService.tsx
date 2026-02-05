@@ -8,15 +8,15 @@ import HighlightDesktopImage from "../../shared/components/HighlightDesktopImage
 
 const AuthHighlightImg = () => {
     return (
-        <>
-            <img src="/authService/robo3.png" className={`absolute ${authHighlightCss.queue_up3}`} />
-            <img src="/authService/robo2.png" className={`absolute ${authHighlightCss.queue_up2}`} />
-            <img src="/authService/robo1.png" className={`absolute ${authHighlightCss.queue_up1}`} />
-            <img src="/authService/boop3.png" className={`absolute ${authHighlightCss.talk3}`} />
-            <img src="/authService/boop2.png" className={`absolute ${authHighlightCss.talk2}`} />
-            <img src="/authService/notAToaster.png" className={`absolute ${authHighlightCss.talk1}`} />
-            <img src="/authService/queueBarrier.png" className={`absolute`} />
-        </>
+        <span className="grid grid-cols-1 grid-rows-1">
+            <img src="/authService/robo3.png" className={`z-1 col-span-full row-span-full  ${authHighlightCss.queue_up3}`} />
+            <img src="/authService/boop3.png" className={`z-1 col-span-full row-span-full  ${authHighlightCss.talk3}`} />
+            <img src="/authService/robo2.png" className={`z-2 col-span-full row-span-full  ${authHighlightCss.queue_up2}`} />
+            <img src="/authService/boop2.png" className={`z-2 col-span-full row-span-full  ${authHighlightCss.talk2}`} />
+            <img src="/authService/robo1.png" className={`z-3 col-span-full row-span-full  ${authHighlightCss.queue_up1}`} />
+            <img src="/authService/notAToaster.png" className={`z-3 col-span-full row-span-full ${authHighlightCss.talk1}`} />
+            <img src="/authService/queueBarrier.png" className={`z-4 col-span-full row-span-full`} />
+        </span>
     )
 }
 
