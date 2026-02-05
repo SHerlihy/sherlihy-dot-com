@@ -7,20 +7,20 @@ import HighlightMobileLayout from "../../shared/components/HighlightMobileLayout
 
 const VelmaImages = () => {
     return (
-        <>
-            <img
-                src="/velmaMode/velmaNoGlasses.png"
-                className={`absolute ${velmaHighlightCss.blur} ${velmaHighlightCss.pop}`}
-            />
-            <img
-                src="/velmaMode/velmaNoGlasses.png"
-                className={`absolute ${velmaHighlightCss.mask} ${velmaHighlightCss.blur_up}`}
-            />
+        <span className="grid grid-cols-1 grid-rows-1">
             <img
                 src="/velmaMode/velmaGlasses.png"
-                className={`absolute ${velmaHighlightCss.move_up}`}
+                className={`z-3 col-span-full row-span-full ${velmaHighlightCss.glasses_on}`}
             />
-        </>
+            <img
+                src="/velmaMode/velmaNoGlasses.png"
+                className={`z-2 col-span-full row-span-full ${velmaHighlightCss.mask} ${velmaHighlightCss.mask_up}`}
+            />
+            <img
+                src="/velmaMode/velmaNoGlasses.png"
+                className={`z-1 col-span-full row-span-full ${velmaHighlightCss.blur_in}`}
+            />
+        </span>
     )
 }
 
@@ -37,9 +37,7 @@ const VelmaModeHighlight = () => {
         <>
             {isDesktop &&
                 <HighlightDesktopLayout paragraphs={paragraphs}>
-                    <div className="h-30 w-30 relative">
-                        <VelmaImages />
-                    </div>
+                    <VelmaImages />
                 </HighlightDesktopLayout>
             }
             {!isDesktop &&

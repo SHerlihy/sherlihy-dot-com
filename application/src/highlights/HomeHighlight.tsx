@@ -1,7 +1,5 @@
 import { useState } from "react"
 import HighlightDesktopImage from "../shared/components/HighlightDesktopImage"
-import HighlightMobileContent from "../shared/components/HighlightMobileContent"
-import HighlightMobileImage from "../shared/components/HighlightMobileImage"
 import useIsDesktop from "../shared/hooks/useIsDesktop"
 import SherlihyImage from "./SherlihyImage"
 
@@ -9,8 +7,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 
 import QueryModel from "../features/query/QueryModel"
 import QueryControl from "../features/query/QueryControl"
-
-import QueryView from "../features/query/QueryView"
 
 import { catchError } from "../lib/async.ts"
 
@@ -36,25 +32,26 @@ const HomeHighlight = () => {
     }
 
     return (
-        <article className="h-full flex flex-col flex-1 justify-between">
+        <article className="h-full p-4 flex flex-col justify-between">
             <div
-                className="whitespace-pre-line overflow-scroll scroll-smooth"
+                className="flex-1 overflow-scroll p-4 scroll-p-20"
             >
-
-                <Intro />
-                {chat.map((utter, i) => <>
-                    &nbsp;
-                    <hr />
-                    &nbsp;
-                    <p
-                        className={`
+                <div className="min-h-full whitespace-pre-line flex flex-col justify-center align-center">
+                    <Intro />
+                    {chat.map((utter, i) => <div key={i}>
+                        &nbsp;
+                        <hr />
+                        &nbsp;
+                        <p
+                            className={`
                         ${i % 2 === 0 && "text-right"}
                     `}
-                    >
-                        {utter}
-                    </p>
-                </>
-                )}
+                        >
+                            {utter}
+                        </p>
+                    </div>
+                    )}
+                </div>
             </div>
             <div className="py-4">
                 <hr className="pb-4" />
@@ -86,9 +83,9 @@ const Intro = () => {
         return (
             <div className="flex justify-center">
                 <p className="inline-block">
-                    <HighlightDesktopImage>
-                        <SherlihyImage />
-                    </HighlightDesktopImage>
+                <HighlightDesktopImage>
+                    <SherlihyImage />
+                </HighlightDesktopImage>
                     {introText}
                 </p>
             </div>
@@ -97,13 +94,12 @@ const Intro = () => {
 
     return (
         <>
-            <HighlightMobileImage>
+            <div className="flex justify-center">
                 <SherlihyImage />
-            </HighlightMobileImage>
-            <span className='pb-4' />
-            <HighlightMobileContent>
+            </div>
+            <p className="pt-4 inline-block">
                 {introText}
-            </HighlightMobileContent>
+            </p>
         </>
     )
 }

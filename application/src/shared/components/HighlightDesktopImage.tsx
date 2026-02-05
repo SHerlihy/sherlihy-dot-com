@@ -1,16 +1,34 @@
 import React, { ReactNode } from 'react'
 
-const HighlightDesktopImage = ({
-    children
-}: {
+type Props = {
+    boxDimension: number,
+    imageDimension: number,
     children: ReactNode
-}) => {
+}
+
+const HighlightDesktopImage = ({
+    boxDimension,
+    imageDimension,
+    children
+}: Props) => {
     return (
-        <div className='float-left overflow-hidden pt-6 pr-16 pb-8'>
-            <div className="h-30 w-30 relative">
+        <span
+            className={`float-left overflow-hidden`}
+            style={{
+                height: `${boxDimension}px`,
+                width: `${boxDimension}px`
+            }}
+        >
+            <span
+                className={`inline-block`}
+                style={{
+                    maxHeight: `${imageDimension}px`,
+                    maxWidth: `${imageDimension}px`
+                }}
+            >
                 {children}
-            </div>
-        </div>
+            </span>
+        </span >
     )
 }
 

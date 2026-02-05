@@ -1,9 +1,9 @@
 .drop_bounce1{
-    animation: drop-bounce 1000ms, drop-sway-a 1000ms;
+    animation: drop-sway-a 1000ms;
 }
 
 .drop_bounce2{
-    animation: drop-bounce 1200ms, drop-sway-b 1200ms;
+    animation: drop-sway-b 1200ms;
 }
 
 .drop_bounce3{
@@ -12,54 +12,54 @@
 
 @keyframes drop-bounce {
     0% {
-        top: -100px;
+        transform: translate(0px, -100px);
     }
 
     33% {
-        top: 5px;
+        transform: translate(0px, 5px);
     }
 
     69% {
-        top: -10px;
+        transform: translate(0px, -10px);
     }
 
     100% {
-        top: 0px;
+        transform: translate(0px, 0px);
     }
 }
 
 @keyframes drop-sway-a {
     0% {
-        left: 0px;
+        transform: translate(0px, -100px);
     }
 
     33% {
-        left: -2px;
+        transform: translate(-2px, 5px);
     }
 
     69% {
-        left: 2px;
+        transform: translate(2px, -10px);
     }
 
     100% {
-        left: 0px;
+        transform: translate(0px, 0px);
     }
 }
 
 @keyframes drop-sway-b {
     0% {
-        left: 0px;
+        transform: translate(0px, -100px);
     }
 
     33% {
-        left: 2px;
+        transform: translate(2px, 5px);
     }
 
     69% {
-        left: -2px;
+        transform: translate(-2px, -10px);
     }
 
     100% {
-        left: 0px;
+        transform: translate(0px, 0px);
     }
 }

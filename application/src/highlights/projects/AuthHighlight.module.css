@@ -24,14 +24,12 @@
 
 @keyframes queue-up {
     0% {
-        left: 100px;
-        top: -100px;
+        transform: translate(100px, -100px);
         scale: 0.5;
     }
 
     100% {
-        left: 0px;
-        top: 0px;
+        transform: translate(0px, 0px);
         scale: 1;
     }
 }

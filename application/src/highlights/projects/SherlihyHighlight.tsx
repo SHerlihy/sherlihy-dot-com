@@ -16,9 +16,7 @@ const SherlihyHighlight = () => {
         <>
             {isDesktop &&
                 <HighlightDesktopLayout paragraphs={paragraphs}>
-                    <div className="h-40 w-40 relative">
                         <SherlihyImage />
-                    </div>
                 </HighlightDesktopLayout>
             }
             {!isDesktop &&

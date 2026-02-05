@@ -7,12 +7,12 @@ import HighlightMobileLayout from "../../shared/components/HighlightMobileLayout
 
 const I2Images = () => {
     return (
-        <>
-            <img src="/i2/spiderweb.png" className={`absolute`} />
-            <img src="/i2/crimes1.png" className={`absolute ${i2HighlightCss.drop_bounce1}`} />
-            <img src="/i2/crimes2.png" className={`absolute ${i2HighlightCss.drop_bounce2}`} />
-            <img src="/i2/crimes3.png" className={`absolute ${i2HighlightCss.drop_bounce3}`} />
-        </>
+        <span className="grid grid-cols-1 grid-rows-1">
+            <img src="/i2/spiderweb.png" className="col-span-full row-span-full" />
+            <img src="/i2/crimes1.png" className={`col-span-full row-span-full ${i2HighlightCss.drop_bounce1}`} />
+            <img src="/i2/crimes2.png" className={`col-span-full row-span-full ${i2HighlightCss.drop_bounce2}`} />
+            <img src="/i2/crimes3.png" className={`col-span-full row-span-full ${i2HighlightCss.drop_bounce3}`} />
+        </span>
     )
 }
 
@@ -29,9 +29,7 @@ const I2GroupHighlight = () => {
         <>
             {isDesktop &&
                 <HighlightDesktopLayout paragraphs={paragraphs}>
-                    <div className="h-30 w-30 relative">
-                        <I2Images />
-                    </div>
+                    <I2Images />
                 </HighlightDesktopLayout>
             }
             {!isDesktop &&
