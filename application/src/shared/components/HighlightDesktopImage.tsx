@@ -12,11 +12,23 @@ const HighlightDesktopImage = ({
     children
 }: Props) => {
     return (
-        <span className={`min-h-2xs min-w-2xs  float-left overflow-hidden`}>
-            <span className={`inline-block max-h-3xs max-w-3xs`}>
+        <span
+            className={`float-left overflow-hidden`}
+            style={{
+                height: `${boxDimension}px`,
+                width: `${boxDimension}px`
+            }}
+        >
+            <span
+                className={`inline-block`}
+                style={{
+                    maxHeight: `${imageDimension}px`,
+                    maxWidth: `${imageDimension}px`
+                }}
+            >
                 {children}
             </span>
-        </span>
+        </span >
     )
 }
 
