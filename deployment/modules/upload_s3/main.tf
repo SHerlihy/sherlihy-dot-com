@@ -4,6 +4,7 @@ resource "aws_s3_object" "dist-to-objects" {
   bucket = var.bucket_id
   key    = var.dist_files[count.index].path
 source = "${var.dist_path}/${var.dist_files[count.index].path}"
+source_hash = filem5("${var.dist_path}/${var.dist_files[count.index].path}")
 
   acl = "public-read"
 
