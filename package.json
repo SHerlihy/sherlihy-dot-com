@@ -5,14 +5,10 @@
   "type": "module",
   "scripts": {
     "build": "cd ./application && npm run build && cd ..",
+    "replace_prod_files": "cd ./deploy/upload && ./apply.sh && cd ../..",
     "infra_diagrams": "live-server --open=./deployment/infrastructure_diagrams .",
-    "launch_prod": "cd ./deployment/production && ./deploy_prod.sh && ../../",
-    "replace_prod_files": "cd ./deployment/production/bucket && ./replace_s3.sh && cd ../../../",
     "compose_diagrams": "cd ./deployment/infrastructure_diagrams && ts-node-esm diagramsToMd.ts",
     "readme_add_diagrams": "cd ./deployment/infrastructure_diagrams && node ./diagrams_to_readme.cjs"
-  },
-  "dependencies": {
-    "terraform": "^1.23.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",

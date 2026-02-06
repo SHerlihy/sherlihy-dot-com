@@ -4,8 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "build": "tsc && vite build --outDir ../dist",
-    "build_stage": "tsc && vite build --mode staging --outDir ../dist",
+    "build": "tsc && vite build",
     "dev": "vite",
     "lint": "eslint .",
     "preview": "vite preview"

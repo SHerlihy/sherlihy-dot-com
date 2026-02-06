@@ -45,12 +45,20 @@ jobs:
           npm install
           cd ..
 
+      - name: Build dist
+        run: |
+          cd ./application
+          npm run build
+          cd ..
+
       - name: AWS user creds
         run: |
           mkdir ~/.aws
-          echo -e "[sherlihyDotCom-prod]\n" > ~/.aws/credentials
+          echo -e "[sherlihydtcom]\n" > ~/.aws/credentials
           echo -e "aws_access_key_id = ${{secrets.AWS_ACCESS_KEY_ID}}\n" >> ~/.aws/credentials
           echo -e "aws_secret_access_key = ${{secrets.AWS_SECRET_ACCESS_KEY}}\n" >> ~/.aws/credentials
+          echo -e "[sherlihydtcom]\n" > ~/.aws/config
+          echo -e "region = us-east-1\n" >> ~/.aws/config
 
       - name: Deploy changes
         run: npm run replace_prod_files
@@ -61,10 +69,10 @@ jobs:
           git config --global user.email 'steven_herlihy@yahoo.com'
 
       - name: Add state
-        run: git add -f deployment/production/**/terraform.tfstate
+        run: git add -f deploy/**/terraform.tfstate
 
       - name: Add var files
-        run: git add -f deployment/production/**/vars.tfvars
+        run: git add -f deploy/**/terraform.tfvars
 
       - name: Commit
         run: git commit -q -n -m"Auto updating tf state" > /dev/null 2>&1 || true
