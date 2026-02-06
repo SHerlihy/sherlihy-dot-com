@@ -1,3 +1,5 @@
+worktrees/
+
 # Local .terraform directories
 **/.terraform/*
 .terraform.*
@@ -6,11 +8,11 @@
 # .tfstate files
 *.tfstate.backup
 
-**/.ssh/*
-
 dist
 
 node_modules/
-worktrees/
-
 package-lock.json
+
+# Allow
+
+!./deploy/upload/terraform.tfstate
