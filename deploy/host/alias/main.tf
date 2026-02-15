@@ -14,6 +14,7 @@ variable "domain_name" {
 variable "endpoint" {
   type = string
 }
+
 variable "zone_id" {
   type = string
 }

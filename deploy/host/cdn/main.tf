@@ -27,10 +27,6 @@ locals {
     disabled_cache = "4135ea2d-6df8-44a3-9df3-4b5a84be39ad"
 }
 
-resource "aws_route53_zone" "phrases" {
-  name = "phrases.com"
-}
-
 resource "aws_cloudfront_distribution" "s3_distribution" {
   origin {
     domain_name              = var.bucket_regional_domain_name
