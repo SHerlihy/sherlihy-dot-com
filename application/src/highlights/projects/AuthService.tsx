@@ -20,31 +20,42 @@ const AuthHighlightImg = () => {
     )
 }
 
+const Content = () => {
+    return (
+        <>
+            <p>
+                Using Go v1.22 and only the standard http package, I created a backend REST service to handle authentication requests.
+            </p>
+            &nbsp;
+            <p>
+                I had previous experience creating Go backend services using the GoFiber framework, however, on discovering the standard http package was updated I wanted to experience and use the updated package.
+            </p>
+            &nbsp;
+            <p>
+                Further to the backend service, I also created a MySQL database to store the authenication data.
+            </p>
+        </>
+    )
+}
+
 
 const AuthServiceHighlight = () => {
     const isDesktop = useIsDesktop()
 
-    const paragraphs = [
-        "Using Go v1.22 and only the standard http package, I created a backend REST service to handle authentication requests.",
-        "I had previous experience creating Go backend services using the GoFiber framework, however, on discovering the standard http package was updated I wanted to experience and use the updated package.",
-        "Further to the backend service, I also created a MySQL database to store the authenication data."
-    ]
+    if (isDesktop) {
+        return (
+            <HighlightDesktopLayout
+                image={<AuthHighlightImg />}
+                content={<Content />}
+            />
+        )
+    }
 
     return (
-        <>
-            {isDesktop &&
-                <HighlightDesktopLayout paragraphs={paragraphs}>
-                    <AuthHighlightImg />
-                </HighlightDesktopLayout>
-            }
-            {!isDesktop &&
-                <HighlightMobileLayout paragraphs={paragraphs}>
-                    <div className="h-30 w-30 relative">
-                        <AuthHighlightImg />
-                    </div>
-                </HighlightMobileLayout>
-            }
-        </>
+        <HighlightMobileLayout
+            image={<AuthHighlightImg />}
+            content={<Content />}
+        />
     )
 }
 

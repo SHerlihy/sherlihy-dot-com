@@ -20,7 +20,7 @@ flex flex-col flex-1 overflow-hidden justify-between align-center
 `}>
                 {isNav && navigate}
                 {!isNav && content}
-                <hr />
+                {isDesktop && <hr />}
             </article>
         </main>
     )
