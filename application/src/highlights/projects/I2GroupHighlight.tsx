@@ -16,30 +16,41 @@ const I2Images = () => {
     )
 }
 
+const Content = () => {
+    return (
+        <>
+            <p>
+                Imagine that scene from Minority Report where Tom Cruise is looking at footage of 'future crimes' but instead of it being a 3D hologram it's 2D, on a browser and shows text.
+            </p>
+            &nbsp;
+            <p>
+                The application was able to chart up to 500,000 nodes and edges. Performance was a key concern and as a front end developer I was responsible for designing and implementing performant optimistic changes on the chart nodes and edges.
+            </p>
+            &nbsp;
+            <p>
+                Due to performance being a key concern much of the codebase was highly mutable and we made extensive use of Typescript to help manage the added complexity of the mutable data structures.
+            </p>
+        </>
+    )
+}
+
 const I2GroupHighlight = () => {
     const isDesktop = useIsDesktop()
 
-    const paragraphs = [
-        "Imagine that scene from Minority Report where Tom Cruise is looking at footage of 'future crimes' but instead of it being a 3D hologram it's 2D, on a browser and shows text.",
-        "The application was able to chart up to 500,000 nodes and edges. Performance was a key concern and as a front end developer I was responsible for designing and implementing performant optimistic changes on the chart nodes and edges.",
-        "Due to performance being a key concern much of the codebase was highly mutable and we made extensive use of Typescript to help manage the added complexity of the mutable data structures."
-    ]
+    if (isDesktop) {
+        return (
+            <HighlightDesktopLayout
+                image={<I2Images />}
+                content={<Content />}
+            />
+        )
+    }
 
     return (
-        <>
-            {isDesktop &&
-                <HighlightDesktopLayout paragraphs={paragraphs}>
-                    <I2Images />
-                </HighlightDesktopLayout>
-            }
-            {!isDesktop &&
-                <HighlightMobileLayout paragraphs={paragraphs}>
-                    <div className="h-30 w-30 relative">
-                        <I2Images />
-                    </div>
-                </HighlightMobileLayout>
-            }
-        </>
+        <HighlightMobileLayout
+            image={<I2Images />}
+            content={<Content />}
+        />
     )
 }
 

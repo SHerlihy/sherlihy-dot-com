@@ -3,23 +3,20 @@ import HighlightMobileImage from "./HighlightMobileImage"
 import HighlightMobileContent from "./HighlightMobileContent"
 
 const HighlightMobileLayout = ({
-    paragraphs,
-    children
+    image,
+    content
 }: {
-    paragraphs: string[],
-    children: ReactNode
+    image: ReactNode,
+    content: ReactNode
 }) => {
     return (
         <>
             <HighlightMobileImage>
-                {children}
+                {image}
             </HighlightMobileImage>
-            <span className='pb-4'/>
+            <span className='pb-4' />
             <HighlightMobileContent>
-                {paragraphs.map((para, idx) => <div key={idx}>
-                    <p>{para}</p>
-                    &nbsp;
-                </div>)}
+                {content}
             </HighlightMobileContent>
         </>
     )

@@ -1,9 +1,10 @@
 import useIsDesktop from '../../shared/hooks/useIsDesktop'
 
 import CoupleContainer from '../../shared/layouts/CoupleContainer'
-import HighlightDesktopImage from '../../shared/components/HighlightDesktopImage'
 import HighlightMobileImage from '../../shared/components/HighlightMobileImage'
 import HighlightMobileContent from '../../shared/components/HighlightMobileContent'
+import HighlightDesktopLayout from '../../shared/components/HighlightDesktopLayout'
+import HighlightMobileLayout from '../../shared/components/HighlightMobileLayout'
 
 const PractitionerImg = () => {
     return (
@@ -30,32 +31,20 @@ const AWSCertsHighlight = () => {
 
     if (isDesktop) {
         return (
-            <div>
-                <HighlightDesktopImage
-                    boxDimension={180}
-                    imageDimension={150}
-                >
-                    <CoupleContainer TlImg={ArchitectImg} BrImg={PractitionerImg} />
-                </HighlightDesktopImage>
-                <Content />
-            </div>
+            <HighlightDesktopLayout
+                image={<CoupleContainer TlImg={ArchitectImg} BrImg={PractitionerImg} />}
+                content={<Content />}
+            />
         )
     }
 
     return (
-        <>
-            <HighlightMobileImage>
-                <CoupleContainer TlImg={ArchitectImg} BrImg={PractitionerImg} />
-            </HighlightMobileImage>
-            <span className='pb-4' />
-            <HighlightMobileContent>
-                <Content />
-            </HighlightMobileContent>
-        </>
+        <HighlightMobileLayout
+            image={<CoupleContainer TlImg={ArchitectImg} BrImg={PractitionerImg} />}
+            content={<Content />}
+        />
     )
 }
-
-
 
 const Content = () => {
     return (

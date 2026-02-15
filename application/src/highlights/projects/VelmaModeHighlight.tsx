@@ -24,30 +24,41 @@ const VelmaImages = () => {
     )
 }
 
+const Content = () => {
+    return (
+        <>
+            <p>
+                The core idea of this project was to provide users with the control to change the size of text and at the same time respect the existing layout of the applications the wrapping component is used in.
+            </p>
+            &nbsp;
+            <p>
+                The application uses a custom hook and the react context API to provide and update the user specified magnification for only the components wrapped in the 'Velma Mode' component.
+            </p>
+            &nbsp;
+            <p>
+                As the project has grown it's become more important to clearly explore and document the desired user experience which has led to creating design decision documents inside the project.
+            </p>
+        </>
+    )
+}
+
 const VelmaModeHighlight = () => {
     const isDesktop = useIsDesktop()
 
-    const paragraphs = [
-        "The core idea of this project was to provide users with the control to change the size of text and at the same time respect the existing layout of the applications the wrapping component is used in.",
-        "The application uses a custom hook and the react context API to provide and update the user specified magnification for only the components wrapped in the 'Velma Mode' component.",
-        "As the project has grown it's become more important to clearly explore and document the desired user experience which has led to creating design decision documents inside the project."
-    ]
+    if (isDesktop) {
+        return (
+            <HighlightDesktopLayout
+                image={<VelmaImages />}
+                content={<Content />}
+            />
+        )
+    }
 
     return (
-        <>
-            {isDesktop &&
-                <HighlightDesktopLayout paragraphs={paragraphs}>
-                    <VelmaImages />
-                </HighlightDesktopLayout>
-            }
-            {!isDesktop &&
-                <HighlightMobileLayout paragraphs={paragraphs}>
-                    <div className="h-30 w-30 relative">
-                        <VelmaImages />
-                    </div>
-                </HighlightMobileLayout>
-            }
-        </>
+        <HighlightMobileLayout
+            image={<VelmaImages />}
+            content={<Content />}
+        />
     )
 }
 

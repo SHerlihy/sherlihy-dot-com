@@ -2,11 +2,11 @@ import { ReactNode } from "react"
 import HighlightDesktopImage from "./HighlightDesktopImage"
 
 const HighlightDesktopLayout = ({
-    paragraphs,
-    children
+    image,
+    content
 }: {
-    paragraphs: string[],
-    children: ReactNode
+    image: ReactNode,
+    content: ReactNode
 }) => {
     return (
         <div className="flex flex-1 justify-center items-center">
@@ -15,12 +15,9 @@ const HighlightDesktopLayout = ({
                     boxDimension={180}
                     imageDimension={150}
                 >
-                    {children}
+                    {image}
                 </HighlightDesktopImage>
-                {paragraphs.map((para, idx) => <div key={idx}>
-                    <p key={idx}>{para}</p>
-                    &nbsp;
-                </div>)}
+                    {content}
             </div>
         </div>
     )
