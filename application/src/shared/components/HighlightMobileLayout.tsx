@@ -11,10 +11,11 @@ const HighlightMobileLayout = ({
 }) => {
     return (
         <>
-            <HighlightMobileImage>
-                {image}
-            </HighlightMobileImage>
-            <span className='pb-4' />
+            <div className="h-1/3 grid grid-cols-[1fr_2fr_1fr]">
+                <div className="min-h-0 py-4 col-start-2 col-end-2 flex justify-center align-center">
+                    {image}
+                </div>
+            </div >
             <HighlightMobileContent>
                 {content}
             </HighlightMobileContent>
