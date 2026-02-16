@@ -51,6 +51,10 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     origin_id                = var.uuid
   }
 
+  aliases = [
+    var.domain_name
+  ]
+
   enabled             = true
   is_ipv6_enabled     = true
 

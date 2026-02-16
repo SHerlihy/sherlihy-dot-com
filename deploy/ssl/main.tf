@@ -24,7 +24,6 @@ resource "aws_acm_certificate" "cert" {
 
 resource "aws_route53_zone" "sherlihyDotCom" {
     name         = var.domain_name
-
     force_destroy = true
 }
 
