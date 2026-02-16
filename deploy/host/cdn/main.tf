@@ -23,8 +23,25 @@ variable "bucket_regional_domain_name" {
     type = string
 }
 
+variable "domain_name" {
+    type = string
+}
+
+variable "cert_arn" {
+    type = string
+}
+
+variable "validation_record_fqdns" {
+  type = list(string)
+}
+
 locals {
     disabled_cache = "4135ea2d-6df8-44a3-9df3-4b5a84be39ad"
+}
+
+resource "aws_acm_certificate_validation" "ssl" {
+  certificate_arn         = var.cert_arn
+  validation_record_fqdns = var.validation_record_fqdns
 }
 
 resource "aws_cloudfront_distribution" "s3_distribution" {
@@ -38,7 +55,8 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   is_ipv6_enabled     = true
 
   viewer_certificate {
-    cloudfront_default_certificate = true
+    acm_certificate_arn = aws_acm_certificate_validation.ssl.certificate_arn
+    ssl_support_method = "sni-only"
   }
 
   default_cache_behavior {
@@ -102,7 +120,7 @@ data "aws_iam_policy_document" "cloudfront_access" {
   }
 }
 
-output "zone_id" {
+output "cdn_zone_id" {
     value = aws_cloudfront_distribution.s3_distribution.hosted_zone_id
 }
 

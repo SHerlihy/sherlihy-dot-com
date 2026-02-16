@@ -11,6 +11,18 @@ provider "aws" {
   profile = "sherlihydtcom"
 }
 
+variable "cert_arn" {
+  type = string
+}
+
+variable "validation_record_fqdns" {
+  type = list(string)
+}
+
+variable "route_zone_id" {
+  type = string
+}
+
 locals {
     uuid = "02d01d33-622a-421d-93de-410f503a438e"
     domain_name = "sherlihy.com"
@@ -30,23 +42,26 @@ module "cdn" {
   bucket_id = module.s3.bucket_id
   bucket_regional_domain_name = module.s3.bucket_regional_domain_name
 
+  domain_name = local.domain_name
+
+  cert_arn = var.cert_arn
+  validation_record_fqdns = var.validation_record_fqdns
+
   uuid = local.uuid
 }
 
 module "alias" {
   source = "./alias"
 
-  domain_name = local.domain_name
-  endpoint = module.cdn.domain_name
-  zone_id = module.cdn.zone_id
+  web_domain = local.domain_name
+  cdn_domain = module.cdn.domain_name
+
+  route_zone_id = var.route_zone_id
+  cdn_zone_id = module.cdn.cdn_zone_id
 }
 
 output "cdn_domain_name" {
   value = module.cdn.domain_name
-}
-
-output "name_servers" {
-  value = module.alias.name_servers
 }
 
 output "bucket_id" {

@@ -7,36 +7,30 @@ terraform {
   }
 }
 
-variable "domain_name" {
+variable "web_domain" {
   type = string
 }
 
-variable "endpoint" {
+variable "route_zone_id" {
   type = string
 }
 
-variable "zone_id" {
+variable "cdn_domain" {
   type = string
 }
 
-resource "aws_route53_zone" "sherlihyDotCom" {
-    name         = var.domain_name
-
-    force_destroy = true
+variable "cdn_zone_id" {
+  type = string
 }
 
 resource "aws_route53_record" "sherlihyDotCom" {
-    zone_id = aws_route53_zone.sherlihyDotCom.zone_id
-    name    = var.domain_name
+    zone_id = var.route_zone_id
+    name    = var.web_domain
     type    = "A"
     
     alias {
-        name = var.endpoint
-        zone_id = var.zone_id 
+        name = var.cdn_domain
+        zone_id = var.cdn_zone_id 
         evaluate_target_health = true
     }
-}
-
-output "name_servers" {
-    value = aws_route53_zone.sherlihyDotCom.name_servers
 }
