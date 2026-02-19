@@ -45,7 +45,7 @@ function QueryModel({
 
     }, [isPending, isError, data])
 
-    const handleClick = (handleQuery: () => void) => {
+    const handlePhase = (handleQuery: () => void) => {
         switch (phase) {
             case "ready":
                 handleQuery()
@@ -73,7 +73,7 @@ function QueryModel({
             feedback={feedback}
             phase={phase}
             handleQuery={async (query) => { await mutateAsync(query) }}
-            handleClick={handleClick}
+            handlePhase={handlePhase}
         />
     )
 }
