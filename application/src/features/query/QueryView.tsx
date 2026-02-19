@@ -54,6 +54,7 @@ function QueryView({
                         name={field.name}
                         state={field.state.value}
                         handleChange={field.handleChange}
+                        onSubmit={() => { handleClick(form.handleSubmit) }}
                         errors={field.state.meta.errorMap.onChange}
                         className="w-full"
                     />
