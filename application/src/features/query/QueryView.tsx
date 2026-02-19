@@ -15,7 +15,7 @@ export const formDefaults: FormSchema = {
 type Props = {
     defaultValues?: FormSchema,
     handleQuery: (query: string) => Promise<void>,
-    handleClick: (submit: () => Promise<void>) => void,
+    handlePhase: (submit: () => Promise<void>) => void,
 }
     & PropsControlButton
 
@@ -24,7 +24,7 @@ function QueryView({
     feedback,
     phase,
     handleQuery,
-    handleClick
+    handlePhase
 }: Props) {
 
     const form = useForm({
@@ -33,7 +33,11 @@ function QueryView({
             onChange: schema,
             onMount: schema,
         },
-        onSubmit: async ({ value }) => { await handleQuery(value.query) }
+        onSubmit: async ({ value }) => {
+            handlePhase(
+                () => handleQuery(value.query)
+            )
+        }
     })
 
     return (
@@ -54,6 +58,7 @@ function QueryView({
                         name={field.name}
                         state={field.state.value}
                         handleChange={field.handleChange}
+                        onSubmit={form.handleSubmit}
                         errors={field.state.meta.errorMap.onChange}
                         className="w-full"
                     />
@@ -62,7 +67,7 @@ function QueryView({
             <ControlButton
                 feedback={feedback}
                 phase={phase}
-                onClick={() => { handleClick(form.handleSubmit) }}
+                onClick={form.handleSubmit}
             />
         </form >
     )
