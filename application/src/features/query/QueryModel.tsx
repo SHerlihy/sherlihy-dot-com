@@ -1,7 +1,18 @@
 import { useMutation } from '@tanstack/react-query'
-import QueryView from './QueryView'
 import { useEffect, useState } from 'react'
-import { Phase } from './components/controlButton/ControlButton'
+import z from 'zod'
+import { useForm } from '@tanstack/react-form'
+import ControlButton, { Phase } from './components/ControlButton'
+import Field from './components/Field'
+
+const schema = z.object({
+    query: z.string()
+})
+
+type FormSchema = z.infer<typeof schema>
+export const formDefaults: FormSchema = {
+    query: ""
+}
 
 export const FEEDBACK_READY = "submit"
 export const FEEDBACK_ERROR = "retry?"
@@ -16,6 +27,7 @@ function QueryModel({
     postQuery,
     abortQuery
 }: Props) {
+    const [query, setQuery] = useState("")
     const [feedback, setFeedback] = useState(FEEDBACK_READY)
     const [phase, setPhase] = useState<Phase>("ready")
 
@@ -28,6 +40,7 @@ function QueryModel({
         if (isSuccess) {
             setPhase("ready")
             setFeedback(FEEDBACK_READY)
+            setQuery("")
             return
         }
 
@@ -68,13 +81,52 @@ function QueryModel({
         }
     }
 
+    const form = useForm({
+        defaultValues: formDefaults,
+        validators: {
+            onChange: schema,
+            onMount: schema,
+        },
+        onSubmit: async ({ value }) => {
+            handlePhase(
+                async () => { await mutateAsync(value.query) }
+            )
+        }
+    })
+
     return (
-        <QueryView
-            feedback={feedback}
-            phase={phase}
-            handleQuery={async (query) => { await mutateAsync(query) }}
-            handlePhase={handlePhase}
-        />
+        <form
+            onSubmit={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
+            }}
+            onChange={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
+            }}
+        >
+            <form.Field
+                name="query"
+                children={(field) => (
+                    <Field
+                        name={field.name}
+                        value={query}
+                        handleChange={(e) => {
+                            field.handleChange(e)
+                            setQuery(e)
+                        }}
+                        onSubmit={form.handleSubmit}
+                        errors={field.state.meta.errorMap.onChange}
+                        className="w-full"
+                    />
+                )}
+            />
+            <ControlButton
+                feedback={feedback}
+                phase={phase}
+                onClick={form.handleSubmit}
+            />
+        </form >
     )
 }
 
