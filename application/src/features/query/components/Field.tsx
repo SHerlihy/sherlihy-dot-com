@@ -2,7 +2,7 @@ import { StandardSchemaV1Issue } from "@tanstack/react-form"
 
 type Props = {
     name: string,
-    state: string,
+    value: string,
     handleChange: (e: string) => void,
     onSubmit: () => void,
     errors?: StandardSchemaV1Issue[],
@@ -11,7 +11,7 @@ type Props = {
 
 function Field({
     name,
-    state,
+    value,
     handleChange,
     onSubmit,
     errors,
@@ -25,15 +25,15 @@ function Field({
                 type="text"
                 placeholder="What would you like to know?"
                 className={`
-                    ${"firefox"===true && "field-sizing-content"}
+                    ${"firefox" === true && "field-sizing-content"}
                     h-full w-full
                     outline-double
                 `}
                 name={name}
-                value={state}
+                value={value}
                 onChange={(e) => handleChange(e.target.value)}
                 onSubmit={onSubmit}
-                
+
             />
             <p>
                 {errors && errors.length > 0 ? (
