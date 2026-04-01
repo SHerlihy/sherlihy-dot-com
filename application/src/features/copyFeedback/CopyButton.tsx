@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { CopyIcon } from "../../shared/icons";
 import { CopyFeedbackContext } from "./CopyFeedbackContext.tsx";
 

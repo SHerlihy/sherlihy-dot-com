@@ -1,9 +1,12 @@
 import useIsDesktop from "../hooks/useIsDesktop"
 
 import { useContext } from "react";
-import { BackIcon, CopyIcon, MenuIcon } from "../icons";
+import { BackIcon, MenuIcon } from "../icons";
 import { NavContext } from "../context/NavContext";
 import CopyButton from "../../features/copyFeedback/CopyButton";
+
+const phoneId = crypto.randomUUID()
+const emailId = crypto.randomUUID()
 
 function ControlBar() {
     const { isNav, toggleIsNav } = useContext(NavContext)
@@ -58,10 +61,10 @@ function ContactInfoDesktop() {
     return (
         <div className={`flex-1 flex justify-center`}>
             <p>{PHONE_NO}&nbsp;</p>
-            <CopyButton content={PHONE_NO} />
+            <CopyButton id={phoneId} content={PHONE_NO} />
             <p>&nbsp;|&nbsp;</p>
             <p>{EMAIL}&nbsp;</p>
-            <CopyButton content={EMAIL} />
+            <CopyButton id={emailId} content={EMAIL} />
         </div>
     )
 }
@@ -73,13 +76,13 @@ function ContactInfoMobile() {
                 {PHONE_NO}
             </p>
             <p className={`row-start-1 row-end-2 col-start-5 col-end-6`}>
-                <CopyButton content={PHONE_NO} />
+                <CopyButton id={phoneId} content={PHONE_NO} />
             </p>
             <p className={`text-right row-start-2 row-end-3 col-start-1 col-end-5`}>
                 {EMAIL}
             </p>
             <p className={`row-start-2 row-end-3 col-start-5 col-end-6`}>
-                <CopyButton content={EMAIL} />
+                <CopyButton id={emailId} content={EMAIL} />
             </p>
         </div>
     )
