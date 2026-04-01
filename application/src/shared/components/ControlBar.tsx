@@ -3,16 +3,17 @@ import useIsDesktop from "../hooks/useIsDesktop"
 import { useContext } from "react";
 import { BackIcon, CopyIcon, MenuIcon } from "../icons";
 import { NavContext } from "../context/NavContext";
+import CopyButton from "../../features/copyFeedback/CopyButton";
 
 function ControlBar() {
     const { isNav, toggleIsNav } = useContext(NavContext)
     return (
-<>
-        <section className="">
-<div className="
+        <>
+            <section className="">
+                <div className="
 absolute left-0 top-0
 ">
-<div className="
+                    <div className="
 absolute
 rotate-45
 -translate-x-1/2
@@ -22,7 +23,7 @@ w-32
 border-r-1
 bg-[Canvas]
 "/>
-</div>
+                </div>
                 <button
                     className={`
 z-1
@@ -32,10 +33,10 @@ hover:cursor-pointer`}
                     {isNav && <BackIcon />}
                     {!isNav && <MenuIcon />}
                 </button>
-            <ContactInfo style={``} />
-        </section>
-<hr/>
-</>
+                <ContactInfo style={``} />
+            </section>
+            <hr />
+        </>
     )
 }
 
@@ -81,27 +82,6 @@ function ContactInfoMobile() {
                 <CopyButton content={EMAIL} />
             </p>
         </div>
-    )
-}
-
-function CopyButton({ content }: { content: string }) {
-    function updateClipboard() {
-        navigator.clipboard.writeText(content).then(
-            () => {
-                /* clipboard successfully set */
-            },
-            () => {
-                /* clipboard write failed */
-            },
-        );
-    }
-
-    return (
-        <button className={`cursor-pointer`}
-            onClick={() => updateClipboard()}
-        >
-            <CopyIcon />
-        </button>
     )
 }
 
