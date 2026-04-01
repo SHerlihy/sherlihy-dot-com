@@ -1,18 +1,17 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { CopyIcon } from "../../shared/icons";
+import { CopyFeedbackContext } from "./CopyFeedbackContext.tsx";
 
-function CopyButton({ content }: { content: string }) {
-    const [feedbackColor, setFeedbackColor] = useState('')
+function CopyButton({ id, content }: { id: string, content: string }) {
+    const { elementFeedback, handleSetElementFeedback } = useContext(CopyFeedbackContext)
 
     function updateClipboard() {
         navigator.clipboard.writeText(content).then(
             () => {
-                setFeedbackColor('fill-lime-500')
-                /* clipboard successfully set */
+                handleSetElementFeedback(id, 'fill-lime-500')
             },
             () => {
-                setFeedbackColor('fill-red-500')
-                /* clipboard write failed */
+                handleSetElementFeedback(id, 'fill-red-500')
             },
         );
     }
@@ -24,8 +23,8 @@ cursor-pointer
             onClick={() => updateClipboard()}
         >
             <CopyIcon
-                 className={`
-${feedbackColor}
+                className={`
+${id === elementFeedback.elementId && elementFeedback.feedbackColor}
  `}
             />
         </button>
