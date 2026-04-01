@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { CopyIcon } from "../../shared/icons";
 import { CopyFeedbackContext } from "./CopyFeedbackContext.tsx";
 
-function CopyButton({ id, content }: { id: string, content: string }) {
+function CopyButton({ id, content, className = "" }: { id: string, content: string, className: string }) {
     const { elementFeedback, handleSetElementFeedback } = useContext(CopyFeedbackContext)
 
     function updateClipboard() {
@@ -19,6 +19,7 @@ function CopyButton({ id, content }: { id: string, content: string }) {
     return (
         <button className={`
 cursor-pointer
+${className}
 `}
             onClick={() => updateClipboard()}
         >

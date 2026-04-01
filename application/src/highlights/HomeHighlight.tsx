@@ -1,4 +1,4 @@
-import { ReactElement, ReactNode, Ref, useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import HighlightDesktopImage from "../shared/components/HighlightDesktopImage"
 import useIsDesktop from "../shared/hooks/useIsDesktop"
 import SherlihyImage from "./SherlihyImage"
@@ -9,6 +9,8 @@ import QueryModel from "../features/query/QueryModel"
 import QueryControl from "../features/query/QueryControl"
 
 import { catchError } from "../lib/async.ts"
+import CopyButton from "../features/copyFeedback/CopyButton.tsx"
+import { stringToId } from "../features/copyFeedback/stringToId.ts"
 
 const queryClient = new QueryClient()
 
@@ -35,13 +37,13 @@ const HomeHighlight = () => {
     useEffect(() => {
         const chatBox = chatBoxRef.current
 
-        if(!chatBox){return}
+        if (!chatBox) { return }
 
         const answers = chatBox.children
 
-        if(answers.length < 1){return}
+        if (answers.length < 1) { return }
 
-        const currentAnswer = answers.item(answers.length-1)
+        const currentAnswer = answers.item(answers.length - 1)
 
         currentAnswer?.scrollIntoView()
     })
@@ -55,18 +57,26 @@ const HomeHighlight = () => {
                     ref={chatBoxRef}
                     className="min-h-full whitespace-pre-line flex flex-col justify-center align-center">
                     <Intro />
-                    {chat.map((utter, i) => <div key={i}>
-                        &nbsp;
-                        <hr />
-                        &nbsp;
-                        <p
-                            className={`
+                    {chat.map(async (utter, i) => {
+                        const utterId = await stringToId(utter)
+
+                        return (<div key={i}>
+                            &nbsp;
+                            <hr />
+                            <div className="flex justify-end">
+                                {i % 2 === 0 && <>&nbsp;</>}
+                                {i % 2 !== 0 && <CopyButton id={utterId} content={utter} className="p-4" />}
+                            </div>
+                            <p
+                                className={`
                         ${i % 2 === 0 && "text-right"}
                     `}
-                        >
-                            {utter}
-                        </p>
-                    </div>
+                            >
+                                {utter}
+                            </p>
+                        </div>
+                        )
+                    }
                     )}
                 </div>
             </div>
