@@ -9,6 +9,7 @@ import QueryModel from "../features/query/QueryModel"
 import QueryControl from "../features/query/QueryControl"
 
 import { catchError } from "../lib/async.ts"
+import { stringToArray } from "../lib/strings.ts"
 
 const queryClient = new QueryClient()
 
@@ -17,7 +18,7 @@ const QUERY_URL = "https://rtuard82z7.execute-api.us-east-1.amazonaws.com/prod/q
 const { postQuery, demarshall, abortQuery } = new QueryControl(QUERY_URL)
 
 const HomeHighlight = () => {
-    const [chat, setChat] = useState<string[]>([])
+    const [chat, setChat] = useState<string[][]>([])
     const chatBoxRef = useRef<HTMLDivElement>(null)
 
     const handlePostQuery = async (query: string) => {
@@ -29,19 +30,19 @@ const HomeHighlight = () => {
 
         const answer = await demarshall(response)
 
-        setChat((prev) => [...prev, query, answer])
+        setChat((prev) => [...prev, stringToArray(query), answer])
     }
 
     useEffect(() => {
         const chatBox = chatBoxRef.current
 
-        if(!chatBox){return}
+        if (!chatBox) { return }
 
         const answers = chatBox.children
 
-        if(answers.length < 1){return}
+        if (answers.length < 1) { return }
 
-        const currentAnswer = answers.item(answers.length-1)
+        const currentAnswer = answers.item(answers.length - 1)
 
         currentAnswer?.scrollIntoView()
     })
@@ -59,13 +60,22 @@ const HomeHighlight = () => {
                         &nbsp;
                         <hr />
                         &nbsp;
-                        <p
+                        <div
                             className={`
                         ${i % 2 === 0 && "text-right"}
                     `}
                         >
-                            {utter}
-                        </p>
+                            {
+                                utter.map((line, j) =>
+                                    <>
+                                        <p key={j}>
+                                            {`${line}`}
+                                        </p>
+                                        {j+1 < utter.length && <>&nbsp;</>}
+                                    </>
+                                )
+                            }
+                        </div>
                     </div>
                     )}
                 </div>

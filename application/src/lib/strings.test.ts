@@ -3,12 +3,14 @@ import { stringToArray } from './strings'
 
 const line_feed_chars = [
     '\n',
+    '\\n',
     '0x0A',
     'U+000A'
 ]
 
 const carriage_return_chars = [
     '\r',
+    '\\r',
     '0x0D',
     'U+000D',
 ]
@@ -24,7 +26,7 @@ describe('stringToArray', () => {
             const input = `Some text.${char}Other text.`
             const output = stringToArray(input)
 
-            expect(output.length === 2)
+            expect(output.length).toBe(2)
         })
     })
 
@@ -34,7 +36,7 @@ describe('stringToArray', () => {
                 const input = `Some text.${charA}${charB}Other text.`
                 const output = stringToArray(input)
 
-                expect(output.length === 2)
+                expect(output.length).toBe(2)
             })
         })
     })
