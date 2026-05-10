@@ -1,4 +1,4 @@
-import { ReactElement, ReactNode, Ref, useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import HighlightDesktopImage from "../shared/components/HighlightDesktopImage"
 import useIsDesktop from "../shared/hooks/useIsDesktop"
 import SherlihyImage from "./SherlihyImage"
@@ -9,7 +9,6 @@ import QueryModel from "../features/query/QueryModel"
 import QueryControl from "../features/query/QueryControl"
 
 import { catchError } from "../lib/async.ts"
-import { stringToArray } from "../lib/strings.ts"
 
 const queryClient = new QueryClient()
 
@@ -18,11 +17,15 @@ const QUERY_URL = "https://rtuard82z7.execute-api.us-east-1.amazonaws.com/prod/q
 const { postQuery, demarshall, abortQuery } = new QueryControl(QUERY_URL)
 
 const HomeHighlight = () => {
-    const [chat, setChat] = useState<string[][]>([])
+    const [chat, setChat] = useState<string[]>([])
     const chatBoxRef = useRef<HTMLDivElement>(null)
 
     const handlePostQuery = async (query: string) => {
-        const [error, response] = await catchError(postQuery(query))
+        const [error, response] = await catchError(
+            postQuery(
+                    query
+            )
+        )
 
         if (error) {
             throw error
@@ -30,7 +33,7 @@ const HomeHighlight = () => {
 
         const answer = await demarshall(response)
 
-        setChat((prev) => [...prev, stringToArray(query), answer])
+        setChat((prev) => [...prev, query, answer])
     }
 
     useEffect(() => {
@@ -65,16 +68,7 @@ const HomeHighlight = () => {
                         ${i % 2 === 0 && "text-right"}
                     `}
                         >
-                            {
-                                utter.map((line, j) =>
-                                    <>
-                                        <p key={j}>
-                                            {`${line}`}
-                                        </p>
-                                        {j+1 < utter.length && <>&nbsp;</>}
-                                    </>
-                                )
-                            }
+                            {utter}
                         </div>
                     </div>
                     )}

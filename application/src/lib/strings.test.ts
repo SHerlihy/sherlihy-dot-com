@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { stringToArray } from './strings'
+import { stringLineBreaksToBreakLine } from './strings'
 
 const line_feed_chars = [
     '\n',
@@ -20,23 +20,27 @@ const new_line_chars = [
     ...carriage_return_chars
 ]
 
-describe('stringToArray', () => {
+describe('stringLineBreaksToBreakLine', () => {
     new_line_chars.forEach((char) => {
-        it(`should split string with ${char} character`, () => {
+        it(`should replace ${char} character`, () => {
             const input = `Some text.${char}Other text.`
-            const output = stringToArray(input)
+            const expected = `Some text.\n\nOther text.`
 
-            expect(output.length).toBe(2)
+            const output = stringLineBreaksToBreakLine(input)
+
+            expect(output).toEqual(expected)
         })
     })
 
     new_line_chars.forEach((charA) => {
         new_line_chars.forEach((charB) => {
-            it(`should split string with doubled ${charA} ${charB} characters`, () => {
+        it(`should replace ${charA}${charB} character`, () => {
                 const input = `Some text.${charA}${charB}Other text.`
-                const output = stringToArray(input)
+                const expected = `Some text.\n\nOther text.`
 
-                expect(output.length).toBe(2)
+                const output = stringLineBreaksToBreakLine(input)
+
+                expect(output).toEqual(expected)
             })
         })
     })

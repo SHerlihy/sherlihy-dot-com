@@ -1,10 +1,10 @@
-import { stringToArray } from "../../lib/strings"
+import { stringLineBreaksToBreakLine } from "../../lib/strings"
 
 type QueryResponse = Response
 
 interface IQueryControl {
     postQuery: (query: string) => Promise<QueryResponse>
-    demarshall: (res: QueryResponse) => Promise<string[]>
+    demarshall: (res: QueryResponse) => Promise<string>
     abortQuery: (reason?: any) => void
 }
 
@@ -31,7 +31,7 @@ class QueryControl implements IQueryControl {
     }
 
     demarshall = async (queryRes: QueryResponse) => {
-        return stringToArray(
+        return stringLineBreaksToBreakLine(
             await queryRes.text()
         )
     }
