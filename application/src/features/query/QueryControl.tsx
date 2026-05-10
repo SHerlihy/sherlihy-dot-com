@@ -1,8 +1,10 @@
+import { stringToArray } from "../../lib/strings"
+
 type QueryResponse = Response
 
 interface IQueryControl {
     postQuery: (query: string) => Promise<QueryResponse>
-    demarshall: (res: QueryResponse) => Promise<string>
+    demarshall: (res: QueryResponse) => Promise<string[]>
     abortQuery: (reason?: any) => void
 }
 
@@ -29,7 +31,9 @@ class QueryControl implements IQueryControl {
     }
 
     demarshall = async (queryRes: QueryResponse) => {
-        return await queryRes.text()
+        return stringToArray(
+            await queryRes.text()
+        )
     }
 
     abortQuery = (reason?: any) => {
@@ -39,9 +43,9 @@ class QueryControl implements IQueryControl {
     queryRequest = async (query: string) => {
         return await fetch(this.postUrl, {
             method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+            headers: {
+                'Content-Type': 'application/json'
+            },
             mode: "cors",
             signal: this.controller.signal,
             body: query
