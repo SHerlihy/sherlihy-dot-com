@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { BackIcon, MenuIcon } from "../icons";
 import { NavContext } from "../context/NavContext";
 import CopyButton from "../../features/copyFeedback/CopyButton";
+import { Link } from "@tanstack/react-router";
 
 const phoneId = crypto.randomUUID()
 const emailId = crypto.randomUUID()
@@ -56,6 +57,7 @@ ${style}`}>
 
 const PHONE_NO = "+44 7354430588"
 const EMAIL = "steven_herlihy@yahoo.com"
+const LLM_LEARNING = "https://d2gru0zoilocfa.cloudfront.net/"
 
 function ContactInfoDesktop() {
     return (
@@ -65,6 +67,13 @@ function ContactInfoDesktop() {
             <p>&nbsp;|&nbsp;</p>
             <p>{EMAIL}&nbsp;</p>
             <CopyButton id={emailId} content={EMAIL} />
+            <p>&nbsp;|&nbsp;</p>
+            <Link />
+            <Link
+                to={LLM_LEARNING}
+            >
+                LLM Learning
+            </Link>
         </div>
     )
 }
