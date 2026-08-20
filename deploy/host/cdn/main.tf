@@ -7,6 +7,18 @@ terraform {
   }
 }
 
+resource "aws_ssm_parameter" "cloudfront_distribution_id" {
+  name  = "/sherlihy/cdn/distribution_id"
+  type  = "String"
+  value = aws_cloudfront_distribution.s3_distribution.id
+}
+
+resource "aws_ssm_parameter" "log_source_name" {
+  name  = "/sherlihy/cdn/log_source_name"
+  type  = "String"
+  value = aws_cloudwatch_log_delivery_source.website_cdn.name
+}
+
 variable "uuid" {
   type = string
 }
@@ -122,6 +134,14 @@ data "aws_iam_policy_document" "cloudfront_access" {
       ]
     }
   }
+}
+
+resource "aws_cloudwatch_log_delivery_source" "website_cdn" {
+  region = data.aws_region.current.region
+
+  name         = "website_cdn"
+  log_type     = "ACCESS_LOGS"
+  resource_arn = aws_cloudfront_distribution.s3_distribution.arn
 }
 
 output "cdn_zone_id" {
