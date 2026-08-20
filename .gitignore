@@ -1,4 +1,4 @@
-worktrees/
+worktree/
 
 # Local .terraform directories
 **/.terraform/*
