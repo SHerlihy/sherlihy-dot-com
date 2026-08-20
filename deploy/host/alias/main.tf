@@ -24,13 +24,13 @@ variable "cdn_zone_id" {
 }
 
 resource "aws_route53_record" "sherlihyDotCom" {
-    zone_id = var.route_zone_id
-    name    = var.web_domain
-    type    = "A"
-    
-    alias {
-        name = var.cdn_domain
-        zone_id = var.cdn_zone_id 
-        evaluate_target_health = true
-    }
+  zone_id = var.route_zone_id
+  name    = var.web_domain
+  type    = "A"
+
+  alias {
+    name                   = var.cdn_domain
+    zone_id                = var.cdn_zone_id
+    evaluate_target_health = true
+  }
 }

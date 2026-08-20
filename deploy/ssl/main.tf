@@ -24,7 +24,6 @@ resource "aws_acm_certificate" "cert" {
 
 resource "aws_route53_zone" "sherlihyDotCom" {
     name         = var.domain_name
-    force_destroy = true
 }
 
 // add CNAME record to r53
@@ -37,7 +36,6 @@ resource "aws_route53_record" "ssl" {
     }
   }
 
-  allow_overwrite = true
   name            = each.value.name
   records         = [each.value.record]
   ttl             = 60

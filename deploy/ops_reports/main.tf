@@ -66,7 +66,7 @@ resource "aws_cloudwatch_log_delivery" "user_access" {
   ]
   s3_delivery_configuration {
     enable_hive_compatible_path = true
-    suffix_path                 = "distribution_id={DistributionId}/dt={yyyy}-{MM}-{dd}/hour={HH}"
+    suffix_path                 = "{distributionid}/{yyyy}/{MM}/{dd}/{HH}/"
   }
 }
 
@@ -114,7 +114,7 @@ data "aws_iam_policy_document" "user_access_log_delivery" {
     ]
 
     resources = [
-      "${aws_s3_bucket.user_access.arn}/AWSLogs/${data.aws_caller_identity.current.account_id}/*",
+      "${aws_s3_bucket.user_access.arn}/AWSLogs/aws-account-id=${data.aws_caller_identity.current.account_id}/CloudFront/*",
     ]
 
     condition {
@@ -176,8 +176,8 @@ resource "aws_athena_database" "ops_results" {
 locals {
   table_name                 = "hourly_ops_table"
   distribution_id_predicate  = data.aws_ssm_parameter.cloudfront_distribution_id.value
-  cloudfront_logs_s3_prefix  = "s3://${aws_s3_bucket.user_access.bucket}/AWSLogs/${data.aws_caller_identity.current.account_id}/CloudFront"
-  cloudfront_logs_s3_pattern = "${local.cloudfront_logs_s3_prefix}/distribution_id=$${distribution_id}/dt=$${dt}/hour=$${hour}/"
+  cloudfront_logs_s3_prefix  = "s3://${aws_s3_bucket.user_access.bucket}/AWSLogs/aws-account-id=${data.aws_caller_identity.current.account_id}/CloudFront"
+  cloudfront_logs_s3_pattern = "${local.cloudfront_logs_s3_prefix}/distributionid=$${distributionid}/year=$${year}/month=$${month}/day=$${day}/hour=$${hour}/"
 }
 
 resource "aws_glue_catalog_table" "hourly_ops_table" {
@@ -186,18 +186,23 @@ resource "aws_glue_catalog_table" "hourly_ops_table" {
   table_type    = "EXTERNAL_TABLE"
 
   parameters = {
-    EXTERNAL                            = "TRUE"
-    classification                      = "json"
-    "projection.enabled"                = "true"
-    "projection.distribution_id.type"   = "enum"
-    "projection.distribution_id.values" = data.aws_ssm_parameter.cloudfront_distribution_id.value
-    "projection.dt.type"                = "date"
-    "projection.dt.range"               = "2020-01-01,NOW"
-    "projection.dt.format"              = "yyyy-MM-dd"
-    "projection.hour.type"              = "integer"
-    "projection.hour.range"             = "0,23"
-    "projection.hour.digits"            = "2"
-    "storage.location.template"         = local.cloudfront_logs_s3_pattern
+    EXTERNAL                           = "TRUE"
+    classification                     = "json"
+    "projection.enabled"               = "true"
+    "projection.distributionid.type"   = "enum"
+    "projection.distributionid.values" = data.aws_ssm_parameter.cloudfront_distribution_id.value
+    "projection.year.type"             = "integer"
+    "projection.year.range"            = "2020,2035"
+    "projection.month.type"            = "integer"
+    "projection.month.range"           = "1,12"
+    "projection.month.digits"          = "2"
+    "projection.day.type"              = "integer"
+    "projection.day.range"             = "1,31"
+    "projection.day.digits"            = "2"
+    "projection.hour.type"             = "integer"
+    "projection.hour.range"            = "0,23"
+    "projection.hour.digits"           = "2"
+    "storage.location.template"        = local.cloudfront_logs_s3_pattern
   }
 
   storage_descriptor {
@@ -242,12 +247,22 @@ resource "aws_glue_catalog_table" "hourly_ops_table" {
   }
 
   partition_keys {
-    name = "distribution_id"
+    name = "distributionid"
     type = "string"
   }
 
   partition_keys {
-    name = "dt"
+    name = "year"
+    type = "string"
+  }
+
+  partition_keys {
+    name = "month"
+    type = "string"
+  }
+
+  partition_keys {
+    name = "day"
     type = "string"
   }
 
@@ -271,8 +286,8 @@ FROM
     ${aws_athena_database.ops_results.name}.${local.table_name}
 WHERE 
     status = 200 
-    AND distribution_id = '${local.distribution_id_predicate}'
-    AND dt BETWEEN CAST(current_date - INTERVAL '1' DAY AS varchar)
+    AND distributionid = '${local.distribution_id_predicate}'
+    AND concat(year, '-', month, '-', day) BETWEEN CAST(current_date - INTERVAL '1' DAY AS varchar)
         AND CAST(current_date AS varchar)
     AND date >= CURRENT_DATE - INTERVAL '1' DAY
     AND parse_datetime(concat(CAST(date AS varchar), ' ', time), 'yyyy-MM-dd HH:mm:ss') 
@@ -305,8 +320,8 @@ SELECT
 FROM 
     ${aws_athena_database.ops_results.name}.${local.table_name}
 WHERE 
-    distribution_id = '${local.distribution_id_predicate}'
-    AND dt BETWEEN CAST(current_date - INTERVAL '1' DAY AS varchar)
+    distributionid = '${local.distribution_id_predicate}'
+    AND concat(year, '-', month, '-', day) BETWEEN CAST(current_date - INTERVAL '1' DAY AS varchar)
         AND CAST(current_date AS varchar)
     AND date >= CURRENT_DATE - INTERVAL '1' DAY
     AND parse_datetime(concat(CAST(date AS varchar), ' ', time), 'yyyy-MM-dd HH:mm:ss') 

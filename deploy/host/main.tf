@@ -9,6 +9,13 @@ terraform {
 
 provider "aws" {
   profile = "sherlihydtcom"
+  region  = "eu-west-2"
+}
+
+provider "aws" {
+  alias   = "us_east_1"
+  profile = "sherlihydtcom"
+  region  = "us-east-1"
 }
 
 module "names" {
@@ -28,9 +35,9 @@ variable "route_zone_id" {
 }
 
 locals {
-    uuid = "02d01d33-622a-421d-93de-410f503a438e"
-    domain_name = "sherlihy.com"
-    project_name = "sherlihydtcom"
+  uuid         = "02d01d33-622a-421d-93de-410f503a438e"
+  domain_name  = "sherlihy.com"
+  project_name = "sherlihydtcom"
 }
 
 module "s3" {
@@ -42,13 +49,18 @@ module "s3" {
 module "cdn" {
   source = "./cdn"
 
-  bucket_arn = module.s3.bucket_arn
-  bucket_id = module.s3.bucket_id
+  providers = {
+    aws           = aws
+    aws.us_east_1 = aws.us_east_1
+  }
+
+  bucket_arn                  = module.s3.bucket_arn
+  bucket_id                   = module.s3.bucket_id
   bucket_regional_domain_name = module.s3.bucket_regional_domain_name
 
   domain_name = local.domain_name
 
-  cert_arn = var.cert_arn
+  cert_arn                = var.cert_arn
   validation_record_fqdns = var.validation_record_fqdns
 
   uuid = local.uuid
@@ -61,7 +73,7 @@ module "alias" {
   cdn_domain = module.cdn.domain_name
 
   route_zone_id = var.route_zone_id
-  cdn_zone_id = module.cdn.cdn_zone_id
+  cdn_zone_id   = module.cdn.cdn_zone_id
 }
 
 output "cdn_domain_name" {
@@ -73,13 +85,13 @@ output "bucket_id" {
 }
 
 resource "aws_ssm_parameter" "cloudfront_distribution_id" {
-  name = module.names.cloudfront_distribution_id
+  name  = module.names.cloudfront_distribution_id
   type  = "String"
   value = module.cdn.distribution_id
 }
 
 resource "aws_ssm_parameter" "log_source_name" {
-  name = module.names.log_source_name
+  name  = module.names.log_source_name
   type  = "String"
   value = module.cdn.log_source_name
 }
