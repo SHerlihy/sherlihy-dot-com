@@ -7,18 +7,6 @@ terraform {
   }
 }
 
-resource "aws_ssm_parameter" "cloudfront_distribution_id" {
-  name  = "/sherlihy/cdn/distribution_id"
-  type  = "String"
-  value = aws_cloudfront_distribution.s3_distribution.id
-}
-
-resource "aws_ssm_parameter" "log_source_name" {
-  name  = "/sherlihy/cdn/log_source_name"
-  type  = "String"
-  value = aws_cloudwatch_log_delivery_source.website_cdn.name
-}
-
 variable "uuid" {
   type = string
 }
@@ -150,4 +138,12 @@ output "cdn_zone_id" {
 
 output "domain_name" {
     value = aws_cloudfront_distribution.s3_distribution.domain_name
+}
+
+output "log_source_name" {
+    value = aws_cloudwatch_log_delivery_source.website_cdn.name
+}
+
+output "distribution_id" {
+    value = aws_cloudfront_distribution.s3_distribution.id
 }

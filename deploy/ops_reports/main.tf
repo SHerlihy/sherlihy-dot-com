@@ -11,19 +11,18 @@ provider "aws" {
   profile = "sherlihydtcom"
 }
 
-data "aws_caller_identity" "current" {}
-
-variable "log_source_name" {
-  type = string
+module "names" {
+  source = "../names"
 }
 
-variable "cloudfront_distribution_ids" {
-  type = list(string)
+data "aws_caller_identity" "current" {}
 
-  validation {
-    condition     = length(var.cloudfront_distribution_ids) > 0
-    error_message = "At least one CloudFront distribution ID is required for Athena partition projection."
-  }
+data "aws_ssm_parameter" "log_source_name" {
+  name = module.names.log_source_name
+}
+
+data "aws_ssm_parameter" "cloudfront_distribution_id" {
+  name = module.names.cloudfront_distribution_id
 }
 
 resource "aws_s3_bucket" "user_access" {
@@ -51,8 +50,12 @@ resource "aws_cloudwatch_log_delivery_destination" "user_access" {
 
 resource "aws_cloudwatch_log_delivery" "user_access" {
   region                   = "us-east-1"
-  delivery_source_name     = var.log_source_name
+  delivery_source_name     = data.aws_ssm_parameter.log_source_name.value
   delivery_destination_arn = aws_cloudwatch_log_delivery_destination.user_access.arn
+
+  depends_on = [
+    aws_s3_bucket_policy.user_access_log_delivery,
+  ]
 
   record_fields = [
     "date",
@@ -172,7 +175,7 @@ resource "aws_athena_database" "ops_results" {
 
 locals {
   table_name                 = "hourly_ops_table"
-  distribution_id_predicate  = join(", ", formatlist("'%s'", var.cloudfront_distribution_ids))
+  distribution_id_predicate  = data.aws_ssm_parameter.cloudfront_distribution_id.value
   cloudfront_logs_s3_prefix  = "s3://${aws_s3_bucket.user_access.bucket}/AWSLogs/${data.aws_caller_identity.current.account_id}/CloudFront"
   cloudfront_logs_s3_pattern = "${local.cloudfront_logs_s3_prefix}/distribution_id=$${distribution_id}/dt=$${dt}/hour=$${hour}/"
 }
@@ -187,7 +190,7 @@ resource "aws_glue_catalog_table" "hourly_ops_table" {
     classification                      = "json"
     "projection.enabled"                = "true"
     "projection.distribution_id.type"   = "enum"
-    "projection.distribution_id.values" = join(",", var.cloudfront_distribution_ids)
+    "projection.distribution_id.values" = data.aws_ssm_parameter.cloudfront_distribution_id.value
     "projection.dt.type"                = "date"
     "projection.dt.range"               = "2020-01-01,NOW"
     "projection.dt.format"              = "yyyy-MM-dd"
@@ -268,11 +271,11 @@ FROM
     ${aws_athena_database.ops_results.name}.${local.table_name}
 WHERE 
     status = 200 
-    AND distribution_id IN (${local.distribution_id_predicate})
+    AND distribution_id = '${local.distribution_id_predicate}'
     AND dt BETWEEN CAST(current_date - INTERVAL '1' DAY AS varchar)
         AND CAST(current_date AS varchar)
     AND date >= CURRENT_DATE - INTERVAL '1' DAY
-    AND parse_datetime(concat(date, ' ', time), 'yyyy-MM-dd HH:mm:ss') 
+    AND parse_datetime(concat(CAST(date AS varchar), ' ', time), 'yyyy-MM-dd HH:mm:ss') 
         >= current_timestamp - INTERVAL '2' HOUR
 GROUP BY 
     location
@@ -302,11 +305,11 @@ SELECT
 FROM 
     ${aws_athena_database.ops_results.name}.${local.table_name}
 WHERE 
-    distribution_id IN (${local.distribution_id_predicate})
+    distribution_id = '${local.distribution_id_predicate}'
     AND dt BETWEEN CAST(current_date - INTERVAL '1' DAY AS varchar)
         AND CAST(current_date AS varchar)
     AND date >= CURRENT_DATE - INTERVAL '1' DAY
-    AND parse_datetime(concat(date, ' ', time), 'yyyy-MM-dd HH:mm:ss') 
+    AND parse_datetime(concat(CAST(date AS varchar), ' ', time), 'yyyy-MM-dd HH:mm:ss') 
         >= current_timestamp - INTERVAL '2' HOUR
 GROUP BY 
     1, 2

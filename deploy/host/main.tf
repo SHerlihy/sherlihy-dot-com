@@ -11,6 +11,10 @@ provider "aws" {
   profile = "sherlihydtcom"
 }
 
+module "names" {
+  source = "../names"
+}
+
 variable "cert_arn" {
   type = string
 }
@@ -66,4 +70,16 @@ output "cdn_domain_name" {
 
 output "bucket_id" {
   value = module.s3.bucket_id
+}
+
+resource "aws_ssm_parameter" "cloudfront_distribution_id" {
+  name = module.names.cloudfront_distribution_id
+  type  = "String"
+  value = module.cdn.distribution_id
+}
+
+resource "aws_ssm_parameter" "log_source_name" {
+  name = module.names.log_source_name
+  type  = "String"
+  value = module.cdn.log_source_name
 }
