@@ -1,22 +1,8 @@
-terraform {
-  required_providers {
-    aws = {
-      source                = "hashicorp/aws"
-      version               = "~> 6.0"
-      configuration_aliases = [aws.us_east_1]
-    }
-  }
+provider "aws" {
+  region  = "us-east-1"
 }
 
 variable "uuid" {
-  type = string
-}
-
-variable "bucket_id" {
-  type = string
-}
-
-variable "bucket_arn" {
   type = string
 }
 
@@ -41,7 +27,6 @@ locals {
 }
 
 resource "aws_acm_certificate_validation" "ssl" {
-  provider                = aws.us_east_1
   certificate_arn         = var.cert_arn
   validation_record_fqdns = var.validation_record_fqdns
 }
@@ -94,38 +79,6 @@ resource "aws_cloudfront_origin_access_control" "website" {
   signing_protocol                  = "sigv4"
 }
 
-resource "aws_s3_bucket_policy" "cloudfront_access" {
-  bucket = var.bucket_id
-  policy = data.aws_iam_policy_document.cloudfront_access.json
-}
-
-data "aws_iam_policy_document" "cloudfront_access" {
-  statement {
-    principals {
-      type        = "Service"
-      identifiers = ["cloudfront.amazonaws.com"]
-    }
-
-    actions = [
-      "s3:GetObject",
-    ]
-
-    resources = [
-      "${var.bucket_arn}/*"
-    ]
-
-
-    condition {
-      test     = "StringEquals"
-      variable = "AWS:SourceArn"
-
-      values = [
-        aws_cloudfront_distribution.s3_distribution.arn
-      ]
-    }
-  }
-}
-
 resource "aws_cloudwatch_log_delivery_source" "website_cdn" {
   region = "us-east-1"
 
@@ -148,4 +101,8 @@ output "log_source_name" {
 
 output "distribution_id" {
   value = aws_cloudfront_distribution.s3_distribution.id
+}
+
+output "cdn_arn"{
+  value = aws_cloudfront_distribution.s3_distribution.arn
 }

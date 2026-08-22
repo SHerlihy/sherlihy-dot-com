@@ -17,11 +17,11 @@ provider "aws" {
   profile = "sherlihydtcom"
 }
 
+data "aws_caller_identity" "current" {}
+
 module "names" {
   source = "../names"
 }
-
-data "aws_caller_identity" "current" {}
 
 data "aws_ssm_parameter" "log_source_name" {
   name = module.names.log_source_name
@@ -162,6 +162,7 @@ resource "aws_s3_bucket_public_access_block" "athena_results" {
 }
 
 resource "aws_athena_workgroup" "ops_analysis" {
+  force_destroy = true
   name = "ops_analysis"
 
   configuration {

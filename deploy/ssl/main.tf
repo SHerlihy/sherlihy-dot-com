@@ -15,12 +15,15 @@ terraform {
 
 provider "aws" {
   profile = "sherlihydtcom"
-    region = "us-east-1"
 }
 
 variable "domain_name" {
     type = string
     default = "sherlihy.com"
+}
+
+module "names" {
+  source = "../names"
 }
 
 resource "aws_acm_certificate" "cert" {
@@ -49,19 +52,30 @@ resource "aws_route53_record" "ssl" {
   zone_id         = aws_route53_zone.sherlihyDotCom.zone_id
 }
 
-output "cert_arn" {
+locals {
+  fqdn_list = [for record in aws_route53_record.ssl : record.fqdn]
+}
+
+resource "aws_ssm_parameter" "cert_arn" {
+  name  = module.names.ssl_cert_arn
+  type  = "String"
   value = aws_acm_certificate.cert.arn
 }
 
-output "validation_record_fqdns" {
-  value = [for record in aws_route53_record.ssl : record.fqdn]
+resource "aws_ssm_parameter" "validation_record_fqdns" {
+  name  = module.names.ssl_validation_record_fqdns
+  type  = "StringList"
+  value = join(",", local.fqdn_list)
 }
 
-output "route_zone_id" {
+resource "aws_ssm_parameter" "route_zone_id" {
+  name  = module.names.ssl_route_zone_id
+  type  = "String"
   value = aws_route53_zone.sherlihyDotCom.zone_id
 }
 
-// to put into DNS
-output "name_servers" {
-    value = aws_route53_zone.sherlihyDotCom.name_servers
+resource "aws_ssm_parameter" "name_servers" {
+  name  = module.names.ssl_name_servers
+  type  = "StringList"
+  value = join(",", aws_route53_zone.sherlihyDotCom.name_servers)
 }

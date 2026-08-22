@@ -5,14 +5,25 @@ terraform {
       version = "~> 6.0"
     }
   }
+
+  backend "s3" {
+    bucket = "state-bucket-82f5696f9e0c0e51a2e8769e08"
+    key    = "upload/terraform.tfstate"
+    region = "eu-west-2"
+  }
 }
 
 provider "aws" {
   profile = "sherlihydtcom"
 }
 
-variable "bucket_id" {
-  type = string
+module "names" {
+  source = "../names"
+}
+
+data "aws_ssm_parameter" "host_bucket_id" {
+  region = "eu-west-2"
+  name = module.names.host_bucket_id
 }
 
 locals {
@@ -33,7 +44,7 @@ resource "terraform_data" "replacement" {
 resource "aws_s3_object" "website" {
   for_each = fileset("${path.module}/website", "**/*")
 
-  bucket = var.bucket_id
+  bucket = data.aws_ssm_parameter.host_bucket_id.value
   key    = each.value
   source = "${path.module}/website/${each.value}"
   source_hash = filemd5("${path.module}/website/${each.value}")

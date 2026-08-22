@@ -15,35 +15,28 @@ terraform {
 
 provider "aws" {
   profile = "sherlihydtcom"
-  region  = "eu-west-2"
-}
-
-provider "aws" {
-  alias   = "us_east_1"
-  profile = "sherlihydtcom"
-  region  = "us-east-1"
-}
-
-module "names" {
-  source = "../names"
-}
-
-variable "cert_arn" {
-  type = string
-}
-
-variable "validation_record_fqdns" {
-  type = list(string)
-}
-
-variable "route_zone_id" {
-  type = string
 }
 
 locals {
   uuid         = "02d01d33-622a-421d-93de-410f503a438e"
   domain_name  = "sherlihy.com"
   project_name = "sherlihydtcom"
+}
+
+module "names" {
+  source = "../names"
+}
+
+data "aws_ssm_parameter" "ssl_cert_arn" {
+  name = module.names.ssl_cert_arn
+}
+
+data "aws_ssm_parameter" "ssl_validation_record_fqdns" {
+  name = module.names.ssl_validation_record_fqdns
+}
+
+data "aws_ssm_parameter" "ssl_route_zone_id" {
+  name = module.names.ssl_route_zone_id
 }
 
 module "s3" {
@@ -55,21 +48,46 @@ module "s3" {
 module "cdn" {
   source = "./cdn"
 
-  providers = {
-    aws           = aws
-    aws.us_east_1 = aws.us_east_1
-  }
-
-  bucket_arn                  = module.s3.bucket_arn
-  bucket_id                   = module.s3.bucket_id
   bucket_regional_domain_name = module.s3.bucket_regional_domain_name
 
   domain_name = local.domain_name
 
-  cert_arn                = var.cert_arn
-  validation_record_fqdns = var.validation_record_fqdns
+  cert_arn                = data.aws_ssm_parameter.ssl_cert_arn.value
+  validation_record_fqdns = split(",", data.aws_ssm_parameter.ssl_validation_record_fqdns.value)
 
   uuid = local.uuid
+}
+
+resource "aws_s3_bucket_policy" "cloudfront_access" {
+  bucket = module.s3.bucket_id
+  policy = data.aws_iam_policy_document.cloudfront_access.json
+}
+
+data "aws_iam_policy_document" "cloudfront_access" {
+  statement {
+    principals {
+      type        = "Service"
+      identifiers = ["cloudfront.amazonaws.com"]
+    }
+
+    actions = [
+      "s3:GetObject",
+    ]
+
+    resources = [
+      "${module.s3.bucket_arn}/*"
+    ]
+
+
+    condition {
+      test     = "StringEquals"
+      variable = "AWS:SourceArn"
+
+      values = [
+        module.cdn.cdn_arn
+      ]
+    }
+  }
 }
 
 module "alias" {
@@ -78,15 +96,19 @@ module "alias" {
   web_domain = local.domain_name
   cdn_domain = module.cdn.domain_name
 
-  route_zone_id = var.route_zone_id
+  route_zone_id = data.aws_ssm_parameter.ssl_route_zone_id.value
   cdn_zone_id   = module.cdn.cdn_zone_id
 }
 
-output "cdn_domain_name" {
+resource "aws_ssm_parameter" "cdn_domain_name" {
+  name  = module.names.cdn_domain_name
+  type  = "String"
   value = module.cdn.domain_name
 }
 
-output "bucket_id" {
+resource "aws_ssm_parameter" "host_bucket_id" {
+  name  = module.names.host_bucket_id
+  type  = "String"
   value = module.s3.bucket_id
 }
 
