@@ -17,6 +17,17 @@ provider "aws" {
   profile = "sherlihydtcom"
 }
 
+## need to do a thumbprint thing
+data "tls_certificate" "github" {
+  url = "https://token.actions.githubusercontent.com"
+}
+
+resource "aws_iam_openid_connect_provider" "github" {
+  url             = "https://githubusercontent.com"
+  client_id_list  = ["://amazonaws.com"]
+  thumbprint_list = [data.tls_certificate.github.certificates[0].sha1_fingerprint]
+}
+
 data "aws_iam_policy_document" "pipeline" {
   statement {
     actions = ["sts:AssumeRoleWithWebIdentity"]
@@ -24,7 +35,8 @@ data "aws_iam_policy_document" "pipeline" {
 
     principals {
       type        = "Federated"
-      identifiers = ["arn:aws:iam::111644099040:oidc-provider/token.actions.githubusercontent.com"]
+      identifiers = [aws_iam_openid_connect_provider.github.arn]
+      ## identifiers = ["arn:aws:iam::111644099040:oidc-provider/token.actions.githubusercontent.com"]
     }
 
     condition {
