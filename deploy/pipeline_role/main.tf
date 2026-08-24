@@ -59,9 +59,8 @@ resource "aws_iam_role" "pipeline" {
   assume_role_policy = data.aws_iam_policy_document.pipeline.json
 }
 
-resource "aws_iam_policy" "s3_full_access" {
-  name        = "github-actions-s3-full-access"
-  description = "Grants full administrative access to all S3 buckets and actions"
+resource "aws_iam_policy" "pipeline_service_permissions" {
+  name        = "pipeline-service-permissions"
 
   policy = jsonencode({
     Version = "2012-10-17"
@@ -70,14 +69,19 @@ resource "aws_iam_policy" "s3_full_access" {
         Effect   = "Allow"
         Action   = "s3:*"
         Resource = "*"
+      },
+      {
+        Effect   = "Allow"
+        Action   = "ssm:*"
+        Resource = "*"
       }
     ]
   })
 }
 
-resource "aws_iam_role_policy_attachment" "attach_s3_full" {
+resource "aws_iam_role_policy_attachment" "pipeline_service_permissions" {
   role       = aws_iam_role.pipeline.name
-  policy_arn = aws_iam_policy.s3_full_access.arn
+  policy_arn = aws_iam_policy.pipeline_service_permissions.arn
 }
 
 output "arn" {
