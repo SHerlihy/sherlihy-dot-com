@@ -13,10 +13,6 @@ terraform {
   }
 }
 
-provider "aws" {
-  profile = "sherlihydtcom"
-}
-
 module "names" {
   source = "../names"
 }

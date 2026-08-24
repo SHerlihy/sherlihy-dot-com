@@ -17,7 +17,6 @@ provider "aws" {
   profile = "sherlihydtcom"
 }
 
-## need to do a thumbprint thing
 data "tls_certificate" "github" {
   url = "https://token.actions.githubusercontent.com"
 }
@@ -36,7 +35,6 @@ data "aws_iam_policy_document" "pipeline" {
     principals {
       type        = "Federated"
       identifiers = [aws_iam_openid_connect_provider.github.arn]
-      ## identifiers = ["arn:aws:iam::111644099040:oidc-provider/token.actions.githubusercontent.com"]
     }
 
     condition {
