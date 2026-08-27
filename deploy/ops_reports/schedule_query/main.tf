@@ -2,14 +2,13 @@ variable "query_id" {
   type = string
 }
 
+variable "rate" {
+    type = string
+}
+
 variable "notification_email" {
   type        = string
   description = "Email address subscribed to scheduled HTTP error count notifications."
-}
-
-variable "schedule_expression" {
-  type    = string
-  default = "cron(0 20 * * ? *)"
 }
 
 variable "name_prefix" {
@@ -121,7 +120,7 @@ resource "aws_lambda_function" "runner" {
 
 resource "aws_cloudwatch_event_rule" "schedule" {
   name                = "${var.name_prefix}-schedule"
-  schedule_expression = var.schedule_expression
+  schedule_expression = "rate(${var.rate} hours)"
 }
 
 resource "aws_cloudwatch_event_target" "lambda" {

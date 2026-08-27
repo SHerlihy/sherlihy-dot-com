@@ -21,17 +21,18 @@ provider "aws" {
   profile = "sherlihydtcom"
 }
 
+variable "notification_email" {
+  type = string
+  default = "steven0herlihy+sherlihydtcom@gmail.com"
+}
+
 module "names" {
   source = "../names"
 }
 
 locals {
   table_name = "hourly_ops_table"
-}
-
-variable "notification_email" {
-  type        = string
-  description = "Email address subscribed to scheduled HTTP error count notifications."
+  rate = "24"
 }
 
 data "aws_ssm_parameter" "log_source_name" {
@@ -77,11 +78,13 @@ module "output_errors" {
   output_bucket   = aws_s3_bucket.athena_results.bucket
   database_name   = module.athena_structure.database_name
   table_name      = local.table_name
+  rate = local.rate
 }
 
 module "schedule_query" {
   source = "./schedule_query"
 
-  query_id           = module.output_errors.query_id
   notification_email = var.notification_email
+  query_id           = module.output_errors.query_id
+  rate = local.rate
 }

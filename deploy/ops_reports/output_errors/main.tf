@@ -1,3 +1,7 @@
+variable "rate" {
+    type = string
+}
+
 variable "distribution_id" {
   type = string
 }
@@ -52,7 +56,7 @@ WHERE
         AND CAST(current_date AS varchar)
     AND date >= CURRENT_DATE - INTERVAL '1' DAY
     AND parse_datetime(concat(CAST(date AS varchar), ' ', time), 'yyyy-MM-dd HH:mm:ss') 
-        >= current_timestamp - INTERVAL '24' HOUR
+        >= current_timestamp - INTERVAL '${var.rate}' HOUR
 GROUP BY 
     1, 2
 ORDER BY 
