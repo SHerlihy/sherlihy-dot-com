@@ -50,12 +50,20 @@ SELECT
     ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER (), 2) AS percentage
 FROM 
     ${var.database_name}.${var.table_name}
-WHERE 
+WHERE
     distributionid = '${var.distribution_id}'
-    AND concat(year, '-', month, '-', day) BETWEEN CAST(current_date - INTERVAL '1' DAY AS varchar)
-        AND CAST(current_date AS varchar)
-    AND date >= CURRENT_DATE - INTERVAL '1' DAY
-    AND parse_datetime(concat(CAST(date AS varchar), ' ', time), 'yyyy-MM-dd HH:mm:ss') 
+    AND (
+        (
+            year = date_format(current_date, '%Y')
+            AND month = date_format(current_date, '%m')
+            AND day = date_format(current_date, '%d')
+        ) OR (
+            year = date_format(current_date - INTERVAL '1' DAY, '%Y')
+            AND month = date_format(current_date - INTERVAL '1' DAY, '%m')
+            AND day = date_format(current_date - INTERVAL '1' DAY, '%d')
+        )
+    )
+    AND parse_datetime(concat(CAST(date AS varchar), ' ', time), 'yyyy-MM-dd HH:mm:ss')
         >= current_timestamp - INTERVAL '${var.rate}' HOUR
 GROUP BY 
     1, 2
