@@ -1,22 +1,22 @@
 variable "distribution_id" {
-	type = string
+  type = string
 }
 
 variable "database_name" {
-	type = string
+  type = string
 }
 
 variable "table_name" {
-    type = string
+  type = string
 }
 
 variable "output_bucket" {
-    type = string
+  type = string
 }
 
 resource "aws_athena_workgroup" "ops_analysis" {
   force_destroy = true
-  name = "ops_analysis"
+  name          = "ops_analysis"
 
   configuration {
     enforce_workgroup_configuration    = true
@@ -61,5 +61,5 @@ EOF
 }
 
 output "query_id" {
-    value = aws_athena_named_query.status_by_category.id
+  value = aws_athena_named_query.status_by_category.id
 }

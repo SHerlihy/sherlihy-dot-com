@@ -1,10 +1,15 @@
 variable "query_id" {
+  type = string
+}
+
+variable "notification_email" {
   type        = string
+  description = "Email address subscribed to scheduled HTTP error count notifications."
 }
 
 variable "schedule_expression" {
-  type        = string
-  default     = "cron(0 20 * * * *)"
+  type    = string
+  default = "cron(0 20 * * ? *)"
 }
 
 variable "name_prefix" {
@@ -44,10 +49,22 @@ resource "aws_iam_role_policy_attachment" "lambda_basic_execution" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
 
+resource "aws_sns_topic" "error_counts" {
+  name = "${var.name_prefix}-error-counts"
+}
+
+resource "aws_sns_topic_subscription" "email" {
+  topic_arn = aws_sns_topic.error_counts.arn
+  protocol  = "email"
+  endpoint  = var.notification_email
+}
+
 data "aws_iam_policy_document" "lambda_athena" {
   statement {
     actions = [
       "athena:GetNamedQuery",
+      "athena:GetQueryExecution",
+      "athena:GetQueryResults",
       "athena:StartQueryExecution",
     ]
 
@@ -69,6 +86,14 @@ data "aws_iam_policy_document" "lambda_athena" {
 
     resources = ["*"]
   }
+
+  statement {
+    actions = [
+      "sns:Publish",
+    ]
+
+    resources = [aws_sns_topic.error_counts.arn]
+  }
 }
 
 resource "aws_iam_role_policy" "lambda_athena" {
@@ -84,12 +109,13 @@ resource "aws_lambda_function" "runner" {
   handler          = "call_query.lambda_handler"
   filename         = data.archive_file.lambda.output_path
   source_code_hash = data.archive_file.lambda.output_base64sha256
-  timeout          = 60
+  timeout          = 300
 
   environment {
     variables = {
-        ATHENA_NAMED_QUERY_ID = var.query_id
-      }
+      ATHENA_NAMED_QUERY_ID = var.query_id
+      SNS_TOPIC_ARN         = aws_sns_topic.error_counts.arn
+    }
   }
 }
 

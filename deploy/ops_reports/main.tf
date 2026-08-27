@@ -4,6 +4,10 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 6.0"
     }
+    archive = {
+      source  = "hashicorp/archive"
+      version = "~> 2.7"
+    }
   }
 
   backend "s3" {
@@ -23,6 +27,11 @@ module "names" {
 
 locals {
   table_name = "hourly_ops_table"
+}
+
+variable "notification_email" {
+  type        = string
+  description = "Email address subscribed to scheduled HTTP error count notifications."
 }
 
 data "aws_ssm_parameter" "log_source_name" {
@@ -66,12 +75,13 @@ module "output_errors" {
 
   distribution_id = data.aws_ssm_parameter.cloudfront_distribution_id.value
   output_bucket   = aws_s3_bucket.athena_results.bucket
-  database_name = module.athena_structure.database_name
-  table_name    = local.table_name
+  database_name   = module.athena_structure.database_name
+  table_name      = local.table_name
 }
 
 module "schedule_query" {
   source = "./schedule_query"
 
-  query_id = module.output_errors.query_id
+  query_id           = module.output_errors.query_id
+  notification_email = var.notification_email
 }
