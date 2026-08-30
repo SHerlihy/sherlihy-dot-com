@@ -5,9 +5,8 @@ import userEvent from '@testing-library/user-event';
 
 import { FakeEventSource } from "../../test/FakeEventSource"
 import LiveLogTable, { type LiveLog } from "./LiveLogTable"
-import { createLiveLogStream } from "./LiveLogStream"
 
-import {columnTitles, CloudFrontLogEvent} from "./definitions.ts"
+import {columnTitles, CloudFrontLogEvent, LogEntryEvent} from "./definitions.ts"
 
 describe("LiveLogs", () => {
     beforeEach(() => {
@@ -23,7 +22,7 @@ describe("LiveLogs", () => {
 
         columnTitles.forEach((title)=>{
             it("initialises with ${title} field", ()=>{
-                const { rerender } = render(<LiveLogTable />)
+                render(<LiveLogTable />)
 
                 const titleElements = screen.getAllByText(title)
                 expect(
@@ -52,6 +51,62 @@ describe("LiveLogs", () => {
                 ).toBe(false)
             })
         })
+    })
+
+    describe("stream behaviour", ()=>{
+        const methods = ['GET' , 'POST' , 'PUT' , 'DELETE' , 'OPTIONS' , 'HEAD' , 'PATCH'] as const
+        const edgeResultTypes = ['Hit' , 'Miss' , 'RefreshHit' , 'Redirect' , 'Error' , 'LimitExceeded' , 'CapacityExceeded'] as const
+        const sslProtocols = ['TLSv1.2' , 'TLSv1.3' , '-'] as const
+        const userProtocols = ['http' , 'https' , 'ws' , 'wss'] as const
+        const userProtocolVersion = ['HTTP/1.0' , 'HTTP/1.1' , 'HTTP/2' , 'HTTP/3'] as const
+
+        let dummyEventObjects: Array<CloudFrontLogEvent> = []
+
+        beforeEach(() => {
+            for (let i = 0; i < 99; i++){
+                const dummyAccessLog = {
+                    timestamp: Math.random(),
+                    time_taken: Math.random(),
+                    sc_status: 200,
+                    ctx_host: "host",
+                    cs_method: methods[Math.floor(Math.random()*methods.length)],
+                    cs_uri_stem: "something/otherthing/endpoint",
+                    cs_uri_query: "uri query",
+                    x_edge_result_type: edgeResultTypes[Math.floor(Math.random()*methods.length)],
+                    x_edge_request_id: "edgeId",
+                    ssl_protocol: sslProtocols[Math.floor(Math.random()*methods.length)],
+                    ssl_cipher: "sslCipher",
+                    x_edge_response_result_type: edgeResultTypes[Math.floor(Math.random()*methods.length)],
+                    cs_user_agent: "user agent",
+                    cs_referer: "user referer",
+                    cs_cookie: "cookie data",
+                    sc_bytes: 99999,
+                    cs_bytes: 99999,
+                    x_edge_location: "edge location",
+                    sc_content_len: 999,
+                    time_to_first_byte: 9999,
+                    cs_host_header: "user header",
+                    cs_protocol: userProtocols[Math.floor(Math.random()*methods.length)],
+                    cs_protocol_version: userProtocolVersion[Math.floor(Math.random()*methods.length)],
+                    fle_status: "fle status",
+                    fle_encrypted_fields: 99
+                }
+
+                const dummyLogEntryEvent: LogEntryEvent = {
+                    id: `Event-${i}`,
+                    event: 'log_entry',
+                    data: dummyAccessLog
+
+                }
+
+                dummyEventObjects.push(dummyLogEntryEvent)
+            }
+        })
+
+        afterEach(() => {
+            dummyEventObjects = []
+        })
+
     })
 
     it("adds streamed log data to the rendered table", () => {

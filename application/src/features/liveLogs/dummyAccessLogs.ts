@@ -39,6 +39,10 @@ class AccessLogBuilder implements IAccessLogBuilder {
   		"fle_encrypted_fields": undefined,
 	}
 
+	constructor(accessLog: CloudFrontLogPayload){
+		this.accessLog = accessLog
+	}
+
 	build = () => {
 		const allDefined = allPropertiesAreDefined(this.accessLog)
 
