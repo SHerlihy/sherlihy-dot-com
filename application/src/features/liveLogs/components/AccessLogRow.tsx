@@ -1,21 +1,12 @@
-import {
-    CloudFrontLogPayload,
-	columnOrder
-} from "../definitions.ts"
+import AccessLogDisplayData from "./AccessLogDisplayData.tsx";
+import { useCloudwatchLogs } from "../useCloudwatchLogs";
 
-type Props = {
-} & CloudFrontLogPayload
+function AccessLogRow({ id }: { id: string }) {
+  const { getLog } = useCloudwatchLogs();
 
-function AccessLogRow(props: Props){
-	return (
-		<tr>
-		{
-			columnOrder.map(({objKey}) => {
-				return <td>{props[objKey]}</td>
-			})
-		}
-		</tr>
-	)
+  const logDisplayData = getLog(id);
+
+  return <AccessLogDisplayData logDisplayData={logDisplayData} />;
 }
 
-export default AccessLogRow
+export default AccessLogRow;
