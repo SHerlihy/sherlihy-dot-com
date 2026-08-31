@@ -1,35 +1,23 @@
 import { useState } from "react";
-import {
-  LogDisplayData,
-  LogEntryEvent,
-  CloudFrontLogPayload,
-} from "./definitions";
+import { LogDisplayData, LogEntryEvent } from "./definitions";
 
 type NullablePartial<T> = {
   [P in keyof T]: T[P] | null;
 };
 
 export function useCloudwatchLogs() {
-  const [logs, setLogs] = useState<Array<LogDisplayData>>([]);
-
-  const idToIdx = Object.create(null);
-
-  function getLog(id: string) {
-    return logs[idToIdx[id]];
-  }
+  const [orderedLogs, setOrderedLogs] = useState<Array<LogDisplayData>>([]);
 
   function addLog(eventLog: LogEntryEvent) {
     const logDisplayData = logDisplayDataFromLogEntryEvent(eventLog);
 
-    idToIdx[logDisplayData.id] = Object.keys(idToIdx).length + 1;
-
-    setLogs((prev) => {
+    setOrderedLogs((prev) => {
       return [...prev, logDisplayData];
     });
   }
 
   return {
-    getLog: getLog,
+    orderedLogs: orderedLogs,
     addLog: addLog,
   };
 }
