@@ -1,12 +1,23 @@
 // @vitest-environment jsdom
-import { cleanup, render, screen, within } from "@testing-library/react"
+import { cleanup, render, screen } from "@testing-library/react"
 import { afterEach, beforeEach, describe, expect, it } from "vitest"
 import userEvent from '@testing-library/user-event';
 
 import { FakeEventSource } from "../../test/FakeEventSource"
-import LiveLogTable, { type LiveLog } from "./LiveLogTable"
+import LiveLogTable from "./LiveLogTable"
 
-import {columnTitles, CloudFrontLogEvent, LogEntryEvent} from "./definitions.ts"
+import {
+methods,
+edgeResultTypes,
+sslProtocols,
+userProtocols,
+userProtocolVersion,
+columnTitles,
+    CloudFrontLogEvent,
+    LogEntryEvent,
+    CloudFrontLogPayload,
+    DisplayLogEvent
+} from "./definitions.ts"
 
 describe("LiveLogs", () => {
     beforeEach(() => {
@@ -54,17 +65,9 @@ describe("LiveLogs", () => {
     })
 
     describe("stream behaviour", ()=>{
-        const methods = ['GET' , 'POST' , 'PUT' , 'DELETE' , 'OPTIONS' , 'HEAD' , 'PATCH'] as const
-        const edgeResultTypes = ['Hit' , 'Miss' , 'RefreshHit' , 'Redirect' , 'Error' , 'LimitExceeded' , 'CapacityExceeded'] as const
-        const sslProtocols = ['TLSv1.2' , 'TLSv1.3' , '-'] as const
-        const userProtocols = ['http' , 'https' , 'ws' , 'wss'] as const
-        const userProtocolVersion = ['HTTP/1.0' , 'HTTP/1.1' , 'HTTP/2' , 'HTTP/3'] as const
 
-        let dummyEventObjects: Array<CloudFrontLogEvent> = []
-
-        beforeEach(() => {
-            for (let i = 0; i < 99; i++){
-                const dummyAccessLog = {
+        function createDummyLogData():CloudFrontLogPayload{
+            return {
                     timestamp: Math.random(),
                     time_taken: Math.random(),
                     sc_status: 200,
@@ -91,6 +94,13 @@ describe("LiveLogs", () => {
                     fle_status: "fle status",
                     fle_encrypted_fields: 99
                 }
+        }
+
+        let dummyEventObjects: Array<CloudFrontLogEvent> = []
+
+        beforeEach(() => {
+            for (let i = 0; i < 3; i++){
+                const dummyAccessLog = createDummyLogData()
 
                 const dummyLogEntryEvent: LogEntryEvent = {
                     id: `Event-${i}`,
@@ -101,35 +111,49 @@ describe("LiveLogs", () => {
 
                 dummyEventObjects.push(dummyLogEntryEvent)
             }
+
+            dummyEventObjects.forEach((dummyEvent)=>{
+                FakeEventSource.instances[0].emitMessage(dummyEvent)
+            })
         })
 
         afterEach(() => {
             dummyEventObjects = []
         })
 
-    })
 
-    it("adds streamed log data to the rendered table", () => {
-        render(<LiveLogTable/>)
+        dummyEventObjects.forEach((dummyEvent, i)=>{
+            if(dummyEvent.id === undefined){
+                throw new Error(`Dummy data missing id at index ${i}`)
+            }
 
-        FakeEventSource.instances[0].emitMessage({
-            timestamp: "2026-08-28T16:00:01.000Z",
-            level: "error",
-            source: "worker",
-            message: "Failed to process import",
+            it(`renders event ${dummyEvent.id}`, ()=>{
+
+                render(<LiveLogTable />)
+
+                screen.getByText(dummyEvent.id!)
+            })
         })
 
-        rerender(<LiveLogTable logs={logs} />)
+        it('renders streamed event', async ()=>{
+            render(<LiveLogTable />)
 
-        const table = screen.getByRole("table", { name: "Live logs" })
-        const rows = within(table).getAllByRole("row")
+            const streamedEventId = "streamedEventId"
+            const freshLogData = createDummyLogData()
 
-        expect(rows).toHaveLength(3)
-        expect(
-            within(table).getByRole("row", { name: /info api log stream connected/i }),
-        ).toBeDefined()
-        expect(
-            within(table).getByRole("row", { name: /error worker failed to process import/i }),
-        ).toBeDefined()
+            const dummyLogEntryEvent: LogEntryEvent = {
+                id: streamedEventId,
+                event: 'log_entry',
+                data: freshLogData
+            }
+
+            const idElementPreEmit = screen.queryByText(streamedEventId)
+            expect(idElementPreEmit).toBeNull()
+
+            FakeEventSource.instances[0].emitMessage(dummyLogEntryEvent)
+
+            const idElement = await screen.findByText(streamedEventId)
+            expect(idElement).not.toBeNull()
+        })
     })
 })
