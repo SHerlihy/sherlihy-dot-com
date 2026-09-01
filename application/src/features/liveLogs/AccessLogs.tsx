@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useCloudwatchLogs } from "./useCloudwatchLogs.ts";
 
 import AccessLogsTable from "./components/AccessLogsTable.tsx";
+import DeselectedSelector from "./components/DeselectedSelector.tsx";
 
 import { CloudFrontLogEvent } from "./definitions.ts";
 
@@ -66,6 +67,8 @@ function AccessLogs() {
       {error && (
         <div style={{ color: "#ff6b6b", marginBottom: "10px" }}>{error}</div>
       )}
+
+      <DeselectedSelector />
 
       <div
         style={{

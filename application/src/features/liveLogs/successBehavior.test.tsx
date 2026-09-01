@@ -47,7 +47,7 @@ describe("LiveLogs", () => {
         const user = userEvent.setup();
 
         let titleElements = screen.getAllByText(title);
-        const titleButton = titleElements.find((el) => el.tagName === "BUTTON");
+        const titleButton = titleElements.find((el) => el.tagName === "A");
         if (titleButton === undefined) {
           throw new Error(`Button with text '${title}' not found.`);
         }
