@@ -1,15 +1,24 @@
-import { useCloudwatchLogs } from "../useCloudwatchLogs.ts";
-import { columnOrder } from "../definitions.ts";
+import { Route } from "../../../routes/observe";
+import { columnOrder, type LogDisplayData } from "../definitions.ts";
 import AccessLogDisplayData from "./AccessLogDisplayData.tsx";
 
-function AccessLogsTable() {
-  const { orderedLogs } = useCloudwatchLogs();
+import { isBitSet } from "../../../lib/bitwise.ts";
+
+type Props = {
+  orderedLogs: Array<LogDisplayData>;
+};
+
+function AccessLogsTable({ orderedLogs }: Props) {
+  const { deselected } = Route.useSearch();
 
   return (
     <table>
       <thead>
         <tr>
-          {columnOrder.map(({ displayText }) => {
+          {columnOrder.map(({ displayText }, i) => {
+            if (isBitSet(deselected, i)) {
+              return null;
+            }
             return (
               <th scope="col" key={displayText}>
                 {displayText}
@@ -19,7 +28,7 @@ function AccessLogsTable() {
         </tr>
       </thead>
       {orderedLogs.map((log) => (
-        <AccessLogDisplayData logDisplayData={log} />
+        <AccessLogDisplayData key={log.id} logDisplayData={log} />
       ))}
     </table>
   );

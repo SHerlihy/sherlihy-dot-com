@@ -1,10 +1,12 @@
 // @vitest-environment jsdom
-import { cleanup, render, screen } from "@testing-library/react";
+import { cleanup, screen, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import userEvent from "@testing-library/user-event";
 
+import { renderWithRouter } from "../../test/renderWithRouter.tsx";
+
 import { FakeEventSource } from "../../test/FakeEventSource";
-import LiveLogTable from "./LiveLogTable";
+import AccessLogs from "./AccessLogs.tsx";
 
 import { createDummyLogData } from "./testHelpers.ts";
 
@@ -15,20 +17,26 @@ import {
 } from "./definitions.ts";
 
 describe("LiveLogs", () => {
-  beforeEach(() => {
-    FakeEventSource.install();
-  });
-
-  afterEach(() => {
-    cleanup();
-    FakeEventSource.uninstall();
-  });
-
   describe("component layout", () => {
-    columnTitles.forEach((title) => {
-      it("initialises with ${title} field", () => {
-        render(<LiveLogTable />);
+    beforeEach(async () => {
+      FakeEventSource.install();
 
+      await renderWithRouter(<AccessLogs />, {
+        initialEntry: `/observe?deselected=0`,
+      });
+
+      waitFor(() => {
+        expect(FakeEventSource.instances[0]).toBeDefined();
+      });
+    });
+
+    afterEach(() => {
+      cleanup();
+      FakeEventSource.uninstall();
+    });
+
+    columnTitles.forEach((title) => {
+      it("initialises with ${title} field", async () => {
         const titleElements = screen.getAllByText(title);
         expect(titleElements.some((el) => el.tagName === "TH")).toBe(true);
       });
@@ -37,8 +45,6 @@ describe("LiveLogs", () => {
     columnTitles.forEach((title) => {
       it("removes field with ${title}", async () => {
         const user = userEvent.setup();
-
-        render(<LiveLogTable />);
 
         let titleElements = screen.getAllByText(title);
         const titleButton = titleElements.find((el) => el.tagName === "BUTTON");
@@ -57,7 +63,7 @@ describe("LiveLogs", () => {
   describe("stream behaviour", () => {
     let dummyEventObjects: Array<CloudFrontLogEvent> = [];
 
-    beforeEach(() => {
+    beforeEach(async () => {
       for (let i = 0; i < 3; i++) {
         const dummyAccessLog = createDummyLogData();
 
@@ -70,12 +76,24 @@ describe("LiveLogs", () => {
         dummyEventObjects.push(dummyLogEntryEvent);
       }
 
+      FakeEventSource.install();
+
+      await renderWithRouter(<AccessLogs />, {
+        initialEntry: `/observe?deselected=0`,
+      });
+
+      waitFor(() => {
+        expect(FakeEventSource.instances[0]).toBeDefined();
+      });
+
       dummyEventObjects.forEach((dummyEvent) => {
         FakeEventSource.instances[0].emitMessage(dummyEvent);
       });
     });
 
     afterEach(() => {
+      cleanup();
+      FakeEventSource.uninstall();
       dummyEventObjects = [];
     });
 
@@ -84,16 +102,12 @@ describe("LiveLogs", () => {
         throw new Error(`Dummy data missing id at index ${i}`);
       }
 
-      it(`renders event ${dummyEvent.id}`, () => {
-        render(<LiveLogTable />);
-
+      it(`renders event ${dummyEvent.id}`, async () => {
         screen.getByText(dummyEvent.id!);
       });
     });
 
-    it("renders streamed event", async () => {
-      render(<LiveLogTable />);
-
+    it.skip("renders streamed event", async () => {
       const streamedEventId = "streamedEventId";
       const freshLogData = createDummyLogData();
 

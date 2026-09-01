@@ -144,7 +144,7 @@ export const columnOrder = [
   createOrderObj("Field-Level Encryption Count", "fle_encrypted_fields"),
 ];
 
-const columnTitles = columnOrder.map(({ displayText }) => displayText);
+export const columnTitles = columnOrder.map(({ displayText }) => displayText);
 
 export type ColumnTitles = (typeof columnTitles)[number];
 

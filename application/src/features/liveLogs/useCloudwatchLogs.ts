@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { LogDisplayData, LogEntryEvent } from "./definitions";
 
 type NullablePartial<T> = {
@@ -8,13 +8,13 @@ type NullablePartial<T> = {
 export function useCloudwatchLogs() {
   const [orderedLogs, setOrderedLogs] = useState<Array<LogDisplayData>>([]);
 
-  function addLog(eventLog: LogEntryEvent) {
+  const addLog = useCallback((eventLog: LogEntryEvent) => {
     const logDisplayData = logDisplayDataFromLogEntryEvent(eventLog);
 
     setOrderedLogs((prev) => {
       return [...prev, logDisplayData];
     });
-  }
+  }, []);
 
   return {
     orderedLogs: orderedLogs,

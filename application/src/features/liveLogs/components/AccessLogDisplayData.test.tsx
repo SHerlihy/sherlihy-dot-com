@@ -1,18 +1,15 @@
 // @vitest-environment jsdom
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import { vi, afterEach, describe, expect, it } from "vitest";
-
 import { renderWithRouter } from "../../../test/renderWithRouter.tsx";
+import { createDummyLogDisplayData } from "../testHelpers.ts";
+
+import { columnOrder } from "../definitions.ts";
+import { Route } from "../../../routes";
 
 import AccessLogDisplayData from "./AccessLogDisplayData.tsx";
 
-import { columnOrder } from "../definitions.ts";
-
-import { Route } from "../../../routes";
-
-import { createDummyLogDisplayData } from "../testHelpers.ts";
-
-describe.only("AccessLogsRow", () => {
+describe("AccessLogsRow", () => {
   const useSearchSpy = vi.spyOn(Route, "useSearch").mockReturnValue({
     deselected: 0,
   });
