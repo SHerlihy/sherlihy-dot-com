@@ -12,7 +12,7 @@ data "aws_ssm_parameter" "cloudfront_distribution_id" {
 
 resource "aws_cloudwatch_log_group" "cloudfront_logs" {
   name              = "/aws/cloudfront/${data.aws_ssm_parameter.cloudfront_distribution_id.value}"
-  retention_in_days = 3 
+  retention_in_days = 3
 }
 
 resource "aws_cloudwatch_log_delivery_destination" "cloudwatch_user_access" {
@@ -70,4 +70,12 @@ resource "aws_cloudwatch_log_delivery" "cloudwatch_user_access" {
     "viewer-request-log-data",
     "viewer-response-log-data"
   ]
+}
+
+output "log_group_name" {
+  value = aws_cloudwatch_log_group.cloudfront_logs.name
+}
+
+output "log_group_arn" {
+  value = aws_cloudwatch_log_group.cloudfront_logs.arn
 }
