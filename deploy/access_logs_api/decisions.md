@@ -6,6 +6,8 @@ No including following fields as can expose user:
 - x-forwarded-for
 - cs-cookie
 - cs-referer
+- viewer-request-log-data
+- viewer-response-log-data
 
 Want a pull model so is on demand when api request is made
 

@@ -63,8 +63,6 @@ resource "aws_cloudwatch_log_delivery" "cloudwatch_user_access" {
     "sc-range-start",
     "sc-range-end",
     "c-country",
-    "viewer-request-log-data",
-    "viewer-response-log-data"
   ]
 }
 
