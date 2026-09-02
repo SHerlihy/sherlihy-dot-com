@@ -19,7 +19,6 @@ terraform {
 
 provider "aws" {
   profile = "sherlihydtcom"
-  region  = "us-east-1"
 }
 
 module "cloudwatch" {
@@ -28,8 +27,8 @@ module "cloudwatch" {
 
 module "stream" {
   source = "./stream"
-  
-  log_group_name = module.cloudwatch.log_group_name
+
+  log_group_arn = module.cloudwatch.log_group_arn
 }
 
 output "access_logs_stream_url" {

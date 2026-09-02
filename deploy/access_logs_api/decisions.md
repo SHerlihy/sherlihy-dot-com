@@ -1,5 +1,12 @@
 Using Live Tail
 
+No including following fields as can expose user:
+- cs-ip
+- cs-uri-query
+- x-forwarded-for
+- cs-cookie
+- cs-referer
+
 Want a pull model so is on demand when api request is made
 
 Logs to firehose and then lambda getting logs from firehose possible
@@ -13,3 +20,5 @@ does not have a minimum cost
 
 to reduce costs will using Live Tail
 will restrict usage using API Gateway throttling and quotas
+
+

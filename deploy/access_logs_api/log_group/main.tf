@@ -16,9 +16,8 @@ resource "aws_cloudwatch_log_group" "cloudfront_logs" {
 }
 
 resource "aws_cloudwatch_log_delivery_destination" "cloudwatch_user_access" {
-  region        = "us-east-1"
   name          = "cloudwatch-access_logs"
-  output_format = "parquet"
+  output_format = "json"
 
   delivery_destination_configuration {
     destination_resource_arn = aws_cloudwatch_log_group.cloudfront_logs.arn
@@ -26,7 +25,6 @@ resource "aws_cloudwatch_log_delivery_destination" "cloudwatch_user_access" {
 }
 
 resource "aws_cloudwatch_log_delivery" "cloudwatch_user_access" {
-  region                   = "us-east-1"
   delivery_source_name     = data.aws_ssm_parameter.log_source_name.value
   delivery_destination_arn = aws_cloudwatch_log_delivery_destination.cloudwatch_user_access.arn
 
@@ -43,17 +41,13 @@ resource "aws_cloudwatch_log_delivery" "cloudwatch_user_access" {
     "cs-host",
     "cs-uri-stem",
     "sc-status",
-    "cs-referer",
     "cs-user-agent",
-    "cs-uri-query",
-    "cs-cookie",
     "x-edge-result-type",
     "x-edge-request-id",
     "x-host-header",
     "cs-protocol",
     "cs-bytes",
     "time-taken",
-    "x-forwarded-for",
     "ssl-protocol",
     "ssl-cipher",
     "x-edge-response-result-type",
