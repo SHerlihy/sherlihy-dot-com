@@ -4,7 +4,7 @@ import { useCloudwatchLogs } from "./useCloudwatchLogs.ts";
 import AccessLogsTable from "./components/AccessLogsTable.tsx";
 import DeselectedSelector from "./components/DeselectedSelector.tsx";
 
-import { CloudFrontLogEvent } from "./definitions.ts";
+import { CloudFrontLogPayload } from "./definitions.ts";
 
 const URL = "/api/logs/sse-stream";
 
@@ -28,10 +28,8 @@ function AccessLogs() {
 
     eventSource.onmessage = (event) => {
       try {
-        const parsedLog: CloudFrontLogEvent = JSON.parse(event.data);
-        if (parsedLog.event === "log_entry") {
-          addLog(parsedLog);
-        }
+        const parsedLog: CloudFrontLogPayload = JSON.parse(event.data);
+        addLog(parsedLog);
       } catch (err) {
         console.error("Failed to parse log event data:", err);
       }
