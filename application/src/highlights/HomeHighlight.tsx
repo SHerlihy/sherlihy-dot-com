@@ -9,12 +9,11 @@ import QueryModel from "../features/query/QueryModel"
 import QueryControl from "../features/query/QueryControl"
 
 import { catchError } from "../lib/async.ts"
+import { config } from "../config.ts"
 
 const queryClient = new QueryClient()
 
-const QUERY_URL = "https://rtuard82z7.execute-api.us-east-1.amazonaws.com/prod/query/"
-
-const { postQuery, demarshall, abortQuery } = new QueryControl(QUERY_URL)
+const { postQuery, demarshall, abortQuery } = new QueryControl(config.queryUrl)
 
 const HomeHighlight = () => {
     const [chat, setChat] = useState<string[]>([])
