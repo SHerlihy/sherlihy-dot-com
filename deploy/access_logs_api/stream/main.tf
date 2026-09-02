@@ -2,6 +2,8 @@ variable "log_group_arn" {
   type = string
 }
 
+data "aws_region" "current" {}
+
 data "aws_iam_policy_document" "assume_role" {
   statement {
     effect = "Allow"
@@ -72,6 +74,7 @@ resource "aws_lambda_function" "stream_logs" {
     variables = {
       LOG_GROUP_ARN      = var.log_group_arn
       LOG_FILTER_PATTERN = "-ping -healthz"
+      REGION = data.aws_region.current.region
     }
   }
 }
@@ -85,7 +88,7 @@ resource "aws_lambda_function_url" "stream_logs" {
   cors {
     allow_origins = ["*"]
     #    allow_origins     = ["https://sherlihy.com", "https://www.sherlihy.com", "http://localhost:3000"]
-    allow_methods = ["GET", "OPTIONS"]
+    allow_methods = ["GET"]
 
     allow_headers  = ["accept", "content-type", "cache-control"]
     expose_headers = ["content-type", "transfer-encoding", "cache-control", "connection"]

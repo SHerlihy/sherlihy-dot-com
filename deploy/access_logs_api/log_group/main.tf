@@ -3,10 +3,12 @@ module "names" {
 }
 
 data "aws_ssm_parameter" "log_source_name" {
+  region = "eu-west-2"
   name = module.names.log_source_name
 }
 
 data "aws_ssm_parameter" "cloudfront_distribution_id" {
+  region = "eu-west-2"
   name = module.names.cloudfront_distribution_id
 }
 
@@ -38,10 +40,10 @@ resource "aws_cloudwatch_log_delivery" "cloudwatch_user_access" {
     "x-edge-location",
     "sc-bytes",
     "cs-method",
-    "cs-host",
+    "cs(Host)",
     "cs-uri-stem",
     "sc-status",
-    "cs-user-agent",
+    "cs(User-Agent)",
     "x-edge-result-type",
     "x-edge-request-id",
     "x-host-header",

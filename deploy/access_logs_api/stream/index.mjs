@@ -6,8 +6,9 @@ import {
 
 const LOG_GROUP_ARN = process.env.LOG_GROUP_ARN;
 const LOG_FILTER_PATTERN = process.env.LOG_FILTER_PATTERN;
+const REGION = process.env.REGION;
 
-const client = new CloudWatchLogsClient({ region: "us-east-1" });
+const client = new CloudWatchLogsClient({ region: REGION });
 
 export const handler = awslambda.streamifyResponse(
   async (event, responseStream, context) => {
