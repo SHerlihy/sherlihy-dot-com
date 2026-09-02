@@ -1,3 +1,7 @@
+variable "log_group_name" {
+  type = string
+}
+
 data "aws_iam_policy_document" "assume_role" {
   statement {
     effect = "Allow"
@@ -47,8 +51,8 @@ resource "aws_lambda_function" "stream_logs" {
 
   environment {
     variables = {
-      ENVIRONMENT = "production"
-      LOG_LEVEL   = "info"
+      LOG_GROUP_NAME = var.log_group_name
+      LOG_FILTER_PATTERN = "-ping -healthz"
     }
   }
 }
