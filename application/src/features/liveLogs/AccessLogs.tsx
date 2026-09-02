@@ -4,8 +4,9 @@ import { useCloudwatchLogs } from "./useCloudwatchLogs.ts";
 import AccessLogsTable from "./components/AccessLogsTable.tsx";
 import DeselectedSelector from "./components/DeselectedSelector.tsx";
 
-const URL =
-  "https://xkn6ujw7kyd67uoy4kretill4a0yhyfu.lambda-url.us-east-1.on.aws/";
+import { config } from "../../config.ts";
+
+const url = `${config.logsUrl}?api_key=${encodeURIComponent(config.logsApiKey)}`;
 
 function AccessLogs() {
   const { orderedLogs, addLog } = useCloudwatchLogs();
@@ -16,7 +17,7 @@ function AccessLogs() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const eventSource = new EventSource(URL);
+    const eventSource = new EventSource(url);
 
     setStatus("connecting");
     setError(null);
