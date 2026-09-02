@@ -1,5 +1,12 @@
 worktree/
 
+.env
+.env.local
+.env.*.local
+application/.env
+application/.env.local
+application/.env.*.local
+
 # Local .terraform directories
 **/.terraform/*
 .terraform.*
