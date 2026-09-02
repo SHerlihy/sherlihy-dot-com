@@ -4,9 +4,8 @@ import { useCloudwatchLogs } from "./useCloudwatchLogs.ts";
 import AccessLogsTable from "./components/AccessLogsTable.tsx";
 import DeselectedSelector from "./components/DeselectedSelector.tsx";
 
-import { CloudFrontLogPayload } from "./definitions.ts";
-
-const URL = "/api/logs/sse-stream";
+const URL =
+  "https://xkn6ujw7kyd67uoy4kretill4a0yhyfu.lambda-url.us-east-1.on.aws/";
 
 function AccessLogs() {
   const { orderedLogs, addLog } = useCloudwatchLogs();
@@ -22,29 +21,40 @@ function AccessLogs() {
     setStatus("connecting");
     setError(null);
 
-    eventSource.onopen = () => {
-      setStatus("connected");
-    };
+    console.log("after connecting");
 
-    eventSource.onmessage = (event) => {
+    eventSource.addEventListener("open", () => {
+      console.log("onopen");
+      setStatus("connected");
+    });
+
+    eventSource.addEventListener("message", (e) => {
+      let parsedLog = e.data;
       try {
-        const parsedLog: CloudFrontLogPayload = JSON.parse(event.data);
+        for (let i = 0; i < 3 && typeof parsedLog === "string"; i++) {
+          parsedLog = JSON.parse(parsedLog);
+        }
+        if (typeof parsedLog === "string") {
+          throw new TypeError("Log message did not parse to object.");
+        }
+
         addLog(parsedLog);
       } catch (err) {
         console.error("Failed to parse log event data:", err);
       }
-    };
+    });
 
     eventSource.addEventListener("end", () => {
+      console.log("end");
       setStatus("disconnected");
       eventSource.close();
     });
 
-    eventSource.onerror = (err) => {
+    eventSource.addEventListener("error", (err) => {
       console.error("EventSource error:", err);
       setError("Connection lost or failed to connect.");
       setStatus("disconnected");
-    };
+    });
 
     return () => {
       eventSource.close();
@@ -67,18 +77,7 @@ function AccessLogs() {
       )}
 
       <DeselectedSelector />
-
-      <div
-        style={{
-          height: "400px",
-          overflowY: "scroll",
-          fontFamily: "monospace",
-          background: "#111",
-          padding: "10px",
-        }}
-      >
-        <AccessLogsTable orderedLogs={orderedLogs} />
-      </div>
+      <AccessLogsTable orderedLogs={orderedLogs} />
     </div>
   );
 }

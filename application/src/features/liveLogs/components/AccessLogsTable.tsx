@@ -12,7 +12,7 @@ function AccessLogsTable({ orderedLogs }: Props) {
   const { deselected } = Route.useSearch();
 
   return (
-    <table>
+    <table className="border-separate border-spacing-4">
       <thead>
         <tr>
           {columnOrder.map(({ displayText }, i) => {
@@ -27,9 +27,11 @@ function AccessLogsTable({ orderedLogs }: Props) {
           })}
         </tr>
       </thead>
-      {orderedLogs.map((log) => (
-        <AccessLogDisplayData key={log.id} logDisplayData={log} />
-      ))}
+      <tbody className="divide-y divide-gray-200">
+        {orderedLogs.map((log) => (
+          <AccessLogDisplayData key={log.id} logDisplayData={log} />
+        ))}
+      </tbody>
     </table>
   );
 }

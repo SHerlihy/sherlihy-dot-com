@@ -9,14 +9,14 @@ function DeselectedSelector() {
   const location = useLocation();
 
   return (
-    <div>
+    <div className="grid grid-cols-12 gap-4">
       {columnOrder.map(({ displayText }, i) => (
         <Link
           key={`${displayText}`}
           style={{ color: "inherit" }}
           className={`
 flex justify-center items-center 
-${isBitSet(deselected, i) ? "bg-green-400" : "bg-red-400"}
+${isBitSet(deselected, i) ? "bg-red-400" : "bg-green-400"}
 `}
           to={location.pathname}
           search={(prev) => {
