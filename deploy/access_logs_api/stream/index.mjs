@@ -18,6 +18,8 @@ export const handler = awslambda.streamifyResponse(
       headers: { "Content-Type": "text/event-stream" }, // Excellent for live logs
     });
 
+    httpStream.write(`event: open\ndata: {}\n\n`);
+
     const liveTailSession = new StartLiveTailCommand({
       logGroupIdentifiers: [LOG_GROUP_ARN],
       logEventFilterPattern: LOG_FILTER_PATTERN,
@@ -32,7 +34,9 @@ export const handler = awslambda.streamifyResponse(
         for await (const chunk of source) {
           if (chunk.sessionUpdate?.sessionResults) {
             for (const log of chunk.sessionUpdate.sessionResults) {
-              yield `data: ${JSON.stringify({ msg: log.message })}\n\n`;
+              //remove backslashes so is valid json?
+              //no because json in json
+              yield `data: ${JSON.stringify(log.message)}\n\n`;
             }
           }
         }
