@@ -1,3 +1,7 @@
+API key used for quota
+
+without a quota the max cost can be over $400 per month for a single lambda function running
+
 Using Live Tail
 
 No including following fields as can expose user:

@@ -15,7 +15,11 @@ export const handler = awslambda.streamifyResponse(
     // 1. Use HttpResponseStream to set the protocol metadata
     const httpStream = awslambda.HttpResponseStream.from(responseStream, {
       statusCode: 200,
-      headers: { "Content-Type": "text/event-stream" }, // Excellent for live logs
+      headers: {
+        "Content-Type": "text/event-stream",
+        "Cache-Control": "no-cache",
+        "Access-Control-Allow-Origin": "*",
+      },
     });
 
     httpStream.write(`event: open\ndata: {}\n\n`);

@@ -4,12 +4,12 @@ module "names" {
 
 data "aws_ssm_parameter" "log_source_name" {
   region = "eu-west-2"
-  name = module.names.log_source_name
+  name   = module.names.log_source_name
 }
 
 data "aws_ssm_parameter" "cloudfront_distribution_id" {
   region = "eu-west-2"
-  name = module.names.cloudfront_distribution_id
+  name   = module.names.cloudfront_distribution_id
 }
 
 resource "aws_cloudwatch_log_group" "cloudfront_logs" {
