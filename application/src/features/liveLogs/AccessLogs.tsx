@@ -6,7 +6,8 @@ import DeselectedSelector from "./components/DeselectedSelector.tsx";
 
 import { config } from "../../config.ts";
 
-const url = `${config.logsUrl}?api_key=${encodeURIComponent(config.logsApiKey)}`;
+const url = new URL(`${config.logsUrl}`);
+url.searchParams.set("x-api-key", encodeURIComponent(config.logsApiKey));
 
 function AccessLogs() {
   const { orderedLogs, addLog } = useCloudwatchLogs();

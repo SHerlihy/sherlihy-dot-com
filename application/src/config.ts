@@ -1,10 +1,9 @@
 const defaultQueryUrl =
   "https://rtuard82z7.execute-api.us-east-1.amazonaws.com/prod/query/";
 
-const defaultLogsUrl =
-  "https://ttorvdzge1.execute-api.us-east-1.amazonaws.com/prod";
+const defaultLogsUrl = "https://jdndninx75.execute-api.us-east-1.amazonaws.com/prod/observe";
 //yes I know, it is okay
-const defaultLogsApiKey = "Z6EwCsnW8O34ONXYAR2t71pymlyij6ts24lwypi6";
+const defaultLogsApiKey = "bz9lHhkK1o3dhQPxkoL26agtVvwirjfk1xLSGxx7";
 
 export const config = {
   queryUrl: import.meta.env.VITE_QUERY_URL || defaultQueryUrl,
