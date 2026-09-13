@@ -115,5 +115,7 @@ resource "aws_api_gateway_integration" "stream_logs" {
   http_method             = aws_api_gateway_method.stream_logs.http_method
   integration_http_method = "POST"
   type                    = "AWS_PROXY"
-  uri                     = aws_lambda_function.stream_logs.invoke_arn
+  uri                     = aws_lambda_function.stream_logs.response_streaming_invoke_arn
+
+  response_transfer_mode = "STREAM"
 }
