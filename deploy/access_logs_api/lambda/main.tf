@@ -118,4 +118,5 @@ resource "aws_api_gateway_integration" "stream_logs" {
   uri                     = aws_lambda_function.stream_logs.response_streaming_invoke_arn
 
   response_transfer_mode = "STREAM"
+  timeout_milliseconds    = 300000
 }
