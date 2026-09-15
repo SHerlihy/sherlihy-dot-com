@@ -9,11 +9,10 @@ import QueryModel from "../features/query/QueryModel"
 import QueryControl from "../features/query/QueryControl"
 
 import { catchError } from "../lib/async.ts"
-import { config } from "../config.ts"
 
 const queryClient = new QueryClient()
 
-const { postQuery, demarshall, abortQuery } = new QueryControl(config.queryUrl)
+const { postQuery, demarshall, abortQuery } = new QueryControl()
 
 const HomeHighlight = () => {
     const [chat, setChat] = useState<string[]>([])
