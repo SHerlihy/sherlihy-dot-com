@@ -33,6 +33,12 @@ bg-[Canvas]
           />
         </div>
         <button
+          aria-label={
+            `
+${isNav && "Close navigation button."}
+${!isNav && "Open navigation button."}
+`
+          }
           className={`
 z-1
 p-4
