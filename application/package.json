@@ -6,6 +6,7 @@
   "scripts": {
     "build": "tsc && vite build",
     "dev": "vite",
+    "dev-compose": "npm run dev -- --host 0.0.0.0 --port 5173 --strictPort",
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest",
