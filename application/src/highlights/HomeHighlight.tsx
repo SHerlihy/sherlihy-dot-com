@@ -57,19 +57,21 @@ const HomeHighlight = () => {
                     ref={chatBoxRef}
                     className="min-h-full whitespace-pre-line flex flex-col justify-center align-center">
                     <Intro />
+                    <ul>
                     {chat.map((utter, i) => <div key={i}>
                         &nbsp;
                         <hr />
                         &nbsp;
-                        <div
+                        <li
                             className={`
                         ${i % 2 === 0 && "text-right"}
                     `}
                         >
                             {utter}
-                        </div>
+                        </li>
                     </div>
                     )}
+                    </ul>
                 </div>
             </div>
             <div className="py-4">
