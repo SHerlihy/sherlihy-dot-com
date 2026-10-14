@@ -1,8 +1,17 @@
-import HighlightDesktopLayout from "../../shared/components/HighlightDesktopLayout"
-import HighlightMobileLayout from "../../shared/components/HighlightMobileLayout"
-import useIsDesktop from "../../shared/hooks/useIsDesktop"
+import HighlightLayout from "@/shared/layouts/HighlightLayout"
 
-const Content = () => {
+function CambridgeAI() {
+  return <HighlightLayout
+  image={<Image/>}
+  content={<Content/>}
+  />
+}
+
+function Image(){
+  return <img src="/camAI/camAI.webp" />
+}
+
+function Content () {
     return (
         <>
             <p>
@@ -16,24 +25,4 @@ const Content = () => {
     )
 }
 
-const CambridgeAIHighlight = () => {
-    const isDesktop = useIsDesktop()
-
-    if (isDesktop) {
-        return (
-            <HighlightDesktopLayout
-                image={<img src="/camAI/camAI.webp" />}
-                content={<Content />}
-            />
-        )
-    }
-
-    return (
-        <HighlightMobileLayout
-            image={<img src="/camAI/camAI.webp" />}
-            content={<Content />}
-        />
-    )
-}
-
-export default CambridgeAIHighlight
+export default CambridgeAI

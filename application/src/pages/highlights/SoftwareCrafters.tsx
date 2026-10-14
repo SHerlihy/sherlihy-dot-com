@@ -1,8 +1,17 @@
-import HighlightDesktopLayout from "../../shared/components/HighlightDesktopLayout"
-import HighlightMobileLayout from "../../shared/components/HighlightMobileLayout"
-import useIsDesktop from "../../shared/hooks/useIsDesktop"
+import HighlightLayout from "@/shared/layouts/HighlightLayout"
 
-const Content = () => {
+function SoftwareCrafters() {
+  return <HighlightLayout
+  image={<Image/>}
+  content={<Content/>}
+  />
+}
+
+function Image(){
+  return <img src="/scc/scc.webp" />
+}
+
+function Content () {
     return (
         <>
             <p>
@@ -20,24 +29,4 @@ const Content = () => {
     )
 }
 
-const SoftwareCraftersHighlight = () => {
-    const isDesktop = useIsDesktop()
-
-    if (isDesktop) {
-        return (
-            <HighlightDesktopLayout
-                image={<img src="/scc/scc.webp" />}
-                content={<Content />}
-            />
-        )
-    }
-
-    return (
-        <HighlightMobileLayout
-            image={<img src="/scc/scc.webp" />}
-            content={<Content />}
-        />
-    )
-}
-
-export default SoftwareCraftersHighlight
+export default SoftwareCrafters

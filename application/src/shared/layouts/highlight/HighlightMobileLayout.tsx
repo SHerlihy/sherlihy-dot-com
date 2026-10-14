@@ -1,5 +1,4 @@
 import { ReactNode } from "react"
-import HighlightMobileImage from "./HighlightMobileImage"
 import HighlightMobileContent from "./HighlightMobileContent"
 
 const HighlightMobileLayout = ({

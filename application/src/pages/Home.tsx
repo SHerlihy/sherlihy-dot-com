@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react"
-import HighlightDesktopImage from "@/shared/components/HighlightDesktopImage"
+import HighlightDesktopImage from "@/shared/layouts/highlight/HighlightDesktopImage"
 import useIsDesktop from "@/shared/hooks/useIsDesktop"
 import SherlihyImage from "@/shared/images/sherlihy/SherlihyImage"
 

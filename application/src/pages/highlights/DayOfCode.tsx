@@ -1,8 +1,17 @@
-import HighlightDesktopLayout from "../../shared/components/HighlightDesktopLayout"
-import HighlightMobileLayout from "../../shared/components/HighlightMobileLayout"
-import useIsDesktop from "../../shared/hooks/useIsDesktop"
+import HighlightLayout from "@/shared/layouts/HighlightLayout"
 
-const Content = () => {
+function DayOfCode() {
+  return <HighlightLayout
+  image={<Image/>}
+  content={<Content/>}
+  />
+}
+
+function Image(){
+  return <img src="/doc/Raspberry_Pi_Logo.svg" />
+}
+
+function Content () {
     return (
         <>
             <p>
@@ -20,24 +29,4 @@ const Content = () => {
     )
 }
 
-const DayOfCodeHighlight = () => {
-    const isDesktop = useIsDesktop()
-
-    if (isDesktop) {
-        return (
-            <HighlightDesktopLayout
-                image={<img src="/doc/Raspberry_Pi_Logo.svg" />}
-                content={<Content />}
-            />
-        )
-    }
-
-    return (
-        <HighlightMobileLayout
-            image={<img src="/doc/Raspberry_Pi_Logo.svg" />}
-            content={<Content />}
-        />
-    )
-}
-
-export default DayOfCodeHighlight
+export default DayOfCode

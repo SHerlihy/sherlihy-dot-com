@@ -1,11 +1,15 @@
-import useIsDesktop from "@/shared/hooks/useIsDesktop"
-
 import css from "./VelmaMode.module.css"
 
-import HighlightDesktopLayout from "@/shared/components/HighlightDesktopLayout"
-import HighlightMobileLayout from "@/shared/components/HighlightMobileLayout"
+import HighlightLayout from "@/shared/layouts/HighlightLayout"
 
-const VelmaImages = () => {
+function VelmaMode() {
+  return <HighlightLayout
+  image={<Image/>}
+  content={<Content/>}
+  />
+}
+
+function Image () {
     return (
         <span className="grid grid-cols-1 grid-rows-1">
             <img
@@ -24,7 +28,7 @@ const VelmaImages = () => {
     )
 }
 
-const Content = () => {
+function Content () {
     return (
         <>
             <p>
@@ -39,26 +43,6 @@ const Content = () => {
                 As the project has grown it's become more important to clearly explore and document the desired user experience which has led to creating design decision documents inside the project.
             </p>
         </>
-    )
-}
-
-const VelmaMode = () => {
-    const isDesktop = useIsDesktop()
-
-    if (isDesktop) {
-        return (
-            <HighlightDesktopLayout
-                image={<VelmaImages />}
-                content={<Content />}
-            />
-        )
-    }
-
-    return (
-        <HighlightMobileLayout
-            image={<VelmaImages />}
-            content={<Content />}
-        />
     )
 }
 

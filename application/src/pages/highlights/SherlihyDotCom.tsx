@@ -1,10 +1,15 @@
-import useIsDesktop from "@/shared/hooks/useIsDesktop"
-
-import HighlightDesktopLayout from "@/shared/components/HighlightDesktopLayout"
-import HighlightMobileLayout from "@/shared/components/HighlightMobileLayout"
 import SherlihyImage from "@/shared/images/sherlihy/SherlihyImage"
 
-const Content = () => {
+import HighlightLayout from "@/shared/layouts/HighlightLayout"
+
+function SherlihyDotCom() {
+  return <HighlightLayout
+  image={<SherlihyImage/>}
+  content={<Content/>}
+  />
+}
+
+function Content (){
     return (
         <>
             <p>
@@ -15,26 +20,6 @@ const Content = () => {
                 What excites me the most about my website is the diagrams as code approach to understanding the deployment design. I quickly found that even for a basic design the details were difficult to memorise; so I commited to recording the design as diagrams. Initially, I was concerned with exposing design details from a security aspect, however, it is best practice to prioritise feedback over obfuscation.
             </p>
         </>
-    )
-}
-
-const SherlihyDotCom = () => {
-    const isDesktop = useIsDesktop()
-
-    if (isDesktop) {
-        return (
-            <HighlightDesktopLayout
-                image={<SherlihyImage />}
-                content={<Content />}
-            />
-        )
-    }
-
-    return (
-        <HighlightMobileLayout
-            image={<SherlihyImage />}
-            content={<Content />}
-        />
     )
 }
 

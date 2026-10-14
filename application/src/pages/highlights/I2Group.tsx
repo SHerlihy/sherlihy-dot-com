@@ -1,11 +1,15 @@
-import useIsDesktop from "../shared/hooks/useIsDesktop"
-
 import i2HighlightCss from "./I2Group.module.css"
 
-import HighlightDesktopLayout from "../shared/components/HighlightDesktopLayout"
-import HighlightMobileLayout from "../shared/components/HighlightMobileLayout"
+import HighlightLayout from "@/shared/layouts/HighlightLayout"
 
-const I2Images = () => {
+function I2Group() {
+  return <HighlightLayout
+  image={<Image/>}
+  content={<Content/>}
+  />
+}
+
+function Image () {
     return (
         <span className="grid grid-cols-1 grid-rows-1">
             <img src="/i2/spiderweb.png" className="col-span-full row-span-full" />
@@ -16,7 +20,7 @@ const I2Images = () => {
     )
 }
 
-const Content = () => {
+function Content () {
     return (
         <>
             <p>
@@ -31,26 +35,6 @@ const Content = () => {
                 Due to performance being a key concern much of the codebase was highly mutable and we made extensive use of Typescript to help manage the added complexity of the mutable data structures.
             </p>
         </>
-    )
-}
-
-const I2Group = () => {
-    const isDesktop = useIsDesktop()
-
-    if (isDesktop) {
-        return (
-            <HighlightDesktopLayout
-                image={<I2Images />}
-                content={<Content />}
-            />
-        )
-    }
-
-    return (
-        <HighlightMobileLayout
-            image={<I2Images />}
-            content={<Content />}
-        />
     )
 }
 
