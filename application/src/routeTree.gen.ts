@@ -10,12 +10,26 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AwsCertsRouteImport } from './routes/awsCerts'
+import { Route as GoAuthRouteImport } from './routes/goAuth'
 import { Route as I2GroupRouteImport } from './routes/i2Group'
 import { Route as ObserveRouteImport } from './routes/observe'
+import { Route as SherlihyDotComRouteImport } from './routes/sherlihyDotCom'
+import { Route as VelmaModeRouteImport } from './routes/velmaMode'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AwsCertsRoute = AwsCertsRouteImport.update({
+  id: '/awsCerts',
+  path: '/awsCerts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GoAuthRoute = GoAuthRouteImport.update({
+  id: '/goAuth',
+  path: '/goAuth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const I2GroupRoute = I2GroupRouteImport.update({
@@ -28,35 +42,83 @@ const ObserveRoute = ObserveRouteImport.update({
   path: '/observe',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SherlihyDotComRoute = SherlihyDotComRouteImport.update({
+  id: '/sherlihyDotCom',
+  path: '/sherlihyDotCom',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VelmaModeRoute = VelmaModeRouteImport.update({
+  id: '/velmaMode',
+  path: '/velmaMode',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/awsCerts': typeof AwsCertsRoute
+  '/goAuth': typeof GoAuthRoute
   '/i2Group': typeof I2GroupRoute
   '/observe': typeof ObserveRoute
+  '/sherlihyDotCom': typeof SherlihyDotComRoute
+  '/velmaMode': typeof VelmaModeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/awsCerts': typeof AwsCertsRoute
+  '/goAuth': typeof GoAuthRoute
   '/i2Group': typeof I2GroupRoute
   '/observe': typeof ObserveRoute
+  '/sherlihyDotCom': typeof SherlihyDotComRoute
+  '/velmaMode': typeof VelmaModeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/awsCerts': typeof AwsCertsRoute
+  '/goAuth': typeof GoAuthRoute
   '/i2Group': typeof I2GroupRoute
   '/observe': typeof ObserveRoute
+  '/sherlihyDotCom': typeof SherlihyDotComRoute
+  '/velmaMode': typeof VelmaModeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/i2Group' | '/observe'
+  fullPaths:
+    | '/'
+    | '/awsCerts'
+    | '/goAuth'
+    | '/i2Group'
+    | '/observe'
+    | '/sherlihyDotCom'
+    | '/velmaMode'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/i2Group' | '/observe'
-  id: '__root__' | '/' | '/i2Group' | '/observe'
+  to:
+    | '/'
+    | '/awsCerts'
+    | '/goAuth'
+    | '/i2Group'
+    | '/observe'
+    | '/sherlihyDotCom'
+    | '/velmaMode'
+  id:
+    | '__root__'
+    | '/'
+    | '/awsCerts'
+    | '/goAuth'
+    | '/i2Group'
+    | '/observe'
+    | '/sherlihyDotCom'
+    | '/velmaMode'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AwsCertsRoute: typeof AwsCertsRoute
+  GoAuthRoute: typeof GoAuthRoute
   I2GroupRoute: typeof I2GroupRoute
   ObserveRoute: typeof ObserveRoute
+  SherlihyDotComRoute: typeof SherlihyDotComRoute
+  VelmaModeRoute: typeof VelmaModeRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -66,6 +128,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/awsCerts': {
+      id: '/awsCerts'
+      path: '/awsCerts'
+      fullPath: '/awsCerts'
+      preLoaderRoute: typeof AwsCertsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/goAuth': {
+      id: '/goAuth'
+      path: '/goAuth'
+      fullPath: '/goAuth'
+      preLoaderRoute: typeof GoAuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/i2Group': {
@@ -82,13 +158,31 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ObserveRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sherlihyDotCom': {
+      id: '/sherlihyDotCom'
+      path: '/sherlihyDotCom'
+      fullPath: '/sherlihyDotCom'
+      preLoaderRoute: typeof SherlihyDotComRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/velmaMode': {
+      id: '/velmaMode'
+      path: '/velmaMode'
+      fullPath: '/velmaMode'
+      preLoaderRoute: typeof VelmaModeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AwsCertsRoute: AwsCertsRoute,
+  GoAuthRoute: GoAuthRoute,
   I2GroupRoute: I2GroupRoute,
   ObserveRoute: ObserveRoute,
+  SherlihyDotComRoute: SherlihyDotComRoute,
+  VelmaModeRoute: VelmaModeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

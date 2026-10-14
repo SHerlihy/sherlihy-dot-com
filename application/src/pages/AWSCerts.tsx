@@ -1,10 +1,8 @@
-import useIsDesktop from '../../shared/hooks/useIsDesktop'
+import useIsDesktop from '@/shared/hooks/useIsDesktop'
 
-import CoupleContainer from '../../shared/layouts/CoupleContainer'
-import HighlightMobileImage from '../../shared/components/HighlightMobileImage'
-import HighlightMobileContent from '../../shared/components/HighlightMobileContent'
-import HighlightDesktopLayout from '../../shared/components/HighlightDesktopLayout'
-import HighlightMobileLayout from '../../shared/components/HighlightMobileLayout'
+import CoupleContainer from '@/shared/layouts/CoupleContainer'
+import HighlightDesktopLayout from '@/shared/components/HighlightDesktopLayout'
+import HighlightMobileLayout from '@/shared/components/HighlightMobileLayout'
 
 const PractitionerImg = () => {
     return (
@@ -26,7 +24,7 @@ const ArchitectImg = () => {
     )
 }
 
-const AWSCertsHighlight = () => {
+const AWSCerts = () => {
     const isDesktop = useIsDesktop()
 
     if (isDesktop) {
@@ -64,4 +62,4 @@ const Content = () => {
     )
 }
 
-export default AWSCertsHighlight
+export default AWSCerts

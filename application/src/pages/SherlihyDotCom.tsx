@@ -1,8 +1,8 @@
-import useIsDesktop from "../../shared/hooks/useIsDesktop"
+import useIsDesktop from "@/shared/hooks/useIsDesktop"
 
-import HighlightDesktopLayout from "../../shared/components/HighlightDesktopLayout"
-import HighlightMobileLayout from "../../shared/components/HighlightMobileLayout"
-import SherlihyImage from "../SherlihyImage"
+import HighlightDesktopLayout from "@/shared/components/HighlightDesktopLayout"
+import HighlightMobileLayout from "@/shared/components/HighlightMobileLayout"
+import SherlihyImage from "@/shared/images/sherlihy/SherlihyImage"
 
 const Content = () => {
     return (
@@ -18,7 +18,7 @@ const Content = () => {
     )
 }
 
-const SherlihyHighlight = () => {
+const SherlihyDotCom = () => {
     const isDesktop = useIsDesktop()
 
     if (isDesktop) {
@@ -38,4 +38,4 @@ const SherlihyHighlight = () => {
     )
 }
 
-export default SherlihyHighlight
+export default SherlihyDotCom

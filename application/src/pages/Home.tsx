@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import HighlightDesktopImage from "@/shared/components/HighlightDesktopImage"
 import useIsDesktop from "@/shared/hooks/useIsDesktop"
-import SherlihyImage from "./home/SherlihyImage"
+import SherlihyImage from "@/shared/images/sherlihy/SherlihyImage"
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 

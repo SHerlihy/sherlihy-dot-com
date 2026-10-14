@@ -1,24 +1,24 @@
-import useIsDesktop from "../../shared/hooks/useIsDesktop"
+import useIsDesktop from "@/shared/hooks/useIsDesktop"
 
-import velmaHighlightCss from "./VelmaModeHighlight.module.css"
+import css from "./VelmaMode.module.css"
 
-import HighlightDesktopLayout from "../../shared/components/HighlightDesktopLayout"
-import HighlightMobileLayout from "../../shared/components/HighlightMobileLayout"
+import HighlightDesktopLayout from "@/shared/components/HighlightDesktopLayout"
+import HighlightMobileLayout from "@/shared/components/HighlightMobileLayout"
 
 const VelmaImages = () => {
     return (
         <span className="grid grid-cols-1 grid-rows-1">
             <img
                 src="/velmaMode/velmaGlasses.png"
-                className={`z-3 col-span-full row-span-full ${velmaHighlightCss.glasses_on}`}
+                className={`z-3 col-span-full row-span-full ${css.glasses_on}`}
             />
             <img
                 src="/velmaMode/velmaNoGlasses.png"
-                className={`z-2 col-span-full row-span-full ${velmaHighlightCss.mask} ${velmaHighlightCss.mask_up}`}
+                className={`z-2 col-span-full row-span-full ${css.mask} ${css.mask_up}`}
             />
             <img
                 src="/velmaMode/velmaNoGlasses.png"
-                className={`z-1 col-span-full row-span-full ${velmaHighlightCss.blur_in}`}
+                className={`z-1 col-span-full row-span-full ${css.blur_in}`}
             />
         </span>
     )
@@ -42,7 +42,7 @@ const Content = () => {
     )
 }
 
-const VelmaModeHighlight = () => {
+const VelmaMode = () => {
     const isDesktop = useIsDesktop()
 
     if (isDesktop) {
@@ -62,4 +62,4 @@ const VelmaModeHighlight = () => {
     )
 }
 
-export default VelmaModeHighlight
+export default VelmaMode
