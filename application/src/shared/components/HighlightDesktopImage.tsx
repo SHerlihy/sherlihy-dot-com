@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import { ReactNode } from 'react'
 
 type Props = {
     boxDimension: number,
@@ -22,8 +22,8 @@ const HighlightDesktopImage = ({
             <span
                 className={`inline-block`}
                 style={{
-                    maxHeight: `${imageDimension}px`,
-                    maxWidth: `${imageDimension}px`
+                    height: `${imageDimension}px`,
+                    width: `${imageDimension}px`
                 }}
             >
                 {children}
