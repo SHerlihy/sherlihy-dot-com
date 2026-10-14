@@ -1,9 +1,9 @@
-import useIsDesktop from "../../shared/hooks/useIsDesktop"
+import useIsDesktop from "../shared/hooks/useIsDesktop"
 
-import i2HighlightCss from "./I2GroupHighlight.module.css"
+import i2HighlightCss from "./I2Group.module.css"
 
-import HighlightDesktopLayout from "../../shared/components/HighlightDesktopLayout"
-import HighlightMobileLayout from "../../shared/components/HighlightMobileLayout"
+import HighlightDesktopLayout from "../shared/components/HighlightDesktopLayout"
+import HighlightMobileLayout from "../shared/components/HighlightMobileLayout"
 
 const I2Images = () => {
     return (
@@ -34,7 +34,7 @@ const Content = () => {
     )
 }
 
-const I2GroupHighlight = () => {
+const I2Group = () => {
     const isDesktop = useIsDesktop()
 
     if (isDesktop) {
@@ -54,4 +54,4 @@ const I2GroupHighlight = () => {
     )
 }
 
-export default I2GroupHighlight
+export default I2Group

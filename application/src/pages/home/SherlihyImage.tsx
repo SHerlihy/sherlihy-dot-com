@@ -1,4 +1,4 @@
-import HomeHighlightCss from "./HomeHighlight.module.css"
+import HomeHighlightCss from "./Home.module.css"
 
 const SherlihyImage = ({ height = "150px", width = "150px" }) => {
     const imgStyles = {

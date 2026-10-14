@@ -10,11 +10,17 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as I2GroupRouteImport } from './routes/i2Group'
 import { Route as ObserveRouteImport } from './routes/observe'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const I2GroupRoute = I2GroupRouteImport.update({
+  id: '/i2Group',
+  path: '/i2Group',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ObserveRoute = ObserveRouteImport.update({
@@ -25,27 +31,31 @@ const ObserveRoute = ObserveRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/i2Group': typeof I2GroupRoute
   '/observe': typeof ObserveRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/i2Group': typeof I2GroupRoute
   '/observe': typeof ObserveRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/i2Group': typeof I2GroupRoute
   '/observe': typeof ObserveRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/observe'
+  fullPaths: '/' | '/i2Group' | '/observe'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/observe'
-  id: '__root__' | '/' | '/observe'
+  to: '/' | '/i2Group' | '/observe'
+  id: '__root__' | '/' | '/i2Group' | '/observe'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  I2GroupRoute: typeof I2GroupRoute
   ObserveRoute: typeof ObserveRoute
 }
 
@@ -56,6 +66,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/i2Group': {
+      id: '/i2Group'
+      path: '/i2Group'
+      fullPath: '/i2Group'
+      preLoaderRoute: typeof I2GroupRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/observe': {
@@ -70,6 +87,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  I2GroupRoute: I2GroupRoute,
   ObserveRoute: ObserveRoute,
 }
 export const routeTree = rootRouteImport

@@ -1,9 +1,9 @@
-import useIsDesktop from "../hooks/useIsDesktop";
+import useIsDesktop from "@/shared/hooks/useIsDesktop";
 
 import { useContext } from "react";
-import { BackIcon, MenuIcon } from "../icons";
-import { NavContext } from "../context/NavContext";
-import CopyButton from "../../features/copyFeedback/CopyButton";
+import { BackIcon, MenuIcon } from "@/shared/icons";
+import { NavContext } from "@/shared/context/NavContext";
+import CopyButton from "@/features/copyFeedback/CopyButton";
 import { Link } from "@tanstack/react-router";
 
 const phoneId = crypto.randomUUID();
