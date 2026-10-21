@@ -1,93 +1,19 @@
-import { useEffect, useRef, useState } from "react"
-import HighlightDesktopImage from "@/shared/layouts/highlight/HighlightDesktopImage"
-import useIsDesktop from "@/shared/hooks/useIsDesktop"
-import SherlihyImage from "@/shared/images/sherlihy/SherlihyImage"
+import HighlightDesktopImage from "@/shared/layouts/highlight/HighlightDesktopImage";
+import useIsDesktop from "@/shared/hooks/useIsDesktop";
+import SherlihyImage from "@/shared/images/sherlihy/SherlihyImage";
 
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import ChatControl from "@/features/query/ChatControl"
 
-import QueryModel from "@/features/query/QueryModel"
-import QueryControl from "@/features/query/QueryControl"
-
-import { catchError } from "@/lib/async.ts"
-
-const queryClient = new QueryClient()
-
-const { postQuery, demarshall, abortQuery } = new QueryControl()
-
-function Home () {
-    const [chat, setChat] = useState<string[]>([])
-    const chatBoxRef = useRef<HTMLDivElement>(null)
-
-    const handlePostQuery = async (query: string) => {
-        const [error, response] = await catchError(
-            postQuery(
-                    query
-            )
-        )
-
-        if (error) {
-            throw error
-        }
-
-        const answer = await demarshall(response)
-
-        setChat((prev) => [...prev, query, answer])
-    }
-
-    useEffect(() => {
-        const chatBox = chatBoxRef.current
-
-        if (!chatBox) { return }
-
-        const answers = chatBox.children
-
-        if (answers.length < 1) { return }
-
-        const currentAnswer = answers.item(answers.length - 1)
-
-        currentAnswer?.scrollIntoView()
-    })
-
-    return (
-        <article className="h-full p-4 flex flex-col justify-between">
-            <div
-                className="flex-1 overflow-scroll p-4 scroll-p-20"
-            >
-                <div
-                    ref={chatBoxRef}
-                    className="min-h-full whitespace-pre-line flex flex-col justify-center align-center">
-                    <Intro />
-                    <ul>
-                    {chat.map((utter, i) => <div key={i}>
-                        &nbsp;
-                        <hr />
-                        &nbsp;
-                        <li
-                            className={`
-                        ${i % 2 === 0 && "text-right"}
-                    `}
-                        >
-                            {utter}
-                        </li>
-                    </div>
-                    )}
-                    </ul>
-                </div>
-            </div>
-            <div className="py-4">
-                <hr className="pb-4" />
-                <QueryClientProvider client={queryClient}>
-                    <QueryModel
-                        postQuery={handlePostQuery}
-                        abortQuery={abortQuery}
-                    />
-                </QueryClientProvider>
-            </div>
-        </article>
-    )
+function Home() {
+  return (
+    <article className="h-full p-4 flex flex-col justify-between">
+      <ChatControl intro={<Intro/>}/>
+    </article>
+  );
 }
 
-const introText = "\
+const introText =
+  "\
     Welcome to my website!\
     \n \
     \n \
@@ -95,34 +21,32 @@ const introText = "\
     \n \
     I spend the majority of my time helping Amazon improve their Alexa AI model but I also find time to practice my web development skills.\
     \n \
-"
+";
 
 const Intro = () => {
-    const isDesktop = useIsDesktop()
+  const isDesktop = useIsDesktop();
 
-    if (isDesktop) {
-        return (
-            <div className="flex justify-center">
-                <p className="inline-block">
-                    <HighlightDesktopImage>
-                        <SherlihyImage />
-                    </HighlightDesktopImage>
-                    {introText}
-                </p>
-            </div>
-        )
-    }
-
+  if (isDesktop) {
     return (
-        <>
-            <div className="flex justify-center">
-                <SherlihyImage />
-            </div>
-            <p className="pt-4 inline-block">
-                {introText}
-            </p>
-        </>
-    )
-}
+      <div className="flex justify-center">
+        <p className="inline-block">
+          <HighlightDesktopImage>
+            <SherlihyImage />
+          </HighlightDesktopImage>
+          {introText}
+        </p>
+      </div>
+    );
+  }
 
-export default Home
+  return (
+    <>
+      <div className="flex justify-center">
+        <SherlihyImage />
+      </div>
+      <p className="pt-4 inline-block">{introText}</p>
+    </>
+  );
+};
+
+export default Home;
