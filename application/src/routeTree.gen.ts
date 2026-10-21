@@ -11,6 +11,15 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ObserveRouteImport } from './routes/observe'
+import { Route as HighlightAwsCertificatesRouteImport } from './routes/highlight/aws-certificates'
+import { Route as HighlightCambridgeAiRouteImport } from './routes/highlight/cambridge-ai'
+import { Route as HighlightDayOfCodeRouteImport } from './routes/highlight/day-of-code'
+import { Route as HighlightGoAuthRouteImport } from './routes/highlight/go-auth'
+import { Route as HighlightI2GroupRouteImport } from './routes/highlight/i2-group'
+import { Route as HighlightSherlihyDotComRouteImport } from './routes/highlight/sherlihy-dot-com'
+import { Route as HighlightSoftwareCraftersRouteImport } from './routes/highlight/software-crafters'
+import { Route as HighlightTechWeekRouteImport } from './routes/highlight/tech-week'
+import { Route as HighlightVelmaModeRouteImport } from './routes/highlight/velma-mode'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +31,148 @@ const ObserveRoute = ObserveRouteImport.update({
   path: '/observe',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HighlightAwsCertificatesRoute =
+  HighlightAwsCertificatesRouteImport.update({
+    id: '/highlight/aws-certificates',
+    path: '/highlight/aws-certificates',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const HighlightCambridgeAiRoute = HighlightCambridgeAiRouteImport.update({
+  id: '/highlight/cambridge-ai',
+  path: '/highlight/cambridge-ai',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HighlightDayOfCodeRoute = HighlightDayOfCodeRouteImport.update({
+  id: '/highlight/day-of-code',
+  path: '/highlight/day-of-code',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HighlightGoAuthRoute = HighlightGoAuthRouteImport.update({
+  id: '/highlight/go-auth',
+  path: '/highlight/go-auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HighlightI2GroupRoute = HighlightI2GroupRouteImport.update({
+  id: '/highlight/i2-group',
+  path: '/highlight/i2-group',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HighlightSherlihyDotComRoute = HighlightSherlihyDotComRouteImport.update({
+  id: '/highlight/sherlihy-dot-com',
+  path: '/highlight/sherlihy-dot-com',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HighlightSoftwareCraftersRoute =
+  HighlightSoftwareCraftersRouteImport.update({
+    id: '/highlight/software-crafters',
+    path: '/highlight/software-crafters',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const HighlightTechWeekRoute = HighlightTechWeekRouteImport.update({
+  id: '/highlight/tech-week',
+  path: '/highlight/tech-week',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HighlightVelmaModeRoute = HighlightVelmaModeRouteImport.update({
+  id: '/highlight/velma-mode',
+  path: '/highlight/velma-mode',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/observe': typeof ObserveRoute
+  '/highlight/aws-certificates': typeof HighlightAwsCertificatesRoute
+  '/highlight/cambridge-ai': typeof HighlightCambridgeAiRoute
+  '/highlight/day-of-code': typeof HighlightDayOfCodeRoute
+  '/highlight/go-auth': typeof HighlightGoAuthRoute
+  '/highlight/i2-group': typeof HighlightI2GroupRoute
+  '/highlight/sherlihy-dot-com': typeof HighlightSherlihyDotComRoute
+  '/highlight/software-crafters': typeof HighlightSoftwareCraftersRoute
+  '/highlight/tech-week': typeof HighlightTechWeekRoute
+  '/highlight/velma-mode': typeof HighlightVelmaModeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/observe': typeof ObserveRoute
+  '/highlight/aws-certificates': typeof HighlightAwsCertificatesRoute
+  '/highlight/cambridge-ai': typeof HighlightCambridgeAiRoute
+  '/highlight/day-of-code': typeof HighlightDayOfCodeRoute
+  '/highlight/go-auth': typeof HighlightGoAuthRoute
+  '/highlight/i2-group': typeof HighlightI2GroupRoute
+  '/highlight/sherlihy-dot-com': typeof HighlightSherlihyDotComRoute
+  '/highlight/software-crafters': typeof HighlightSoftwareCraftersRoute
+  '/highlight/tech-week': typeof HighlightTechWeekRoute
+  '/highlight/velma-mode': typeof HighlightVelmaModeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/observe': typeof ObserveRoute
+  '/highlight/aws-certificates': typeof HighlightAwsCertificatesRoute
+  '/highlight/cambridge-ai': typeof HighlightCambridgeAiRoute
+  '/highlight/day-of-code': typeof HighlightDayOfCodeRoute
+  '/highlight/go-auth': typeof HighlightGoAuthRoute
+  '/highlight/i2-group': typeof HighlightI2GroupRoute
+  '/highlight/sherlihy-dot-com': typeof HighlightSherlihyDotComRoute
+  '/highlight/software-crafters': typeof HighlightSoftwareCraftersRoute
+  '/highlight/tech-week': typeof HighlightTechWeekRoute
+  '/highlight/velma-mode': typeof HighlightVelmaModeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/observe'
+  fullPaths:
+    | '/'
+    | '/observe'
+    | '/highlight/aws-certificates'
+    | '/highlight/cambridge-ai'
+    | '/highlight/day-of-code'
+    | '/highlight/go-auth'
+    | '/highlight/i2-group'
+    | '/highlight/sherlihy-dot-com'
+    | '/highlight/software-crafters'
+    | '/highlight/tech-week'
+    | '/highlight/velma-mode'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/observe'
-  id: '__root__' | '/' | '/observe'
+  to:
+    | '/'
+    | '/observe'
+    | '/highlight/aws-certificates'
+    | '/highlight/cambridge-ai'
+    | '/highlight/day-of-code'
+    | '/highlight/go-auth'
+    | '/highlight/i2-group'
+    | '/highlight/sherlihy-dot-com'
+    | '/highlight/software-crafters'
+    | '/highlight/tech-week'
+    | '/highlight/velma-mode'
+  id:
+    | '__root__'
+    | '/'
+    | '/observe'
+    | '/highlight/aws-certificates'
+    | '/highlight/cambridge-ai'
+    | '/highlight/day-of-code'
+    | '/highlight/go-auth'
+    | '/highlight/i2-group'
+    | '/highlight/sherlihy-dot-com'
+    | '/highlight/software-crafters'
+    | '/highlight/tech-week'
+    | '/highlight/velma-mode'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ObserveRoute: typeof ObserveRoute
+  HighlightAwsCertificatesRoute: typeof HighlightAwsCertificatesRoute
+  HighlightCambridgeAiRoute: typeof HighlightCambridgeAiRoute
+  HighlightDayOfCodeRoute: typeof HighlightDayOfCodeRoute
+  HighlightGoAuthRoute: typeof HighlightGoAuthRoute
+  HighlightI2GroupRoute: typeof HighlightI2GroupRoute
+  HighlightSherlihyDotComRoute: typeof HighlightSherlihyDotComRoute
+  HighlightSoftwareCraftersRoute: typeof HighlightSoftwareCraftersRoute
+  HighlightTechWeekRoute: typeof HighlightTechWeekRoute
+  HighlightVelmaModeRoute: typeof HighlightVelmaModeRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +191,84 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ObserveRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/highlight/aws-certificates': {
+      id: '/highlight/aws-certificates'
+      path: '/highlight/aws-certificates'
+      fullPath: '/highlight/aws-certificates'
+      preLoaderRoute: typeof HighlightAwsCertificatesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/highlight/cambridge-ai': {
+      id: '/highlight/cambridge-ai'
+      path: '/highlight/cambridge-ai'
+      fullPath: '/highlight/cambridge-ai'
+      preLoaderRoute: typeof HighlightCambridgeAiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/highlight/day-of-code': {
+      id: '/highlight/day-of-code'
+      path: '/highlight/day-of-code'
+      fullPath: '/highlight/day-of-code'
+      preLoaderRoute: typeof HighlightDayOfCodeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/highlight/go-auth': {
+      id: '/highlight/go-auth'
+      path: '/highlight/go-auth'
+      fullPath: '/highlight/go-auth'
+      preLoaderRoute: typeof HighlightGoAuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/highlight/i2-group': {
+      id: '/highlight/i2-group'
+      path: '/highlight/i2-group'
+      fullPath: '/highlight/i2-group'
+      preLoaderRoute: typeof HighlightI2GroupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/highlight/sherlihy-dot-com': {
+      id: '/highlight/sherlihy-dot-com'
+      path: '/highlight/sherlihy-dot-com'
+      fullPath: '/highlight/sherlihy-dot-com'
+      preLoaderRoute: typeof HighlightSherlihyDotComRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/highlight/software-crafters': {
+      id: '/highlight/software-crafters'
+      path: '/highlight/software-crafters'
+      fullPath: '/highlight/software-crafters'
+      preLoaderRoute: typeof HighlightSoftwareCraftersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/highlight/tech-week': {
+      id: '/highlight/tech-week'
+      path: '/highlight/tech-week'
+      fullPath: '/highlight/tech-week'
+      preLoaderRoute: typeof HighlightTechWeekRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/highlight/velma-mode': {
+      id: '/highlight/velma-mode'
+      path: '/highlight/velma-mode'
+      fullPath: '/highlight/velma-mode'
+      preLoaderRoute: typeof HighlightVelmaModeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ObserveRoute: ObserveRoute,
+  HighlightAwsCertificatesRoute: HighlightAwsCertificatesRoute,
+  HighlightCambridgeAiRoute: HighlightCambridgeAiRoute,
+  HighlightDayOfCodeRoute: HighlightDayOfCodeRoute,
+  HighlightGoAuthRoute: HighlightGoAuthRoute,
+  HighlightI2GroupRoute: HighlightI2GroupRoute,
+  HighlightSherlihyDotComRoute: HighlightSherlihyDotComRoute,
+  HighlightSoftwareCraftersRoute: HighlightSoftwareCraftersRoute,
+  HighlightTechWeekRoute: HighlightTechWeekRoute,
+  HighlightVelmaModeRoute: HighlightVelmaModeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -1,6 +1,6 @@
 import { ComponentType } from "react"
 
-import useIsDesktop from "../hooks/useIsDesktop"
+import useIsDesktop from "@/shared/hooks/useIsDesktop"
 
 const CoupleContainer = (props: {
     TlImg: ComponentType,
@@ -17,13 +17,13 @@ ${isDesktop && "grid grid-cols-9 grid-rows-9"}
 ${!isDesktop && "flex flex-row-reverse justify-center items-center"}
 `}>
             <div className={`
-h-full 
+h-full
 ${isDesktop && "col-start-4 col-end-9 row-start-4 row-end-9"}
 `} >
                 <BottomRightImg />
             </div>
             <div className={`
-h-full 
+h-full
 ${isDesktop && "col-start-1 col-end-7 row-start-1 row-end-7"}
 `}>
                 <TopLeftImg />

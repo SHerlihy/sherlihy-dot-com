@@ -29,7 +29,6 @@ if (!rootElement.innerHTML) {
                 <IsNavProvider>
                     <RouterProvider router={router} />
                 </IsNavProvider>
-
             </CopyFeedbackProvider>
         </StrictMode>,
     )

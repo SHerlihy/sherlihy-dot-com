@@ -26,6 +26,11 @@ export default defineConfig({
       plugins: [['babel-plugin-react-compiler']]
     }
   }), tailwindcss()],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
+  },
   test: {
     projects: [{
       extends: true,
