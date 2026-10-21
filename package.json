@@ -11,14 +11,6 @@
     "readme_add_diagrams": "cd ./deployment/infrastructure_diagrams && node ./diagrams_to_readme.cjs"
   },
   "devDependencies": {
-    "@eslint/js": "^9.21.0",
-    "@mermaid-js/mermaid-cli": "^10.6.1",
-    "eslint": "^9.21.0",
-    "glob": "^10.3.10",
-    "globals": "^15.15.0",
-    "mermaid": "^10.6.1",
-    "typescript": "~5.7.2",
-    "typescript-eslint": "^8.24.1",
     "live-server": "^1.2.2"
   }
 }
