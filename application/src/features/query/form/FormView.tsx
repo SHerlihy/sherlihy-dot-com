@@ -35,7 +35,7 @@ function FormView({ status, defaultValues, handleSubmit }: Props) {
     },
   });
 
-  const query = useSelector(form.store, (state)=>state.values.query)
+  const query = useSelector(form.store, (state) => state.values.query);
 
   return (
     <form
@@ -61,7 +61,11 @@ function FormView({ status, defaultValues, handleSubmit }: Props) {
           />
         )}
       />
-      <ControlButton status={status} disabled={query===""} onClick={form.handleSubmit} />
+      <ControlButton
+        status={status}
+        isDisabled={query === ""}
+        onClick={form.handleSubmit}
+      />
     </form>
   );
 }

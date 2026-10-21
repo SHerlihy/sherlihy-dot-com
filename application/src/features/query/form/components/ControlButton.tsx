@@ -2,15 +2,19 @@ export type Status = "idle" | "pending" | "success" | "error";
 
 export type Props = {
   status: Status;
+  isDisabled: boolean;
   onClick: () => void;
 } & React.ComponentProps<"button">;
 
-const ControlButton = ({ status, onClick, ...props }: Props) => {
+const ControlButton = ({ status, isDisabled, onClick, ...props }: Props) => {
   return (
     <button
+      disabled={isDisabled}
       className={`
                 w-full
+${isDisabled && "bg-[rgba(127,127,127,0.5)]"}
 ${(() => {
+  if (isDisabled) return;
   switch (status) {
     case "error":
       return "hover:bg-red-400 bg-red-500";
@@ -26,7 +30,9 @@ ${(() => {
       onClick={onClick}
       {...props}
     >
+      {isDisabled && <p>idle</p>}
       {(() => {
+        if (isDisabled) return;
         switch (status) {
           case "error":
             return <p>retry?</p>;
